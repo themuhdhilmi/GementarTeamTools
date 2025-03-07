@@ -1,5 +1,7 @@
 import "~/styles/globals.css";
 
+import { Toaster } from 'react-hot-toast';
+
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 

@@ -6,12 +6,15 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import { Label } from "~/components/ui/label";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function DemoPage() {
   // const data = await getData()
   const [data, setData] = useState<MochaData[]>([]);
   const [text, setText] = useState("");
   const [jiraFile, setJiraFile] = useState<File | null>(null);
+
+  const [disableButton, setDisableButton] = useState(false)
 
   const deleteItem = (index: string) => {
     setData((prevData) => prevData.filter((item) => item.id !== index));
@@ -30,8 +33,7 @@ export default function DemoPage() {
   const handleUpload = async () => {
     let isAbleToSubmit = true;
     if (!jiraFile || data.length === 0) {
-      console.error("No file or data available");
-      return;
+      isAbleToSubmit = false
     }
   
     const formData = new FormData();
@@ -50,24 +52,62 @@ export default function DemoPage() {
     // Append Jira file
     formData.append("jiraFile", jiraFile);
 
-    if(!isAbleToSubmit) return;
-  
-    try {
-      const response = await fetch("/api/callable-api/cypress-report-generator", {
-        method: "POST",
-        body: formData,
-      });
-  
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const result = await response.json();
-      console.log("Upload success:", result);
-    } catch (error) {
-      console.error("Upload failed:", error);
-    }
+    if(!isAbleToSubmit){
+      toast.error("Error! empty file.")
+      return;
+    };
+
+    void toast.promise(
+      async () => {
+        try {
+          setDisableButton(true);
+          const response = await fetch("/api/callable-api/cypress-report-generator", {
+            method: "POST",
+            body: formData,
+          });
+
+          const contentType = response.headers.get('Content-Type');
+          
+          if (contentType?.includes('text/csv')) {
+            const blob = await response.blob();
+            const link = document.createElement('a');
+            
+            const url = URL.createObjectURL(blob);
+            
+            link.href = url;
+            link.download = 'cypress-report.csv';
+        
+            document.body.appendChild(link);
+            
+            link.click();
+            
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            console.log("CSV file download initiated.");
+          } else {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const result = await response.json();
+            console.log("Upload success:", result);
+          }
+        } catch (error) {
+          console.error("Upload failed:", error);
+          throw error;  // Ensure the error is propagated so that `toast.promise` can trigger the error toast
+          
+        }
+
+        setDisableButton(false);
+      },
+      {
+        loading: 'Loading...',
+        success: 'Got the data!',
+        error: 'Error when fetching!',
+      }
+    );
   };
 
   return (
     <div className="container mx-auto px-5 py-10">
+      <Toaster />
       <div className="flex w-full max-w-sm items-center space-x-2 py-3">
         <Input
           type="text"
@@ -147,7 +187,7 @@ export default function DemoPage() {
           }}
         />
 
-        <Button onClick={handleUpload}>
+        <Button onClick={handleUpload} disabled={disableButton}>
           Submit
         </Button>
       </div>

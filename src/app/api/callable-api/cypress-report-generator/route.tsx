@@ -4,7 +4,6 @@ import { parseJiraCSV } from "./functions/convert-jira-csv";
 import { processItemToCsv } from "./functions/process-item-to-csv";
 // import { type MochaData } from "~/app/(generator-page)/cypress-report-generator/columns";
 
-
 export type MochaDataAPI = {
   id: string
   module: string
@@ -13,6 +12,8 @@ export type MochaDataAPI = {
 
 export async function POST(request: NextRequest) {
   try {
+    await new Promise(resolve => setTimeout(resolve, 5000)); // 10 seconds delay
+    
     const formData = await request.formData();
 
     const mochaDataRaw = formData.get("mochaData") as File;
@@ -32,17 +33,24 @@ export async function POST(request: NextRequest) {
     const jiraFileRawText = await jiraFile.text()
     const jiraData = parseJiraCSV(jiraFileRawText);
 
-    processItemToCsv(mochaData, jiraData )
+    const csv = processItemToCsv(mochaData, jiraData )
 
-    return NextResponse.json({
-      message: "Data received",
-      mochaData,
-      jiraData
+    // Set headers to force download of CSV file
+    const response = new NextResponse(csv, {
+      headers: {
+        'Content-Type': 'text/csv',  // Set content type to CSV
+        'Content-Disposition': 'attachment; filename=generated-data.csv',  // Set file name
+      }
     });
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to process request", details: (error as Error).message },
-      { status: 500 }
+    return new NextResponse(
+      JSON.stringify({
+        error: 'Failed to process request',
+        details: (error as Error).message,
+      }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
 }
@@ -57,8 +65,6 @@ export async function GetMochaData(mochaData : MochaDataAPI[] , formData : FormD
       await Promise.all(
         Array.from({ length: uploadLengthCount }, async (_, i) => {
           const json = formData.get(`${element.id}_${i}`) as File;
-          console.log(`${element.id}_${i}`);
-  
           if (json) {
             const mochaDataRawText = await json.text(); 
             const mochaDataObj = JSON.parse(mochaDataRawText) as Mochawesome.Output; 
