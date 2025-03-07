@@ -1,7 +1,7 @@
 ##### DEPENDENCIES
 
 FROM --platform=linux/amd64 node:20-alpine AS deps
-RUN apk add --no-cache libc6-compat openssl && npm install -g yarn
+RUN apk add --no-cache libc6-compat openssl 
 WORKDIR /app
 
 COPY prisma ./
@@ -45,4 +45,4 @@ COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 3000
 ENV PORT 3000
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
