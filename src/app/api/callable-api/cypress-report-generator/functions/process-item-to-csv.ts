@@ -85,8 +85,8 @@ function getAzureMochaToCsvFormat(mochaData: MochaDataAPI[]): CsvData[] {
       upload.results.forEach((result) => {
         result.suites.forEach((suite) => {
           suite.tests.forEach((test) => {
-            const match = test.code?.match(/pdated:\s*(\w+)\s*\(?/i);
-            const name = match?.[1]?.trim().substring(0, 10) ?? "Unknown";
+            const match = test.code?.replace(/\s+/g, '').match(/pdated:(\w+)\(?/i);
+            const name = match?.[1]?.trim().substring(0, 10).replace(/[0-9\W_]/g, '') ?? "Unknown";
             if (test.fail) {
               const dataTestCase = {
                 moduleName: mocha.module,
