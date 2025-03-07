@@ -28,18 +28,29 @@ export default function DemoPage() {
   };
 
   const handleUpload = async () => {
+    let isAbleToSubmit = true;
     if (!jiraFile || data.length === 0) {
       console.error("No file or data available");
       return;
     }
   
     const formData = new FormData();
-  
-    // Append each MochaData object as JSON
+
     formData.append("mochaData", new Blob([JSON.stringify(data)], { type: "application/json" }));
+
+    data.forEach((item) => {
+      if(item.upload.length === 0) isAbleToSubmit = false;
+
+
+      item.upload.forEach((element, index : number) => {
+        formData.append(item.id + '_' + index, element);
+      });
+    })
   
     // Append Jira file
     formData.append("jiraFile", jiraFile);
+
+    if(!isAbleToSubmit) return;
   
     try {
       const response = await fetch("/api/callable-api/cypress-report-generator", {

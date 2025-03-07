@@ -39,7 +39,7 @@ const data = {
   },
   teams: [
     {
-      name: "Gementar Team",
+      name: "Hilmi's Tools",
       logo: Flame,
       plan: "Tools",
     },

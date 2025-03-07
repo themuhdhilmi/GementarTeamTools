@@ -64,19 +64,19 @@ export function NavProjects({
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                <DropdownMenuItem>
+                {/* <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
                   <span>View Project</span>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem>
                   <Forward className="text-muted-foreground" />
                   <span>Share Project</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                {/* <DropdownMenuItem>
                   <Trash2 className="text-muted-foreground" />
                   <span>Delete Project</span>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>

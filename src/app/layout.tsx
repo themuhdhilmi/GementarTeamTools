@@ -13,8 +13,8 @@ import {
 import { AppSidebar } from "./_components/app-sidebar";
 
 export const metadata: Metadata = {
-  title: "Gementar Team Tools",
-  description: "Gementar Team Tools Collection",
+  title: "Hilmi's Tools",
+  description: "Hilmi's Tools Collection",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

@@ -45,7 +45,7 @@ import {
 
 const data = {
   nav: [
-    { name: "Gementar Team!", icon: Bell },
+    { name: "Hilmi's!", icon: Bell },
     { name: "Cypress report tools", icon: Menu },
     // { name: "Home", icon: Home },
     // { name: "Appearance", icon: Paintbrush },
@@ -61,7 +61,7 @@ const data = {
 }
 
 export function SettingsDialog() {
-  const [currentTab, setCurrentTab] = React.useState('Gementar Team!')
+  const [currentTab, setCurrentTab] = React.useState('Hilmi's!')
 
   return (
     <Dialog open={true}>

@@ -1,12 +1,5 @@
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
-import {
-  SidebarProvider,
-  SidebarInset,
-  SidebarTrigger,
-} from "~/components/ui/sidebar";
-import { AppSidebar } from "./_components/app-sidebar";
-import { Separator } from "@radix-ui/react-separator";
 
 export default async function Home() {
   const session = await auth();
