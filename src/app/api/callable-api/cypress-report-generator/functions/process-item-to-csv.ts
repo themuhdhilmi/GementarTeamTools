@@ -1,7 +1,6 @@
 import { type MochaDataAPI } from "../route";
 import { type JiraIssue } from "./convert-jira-csv";
 import { json2csv } from "json-2-csv";
-import fs from "fs";
 
 interface CsvData {
   moduleName: string;
@@ -18,36 +17,37 @@ interface CsvData {
 interface JiraConvertData {
   defectId?: "";
   tcId?: "";
-  appsModules? : ""
+  appsModules?: "";
 }
 
 export function processItemToCsv(
   mochaData: MochaDataAPI[],
   jiraData: JiraIssue[],
-) : string {
+): string {
   const csvData = getAzureMochaToCsvFormat(mochaData);
   const jiraConvertData = getConvertedJiraData(jiraData);
 
-  // console.log(jiraConvertData)
-
-  csvData.forEach(element => {
-    const getDataMatchModuleName = jiraConvertData.filter((x) => x.appsModules === element.moduleName && x.tcId === element.title);
+  csvData.forEach((element) => {
+    const getDataMatchModuleName = jiraConvertData.filter(
+      (x) => x.appsModules === element.moduleName && x.tcId === element.title,
+    );
 
     if (getDataMatchModuleName.length > 0) {
       if (!Array.isArray(element.defectId)) {
-        element.defectId = []; 
+        element.defectId = [];
       }
-        getDataMatchModuleName.forEach(moduleName => {
-          element.defectId?.push(moduleName.defectId ?? "");
-        });
-    }else
-    {
-      element.defectId = ""; 
+      getDataMatchModuleName.forEach((moduleName) => {
+        if (Array.isArray(element.defectId)) {
+          element.defectId.push(moduleName.defectId ?? "");
+        }
+      });
+    } else {
+      element.defectId = "";
     }
   });
-  
+
   const csv = json2csv(csvData);
-  return csv
+  return csv;
   // fs.writeFileSync("data.csv", csv, "utf8");
 }
 
@@ -61,13 +61,13 @@ function getConvertedJiraData(jiraData: JiraIssue[]): JiraConvertData[] {
     tcId = tcId.replace(/,/g, "|");
     const tcIds = tcId.split("|");
 
-    const modules = element.appsModules.split('-')[0]?.trimEnd().trimStart()
+    const modules = element.appsModules.split("-")[0]?.trimEnd().trimStart();
 
     tcIds.forEach((tcId) => {
       const data = {
         defectId: element.issueKey,
         tcId: tcId,
-        appsModules: modules
+        appsModules: modules,
       } as JiraConvertData;
       jiraConvertData.push(data);
     });
@@ -85,8 +85,19 @@ function getAzureMochaToCsvFormat(mochaData: MochaDataAPI[]): CsvData[] {
       upload.results.forEach((result) => {
         result.suites.forEach((suite) => {
           suite.tests.forEach((test) => {
-            const match = test.code?.replace(/\s+/g, '').match(/pdated:(\w+)\(?/i);
-            const name = match?.[1]?.trim().substring(0, 10).replace(/[0-9\W_]/g, '') ?? "Unknown";
+            const match = test.code
+              ?.replace(/\s+/g, "")
+              .match(/pdated:(\w+)\(?/i);
+            const name =
+              match?.[1]
+                ?.trim()
+                .substring(0, 10)
+                .replace(/[0-9\W_]/g, "") ?? "Unknown";
+
+           const errorMessage =
+              (test.err as Error)?.message?.replace(/[\r\n]+/g, " ") ??
+              "No error message";
+
             if (test.fail) {
               const dataTestCase = {
                 moduleName: mocha.module,
@@ -98,9 +109,8 @@ function getAzureMochaToCsvFormat(mochaData: MochaDataAPI[]): CsvData[] {
                 action: "",
                 localRun: "",
                 defectId: [],
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-                errorMessage: test.err.message.replace(/[\r\n]+/g, " "),
-              } as CsvData
+                errorMessage: errorMessage,
+              } as CsvData;
 
               countTotalFail++;
               csvData.push(dataTestCase);

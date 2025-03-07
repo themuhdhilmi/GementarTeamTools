@@ -14,7 +14,7 @@ export default function DemoPage() {
   const [text, setText] = useState("");
   const [jiraFile, setJiraFile] = useState<File | null>(null);
 
-  const [disableButton, setDisableButton] = useState(false)
+  const [disableButton, setDisableButton] = useState(false);
 
   const deleteItem = (index: string) => {
     setData((prevData) => prevData.filter((item) => item.id !== index));
@@ -32,55 +32,60 @@ export default function DemoPage() {
 
   const handleUpload = async () => {
     let isAbleToSubmit = true;
-    if (!jiraFile || data.length === 0) {
-      isAbleToSubmit = false
-    }
-  
     const formData = new FormData();
 
-    formData.append("mochaData", new Blob([JSON.stringify(data)], { type: "application/json" }));
+    if (!jiraFile || data.length === 0) {
+      isAbleToSubmit = false;
+    } else {
+      // Append Jira file
+      formData.append("jiraFile", jiraFile);
+    }
+
+    formData.append(
+      "mochaData",
+      new Blob([JSON.stringify(data)], { type: "application/json" }),
+    );
 
     data.forEach((item) => {
-      if(item.upload.length === 0) isAbleToSubmit = false;
+      if (item.upload.length === 0) isAbleToSubmit = false;
 
-
-      item.upload.forEach((element, index : number) => {
-        formData.append(item.id + '_' + index, element);
+      item.upload.forEach((element, index: number) => {
+        formData.append(item.id + "_" + index, element);
       });
-    })
-  
-    // Append Jira file
-    formData.append("jiraFile", jiraFile);
+    });
 
-    if(!isAbleToSubmit){
-      toast.error("Error! empty file.")
+    if (!isAbleToSubmit) {
+      toast.error("Error! empty file.");
       return;
-    };
+    }
 
     void toast.promise(
       async () => {
         try {
           setDisableButton(true);
-          const response = await fetch("/api/callable-api/cypress-report-generator", {
-            method: "POST",
-            body: formData,
-          });
+          const response = await fetch(
+            "/api/callable-api/cypress-report-generator",
+            {
+              method: "POST",
+              body: formData,
+            },
+          );
 
-          const contentType = response.headers.get('Content-Type');
-          
-          if (contentType?.includes('text/csv')) {
+          const contentType = response.headers.get("Content-Type");
+
+          if (contentType?.includes("text/csv")) {
             const blob = await response.blob();
-            const link = document.createElement('a');
-            
+            const link = document.createElement("a");
+
             const url = URL.createObjectURL(blob);
-            
+
             link.href = url;
-            link.download = 'cypress-report.csv';
-        
+            link.download = "cypress-report.csv";
+
             document.body.appendChild(link);
-            
+
             link.click();
-            
+
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
             console.log("CSV file download initiated.");
@@ -91,17 +96,16 @@ export default function DemoPage() {
           }
         } catch (error) {
           console.error("Upload failed:", error);
-          throw error;  // Ensure the error is propagated so that `toast.promise` can trigger the error toast
-          
+          throw error; // Ensure the error is propagated so that `toast.promise` can trigger the error toast
         }
 
         setDisableButton(false);
       },
       {
-        loading: 'Loading...',
-        success: 'Got the data!',
-        error: 'Error when fetching!',
-      }
+        loading: "Loading...",
+        success: "Got the data!",
+        error: "Error when fetching!",
+      },
     );
   };
 

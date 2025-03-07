@@ -1,4 +1,6 @@
 import Papa from 'papaparse';
+import { MochaDataAPI } from '../route';
+import Mochawesome from 'mochawesome';
 
 export type JiraIssue = {
   issueType: string;
@@ -24,12 +26,14 @@ export type JiraIssue = {
 
 export function parseJiraCSV(csvText: string): JiraIssue[] {
   const parsed = Papa.parse(csvText, {
-    header: true,          // Automatically uses the first row as headers
-    skipEmptyLines: true,  // Skip any empty lines
-    dynamicTyping: true,   // Converts numbers and booleans automatically
+    header: true, 
+    skipEmptyLines: true,
+    dynamicTyping: true, 
   });
 
-  return parsed.data.map((row: Record<string, string>) => { 
+  const data = parsed.data as Record<string, string>[];
+
+  return data.map((row: Record<string, string>) => { 
     return {
       issueType: row["Issue Type"] ?? "",
       issueKey: row["Issue key"] ?? "",
@@ -52,4 +56,28 @@ export function parseJiraCSV(csvText: string): JiraIssue[] {
       inwardIssueLink: row["Inward issue link (Test)"] ?? "",
     } as JiraIssue;
   });
+}
+
+
+export async function GetMochaData(mochaData : MochaDataAPI[] , formData : FormData) {
+
+  await Promise.all(
+    mochaData.map(async (element) => {
+      const uploadLengthCount = element.upload.length;
+      const arrayFile: Mochawesome.Output[] = [];
+  
+      await Promise.all(
+        Array.from({ length: uploadLengthCount }, async (_, i) => {
+          const json = formData.get(`${element.id}_${i}`) as File;
+          if (json) {
+            const mochaDataRawText = await json.text(); 
+            const mochaDataObj = JSON.parse(mochaDataRawText) as Mochawesome.Output; 
+            arrayFile.push(mochaDataObj);
+          }
+        })
+      );
+  
+      element.upload = arrayFile;
+    })
+  );
 }

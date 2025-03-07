@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
                     {(() => {
                       if (cell.column.id === "upload") {
                         const itemNames: string[] = [];
-                        cell.row.original.upload.forEach(
+                        (cell.row.original as { upload: { name: string }[] }).upload.forEach(
                           (element: { name: string }, index: number) => {
                             if (index === 0) {
                               itemNames.push(element.name);
@@ -83,10 +83,8 @@ export function DataTable<TData, TValue>({
                             }
                           },
                         );
-
-                        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                        return <>{itemNames}</>;
-                      } else {
+                      }
+                       else {
                         return (
                           <>
                             {flexRender(
@@ -113,7 +111,7 @@ export function DataTable<TData, TValue>({
                       accept="application/json"
                       onChange={(e) =>
                         functionHandleFileChange(
-                          row.original.id,
+                          (row as { original : { id : string} }).original.id,
                           e.target.files,
                         )
                       }
@@ -122,7 +120,7 @@ export function DataTable<TData, TValue>({
                 </TableCell>
 
                 <TableCell>
-                  <Button onClick={() => functionDeleteItem(row.original.id)}>
+                  <Button onClick={() => functionDeleteItem((row as { original : { id : string} }).original.id)}>
                     Delete
                   </Button>
                 </TableCell>

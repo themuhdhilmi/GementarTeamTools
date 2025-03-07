@@ -1,6 +1,6 @@
 import type Mochawesome from "mochawesome";
 import { type NextRequest, NextResponse } from "next/server";
-import { parseJiraCSV } from "./functions/convert-jira-csv";
+import { GetMochaData, parseJiraCSV } from "./functions/convert-jira-csv";
 import { processItemToCsv } from "./functions/process-item-to-csv";
 // import { type MochaData } from "~/app/(generator-page)/cypress-report-generator/columns";
 
@@ -55,25 +55,3 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GetMochaData(mochaData : MochaDataAPI[] , formData : FormData) {
-
-  await Promise.all(
-    mochaData.map(async (element) => {
-      const uploadLengthCount = element.upload.length;
-      const arrayFile: Mochawesome.Output[] = [];
-  
-      await Promise.all(
-        Array.from({ length: uploadLengthCount }, async (_, i) => {
-          const json = formData.get(`${element.id}_${i}`) as File;
-          if (json) {
-            const mochaDataRawText = await json.text(); 
-            const mochaDataObj = JSON.parse(mochaDataRawText) as Mochawesome.Output; 
-            arrayFile.push(mochaDataObj);
-          }
-        })
-      );
-  
-      element.upload = arrayFile;
-    })
-  );
-}
