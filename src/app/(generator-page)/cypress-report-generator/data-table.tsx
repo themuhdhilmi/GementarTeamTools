@@ -72,9 +72,9 @@ export function DataTable<TData, TValue>({
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {(() => {
-                      if (cell.column.id === "upload") {
+                       if (cell.column.id === "upload") {
                         const itemNames: string[] = [];
-                        (cell.row.original as { upload: { name: string }[] }).upload.forEach(
+                        (cell.row.original as { upload : { name : string }[] }).upload.forEach(
                           (element: { name: string }, index: number) => {
                             if (index === 0) {
                               itemNames.push(element.name);
@@ -83,6 +83,7 @@ export function DataTable<TData, TValue>({
                             }
                           },
                         );
+                        return <>{itemNames}</>;
                       }
                        else {
                         return (
@@ -97,12 +98,7 @@ export function DataTable<TData, TValue>({
                     })()}
                   </TableCell>
                 ))}
-
                 <TableCell>
-                  {/* <Button onClick={() => functionDeleteItem(row.original.id)}>
-                    Delete
-                  </Button> */}
-
                   <div className="grid w-full max-w-sm items-center gap-1.5">
                     <Label htmlFor="picture">mochaAwsome(s).json</Label>
                     <Input
@@ -118,7 +114,6 @@ export function DataTable<TData, TValue>({
                     />
                   </div>
                 </TableCell>
-
                 <TableCell>
                   <Button onClick={() => functionDeleteItem((row as { original : { id : string} }).original.id)}>
                     Delete

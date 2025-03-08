@@ -12,12 +12,18 @@ interface CsvData {
   action?: string;
   defectId?: string[] | string;
   localRun?: string;
+  errorMessage? : string;
 }
 
 interface JiraConvertData {
   defectId?: "";
   tcId?: "";
   appsModules?: "";
+}
+
+interface CountUpdatedBy {
+  name?: string,
+  count?: number,
 }
 
 export function processItemToCsv(
@@ -27,28 +33,108 @@ export function processItemToCsv(
   const csvData = getAzureMochaToCsvFormat(mochaData);
   const jiraConvertData = getConvertedJiraData(jiraData);
 
-  csvData.forEach((element) => {
-    const getDataMatchModuleName = jiraConvertData.filter(
-      (x) => x.appsModules === element.moduleName && x.tcId === element.title,
-    );
+  updateCsvToInsertAllDataPerModule(csvData, jiraConvertData);
 
-    if (getDataMatchModuleName.length > 0) {
-      if (!Array.isArray(element.defectId)) {
-        element.defectId = [];
-      }
-      getDataMatchModuleName.forEach((moduleName) => {
-        if (Array.isArray(element.defectId)) {
-          element.defectId.push(moduleName.defectId ?? "");
-        }
-      });
-    } else {
-      element.defectId = "";
-    }
-  });
+  updateCsvToInsertNextLine(csvData);
+  updateCsvToInsertNextLine(csvData);
+  updateCsvToInsertNextLine(csvData);
+
+  updatCsvTotalEntireFailed(csvData);
+  updateCsvTotalEntireDefectPerTc(csvData);
+  // updateCsvTotalEntireDefect(csvData);
+
+  updateCsvToInsertNextLine(csvData);
+  updateCsvToInsertNextLine(csvData);
+  updateCsvToInsertNextLine(csvData);
+
+  updateCsvToFindTotalFailPerPerson(csvData);
 
   const csv = json2csv(csvData);
   return csv;
-  // fs.writeFileSync("data.csv", csv, "utf8");
+}
+
+function updatCsvTotalEntireFailed(csvData : CsvData[])
+{
+
+  let countFailed = 0;
+  csvData.forEach(element => {
+    if(element.errorMessage && element.errorMessage.length > 1)
+    {
+      countFailed++;
+    }
+  });
+
+  const title = {
+    moduleName: "",
+    title: "",
+    updatedBy: "",
+    defectRefactorDependentPassedInLocal: "Total Entire Failed",
+    reason: countFailed.toString(),
+    actionItem: "",
+    action: "",
+    localRun: "",
+    defectId: "",
+    errorMessage: "",
+  } as CsvData
+
+  csvData.push(title);
+
+}
+
+function updateCsvTotalEntireDefectPerTc(csvData : CsvData[])
+{
+
+  let countFailed = 0;
+  csvData.forEach(element => {
+    if(element.defectId && element.defectId.length > 0)
+    {
+      countFailed++;
+    }
+  });
+
+  const title = {
+    moduleName: "",
+    title: "",
+    updatedBy: "",
+    defectRefactorDependentPassedInLocal: "Total Entire TC with Defects",
+    reason: countFailed.toString(),
+    actionItem: "",
+    action: "",
+    localRun: "",
+    defectId: "",
+    errorMessage: "",
+  } as CsvData
+
+  csvData.push(title);
+
+}
+
+function updateCsvTotalEntireDefect(csvData : CsvData[])
+{
+
+  let countFailed = 0;
+  csvData.forEach(element => {
+    if(element.defectId && element.defectId.length > 0)
+    {
+      countFailed += element.defectId.length;
+    }
+  });
+
+  const title = {
+    moduleName: "",
+    title: "",
+    updatedBy: "",
+    defectRefactorDependentPassedInLocal: "Total Entire Defect",
+    reason: countFailed.toString(),
+    actionItem: "",
+    action: "",
+    localRun: "",
+    defectId: "",
+    errorMessage: "",
+  } as CsvData
+
+  csvData.push(title);
+
 }
 
 function getConvertedJiraData(jiraData: JiraIssue[]): JiraConvertData[] {
@@ -94,16 +180,15 @@ function getAzureMochaToCsvFormat(mochaData: MochaDataAPI[]): CsvData[] {
                 .substring(0, 10)
                 .replace(/[0-9\W_]/g, "") ?? "Unknown";
 
-           const errorMessage =
-              (test.err as Error)?.message?.replace(/[\r\n]+/g, " ") ??
-              "No error message";
+           const errorMessage = (test.err as Error)?.message?.replace(/[\r\n]+/g, " ") ?? "No error message";
+           const isErrorMessageStartWithTimeout = errorMessage.startsWith("CypressError: Timed");
 
             if (test.fail) {
               const dataTestCase = {
                 moduleName: mocha.module,
                 title: test.title,
                 updatedBy: name,
-                defectRefactorDependentPassedInLocal: "",
+                defectRefactorDependentPassedInLocal: isErrorMessageStartWithTimeout ? "CYPESS TIMEOUT" : "",
                 reason: "",
                 actionItem: "",
                 action: "",
@@ -132,24 +217,119 @@ function getAzureMochaToCsvFormat(mochaData: MochaDataAPI[]): CsvData[] {
       defectId: [],
       errorMessage: "",
     };
-    const empty = {
-      moduleName: "",
-      title: "",
-      updatedBy: "",
-      defectRefactorDependentPassedInLocal: "",
-      reason: "",
-      actionItem: "",
-      action: "",
-      localRun: "",
-      defectId: [],
-      errorMessage: "",
-    };
+
     csvData.push(dataTestCase);
-    csvData.push(empty);
-    csvData.push(empty);
-    csvData.push(empty);
-    csvData.push(empty);
+    updateCsvToInsertNextLine(csvData);
+    updateCsvToInsertNextLine(csvData);
+    updateCsvToInsertNextLine(csvData);
+    updateCsvToInsertNextLine(csvData);
   });
 
   return csvData;
+}
+
+function updateCsvToInsertAllDataPerModule(csvData : CsvData[], jiraConvertData : JiraConvertData[])
+{
+  csvData.forEach((element) => {
+    const getDataMatchModuleName = jiraConvertData.filter(
+      (x) => x.appsModules === element.moduleName && x.tcId === element.title,
+    );
+
+    if (getDataMatchModuleName.length > 0) {
+      if (!Array.isArray(element.defectId)) {
+        element.defectId = [];
+      }
+      getDataMatchModuleName.forEach((moduleName) => {
+        if (Array.isArray(element.defectId)) {
+          element.defectId.push(moduleName.defectId ?? "");
+        }
+      });
+    } else {
+      element.defectId = "";
+    }
+  });
+}
+
+function updateCsvToFindTotalFailPerPerson(csvData : CsvData[])
+{
+
+  const countUpdatedBy = [] as CountUpdatedBy[]
+  csvData.forEach(element => {
+
+    if(element.updatedBy === "") return;
+
+    const findUser = countUpdatedBy.find((x) => x.name === element.updatedBy);
+    if(!findUser)
+    {
+      countUpdatedBy.push({ count : 1, name : element.updatedBy })
+    }else
+    {
+      const currentCount = findUser.count ?? 0;
+      const updateCount = currentCount + 1;
+      findUser.count = updateCount;
+    }
+  });
+
+  const title = {
+    moduleName: "",
+    title: "",
+    updatedBy: "",
+    defectRefactorDependentPassedInLocal: "Total fail per/person",
+    reason: "",
+    actionItem: "",
+    action: "",
+    localRun: "",
+    defectId: "",
+    errorMessage: "",
+  };
+  csvData.push(title);
+
+  const title2 = {
+    moduleName: "",
+    title: "",
+    updatedBy: "",
+    defectRefactorDependentPassedInLocal: "Name",
+    reason: "Total",
+    actionItem: "",
+    action: "",
+    localRun: "",
+    defectId: "",
+    errorMessage: "",
+  };
+  csvData.push(title2);
+
+  countUpdatedBy.forEach(element => {
+    const countDataCsv = {
+      moduleName: "",
+      title: "",
+      updatedBy: "",
+      defectRefactorDependentPassedInLocal: element.name,
+      reason: element?.count?.toString() ?? "",
+      actionItem: "",
+      action: "",
+      localRun: "",
+      defectId: "",
+      errorMessage: "",
+    };
+    
+    csvData.push(countDataCsv);
+  });
+}
+
+
+function updateCsvToInsertNextLine(csvData : CsvData[])
+{
+  const empty = {
+    moduleName: "",
+    title: "",
+    updatedBy: "",
+    defectRefactorDependentPassedInLocal: "",
+    reason: "",
+    actionItem: "",
+    action: "",
+    localRun: "",
+    defectId: "",
+    errorMessage: "",
+  };
+  csvData.push(empty);
 }
