@@ -163,6 +163,16 @@ export default function DemoPage() {
                   module: "Talent and Rights",
                   upload: [],
                 },
+                {
+                  id: uuidv4(),
+                  module: "Payee Portal",
+                  upload: [],
+                },
+                {
+                  id: uuidv4(),
+                  module: "Residuals",
+                  upload: [],
+                },
               ];
               setData(newData2);
             }
