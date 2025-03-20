@@ -173,6 +173,11 @@ export default function DemoPage() {
                   module: "Residuals",
                   upload: [],
                 },
+                {
+                  id: uuidv4(),
+                  module: "Client Portal",
+                  upload: [],
+                }
               ];
               setData(newData2);
             }
