@@ -2,6 +2,7 @@ import type Mochawesome from "mochawesome";
 import { type NextRequest, NextResponse } from "next/server";
 import { GetMochaData, parseJiraCSV } from "./functions/convert-jira-csv";
 import { processItemToCsv } from "./functions/process-item-to-csv";
+import { getDashboardData } from "./functions/process-dashboard-data";
 // import { type MochaData } from "~/app/(generator-page)/cypress-report-generator/columns";
 
 export type MochaDataAPI = {
@@ -33,9 +34,12 @@ export async function POST(request: NextRequest) {
     const jiraFileRawText = await jiraFile.text()
     const jiraData = parseJiraCSV(jiraFileRawText);
 
-    const csv = processItemToCsv(mochaData, jiraData )
+    const csv = processItemToCsv(mochaData, jiraData)
 
-    // Set headers to force download of CSV file
+    const data = getDashboardData(mochaData);
+
+    console.log(JSON.stringify(data));
+
     const response = new NextResponse(csv, {
       headers: {
         'Content-Type': 'text/csv',  // Set content type to CSV
