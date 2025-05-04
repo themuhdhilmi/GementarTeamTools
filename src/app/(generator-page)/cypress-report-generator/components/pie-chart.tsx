@@ -170,7 +170,8 @@ export function PieChartReportDashboard({
         <div>
           <div className="space-y-1">
             <h4 className="text-sm font-medium leading-none text-center w-full">
-            {dashboardData.moduleName === undefined ? "" : `${dashboardData.totalTests} Tests | ${Math.floor( parseInt(dashboardData.totalDuration?.toString() ?? "0") / (1000 * 60 * 60))}h ${Math.floor((parseInt(dashboardData.totalDuration?.toString() ?? "0") % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((parseInt(dashboardData.totalDuration?.toString() ?? "0") % (1000 * 60)) / 1000)}s | ${((dashboardData?.totalPassed ?? 0) / (dashboardData?.totalTests ?? 1) * 100).toFixed(2)}% Passed`}
+            {dashboardData.moduleName === undefined ? "" : `${dashboardData.totalTests} Tests | ${Math.floor( parseInt(dashboardData.totalDuration?.toString() ?? "0") / (1000 * 60 * 60))}h ${Math.floor((parseInt(dashboardData.totalDuration?.toString() ?? "0") % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((parseInt(dashboardData.totalDuration?.toString() ?? "0") % (1000 * 60)) / 1000)}s | `}
+            {`${((dashboardData?.totalPassed ?? 0) / (dashboardData?.totalTests ?? 1) * 100).toFixed(2)}% Passed`}
             </h4>
           </div>
           <Separator className="my-4" />

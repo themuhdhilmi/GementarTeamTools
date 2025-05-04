@@ -1,18 +1,26 @@
 import { type MochaDataAPI } from "../route";
-import { type JiraIssue } from "./convert-jira-csv";
-import { json2csv } from "json-2-csv";
 
 export function getDashboardData(mochaData: MochaDataAPI[]) {
+
   const statsPerModule = mochaData.map((module) => {
+
+    const totalSuites = module.upload.reduce((acc, curr) => acc + (curr.stats?.suites ?? 0), 0);
+    const totalTests = module.upload.reduce((acc, curr) => acc + (curr.stats?.tests ?? 0), 0);
+    const totalPassed = module.upload.reduce((acc, curr) => acc + (curr.stats?.passes ?? 0), 0);
+    const totalFailed = module.upload.reduce((acc, curr) => acc + (curr.stats?.failures ?? 0), 0);
+    const totalPending = module.upload.reduce((acc, curr) => acc + (curr.stats?.pending ?? 0), 0);
+    const totalSkipped = module.upload.reduce((acc, curr) => acc + (curr.stats?.skipped ?? 0), 0);
+    const totalDuration = module.upload.reduce((acc, curr) => acc + (curr.stats?.duration ?? 0), 0);
+
     return {
       moduleName: module.module,
-      totalSuites: module.upload[0]?.stats?.suites ?? 0,
-      totalTests: module.upload[0]?.stats?.tests ?? 0,
-      totalPassed: module.upload[0]?.stats?.passes ?? 0,
-      totalFailed: module.upload[0]?.stats?.failures ?? 0,
-      totalPending: module.upload[0]?.stats?.pending ?? 0,
-      totalSkipped: module.upload[0]?.stats?.skipped ?? 0,
-      totalDuration: module.upload[0]?.stats?.duration ?? 0,
+      totalSuites,
+      totalTests,
+      totalPassed,
+      totalFailed,
+      totalPending,
+      totalSkipped,
+      totalDuration,
     };
   });
 
