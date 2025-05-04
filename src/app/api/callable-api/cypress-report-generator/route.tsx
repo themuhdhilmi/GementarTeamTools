@@ -36,10 +36,6 @@ export async function POST(request: NextRequest) {
 
     const csv = processItemToCsv(mochaData, jiraData)
 
-    const data = getDashboardData(mochaData);
-
-    console.log(JSON.stringify(data));
-
     const response = new NextResponse(csv, {
       headers: {
         'Content-Type': 'text/csv',  // Set content type to CSV

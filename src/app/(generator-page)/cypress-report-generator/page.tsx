@@ -7,12 +7,41 @@ import { Input } from "~/components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import { Label } from "~/components/ui/label";
 import toast, { Toaster } from "react-hot-toast";
+import CypressReportDashboard from "./components/cypress-report-dashbaord";
+
+export interface CypressReportDashboardProps {
+  dashboardData: {
+    statsModuleTotal: {
+      totalTests: number;
+      totalPassed: number;
+      totalFailed: number;
+      totalPending: number;
+      totalSkipped: number;
+      totalDuration: number;
+      totalSuites: number;
+      totalModules: number;
+    };
+    statsPerModule: {
+      moduleName: string;
+      totalTests: number;
+      totalPassed: number;
+      totalFailed: number;
+      totalPending: number;
+      totalSkipped: number;
+      totalDuration: number;
+      totalSuites: number;
+      totalModules: number;
+    }[];
+  };
+}
 
 export default function DemoPage() {
   // const data = await getData()
   const [data, setData] = useState<MochaData[]>([]);
   const [text, setText] = useState("");
   const [jiraFile, setJiraFile] = useState<File | null>(null);
+  const [dashboardData, setDashboardData] =
+    useState<CypressReportDashboardProps | null>(null);
 
   const [disableButton, setDisableButton] = useState(false);
 
@@ -63,6 +92,25 @@ export default function DemoPage() {
       async () => {
         try {
           setDisableButton(true);
+
+          const responseDashboard = await fetch(
+            "/api/callable-api/cypress-report-generator/dashboard",
+            {
+              method: "POST",
+              body: formData,
+            },
+          );
+
+          if (!responseDashboard.ok) {
+            throw new Error(`HTTP error! status: ${responseDashboard.status}`);
+          }
+
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          const dashboardData = await responseDashboard.json();
+          console.log("Dashboard data:", dashboardData);
+
+          setDashboardData(dashboardData);
+
           const response = await fetch(
             "/api/callable-api/cypress-report-generator",
             {
@@ -177,7 +225,7 @@ export default function DemoPage() {
                   id: uuidv4(),
                   module: "Client Portal",
                   upload: [],
-                }
+                },
               ];
               setData(newData2);
             }
@@ -209,6 +257,11 @@ export default function DemoPage() {
         <Button onClick={handleUpload} disabled={disableButton}>
           Submit
         </Button>
+      </div>
+      <div className="w-full">
+        {dashboardData && (
+          <CypressReportDashboard dashboardData={dashboardData} />
+        )}
       </div>
     </div>
   );
