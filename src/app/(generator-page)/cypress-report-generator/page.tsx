@@ -41,7 +41,7 @@ export default function DemoPage() {
   const [text, setText] = useState("");
   const [jiraFile, setJiraFile] = useState<File | null>(null);
   const [dashboardData, setDashboardData] =
-    useState<CypressReportDashboardProps | null>(null);
+    useState<CypressReportDashboardProps["dashboardData"]>();
 
   const [disableButton, setDisableButton] = useState(false);
 
@@ -106,7 +106,7 @@ export default function DemoPage() {
           }
 
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const dashboardData = await responseDashboard.json();
+          const dashboardData = await responseDashboard.json() as CypressReportDashboardProps["dashboardData"];
           console.log("Dashboard data:", dashboardData);
 
           setDashboardData(dashboardData);

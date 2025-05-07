@@ -60,7 +60,6 @@ export default function CypressReportDashboard({
                 <div className="h-3 w-3 rounded-full bg-yellow-500" />
                 <div>Pending</div>
               </div>
-
             </div>
             <div className="rounded-lg border p-2">
               <PieChartReportDashboard dashboardData={statsPerModuleTotal} />

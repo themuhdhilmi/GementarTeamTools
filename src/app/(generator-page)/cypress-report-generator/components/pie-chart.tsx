@@ -152,7 +152,7 @@ export function PieChartReportDashboard({
                           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
                           x={viewBox.cx}
                           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-                          y={(viewBox.cy || 0) + 24}
+                          y={(viewBox.cy ?? 0) + 24}
                           className="fill-muted-foreground"
                         >
                           Tests
