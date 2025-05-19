@@ -15,7 +15,7 @@ import {
 import { AppSidebar } from "./_components/app-sidebar";
 
 export const metadata: Metadata = {
-  title: "Hilmi's Tools Test JENKINS",
+  title: "Hilmi's Tools",
   description: "Hilmi's Tools Collection",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
