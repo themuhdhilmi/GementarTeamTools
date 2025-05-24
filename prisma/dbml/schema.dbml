@@ -1,0 +1,104 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Account {
+  id String [pk]
+  userId String [not null]
+  type String [not null]
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  access_token String
+  expires_at Int
+  token_type String
+  scope String
+  id_token String
+  session_state String
+  user User [not null]
+  refresh_token_expires_in Int
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table Session {
+  id String [pk]
+  sessionToken String [unique, not null]
+  userId String [not null]
+  expires DateTime [not null]
+  user User [not null]
+}
+
+Table User {
+  id String [pk]
+  name String
+  email String [unique]
+  emailVerified DateTime
+  image String
+  accounts Account [not null]
+  sessions Session [not null]
+  user Group [not null]
+  assignedClaim AssignedClaim [not null]
+}
+
+Table Group {
+  id String [pk]
+  permission Permission [not null]
+  user User [not null]
+}
+
+Table Permission {
+  id Int [pk]
+  permission PermissionList [not null]
+  Group Group [not null]
+}
+
+Table AssignedClaim {
+  id String [pk]
+  claimCategory ClaimCategory [not null]
+  requestedClaim RequestedClaim [not null]
+  User User
+  userId String
+}
+
+Table RequestedClaim {
+  id String [pk]
+  AssignedClaim AssignedClaim
+  assignedClaimId String
+}
+
+Table GroupToUser {
+  userId String [ref: > Group.id]
+  userId String [ref: > User.id]
+}
+
+Table GroupToPermission {
+  permissionId Int [ref: > Permission.id]
+  groupId String [ref: > Group.id]
+}
+
+Enum PermissionList {
+  LOGIN
+  LOGOUT
+  VIEW_REPORTS
+  EDIT_REPORTS
+  DELETE_REPORTS
+  MANAGE_USERS
+}
+
+Enum ClaimCategory {
+  CATEGORY_1
+  CATEGORY_2
+  CATEGORY_3
+  CATEGORY_4
+}
+
+Ref: Account.userId > User.id [delete: Cascade]
+
+Ref: Session.userId > User.id [delete: Cascade]
+
+Ref: AssignedClaim.userId > User.id
+
+Ref: RequestedClaim.assignedClaimId > AssignedClaim.id
