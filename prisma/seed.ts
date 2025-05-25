@@ -55,17 +55,18 @@ async function main() {
     },
   });
 
-  await prisma.user.create({
-    data: {
-      name: "sample user",
-      email: "sample@email.com",
-      group: {
-        connect: {
-          id: "STAFF",
-        },
-      },
-    },
-  });
+  // await prisma.user.create({
+  //   data: {
+  //     name: "sample user",
+  //     email: "sample@email.com",
+  //     hashed_password: "$2a$12$twZYpoyxc8zHfoO3HE.pTOwMf8Y05OzrmxLYD80aXqvOVknUvBV3W", //Sample@123
+  //     group: {
+  //       connect: {
+  //         id: "STAFF",
+  //       },
+  //     },
+  //   },
+  // });
 
   await prisma.user.upsert({
     where: {
@@ -75,6 +76,7 @@ async function main() {
       name: "sample user",
       email: "sample@email.com",
       groupId: "STAFF",
+      hashed_password: "$2a$12$twZYpoyxc8zHfoO3HE.pTOwMf8Y05OzrmxLYD80aXqvOVknUvBV3W", //Sample@123
       assignedClaim: {
         createMany: {
           data: [

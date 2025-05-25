@@ -32,8 +32,9 @@ CREATE TABLE `Session` (
 -- CreateTable
 CREATE TABLE `User` (
     `id` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(191) NULL,
-    `email` VARCHAR(191) NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `hashed_password` VARCHAR(191) NOT NULL,
     `emailVerified` DATETIME(3) NULL,
     `image` VARCHAR(191) NULL,
     `groupId` VARCHAR(191) NOT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE `Group` (
 -- CreateTable
 CREATE TABLE `Permission` (
     `id` INTEGER NOT NULL,
-    `permission` ENUM('LOGIN', 'LOGOUT', 'REQUEST_CLAIM', 'ASSIGN_CLAIM') NOT NULL,
+    `permission` ENUM('LOGIN', 'LOGOUT', 'REQUEST_CLAIM', 'ASSIGN_CLAIM', 'GET_USER_CLAIMS', 'GET_SELF_CLAIMS') NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -60,6 +61,7 @@ CREATE TABLE `Permission` (
 -- CreateTable
 CREATE TABLE `AssignedClaim` (
     `id` VARCHAR(191) NOT NULL,
+    `value` DOUBLE NOT NULL,
     `claimCategory` ENUM('CATEGORY_1', 'CATEGORY_2', 'CATEGORY_3', 'CATEGORY_4') NOT NULL,
     `userId` VARCHAR(191) NULL,
 
@@ -69,6 +71,8 @@ CREATE TABLE `AssignedClaim` (
 -- CreateTable
 CREATE TABLE `RequestedClaim` (
     `id` VARCHAR(191) NOT NULL,
+    `value` DOUBLE NOT NULL,
+    `status` ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL,
     `assignedClaimId` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)

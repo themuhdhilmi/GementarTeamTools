@@ -2,12 +2,11 @@
 
 import {
   Folder,
-  Forward,
   MoreHorizontal,
+  Share,
   Trash2,
   type LucideIcon,
 } from "lucide-react"
-import { usePathname, useRouter } from "next/navigation"
 
 import {
   DropdownMenu,
@@ -37,16 +36,13 @@ export function NavProjects({
 }) {
   const { isMobile } = useSidebar()
 
-  const router = usePathname();
-  const firstParam = router.split("/")[1];
-
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Generator</SidebarGroupLabel>
+      <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
-          <SidebarMenuItem key={item.name} >
-            <SidebarMenuButton asChild isActive={item.url === '/' + firstParam ? true : false}>
+          <SidebarMenuItem key={item.name}>
+            <SidebarMenuButton asChild>
               <a href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>
@@ -60,33 +56,33 @@ export function NavProjects({
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-48 rounded-lg"
+                className="w-48"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                {/* <DropdownMenuItem>
+                <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
                   <span>View Project</span>
-                </DropdownMenuItem> */}
+                </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Forward className="text-muted-foreground" />
+                  <Share className="text-muted-foreground" />
                   <span>Share Project</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                {/* <DropdownMenuItem>
+                <DropdownMenuItem>
                   <Trash2 className="text-muted-foreground" />
                   <span>Delete Project</span>
-                </DropdownMenuItem> */}
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        {/* <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
+        <SidebarMenuItem>
+          <SidebarMenuButton>
+            <MoreHorizontal />
             <span>More</span>
           </SidebarMenuButton>
-        </SidebarMenuItem> */}
+        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

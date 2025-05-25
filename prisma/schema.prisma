@@ -45,15 +45,17 @@ model Session {
 
 model User {
     id            String          @id @default(cuid())
-    name          String?
-    email         String?         @unique
+    name          String
+    email         String         @unique
+    hashed_password          String
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
     group         Group           @relation(fields: [groupId], references: [id])
-    assignedClaim AssignedClaim[]
     groupId       String
+    assignedClaim AssignedClaim[]
+    permission    Permission[]
 }
 
 model Group {
@@ -65,7 +67,8 @@ model Group {
 model Permission {
     id         Int            @id
     permission PermissionList
-    Group      Group[]
+    group      Group[]
+    user User[]
 }
 
 enum PermissionList {
@@ -76,6 +79,9 @@ enum PermissionList {
 
     GET_USER_CLAIMS
     GET_SELF_CLAIMS
+
+    PAGE_PERMISSION_REIMBURSEMENT
+    PAGE_PERMISSION_CYPRESS_REPORT
 }
 
 enum ClaimCategory {
@@ -90,7 +96,7 @@ model AssignedClaim {
     value          Float
     claimCategory  ClaimCategory
     requestedClaim RequestedClaim[]
-    User           User?            @relation(fields: [userId], references: [id])
+    user           User?            @relation(fields: [userId], references: [id])
     userId         String?
 }
 
