@@ -1,0 +1,1674 @@
+{
+  "stats": {
+    "suites": 25,
+    "tests": 33,
+    "passes": 29,
+    "pending": 0,
+    "failures": 4,
+    "testsRegistered": 33,
+    "passPercent": 87.87878787878788,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-05-19T11:04:28.214Z",
+    "end": "2025-05-19T11:36:46.231Z",
+    "duration": 1938017
+  },
+  "results": [
+    {
+      "uuid": "308db4fd-f168-419c-8faf-73897990401d",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC101.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC101.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ad2d9540-e507-4e4c-9ff0-fe3fb87a3f90",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC101.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC101.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC101",
+              "fullTitle": "Talent Payee Sync Maintenance TC101",
+              "timedOut": null,
+              "duration": 26200,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (3/2/2025)\n    Module : talent payee synch maintenance\n    TC101\n    Description: Add new US Citizen talent record in the Talents and Right UI screen\n    Expected:User should be able to create new US citizen Talent Record and all the information should flow into EPRS Payee screens (payee detail info, tax withholding, address etc)\n    */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\nconst socialsecurityNo = faker_1.faker.number.int({ min: 100000000, max: 899999999 });\nconst firstname = 'Automation US Citizen : ';\nconst lastname = faker_1.faker.person.firstName();\n//#region Add New Us Citizen\ncy.contains('New Talent').should('be.visible').click();\ncy.contains('Continue').should('be.visible').click();\n//social sec no\ncy.get('[name=\"ctrl.talent.SocialSecurityNumber\"]').type(socialsecurityNo);\n//First Name\ncy.get('[name=\"ctrl.talent.FirstName\"]').type(firstname);\n//last Name\ncy.get('[name=\"ctrl.talent.LastName\"]').type(lastname);\n//Click Continue\ncy.contains('Continue').should('be.visible').click();\nconst Line1 = faker_1.faker.location.streetAddress();\nconst Line2 = faker_1.faker.location.secondaryAddress();\nconst City = faker_1.faker.location.city();\nconst PostalCode = faker_1.faker.location.zipCode();\nconst PhoneNumber = faker_1.faker.phone.number('###########');\nconst EmailAddress = faker_1.faker.internet.email();\n//address 1\ncy.get('[name=\"ctrl.talent.Addresses[0].Line1\"]').type(Line1);\n//address 2\ncy.get('[name=\"ctrl.talent.Addresses[0].Line2\"]').type(Line2);\n//City\ncy.get('[name=\"ctrl.talent.Addresses[0].City\"]').type(City);\ncy.get('[name=\"ctrl.talent.Addresses[0].StateId\"]').select('number:1');\n//zip\ncy.get('[name=\"ctrl.talent.Addresses[0].Zip\"]').type(PostalCode);\n//phone no\ncy.get('[name=\"ctrl.talent.PhoneNumber\"]').type(PhoneNumber);\n//Email\ncy.get('[name=\"ctrl.talent.EmailAddress\"]').type(EmailAddress);\n//click continue\ncy.contains('Continue').should('be.visible').click();\n//Tax Field\ncy.get('[name=\"ctrl.talent.TaxMaritalStatus\"]').select('Married');\ncy.get(':nth-child(2) > .form-group > datepicker-auto.ng-pristine > div > .ng-valid-required').type('1/1/1991');\ncy.contains('button', 'Done').should('be.visible').click();\ncy.get('[name=\"ctrl.talent.TaxStateExemptions\"]').type('1');\ncy.get('[name=\"ctrl.talent.TaxLocalAuthority\"]').type('LHDN');\ncy.get('[name=\"ctrl.talent.TaxFederalDependentDeductionAmount\"]').type('200');\ncy.get('[name=\"ctrl.talent._taxStateWithholdingPercent\"]').type('10');\ncy.get('[name=\"ctrl.talent.TaxFederalOtherIncome\"]').type('200');\ncy.get('[name=\"ctrl.talent.TaxStateFlatWithholding\"]').type('20');\ncy.get('[name=\"ctrl.talent.TaxExemptYear\"]').type('2025');\ncy.contains('Continue').should('be.visible').click();\n//create Payee\ncy.contains('Create Talent').should('be.visible').click();\ncy.wait(5000);\n//validate record Same\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//#endregion",
+              "err": {},
+              "uuid": "9449ef48-9f03-4a7a-b0d1-6aaeda00a6a9",
+              "parentUUID": "ad2d9540-e507-4e4c-9ff0-fe3fb87a3f90",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9449ef48-9f03-4a7a-b0d1-6aaeda00a6a9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 26200,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "52d41675-5a28-4cb7-a8f3-22de39cd05a6",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC102.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC102.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "357e2549-a108-4b43-8597-5c1137d3e0f7",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC102.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC102.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC102",
+              "fullTitle": "Talent Payee Sync Maintenance TC102",
+              "timedOut": null,
+              "duration": 19185,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (3/2/2025)\n    Module : talent payee synch maintenance\n    TC102\n    Description: Add new corperation talent record in the Talents and Right UI screen\n    Expected:User should be able to create new corperation Talent Record and all the information should flow into EPRS Payee screens (payee detail info, tax withholding, address etc)\n    */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\nconst socialsecurityNo = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst firstname = 'Automation Corp : ';\nconst lastname = faker_1.faker.person.firstName();\nconst FEIN = faker_1.faker.number.int({ min: 100000000, max: 899999999 });\nconst corpName = 'JIJAH :' + faker_1.faker.person.lastName();\n//#region Add New Us Corperation\ncy.contains('New Talent').should('be.visible').click();\ncy.get('input[type=\"radio\"][name=\"ctrl.talentType\"][value=\"2\"]').should('be.visible').check();\ncy.contains('Continue').should('be.visible').click();\n//social sec no\ncy.get('[name=\"ctrl.talent.SocialSecurityNumber\"]').type(socialsecurityNo);\n//First Name\ncy.get('[name=\"ctrl.talent.FirstName\"]').type(firstname);\n//last Name\ncy.get('[name=\"ctrl.talent.LastName\"]').type(lastname);\n//FEIN NO\ncy.get('[name=\"ctrl.talent.CorporationFein\"]').type(FEIN);\n//CORP Name\ncy.get('[name=\"ctrl.talent.CorporationName\"]').type(corpName);\n//Click Continue\ncy.contains('Continue').should('be.visible').click();\nconst Line1 = faker_1.faker.location.streetAddress();\nconst Line2 = faker_1.faker.location.secondaryAddress();\nconst City = faker_1.faker.location.city();\nconst PostalCode = faker_1.faker.location.zipCode();\nconst PhoneNumber = faker_1.faker.phone.number('###########');\nconst EmailAddress = faker_1.faker.internet.email();\n//address 1\ncy.get('[name=\"ctrl.talent.Addresses[0].Line1\"]').type(Line1);\n//address 2\ncy.get('[name=\"ctrl.talent.Addresses[0].Line2\"]').type(Line2);\n//City\ncy.get('[name=\"ctrl.talent.Addresses[0].City\"]').type(City);\ncy.get('[name=\"ctrl.talent.Addresses[0].StateId\"]').select('number:1');\n//zip\ncy.get('[name=\"ctrl.talent.Addresses[0].Zip\"]').type(PostalCode);\n//phone no\ncy.get('[name=\"ctrl.talent.PhoneNumber\"]').type(PhoneNumber);\n//Email\ncy.get('[name=\"ctrl.talent.EmailAddress\"]').type(EmailAddress);\n//click continue\ncy.contains('Continue').should('be.visible').click();\n//create Payee\ncy.contains('Create Talent').should('be.visible').click();\n//Validate\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Corporation Payee').invoke('removeAttr', 'target').click();\n//#endregion",
+              "err": {},
+              "uuid": "dcd63d1b-c425-40c5-a53a-9f891a4530ac",
+              "parentUUID": "357e2549-a108-4b43-8597-5c1137d3e0f7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "dcd63d1b-c425-40c5-a53a-9f891a4530ac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19185,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bc41a554-04c9-4f49-a50b-cae0b8114b9b",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC103.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC103.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "acffd4b6-b350-43a5-8ffd-762203c2a4a4",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC103.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC103.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC103",
+              "fullTitle": "Talent Payee Sync Maintenance TC103",
+              "timedOut": null,
+              "duration": 22728,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (3/2/2025)\n    Module : talent payee synch maintenance\n    TC103\n    Description: Add new Foreign talent record in the Talents and Right UI screen\n    Expected:User should be able to create new Foreign Talent Record and all the information should flow into EPRS Payee screens (payee detail info, tax withholding, address etc)\n    */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\nconst socialsecurityNo = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst firstname = 'Automation Corp : ';\nconst lastname = faker_1.faker.person.firstName();\nconst FEIN = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst corpName = 'JIJAH :' + faker_1.faker.person.lastName();\nconst visaNo = 'AB' + faker_1.faker.number.int({ min: 1000, max: 9999 });\n//#region Add New Foreign Talent\ncy.contains('New Talent').should('be.visible').click();\ncy.get('input[type=\"radio\"][name=\"ctrl.talentType\"][value=\"3\"]').should('be.visible').check();\ncy.contains('Continue').should('be.visible').click();\n//social sec no\ncy.get('[name=\"ctrl.talent.SocialSecurityNumber\"]').type(socialsecurityNo);\n//First Name\ncy.get('[name=\"ctrl.talent.FirstName\"]').type(firstname);\n//last Name\ncy.get('[name=\"ctrl.talent.LastName\"]').type(lastname);\n//FEIN NO\ncy.get('[name=\"ctrl.talent.CorporationFein\"]').type(FEIN);\n//CORP Name\ncy.get('[name=\"ctrl.talent.CorporationName\"]').type(corpName);\n//Click Continue\ncy.contains('Continue').should('be.visible').click();\nconst Line1 = faker_1.faker.location.streetAddress();\nconst Line2 = faker_1.faker.location.secondaryAddress();\nconst City = faker_1.faker.location.city();\nconst PostalCode = faker_1.faker.location.zipCode();\nconst PhoneNumber = faker_1.faker.phone.number('###########');\nconst EmailAddress = faker_1.faker.internet.email();\n//Country\ncy.get('[name=\"ctrl.talent.Addresses[0].CountryId\"]').select('number:26');\n//address 1\ncy.get('[name=\"ctrl.talent.Addresses[0].Line1\"]').type(Line1);\n//address 2\ncy.get('[name=\"ctrl.talent.Addresses[0].Line2\"]').type(Line2);\n//City\ncy.get('[name=\"ctrl.talent.Addresses[0].City\"]').type(City);\ncy.get('[name=\"ctrl.talent.Addresses[0].StateId\"]').select('number:1425');\n//zip\ncy.get('[name=\"ctrl.talent.Addresses[0].Zip\"]').type(PostalCode);\n//phone no\ncy.get('[name=\"ctrl.talent.PhoneNumber\"]').type(PhoneNumber);\n//Email\ncy.get('[name=\"ctrl.talent.EmailAddress\"]').type(EmailAddress);\n//click continue\ncy.contains('Continue').should('be.visible').click();\n//Tax Field\ncy.get('[name=\"ctrl.talent.TaxMaritalStatus\"]').select('Married');\ncy.get(':nth-child(2) > .form-group > datepicker-auto.ng-pristine > div > .ng-valid-required').type('1/1/1991');\ncy.get('li.ng-scope > .btn-success').click();\ncy.get('[name=\"ctrl.talent.TaxStateExemptions\"]').type('1');\ncy.get('[name=\"ctrl.talent.TaxLocalAuthority\"]').type('LHDN');\ncy.get('[name=\"ctrl.talent.TaxFederalDependentDeductionAmount\"]').type('200');\ncy.get('[name=\"ctrl.talent._taxStateWithholdingPercent\"]').type('4');\ncy.get('[name=\"ctrl.talent.TaxFederalOtherIncome\"]').type('200');\ncy.get('[name=\"ctrl.talent.TaxStateFlatWithholding\"]').type('7');\ncy.get('[name=\"ctrl.talent.TaxExemptYear\"]').type('2025');\ncy.contains('Continue').should('be.visible').click();\n//create Payee\ncy.contains('Create Talent').should('be.visible').click();\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//  //#endregion",
+              "err": {},
+              "uuid": "89a588c0-d4be-4925-a7e7-36309badfa09",
+              "parentUUID": "acffd4b6-b350-43a5-8ffd-762203c2a4a4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "89a588c0-d4be-4925-a7e7-36309badfa09"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 22728,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "5119c348-79f9-4350-98a3-7543e513b36a",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC104.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC104.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d99de458-5717-479a-9548-7295e260fac6",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC104.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC104.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC104",
+              "fullTitle": "Talent Payee Sync Maintenance TC104",
+              "timedOut": null,
+              "duration": 20607,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (3/2/2025)\n    Module : talent payee synch maintenance\n    TC104\n    Description: Add new Canadian Citizen talent record in the Talents and Right UI screen\n    Expected:User should be able to create new Canadian citizen Talent Record and all the information should flow into EPRS Payee screens (payee detail info, tax withholding, address etc)\n    */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\nconst socialsecurityNo = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst firstname = 'Automation Corp : ';\nconst lastname = faker_1.faker.person.firstName();\nconst FEIN = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst corpName = 'JIJAH :' + faker_1.faker.person.lastName();\nconst visaNo = 'AB' + faker_1.faker.number.int({ min: 1000, max: 9999 });\n//#region Add New Canadian Citizen\ncy.contains('New Talent').should('be.visible').click();\ncy.get('input[type=\"radio\"][name=\"ctrl.talentType\"][value=\"7\"]').should('be.visible').check();\ncy.contains('Continue').should('be.visible').click();\n//social sec no\ncy.get('[name=\"ctrl.talent.SocialSecurityNumber\"]').type(socialsecurityNo);\n//First Name\ncy.get('[name=\"ctrl.talent.FirstName\"]').type(firstname);\n//last Name\ncy.get('[name=\"ctrl.talent.LastName\"]').type(lastname);\n//FEIN NO\ncy.get('[name=\"ctrl.talent.CorporationFein\"]').type(FEIN);\n//CORP Name\ncy.get('[name=\"ctrl.talent.CorporationName\"]').type(corpName);\n//Click Continue\ncy.contains('Continue').should('be.visible').click();\nconst Line1 = faker_1.faker.location.streetAddress();\nconst Line2 = faker_1.faker.location.secondaryAddress();\nconst City = faker_1.faker.location.city();\nconst PostalCode = faker_1.faker.location.zipCode();\nconst PhoneNumber = faker_1.faker.phone.number('###########');\nconst EmailAddress = faker_1.faker.internet.email();\n//Country\ncy.get('[name=\"ctrl.talent.Addresses[0].CountryId\"]').select('number:2');\n//address 1\ncy.get('[name=\"ctrl.talent.Addresses[0].Line1\"]').type(Line1);\n//address 2\ncy.get('[name=\"ctrl.talent.Addresses[0].Line2\"]').type(Line2);\n//City\ncy.get('[name=\"ctrl.talent.Addresses[0].City\"]').type(City);\ncy.get('[name=\"ctrl.talent.Addresses[0].StateId\"]').select('number:52');\n//zip\ncy.get('[name=\"ctrl.talent.Addresses[0].Zip\"]').type(PostalCode);\n//phone no\ncy.get('[name=\"ctrl.talent.PhoneNumber\"]').type(PhoneNumber);\n//Email\ncy.get('[name=\"ctrl.talent.EmailAddress\"]').type(EmailAddress);\n//click continue\ncy.contains('Continue').should('be.visible').click();\n//create Payee\ncy.contains('Create Talent').should('be.visible').click();\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//#endregion",
+              "err": {},
+              "uuid": "f04873e2-893d-4c36-bdba-a88a747132bb",
+              "parentUUID": "d99de458-5717-479a-9548-7295e260fac6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f04873e2-893d-4c36-bdba-a88a747132bb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 20607,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "e18dd4aa-f58c-4df9-a0a4-02ba59e5128a",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC105.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC105.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "54e14d13-755b-4136-ace7-88e2415d766a",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC105.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC105.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC105",
+              "fullTitle": "Talent Payee Sync Maintenance TC105",
+              "timedOut": null,
+              "duration": 18599,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (4/2/2025)\n    Module : talent payee synch maintenance\n    TC105\n    Description: Add new agent record in the Talents and Right UI screen\n    Expected: User should be able to create new agent record and all the information should flow into EPRS Payee screens (agent detail info, tax withholding, address etc)\n    */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\nconst socialsecurityNo = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst firstname = 'Automation Corp : ';\nconst lastname = faker_1.faker.person.firstName();\nconst FEIN = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst corpName = 'JIJAH AGENT :' + faker_1.faker.person.lastName();\nconst visaNo = 'AB' + faker_1.faker.number.int({ min: 1000, max: 9999 });\n//#region Add New Agent\ncy.contains('New Talent').should('be.visible').click();\ncy.get('input[type=\"radio\"][name=\"ctrl.talentType\"][value=\"5\"]').should('be.visible').check();\ncy.contains('Continue').should('be.visible').click();\n//FEIN NO\ncy.get('[name=\"ctrl.talent.CorporationFein\"]').type(FEIN);\n//CORP Name\ncy.get('[name=\"ctrl.talent.CorporationName\"]').type(corpName);\n//Click Continue\ncy.contains('Continue').should('be.visible').click();\nconst Line1 = faker_1.faker.location.streetAddress();\nconst Line2 = faker_1.faker.location.secondaryAddress();\nconst City = faker_1.faker.location.city();\nconst PostalCode = faker_1.faker.location.zipCode();\nconst PhoneNumber = faker_1.faker.phone.number('###########');\nconst EmailAddress = faker_1.faker.internet.email();\n//Country\ncy.get('[name=\"ctrl.talent.Addresses[0].CountryId\"]').select('number:2');\n//address 1\ncy.get('[name=\"ctrl.talent.Addresses[0].Line1\"]').type(Line1);\n//address 2\ncy.get('[name=\"ctrl.talent.Addresses[0].Line2\"]').type(Line2);\n//City\ncy.get('[name=\"ctrl.talent.Addresses[0].City\"]').type(City);\ncy.get('[name=\"ctrl.talent.Addresses[0].StateId\"]').select('number:52');\n//zip\ncy.get('[name=\"ctrl.talent.Addresses[0].Zip\"]').type(PostalCode);\n//phone no\ncy.get('[name=\"ctrl.talent.PhoneNumber\"]').type(PhoneNumber);\n//Email\ncy.get('[name=\"ctrl.talent.EmailAddress\"]').type(EmailAddress);\n//click continue\ncy.contains('Continue').should('be.visible').click();\n//create Payee\ncy.contains('Create Talent').should('be.visible').click();\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//#endregion",
+              "err": {},
+              "uuid": "f734043d-3426-464c-8778-d252806f9d29",
+              "parentUUID": "54e14d13-755b-4136-ace7-88e2415d766a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f734043d-3426-464c-8778-d252806f9d29"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18599,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "31e50110-b4b0-4514-bbe2-329c6a4b61f4",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC106.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC106.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "86a2c418-f811-4dd8-8ac2-821ffae8085b",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC106.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC106.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC106",
+              "fullTitle": "Talent Payee Sync Maintenance TC106",
+              "timedOut": null,
+              "duration": 19171,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (4/2/2025)\n    Module : talent payee synch maintenance\n    TC106\n    Description: Add new Vendor record in the Talents and Right UI screen\n    Expected: User should be able to create new Vendor record and all the information should flow into EPRS Payee screens (agent detail info, tax withholding, address etc)\n    */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\nconst socialsecurityNo = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst firstname = 'Automation Corp : ';\nconst lastname = faker_1.faker.person.firstName();\nconst FEIN = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\nconst corpName = 'JIJAH Vendor :' + faker_1.faker.person.lastName();\nconst visaNo = 'AB' + faker_1.faker.number.int({ min: 1000, max: 9999 });\n//#region Add New Agent\ncy.contains('New Talent').should('be.visible').click();\ncy.get('input[type=\"radio\"][name=\"ctrl.talentType\"][value=\"8\"]').should('be.visible').check();\ncy.contains('Continue').should('be.visible').click();\n//FEIN NO\ncy.get('[name=\"ctrl.talent.CorporationFein\"]').type(FEIN);\n//CORP Name\ncy.get('[name=\"ctrl.talent.CorporationName\"]').type(corpName);\n//Click Continue\ncy.contains('Continue').should('be.visible').click();\nconst Line1 = faker_1.faker.location.streetAddress();\nconst Line2 = faker_1.faker.location.secondaryAddress();\nconst City = faker_1.faker.location.city();\nconst PostalCode = faker_1.faker.location.zipCode();\nconst PhoneNumber = faker_1.faker.phone.number('###########');\nconst EmailAddress = faker_1.faker.internet.email();\n//Country\ncy.get('[name=\"ctrl.talent.Addresses[0].CountryId\"]').select('number:2');\n//address 1\ncy.get('[name=\"ctrl.talent.Addresses[0].Line1\"]').type(Line1);\n//address 2\ncy.get('[name=\"ctrl.talent.Addresses[0].Line2\"]').type(Line2);\n//City\ncy.get('[name=\"ctrl.talent.Addresses[0].City\"]').type(City);\ncy.get('[name=\"ctrl.talent.Addresses[0].StateId\"]').select('number:52');\n//zip\ncy.get('[name=\"ctrl.talent.Addresses[0].Zip\"]').type(PostalCode);\n//phone no\ncy.get('[name=\"ctrl.talent.PhoneNumber\"]').type(PhoneNumber);\n//Email\ncy.get('[name=\"ctrl.talent.EmailAddress\"]').type(EmailAddress);\n//click continue\ncy.contains('Continue').should('be.visible').click();\n//create Payee\ncy.contains('Create Talent').should('be.visible').click();\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//#endregion",
+              "err": {},
+              "uuid": "088ac466-1165-46cb-a4e7-52b5e55f6351",
+              "parentUUID": "86a2c418-f811-4dd8-8ac2-821ffae8085b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "088ac466-1165-46cb-a4e7-52b5e55f6351"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19171,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f2d8b3d7-a9b0-4975-b3eb-0cd28c1fca9d",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC107.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC107.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "74c56e06-793f-4018-ab7d-7b8e20e67a62",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC107.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC107.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC107",
+              "fullTitle": "Talent Payee Sync Maintenance TC107",
+              "timedOut": null,
+              "duration": 22857,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (4/2/2025)\n    Module : talent payee synch maintenance\n    TC107\n    Description: Verify default address value for W2\n    Expected: For Talent Mailing Address, add an Address record in the Payee Record > Addresses tab where the Payee Record Address Type = Resident W2 Address (Note: This is the address used to tax the payee)\n  */\ncreatePayee();\n//Go To Address Tab\ncy.intercept('GET', '**/api/payroll/payee-details/payee-address/search?payeeId=*').as('getPayeeAddress');\ncy.get('[routerlink=\"address\"]').click();\n//trying to add new address\ncy.wait('@getPayeeAddress');\n// cy.contains('New Address').click();\n// //Validate Default is W2 Address\n// cy.get('[class=\"k-input-inner\"]')\n// .find('[class=\"k-input-value-text\"]')\n// .should('contain', 'Resident W2 Address');\n// cy.get(':nth-child(1) > .col-md-9 > .k-picker-md > .k-input-inner > .k-input-value-text').type('ERPS{enter}');\n// cy.get(':nth-child(3) > .col-md-9 > .ng-untouched').type(Line1);\n// cy.get(':nth-child(4) > .col-md-9 > .ng-untouched').type(Line2);\n// cy.get(':nth-child(5) > .col-md-9 > .ng-untouched').type(City);\n// cy.get('[textfield=\"stateName\"]').focus().type('{downArrow}');\n// cy.get(':nth-child(7) > .col-md-9 > .ng-untouched').type('3391023');\n// cy.get('[name=\"editable.comments\"]').type('This is a Taxable Address');\n// cy.contains('[class=\"btn btn-primary\"]', 'Save').click();",
+              "err": {},
+              "uuid": "302a7481-4522-4a60-8177-22622963f7ec",
+              "parentUUID": "74c56e06-793f-4018-ab7d-7b8e20e67a62",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "302a7481-4522-4a60-8177-22622963f7ec"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 22857,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2d687573-d900-4302-af63-0c4f8826d6f7",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC109.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC109.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "00915894-3e7a-498d-a85e-d082981bf28e",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC109.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC109.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC109",
+              "fullTitle": "Talent Payee Sync Maintenance TC109",
+              "timedOut": null,
+              "duration": 29293,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (5/2/2025)\n    Module : talent payee synch maintenance\n    TC109\n    Description: Verify default address value for W2\n    Expected: For Talent Mailing Address, add an Address record in the Payee Record > Addresses tab where the Payee Record Address Type = Resident W2 Address (Note: This is the address used to tax the payee)\n  */\ncreatePayee();\n//ADD TEMP Address in TALENT\ncy.get('.col-md-2.ng-scope > .btn-toolbar > button.btn').click();\ncy.get('[ng-if=\"address.IsTemporary\"] > .table > tbody > :nth-child(1) > :nth-child(2) > .form-group > .form-control').select('number:1');\ncy.get('input[name=\"address.Line1\"]').first().should('be.visible').type('This is an address line 1');\ncy.get('[name=\"address.Line2\"]').first().type('This is an address line 2');\ncy.get('[name=\"address.City\"]').first().type('Winsconsin');\ncy.get('[name=\"address.StateId\"]').first().select('number:1');\ncy.get('[name=\"address.Zip\"]').first().type('12345678');\ncy.get('datepicker-auto[name=\"address.ForwardingFromDate\"] input[user-input]')\n    .first()\n    .clear()\n    .type('02/02/2025{enter}', { force: true });\ncy.get('datepicker-auto[name=\"address.ForwardingToDate\"] input[user-input]')\n    .first() // Ensures only the visible input is selected\n    .clear()\n    .type('31/12/2027{enter}', { force: true });\ncy.contains('a.btn-primary', 'Save').click();\n//validate record Same\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//Go To Address Tab\ncy.intercept('GET', '**/api/payroll/payee-details/payee-address/search?payeeId=*').as('getPayeeAddress');\ncy.get('[routerlink=\"address\"]').click();\ncy.wait('@getPayeeAddress');\ncy.get('tbody > :nth-child(2) > :nth-child(3)').should('contain', 'Temp_Address');\n// //trying to add new address\n// cy.wait('@getPayeeAddress');\n// cy.contains('New Address').click();\n// //Validate Default is W2 Address\n// cy.get('[class=\"k-input-inner\"]')\n// .find('[class=\"k-input-value-text\"]')\n// .should('contain', 'Resident W2 Address');\n// cy.get(':nth-child(1) > .col-md-9 > .k-picker-md > .k-input-inner > .k-input-value-text').type('ERPS{enter}');\n// cy.get(':nth-child(3) > .col-md-9 > .ng-untouched').type(Line1);\n// cy.get(':nth-child(4) > .col-md-9 > .ng-untouched').type(Line2);\n// cy.get(':nth-child(5) > .col-md-9 > .ng-untouched').type(City);\n// cy.get('[textfield=\"stateName\"]').focus().type('{downArrow}');\n// cy.get(':nth-child(7) > .col-md-9 > .ng-untouched').type('3391023');\n// cy.get('[name=\"editable.comments\"]').type('This is a Taxable Address');\n// cy.contains('[class=\"btn btn-primary\"]', 'Save').click();",
+              "err": {},
+              "uuid": "c47a43f7-e71d-4a86-8e3b-cae0649a2fd0",
+              "parentUUID": "00915894-3e7a-498d-a85e-d082981bf28e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c47a43f7-e71d-4a86-8e3b-cae0649a2fd0"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 29293,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f388b975-725c-46dc-a7b6-2fa5afbffabc",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC110.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC110.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4e75b8c9-b4eb-4ab5-9ff5-97f437e0ac18",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC110.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC110.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC110",
+              "fullTitle": "Talent Payee Sync Maintenance TC110",
+              "timedOut": null,
+              "duration": 18034,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n     Last Updated : afiq (5/2/2025)\n     Module : talent payee synch maintenance\n     TC110\n     Description: Verify when user updates the above records' Tax Withholdings, Work Authorizations, Bank Accounts, Address, Garnishments, Misc Deductions, Coogan Deductions, Unions, Wire and recoupments)\n     Expected: \"User should be able to update a Talent Record in Talent & Rights,and the data should be updated in the corresponding Payee Maintenance Record in A6 (and vice versa)\n     Note: Known instances where we should not update the Talent Record: Direct Deposit bank account, Misc Deductions other than Minor Trust Fund --> Coogan tab, Work Authorization\n   */\ncy.visit('/adbridge/tal/Talent/Talent#!/Search');\ncy.contains('a.btn-primary', 'Edit').invoke('removeAttr', 'target').click();\ncy.get('[name=\"ctrl.talent.FirstName\"]').type(' Update Test Name');\ncy.contains('a.btn-primary', 'Save').click();\ncy.wait(5000);\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();",
+              "err": {},
+              "uuid": "af4f74e8-1cef-44d5-bc98-b9ba2993e14e",
+              "parentUUID": "4e75b8c9-b4eb-4ab5-9ff5-97f437e0ac18",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "af4f74e8-1cef-44d5-bc98-b9ba2993e14e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18034,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "430afff9-bdf6-4ce9-81e7-064db732b862",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC111.cy.ts",
+      "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC111.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7f1e4ca5-7edc-4bfb-bac2-1b6e5bb2d65e",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC111.cy.ts",
+          "file": "src\\e2e\\kl\\100-talents-payee-synch-maintenance\\talent-payee-synch-maintenance-TC111.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC111",
+              "fullTitle": "Talent Payee Sync Maintenance TC111",
+              "timedOut": null,
+              "duration": 20077,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n     Last Updated : afiq (5/2/2025)\n     Module : talent payee synch maintenance\n     TC111\n     Description: Validate audit entries on Payee Creation\n     Expected: All Payee creation activities should be logged correctly in the audit history table\n   */\ncreatePayee();\n//validate record Same\ncy.contains('a.btn-primary', 'Payee').invoke('removeAttr', 'target').click();\n//Go to Audit Trails\ncy.get('[routerlink=\"audits\"]').click();\ncy.get('.list-group > :nth-child(1)').should('not.be.empty');",
+              "err": {},
+              "uuid": "831f21ba-a2fc-4891-be62-f411c80d93a8",
+              "parentUUID": "7f1e4ca5-7edc-4bfb-bac2-1b6e5bb2d65e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "831f21ba-a2fc-4891-be62-f411c80d93a8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 20077,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "7ce99e35-758f-4310-93dd-c67375195efb",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC206.cy.ts",
+      "file": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC206.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "86bbef85-6f34-41b4-84e9-a4c673d078c7",
+          "title": "Automate Talent Batch Process",
+          "fullFile": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC206.cy.ts",
+          "file": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC206.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC206",
+              "fullTitle": "Automate Talent Batch Process TC206",
+              "timedOut": null,
+              "duration": 26927,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : Rosnisa (21/2/2025)\n    Module : Automated Talent Batch Process\n    1. Process AFM payments to payees not in local 47 and 802, with H&W added to wages\n    */\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_CORE_PAYROLL');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_CORE_PAYROLL');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit('adbridge/tal/talent/masters/912845/general');\ncy.get('h1', { timeout: 90000 }).should('be.visible');\ncy.get('div.left.data span.value', { timeout: 90000 })\n    .invoke('text')\n    .then((text) => {\n    cy.log('Extracted Text:', text.trim());\n    expect(text).to.include('AFTRA,AFM');\n});\ncy.get('li.nav-item a.nav-link', { timeout: 90000 }).should('be.visible').contains('Cast List').click();\ncy.get('table.cast-list-table th.cast-list-talent-details', { timeout: 90000 }).should('be.visible');\ncy.get('thead tr th').each(($th, index) => {\n    if ($th.text().trim() === 'U LCL') {\n        cy.get('tbody.castList.editable-cast-list tr', { timeout: 90000 }).each(($row) => {\n            cy.wrap($row)\n                .find('td')\n                .eq(index)\n                .invoke('text')\n                .then((text) => {\n                const trimmedText = text.trim();\n                cy.log('U LCL Data:', trimmedText);\n                expect(trimmedText.replace(/\\d+/g, '')).to.not.include('802'); // Assertion: Ensure text does NOT contain \"Local 47\" or \"802\"\n                expect(trimmedText.replace(/\\d+/g, '')).to.not.include('47');\n            });\n        });\n    }\n});\ncy.contains('a.nav-link', 'Payments', { timeout: 90000 }).should('be.visible').click();\ncy.get('.spinner-threedots', { timeout: 90000 }).should('not.be.visible');\ncy.get('h4.section-header.card-header.hand', { timeout: 90000 }).should('be.visible').and('have.text', 'INVOICES'); // Ensure the header contains \"INVOICES\"\ncy.get('commonux-typeahead[name=\"paymentSearchCriteria.union\"] input.form-control', { timeout: 90000 })\n    .should('be.visible')\n    .click()\n    .clear()\n    .type('AFM');\ncy.get('button.btn.btn-success[name=\"submit\"]', { timeout: 90000 }).should('be.visible').click();\ncy.contains('td.align-middle.text-center', 'AFM', { timeout: 90000 }).should('be.visible');\ncy.log('Process AFM payments to payees is visible');\ncy.contains('td', 'Local 47').should('not.exist'); // Ensures 'Local 47' is not in the table\ncy.contains('td', 'Local 802').should('not.exist'); // Ensures 'Local 802' is not in the table\ncy.log('Verify that no payees from Local 47 and 802 are present');\ncy.visit('Talent/Payments/#!/Edit/1630452');\ncy.get('div.page-heading h1', { timeout: 90000 }).should('be.visible');\ncy.get('a[href=\"#payment-tab-cast\"]', { timeout: 90000 }).click({ force: true });\ncy.get('.table.table-striped.table-condensed.table-form', { timeout: 90000 }).should('exist').should('be.visible');\ncy.get('tr.ng-scope', { timeout: 90000 })\n    .contains('td', 'AFM')\n    .parent()\n    .then(($row) => {\n    cy.wrap($row)\n        .find('td')\n        .eq(4)\n        .invoke('text')\n        .then((text) => {\n        cy.log('Union:', text);\n    });\n});\ncy.contains('li[role=\"presentation\"] a', 'Wage Details', { timeout: 90000 }).should('be.visible').click({ force: true });\ncy.contains('th', 'H&W').should('be.visible');\ncy.log('Verify: H&W added to wages');",
+              "err": {},
+              "uuid": "36952442-f974-4b0e-a4d3-83330a0ddfa3",
+              "parentUUID": "86bbef85-6f34-41b4-84e9-a4c673d078c7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "36952442-f974-4b0e-a4d3-83330a0ddfa3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 26927,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3ce15e5e-024a-44ff-9fb3-7af531429ea6",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC207.cy.ts",
+      "file": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC207.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "386e42b3-dc9b-4c55-9295-e354faf5e8e8",
+          "title": "Automate Talent Batch Process",
+          "fullFile": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC207.cy.ts",
+          "file": "src\\e2e\\kl\\200-automated-talent-batch-process\\automated-talent-batch-process-TC207.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC207",
+              "fullTitle": "Automate Talent Batch Process TC207",
+              "timedOut": null,
+              "duration": 69923,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : Rosnisa (17/2/2025), 21/3/25\n    Module : Automated Talent Batch Process\n    1. Process payments for a term guarantees with multiple cast lines (unions) consolidated to one check\n    */\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_CORE_PAYROLL');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_CORE_PAYROLL');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit('/adbridge/rsmmgmt/talent/masters/1003000/castlist');\ncy.get('h1', { timeout: 90000 }).should('be.visible');\ncy.get('h1 .small-text', { timeout: 90000 }).should('be.visible');\ncy.contains('button', 'Create Payment', { timeout: 90000 }).should('be.visible').click();\ncy.contains('.modal-header h4', 'Create Payment', { timeout: 90000 }).should('be.visible').click();\ncy.get('table.table tr.hand td', { timeout: 90000 }).eq(1).find('span').should('have.text', 'Primary').click();\ncy.get('.table-striped .hand:nth-child(1) > td:nth-child(2)', { timeout: 90000 }).click(); //Arnel\ncy.get('.hand:nth-child(2) > td:nth-child(2)', { timeout: 90000 }).click(); //Chad\ncy.get('.modal-footer > .btn-success', { timeout: 90000 }).click(); //click Create payment\ncy.get('body', { timeout: 90000 }).then(($body) => {\n    if ($body.find('.spinner-threedots').length > 0) {\n        cy.get('.spinner-threedots', { timeout: 10000 }).should('not.be.visible');\n    }\n});\ncy.get('.page-heading h1', { timeout: 90000 }).should('be.visible'); //general\ncy.wait(3000); //loading\ncy.get('input[ng-model=\"payment.PONumber\"]', { timeout: 90000 }).clear().type('BONEAF23003'); //PO Number\ncy.get('input[ng-model=\"payment.EstimateNumber\"]', { timeout: 90000 }).should('not.be.disabled').clear().type('12345'); //Estimate Number\ncy.get('input[ng-model=\"inputModel\"]', { timeout: 90000 }).first().clear().type('02/21/2025').type('{enter}'); //Due Date\ncy.get('input[ng-model=\"payment.TimetoInvoice\"]', { timeout: 90000 }).clear().type('7'); //Time to Invoice (In hours)\ncy.get('input[name=\"jobNumber.JobNumber\"]', { timeout: 90000 }).should('not.be.disabled').clear().type('5'); //Job Number\ncy.get('input[name=\"jobNumber.AllocationPercentage\"]', { timeout: 90000 }).should('not.be.disabled').clear().type('100'); //%\nconst today = new Date(); // Get today's date in the format MM/DD/YYYY\nconst month = (today.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed\nconst day = today.getDate().toString().padStart(2, '0'); // Add leading zero if needed\nconst year = today.getFullYear();\nconst formattedToday = `${month}/${day}/${year}`; // Format the date as &today/month/year\ncy.get('div.panel.panel-darkblue-c div.input-group input:nth-child(1)', { timeout: 90000 })\n    .should('not.be.disabled')\n    .invoke('removeAttr', 'disabled')\n    .first()\n    .click({ force: true })\n    .type(formattedToday, { force: true })\n    .type('{enter}', { force: true }); // Force press Enter\nconst futureDate = new Date(); // Calculate the future date (2 months after today)\nfutureDate.setMonth(futureDate.getMonth() + 2);\nconst formattedFutureDate = futureDate.toLocaleDateString('en-US'); // Format the future date as MM/DD/YYYY\ncy.get(':nth-child(2) > .form-group > datepicker-auto.ng-pristine > div > .ng-valid-required', { timeout: 90000 })\n    .should('not.be.disabled')\n    .invoke('removeAttr', 'disabled')\n    .clear()\n    .type(`${formattedFutureDate}{enter}`, { force: true }); // Type the future date and press Enter\ncy.get('select[name=\"vm.use.PaymentType\"]', { timeout: 90000 }).should('be.visible').select('1099 Payment'); //Media Type\ncy.get('select#payment\\\\.PayrollWageAmountSet\\\\.Currency', { timeout: 90000 }).should('be.visible').select('USD - US Dollar'); //Payroll Currency\ncy.get('a[href=\"#payment-tab-cast-wage-details\"]', { timeout: 90000 }).contains('Wage Details').click(); //wage details\ncy.get('input[ng-model=\"castMember.WageAmountSet.ApplyOverride\"]', { timeout: 90000 })\n    .should('be.visible')\n    .first()\n    .should('have.attr', 'placeholder', '0.00')\n    .clear()\n    .type('1000.00');\ncy.get('input[ng-model=\"castMember.WageAmountSet.ApplyOverride\"]', { timeout: 90000 })\n    .should('be.visible')\n    .eq(1)\n    .clear()\n    .type('1000.00');\ncy.get('a[href=\"#payment-tab-attachments\"]', { timeout: 90000 }).click(); //attachment\ncy.get('#accordionPaymentAttachments', { timeout: 5000 }).should('be.visible');\ncy.get('a.attach-document.btn.btn-success', { timeout: 90000 }).first().click();\nconst filePath = 'TestingOnly.pdf';\ncy.get('input[type=\"file\"]', { timeout: 90000 }).attachFile(filePath);\ncy.get('input[type=\"submit\"][value=\"Upload Files\"]', { timeout: 90000 }).should('be.visible').first().click();\ncy.get('td[data-field=\"CreateUserFullName\"]', { timeout: 90000 }).should('be.visible');\ncy.wait(2000); //loading\ncy.get('a[ng-click=\"savePayment()\"]', { timeout: 90000 }).should('be.visible').click(); //save button\ncy.wait(3000); //loading\ncy.get('a.btn.btn-info[ng-if=\"permissionFlags.canCalculateWages\"]', { timeout: 90000 }).contains('Calculate').click(); //calculate\ncy.on('window:confirm', () => { });\ncy.get('.md-buttons > .btn', { timeout: 90000 }).then(($button) => {\n    if ($button.length) {\n        cy.wrap($button).click();\n    }\n    else {\n        cy.log('Button not available, skipping');\n    }\n});\ncy.wait(5000); //loading\ncy.get('a.btn.btn-secondary[ng-click=\"updateToReady()\"]', { timeout: 90000 }).contains('Ready').click();\ncy.on('window:confirm', () => { });\ncy.wait(5000); //loading\nclickPrimaryUntilVerified();\ncy.wait(5000); //loading\nclickPrimaryUntilInvoice();\ncy.wait(2000); //loading\ncy.get('p[name=\"payment.PaymentId\"]', { timeout: 90000 })\n    .invoke('text')\n    .then((text) => {\n    const numberOnly = text.replace(/\\D/g, ''); // Removes all non-numeric characters\n    cy.log('Extracted Number:', numberOnly);\n    cy.wrap(numberOnly).as('paymentId'); // Store the number for later use\n    cy.visit('/talent/reference');\n    cy.get(':nth-child(10) > a', { timeout: 90000 }).should('be.visible').click();\n    cy.get('.active > :nth-child(3) > .widget > .widget-content > .row > .col-md-12 > .control-group > .form-control', {\n        timeout: 90000\n    })\n        .should('be.visible')\n        .type(numberOnly);\n    cy.get('.trigger-payment-specific-check-run', { timeout: 90000 }).should('be.visible').click();\n    cy.get('.panel-body.text-right.form-inline.show-when-payment-specific-check-run-is-requested', { timeout: 90000 }).should('contain', 'Payment-Specific Check Run Request has been submitted.');\n    cy.log('✅Payment-Specific Check Run Request has been submitted.');\n});",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'UnionContractYear')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'UnionContractYear')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at Object.<anonymous> (https://app.uat2-extremereach.com/talent/reference:3230:66)\n    at Object.<anonymous> (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:43860)\n    at fire (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:42035)\n    at Object.fireWith [as resolveWith] (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:43186)\n    at done (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:128488)\n    at XMLHttpRequest.callback (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:134223)",
+                "diff": null
+              },
+              "uuid": "d0c30d17-d162-4896-a456-dd4a98f5902a",
+              "parentUUID": "386e42b3-dc9b-4c55-9295-e354faf5e8e8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "d0c30d17-d162-4896-a456-dd4a98f5902a"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 69923,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bd3655bd-4645-45f4-a17b-10d29e16838f",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC301.cy.ts",
+      "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC301.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "90516567-497f-4391-b536-4b0e41c5767a",
+          "title": "Enchancement to Talent Payment",
+          "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC301.cy.ts",
+          "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC301.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC301",
+              "fullTitle": "Enchancement to Talent Payment TC301",
+              "timedOut": null,
+              "duration": 30177,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (14/2/2025)\n    Module : talent payee synch maintenance\n    TC301\n    Description: Add new US Citizen talent record in the Talents and Right UI screen\n    Expected:User should be able to create new US citizen Talent Record and all the information should flow into EPRS Payee screens (payee detail info, tax withholding, address etc)\n    */\ncreateTalentUs();\n//Perform Recoupment\ncy.wait(5000);\ncy.get('[routerlink=\"recoupments\"]', { timeout: 20000 }).should('be.visible');\ncy.get('[routerlink=\"recoupments\"]', { timeout: 20000 }).click();\ncy.get('.details-form-actions > .btn', { timeout: 20000 }).click();\n//fill recoupment\n//cy.get('[name=\"originalSource\"]').type('124543')\ncy.get('[name=\"invoice\"]').type('3822979');\ncy.get('[name=\"erCustomerId\"]').type('6201');\ncy.get('[name=\"recoupment.advertiserId\"]').type('Tyson Foods Inc.  OM CHI{enter}');\ncy.xrklKendoDatePickerUse('[pickertype=\"datepicker\"]', '022212025', 0); //12302019\ncy.get('[name=\"amountDue\"]').type('176.55');\ncy.get('[name=\"checkNumber\"]').type('81094487');\ncy.get('[name=\"employerOfRecordId\"]').type('TAL{enter}');\n// cy.xrklKendoDatePickerUse('[pickertype=\"datepicker\"]','212026', 1);\ncy.get('[name=\"isActive\"]').click();\ncy.get('[name=\"deductFundsFromAnyCheck\"]').click();\ncy.contains('button', 'Save').click();\n// cy.get('[]')\n// cy.get('[]')\n//#endregion",
+              "err": {},
+              "uuid": "bf902eeb-7955-476e-9c9e-985cd098631d",
+              "parentUUID": "90516567-497f-4391-b536-4b0e41c5767a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bf902eeb-7955-476e-9c9e-985cd098631d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 30177,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "48e39a3a-c661-40fc-90ab-d9ac6a8e826f",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC303.cy.ts",
+      "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC303.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c512d154-1d74-4d31-aafe-2ed2f8e7bde4",
+          "title": "Enchancement to Talent Payment",
+          "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC303.cy.ts",
+          "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC303.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC303",
+              "fullTitle": "Enchancement to Talent Payment TC303",
+              "timedOut": null,
+              "duration": 10453,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (14/2/2025)\n    Module : talent payee synch maintenance\n    TC301\n    Description: Verify coogan setup in the Payee Mainetenance screen (UI and functional testing)\n    Expected:User should be able to view Coogan Setup of existing record inside Miscelaneous\n    */\ncy.visit('/ps/payee-details/1129556/details');\ncy.get('[routerlink=\"miscellaneousdeductions\"]').click();\ncy.get('tbody').should('contain.text', 'MINOR TRUST'); // Asserts that \"MINOR TRUST\" exists",
+              "err": {},
+              "uuid": "9a565cae-44e9-4b31-902f-d9e4336aed1c",
+              "parentUUID": "c512d154-1d74-4d31-aafe-2ed2f8e7bde4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9a565cae-44e9-4b31-902f-d9e4336aed1c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10453,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "4753d291-0678-4dbd-94e6-5ca06bc49305",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC304.cy.ts",
+      "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC304.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ad8a6b6e-4f94-498d-b33a-40c8ac169a07",
+          "title": "Enchancement to Talent Payment",
+          "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC304.cy.ts",
+          "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enchancement-to-talent-payment-TC304.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC304",
+              "fullTitle": "Enchancement to Talent Payment TC304",
+              "timedOut": null,
+              "duration": 223515,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : Adlina (20/3/2025), afiq (14/2/2025)\nModule : Marketer Payroll\nHigh Level Steps:\n1. Create Talent\n2. Update Coogan/Minor details\n3. Create Master\n4. Process Payment\n      */\n// Step 1: Create Talent\nconst talentType = 'US Citizen';\ncy.generateTalents(talentType).then(() => {\n    cy.readFile('src/fixtures/talent-data.json').then(() => {\n        cy.createNewMultiTalents(talentType);\n    });\n});\n// Step 2 : Create Master\ncy.createTalentMaster();\n// Step 3 : Add Talent to Master\ncy.readFile('src/fixtures/talent-data.json').then((talents) => {\n    const masterID = talents.masterID;\n    const talentName = [`${talents.usFName} ${talents.usLName}`];\n    const talentId = talents.talentIDUSCitizen;\n    cy.addCasttoTalentMaster(masterID, talentName, talentType, talentId);\n    // Step 4 : Create Payment - Process Check Run\n    cy.createTalentPayment(masterID, [`${talents.usFName} ${talents.usLName}`]);\n    // Update PaymentDetails\n    cy.updatePaymentDetails();\n    cy.processPayment();\n    // Create Check Run\n    cy.submitCheckRun();\n});",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'UnionContractYear')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of null (reading 'UnionContractYear')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at Object.<anonymous> (https://app.uat2-extremereach.com/adbridge/tal/talent/reference:3382:66)\n    at Object.<anonymous> (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:43860)\n    at fire (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:42035)\n    at Object.fireWith [as resolveWith] (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:43186)\n    at done (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:128488)\n    at XMLHttpRequest.callback (https://app.uat2-extremereach.com/Content/app/build/v6/base-coco-6.0.0.min.js?16.11.1:1:134223)",
+                "diff": null
+              },
+              "uuid": "42451fec-ff3e-442b-92ab-2645053fe652",
+              "parentUUID": "ad8a6b6e-4f94-498d-b33a-40c8ac169a07",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "42451fec-ff3e-442b-92ab-2645053fe652"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 223515,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "aca7bc9a-cfdf-4497-9733-5f8a3dea80e0",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enhancements-to-talent-payment-TC305.cy.ts",
+      "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enhancements-to-talent-payment-TC305.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d44bf5e0-57ae-4cc3-8600-214d1f512a3d",
+          "title": "Enhancements to Talent Payments",
+          "fullFile": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enhancements-to-talent-payment-TC305.cy.ts",
+          "file": "src\\e2e\\kl\\300-enhancements-to-talent-payment\\enhancements-to-talent-payment-TC305.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC305",
+              "fullTitle": "Enhancements to Talent Payments TC305",
+              "timedOut": null,
+              "duration": 22696,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : Rosnisa (18/2/2025)\n    Module : Enhancements to Talent Payments\n    1. Verify Garnishments\n    */\ncy.visit('adbridge/tal/Talent/Talent#!/Search');\ncy.get('h1', { timeout: 90000 }).should('be.visible');\ncy.visit('ps/payee-details/1221879/details');\ncy.get('.page-heading h1', { timeout: 90000 }).should('be.visible');\ncy.visit('ps/payee-details/1221879/details');\ncy.get('.row.mt-1 .col-sm-3', { timeout: 90000 }).should('be.visible');\ncy.get('a.slug-link', { timeout: 90000 }).should('be.visible').contains('Garnishments').click({ force: true });\ncy.get('a.btn.btn-primary', { timeout: 90000 }).should('be.visible').contains('Setup Garnishment').click({ force: true });\ncy.get('.k-window-title.k-dialog-title', { timeout: 90000 }).should('be.visible').should('contain.text', 'Setup Garnishment');\ncy.request({\n    method: 'GET',\n    url: '/api/payroll/payee-details/static-data',\n    qs: { payeeId: '1221879', customerId: '0' }\n}).then((response) => {\n    expect(response.status).to.eq(200);\n    cy.log('Wait until element visible');\n});\ncy.get(':nth-child(1) > :nth-child(2) > .k-picker-md > .k-input-inner > .k-input-value-text', { timeout: 90000 })\n    .should('be.visible')\n    .click();\ncy.get('.k-overlay', { timeout: 90000 }).should('not.be.visible');\ncy.contains('DEMO', { timeout: 90000 }).should('be.visible').click({ force: true });\ncy.get(':nth-child(4) > :nth-child(2) > .k-picker-md > .k-input-inner > .k-input-value-text', { timeout: 90000 })\n    .should('be.visible')\n    .click(); //Deduction Code:\ncy.get('.k-overlay', { timeout: 90000 }).should('not.be.visible');\ncy.contains('GARNISHMENT-FLAT', { timeout: 90000 }).should('exist').should('be.visible').click({ force: true });\ncy.get(':nth-child(5) > :nth-child(2) > .k-picker-md > .k-input-inner > .k-input-value-text', { timeout: 90000 })\n    .should('be.visible')\n    .click(); //Garnishment Type\ncy.get('.k-overlay', { timeout: 90000 }).should('not.be.visible');\ncy.contains('Levy', { timeout: 90000 }).should('exist').should('be.visible').click({ force: true });\ncy.get(':nth-child(6) > :nth-child(2) > .k-picker-md > .k-input-inner > .k-input-value-text', { timeout: 90000 })\n    .should('be.visible')\n    .click(); //Garnishment Frequency:\ncy.contains('Once Only', { timeout: 90000 }).should('exist').should('be.visible').click({ force: true });\ncy.get('input[type=\"number\"]', { timeout: 90000 }).first().clear().type('1');\ncy.get('input[name=\"editable.totalAmountDue\"]', { timeout: 90000 }).clear().type('5000.00');\ncy.get('input[name=\"editable.isActive\"]', { timeout: 90000 }).check();\ncy.get('input[name=\"editable.caseNumber\"]', { timeout: 90000 }).clear().type('CASE12345');\ncy.get('button[title=\"Toggle calendar\"]', { timeout: 90000 }).should('be.visible').first().click({ force: true });\ncy.get('.k-calendar', { timeout: 90000 }).should('be.visible');\ncy.get('.k-calendar-nav-today', { timeout: 90000 }).click({ force: true });\ncy.contains('button.btn-primary', 'Save', { timeout: 90000 }).should('be.visible').click({ force: true });\ncy.get('.k-i-close').then(($el) => {\n    if ($el.is(':visible')) {\n        cy.wrap($el).click();\n    }\n    else {\n        cy.log('Element is not visible, skipping click');\n    }\n});\nconst today = new Date();\nconst formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });\ncy.get('table.table', { timeout: 90000 }).should('be.visible');\ncy.get('th', { timeout: 90000 }).contains('Garnishment Id').should('be.visible');\ncy.get('tr.ng-star-inserted', { timeout: 90000 }).should('be.visible');\ncy.log(`Start Date: ${formattedDate}`);\ncy.get('td.align-middle')\n    .invoke('text')\n    .then((text) => {\n    cy.log('Garnishment Id: ' + text);\n});\ncy.get('td.align-middle', { timeout: 90000 }).find('a[title=\"Delete\"]').click();\ncy.on('window:confirm', (message) => {\n    cy.log(message);\n    return true;\n});",
+              "err": {},
+              "uuid": "fe79aeb2-09de-4427-acc8-ec231ff0c19a",
+              "parentUUID": "d44bf5e0-57ae-4cc3-8600-214d1f512a3d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fe79aeb2-09de-4427-acc8-ec231ff0c19a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 22696,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "e7ce3652-a7d1-41aa-a238-e56160809d5a",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\500-reporting\\500-reporting-TC501-TC509.cy.ts",
+      "file": "src\\e2e\\kl\\500-reporting\\500-reporting-TC501-TC509.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+          "title": "Reporting",
+          "fullFile": "src\\e2e\\kl\\500-reporting\\500-reporting-TC501-TC509.cy.ts",
+          "file": "src\\e2e\\kl\\500-reporting\\500-reporting-TC501-TC509.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC501",
+              "fullTitle": "Reporting TC501",
+              "timedOut": null,
+              "duration": 63319,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (07/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new wage statement for US\n   Expected: System able to Create new wage statement for US */\nnavigateToSystemDefaults();\ntryFindingReport('Talent Check BOA USD');\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "39be54f3-acb0-4f9a-8594-5ef0873a0aae",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC502",
+              "fullTitle": "Reporting TC502",
+              "timedOut": null,
+              "duration": 18563,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (07/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new wage statements for Canada\n   Expected: System able to Create new wage statements for Canada */\nnavigateToSystemDefaults();\ntryFindingReport('Talent Check BOA CAD');\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "0fbd078f-1dbc-4ab4-887f-a2bc438b3e19",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC503",
+              "fullTitle": "Reporting TC503",
+              "timedOut": null,
+              "duration": 10821,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (10/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new Federal Tax Liablity Report\n   Expected: System able to create Federal Tax Liablity Report */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('Federal');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').eq(1).should('exist').should('be.visible').click();\ncy.get('[class=\"k-picker-md k-rounded-md k-picker-solid k-dropdownlist k-picker ng-untouched ng-pristine ng-valid\"]')\n    .first()\n    .type('CAN{enter}');\ncy.get('[class=\"k-picker-md k-rounded-md k-picker-solid k-dropdownlist k-picker ng-untouched ng-pristine ng-valid\"]')\n    .last()\n    .type('EOR{enter}');\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "db063f9c-c6a0-4469-8035-72f0700fc4f9",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC504",
+              "fullTitle": "Reporting TC504",
+              "timedOut": null,
+              "duration": 13506,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (10/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new 941 Quarterly Report\n   Expected: System able to create 941 Quarterly Report */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('941');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').should('exist').should('be.visible').click();\ncy.get('[class=\"k-picker-md k-rounded-md k-picker-solid k-dropdownlist k-picker ng-untouched ng-pristine ng-valid\"]')\n    .first()\n    .type('CAN{enter}');\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "17dc03ac-d49f-41ef-9cc1-1e81bf7ad763",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC505",
+              "fullTitle": "Reporting TC505",
+              "timedOut": null,
+              "duration": 12846,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (10/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new Invoices not payrolled\n   Expected: System able to create Invoices not payrolled */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('invoices');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').last().should('exist').should('be.visible').click();\ncy.xrklKendoDatePickerUse('[class=\"k-input k-dateinput\"]', '2/8/2025');\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "e976a218-c603-43fa-8d8c-2feab8eb695d",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC506",
+              "fullTitle": "Reporting TC506",
+              "timedOut": null,
+              "duration": 12420,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (07/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create Foreign Invoices Due report\n   Expected: System able to create Foreign Invoices Due report */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('foreign');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').first().should('exist').should('be.visible').click();\ncy.xrklKendoDatePickerUse('[class=\"k-input k-dateinput\"]', '2/8/2025');\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "9ef8a54c-3836-4504-9b3f-e6ce787f48ab",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC507",
+              "fullTitle": "Reporting TC507",
+              "timedOut": null,
+              "duration": 10952,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (07/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new Foreign Invoices Due Report\n   Expected: System able to create new Foreign Invoices Due Report */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('pension only');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').should('exist').should('be.visible').click();\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "202a8ea2-46a6-48f4-ae76-8e3c8bbdd29c",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC508",
+              "fullTitle": "Reporting TC508",
+              "timedOut": null,
+              "duration": 14456,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (10/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new Errors Notification Report\n   Expected: System able to create Errors Notification Report */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('error');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').last().should('exist').should('be.visible').click();\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "1c92785c-d458-4fd6-8381-d536caa71953",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC509",
+              "fullTitle": "Reporting TC509",
+              "timedOut": null,
+              "duration": 12256,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (12/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Reporting\n   2. Create new Check Register Report\n   Expected: System able to create Check Register Report */\nnavigateToSystemDefaults();\ncy.get(selectors.searchField, { timeout: 60000 }).should('exist').should('be.visible').type('check register report');\ncy.get('[class=\"k-i-file-pdf k-icon k-font-icon ng-star-inserted\"]').should('exist').should('be.visible').click();\ncy.get('[class=\"k-input-button k-button k-icon-button k-button-md k-button-solid k-button-solid-base\"]').first().type('CAN{enter}');\ncy.xrklKendoDatePickerUse('[class=\"k-input k-dateinput\"]', '2/9/2025', 0);\ncy.xrklKendoDatePickerUse('[class=\"k-input k-dateinput\"]', '2/9/2026', 1);\ncy.get(selectors.pdfRadioButton).first().click();\ncy.get(selectors.submitButton).should('not.be.disabled').click();",
+              "err": {},
+              "uuid": "13c899c4-021b-43bc-981c-0191bc2bcdd9",
+              "parentUUID": "9e8e9f8c-1272-4cab-92f0-bc703259e992",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "39be54f3-acb0-4f9a-8594-5ef0873a0aae",
+            "0fbd078f-1dbc-4ab4-887f-a2bc438b3e19",
+            "db063f9c-c6a0-4469-8035-72f0700fc4f9",
+            "17dc03ac-d49f-41ef-9cc1-1e81bf7ad763",
+            "e976a218-c603-43fa-8d8c-2feab8eb695d",
+            "9ef8a54c-3836-4504-9b3f-e6ce787f48ab",
+            "202a8ea2-46a6-48f4-ae76-8e3c8bbdd29c",
+            "1c92785c-d458-4fd6-8381-d536caa71953",
+            "13c899c4-021b-43bc-981c-0191bc2bcdd9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 169139,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "135efedf-8cb9-4e0c-8888-729eb4c11395",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\600-check-printing-and-scheduling\\check-printing-and-scheduling-TC601.cy.ts",
+      "file": "src\\e2e\\kl\\600-check-printing-and-scheduling\\check-printing-and-scheduling-TC601.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1eb28c61-c990-43ae-a62b-83b78ad9a27c",
+          "title": "Check Printing And Scheduling",
+          "fullFile": "src\\e2e\\kl\\600-check-printing-and-scheduling\\check-printing-and-scheduling-TC601.cy.ts",
+          "file": "src\\e2e\\kl\\600-check-printing-and-scheduling\\check-printing-and-scheduling-TC601.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC601",
+              "fullTitle": "Check Printing And Scheduling TC601",
+              "timedOut": null,
+              "duration": 196526,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : afiq (13/2/2025)\n    Module : Automated Talent Batch Process -Verify Payment Specific Check Run\n    TC601\n    Description: User process Payment Specific Check Run for SAG Talent\n    Expected:\n    */\nconst user = 'MOVING ON PRODUCTIONS LLC';\nconst project = 'MOVING ON';\nconst today = new Date();\nconst oneWeekLater = new Date(today);\noneWeekLater.setDate(today.getDate() + 7);\nconst formattedDate = `${oneWeekLater.getMonth() + 1}${oneWeekLater.getDate()}${oneWeekLater.getFullYear()}`;\ncy.visit('/ps/batch/search');\n//create batch\ncy.intercept('GET', '/api/payroll/batch-details/initialize-new-batch').as('initializeNewBatch');\ncy.contains('[class=\"btn btn-primary\"]', 'Create Batch').click();\ncy.wait('@initializeNewBatch');\n// cy.wait('@initializeNewBatch').wait(2500);\n//fill in details\ncy.xrklKendoDropDownListUse('[name=\"batchTypeId\"]', 'Talent');\ncy.get('[name=\"batchName\"]').type('<MAA>-test-automation');\ncy.xrklKendoComboBoxUse('[name=\"customerId\"]', 'TREEHOUSE MEDIA ENT DBA SILENT CROW ARTS');\ncy.xrklKendoDropDownListUse('[name=\"projectId\"]', 'TREEHOUSE MEDIA ENT');\ncy.get('[name=\"excludePaperlessDDCheckPrinting\"]').uncheck();\ncy.get('[name=\"usesRemoteCheckPrinting\"]').check();\ncy.get('[name=\"generateInterfaceFile\"]').check();\ncy.xrklKendoDropDownListUse('[name=\"employerOfRecordId\"]', 'ERPS');\ncy.xrklKendoComboBoxUse('[name=\"batchOwnerUserId\"]', 'Mohamad Afiq Ashraf');\ncy.xrklKendoDatePickerUse('[name=\"checkDate\"]', formattedDate);\ncy.xrklKendoDatePickerUse('[name=\"weekEndingDate\"]', formattedDate);\ncy.get('[type=\"button\"]').contains('Create Batch').click();\nconst payeeId = '1211027';\n//cy.waitForThreeDotsLoading();\ncy.wait(10000); // This required to ensure all componet load properply before action\ncy.get('[value=\"Add New Timecard\"]').click();\ncy.wait(10000); // This required to ensure all componet load properply before action\n//cy.waitForThreeDotsLoading();\ncy.get('[name=\"editableTimecard.payeeFullName\"]').click();\ncy.get('[name=\"payeeId\"]').find('[role=\"spinbutton\"]').type(payeeId, { delay: 200 });\ncy.contains('[class=\"btn btn-primary\"]', 'Search Payees').click();\ncy.wait(10000);\ncy.get('[class=\"fa fa-check\"]').first().click();\ncy.xrklKendoDatePickerUse('[name=\"beginDateId\"]', '12122024');\ncy.xrklKendoDatePickerUse('[name=\"endDateId\"]', '12122024');\ncy.intercept('POST', '/api/payroll/timecard-details/save-timecard').as('createNewTimeCard');\ncy.contains('button', 'Create').click();\ncy.wait('@createNewTimeCard', { timeout: 120000 }).its('response.statusCode').should('eq', 200);\ncy.get('[data-kendo-grid-column-index=\"3\"] > .dropdown-wrapper > .k-picker-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click();\ncy.get('[name=\"workDate\"]').type('{downarrow}{enter}');\ncy.get('[data-kendo-grid-column-index=\"6\"] > .dropdown-wrapper > .k-picker-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click();\ncy.get('[name=\"unionorjob\"]').type('{downarrow}{enter}');\ncy.get('[data-kendo-grid-column-index=\"7\"] > .dropdown-wrapper > .k-input-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').type('110 STRAIGHT{enter}');\ncy.get('[name=\"payUnits\"]').type('200', { delay: 200 });\ncy.get('[name=\"pensionUnits\"]').type('200', { delay: 200 });\ncy.get('[class=\"btn btn-primary\"]').click();\ncy.wait(10000);\n//cy.get('.page-heading-actions > .btn-success').click();\ncy.contains('button', 'Calculate').click();\ncy.wait(15000);\n//cy.get('.row.mb-1 > :nth-child(1) > .btn').click();\ncy.contains('a', 'Back to Batch').click();\ncy.contains('button', 'Calculate').should('be.visible').click();\ncy.wait(15000);\ncy.intercept('POST', '/api/payroll/batch-details/validate-batch').as('validateBatch');\ncy.contains('button', 'Validate Batch').click();\ncy.wait('@validateBatch', { timeout: 120000 }).its('response.statusCode').should('eq', 200);\ncy.contains('[type=\"button\"]', 'Ready').click();\ncy.wait(7000);\ncy.contains('[type=\"button\"]', 'Verified').click();\ncy.wait(7000);\ncy.intercept('POST', '/api/payroll/batch-details/invoice-payments').as('invoicePayments');\ncy.contains('button', 'Invoice').click();\ncy.wait('@invoicePayments', { timeout: 120000 }).its('response.statusCode').should('eq', 200);\n/*\n        Wait here is necessary since wierd behaviour of the reports\n        component that will not be resolved by api interception.\n    */\n//cy.wait(10000);\ncy.contains('[type=\"button\"]', 'Finalize Batch').click();\ncy.get('[aria-label=\"Yes\"]').click();\ncy.get('[class=\"btn btn-default mr-1 mt-4\"]').contains('Finalized', { timeout: 120000 }).scrollIntoView().should('be.visible');",
+              "err": {},
+              "uuid": "71c11d92-ba33-4ec7-ae4e-fe85e5c00267",
+              "parentUUID": "1eb28c61-c990-43ae-a62b-83b78ad9a27c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "71c11d92-ba33-4ec7-ae4e-fe85e5c00267"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 196526,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f9b07baa-b782-4d1b-b070-fb90e0710434",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\800-wire-payment\\TC801-TC802.cy.ts",
+      "file": "src\\e2e\\kl\\800-wire-payment\\TC801-TC802.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "babd3e75-18d7-4fe4-b5da-0bc076ee9552",
+          "title": "Wire Payment",
+          "fullFile": "src\\e2e\\kl\\800-wire-payment\\TC801-TC802.cy.ts",
+          "file": "src\\e2e\\kl\\800-wire-payment\\TC801-TC802.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC801",
+              "fullTitle": "Wire Payment TC801",
+              "timedOut": null,
+              "duration": 37020,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/* Module: Talent & Rights\n   Last Updated: Hairul (12/02/2025)\n   High-Level Steps:\n   1. Login and navigate to Payroll --> Wires\n   2. Setup Wire Payment\n   Expected: System able to Setup Wire Payment */\nnavigateToSystemDefaults();\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 })\n    .contains(' Create New Wire File ')\n    .should('exist')\n    .should('be.visible')\n    .click();\ncy.xrklKendoDatePickerUse('[class*=\"k-datepicker\"]', '01/01/2025', 3);\ncy.xrklKendoDatePickerUse('[class*=\"k-datepicker\"]', '31/01/2025', 4);\ncy.get('[class=\"k-searchbar\"]').type('USD{enter}');\ncy.get('[class=\"btn btn-primary ng-star-inserted\"]', { timeout: 60000 }).first().should('exist').should('be.visible').click();\ncy.get('[class=\"btn btn-primary ng-star-inserted\"]', { timeout: 60000 }).last().should('exist').should('be.visible').click();",
+              "err": {},
+              "uuid": "03856f69-a616-4f51-92e1-d50587c1cdc6",
+              "parentUUID": "babd3e75-18d7-4fe4-b5da-0bc076ee9552",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "03856f69-a616-4f51-92e1-d50587c1cdc6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 37020,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "15d56e3e-13ca-42d9-ad43-db28da03c4c6",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC013.cy.ts",
+      "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC013.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "663653b9-f5e5-4a98-84e6-4acf34df379d",
+          "title": "marketer-TC013",
+          "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC013.cy.ts",
+          "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC013.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC013",
+              "fullTitle": "marketer-TC013 TC013",
+              "timedOut": null,
+              "duration": 56718,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: MArketer - Talent & Rights\nLast Updated: Rosnisa 6/1/2025\nHigh Level test steps:\nWhen preparing for a production, I want to generate contracts for all of the union talent I’ve hired in a commercial\n1. Log in to the XR platform\n2. Navigate to the Talent & Rights menu.\n3. Click on Contracts in the left Nav menu.\n4. Click “Create New Contract.”\n5. Select a Union from the drop-down list.\n6. Select a Contract Type from the drop-down list.\n7. Click “New Contract.”\n8. Fill out the contract form.\n9. Save the contract.\n10. Click “View Contract PDF” or “Get PDF for Multiple Names”\n11. To add additional names, enter Talent Name, Agent, and Part Played and add new rows until done.\n*/\n//2. Navigate to the Talent & Rights menu.\ncy.get('.k-loading-image', { timeout: 60000 }).should('be.visible');\ncy.get('.k-loading-image', { timeout: 60000 }).should('not.exist');\ncy.get('[data-cy=\"er-sidebar-toggle\"]').click();\ncy.get('span.er-sidebar-label', { timeout: 90000 }).contains('Talent and Rights', { timeout: 90000 }).click();\n//3. Click on Contracts in the left Nav menu.\ncy.get('span', { timeout: 90000 }).contains('Contracts', { timeout: 90000 }).click();\n// 4. Click “Create New Contract.”\ncy.get('.page-heading-actions > .btn', { timeout: 90000 }).click();\n//5. Select a Union from the drop-down list.\ncy.contains('span', '-- Select a Union --', { timeout: 90000 }).click();\n//cy.wait(1000);\ncy.contains('li', 'SAG-AFTRA', { timeout: 90000 }).click();\n//6. Select a Contract Type from the drop-down list.\ncy.contains('span', '-- Select a Contract Type --', { timeout: 90000 }).click();\n//cy.wait(1000);\ncy.contains('span', 'New Structure Commercials Principal', { timeout: 90000 }).click();\n//7. Click “New Contract.”\ncy.window().then((win) => {\n    cy.stub(win, 'open').callsFake((url) => {\n        win.location.href = url;\n    });\n}); //open in same tab\ncy.get(\"input[value='New Contract']\", { timeout: 90000 }).click();\n//cy.wait(3000);\n// 8. Fill out the contract form.\n//Between (Producer):\ncy.get('#CastMember_SignatoryCustomerName', { timeout: 90000 }).click().type('Producer John');\n//and (Performer):\ncy.get('#CastMember_FirstName', { timeout: 90000 }).click().type('Performer Jane');\n//Job #\ncy.get('#CastMember_JobNumber', { timeout: 90000 }).click().type('1001');\n// Switch to the new window and perform actions\n//Dates Worked\ncy.get('#CastMember_CastMemberTimeEntries_0__SessionDate', { timeout: 90000 }).click().type('2/1/2025');\n//Work Time\ncy.get('#CastMember_CastMemberTimeEntries_0__SessionStart', { timeout: 90000 }).click().type('8.00am');\ncy.get('#CastMember_CastMemberTimeEntries_0__SessionEnd', { timeout: 90000 }).click().type('11.00pm');\n//Meals\ncy.get('#CastMember_CastMemberTimeEntries_0__MealStart', { timeout: 90000 }).click().type('11.30am');\ncy.get('#CastMember_CastMemberTimeEntries_0__MealEnd', { timeout: 90000 }).click().type('12.30pm');\n//Travel to Location\ncy.get('#CastMember_CastMemberTimeEntries_0__TravelToLocationStart', { timeout: 90000 }).click().type('7.00am');\ncy.get('#CastMember_CastMemberTimeEntries_0__TravelToLocationEnd', { timeout: 90000 }).click().type('7.30am');\n//Travel from Location\ncy.get('#CastMember_CastMemberTimeEntries_0__TravelFromLocationStart', { timeout: 90000 }).click().type('11.00pm');\ncy.get('#CastMember_CastMemberTimeEntries_0__TravelFromLocationEnd', { timeout: 90000 }).click().type('11.30pm');\n//Makeup/Fitting\ncy.get('#CastMember_CastMemberTimeEntries_0__PriorFitStart', { timeout: 90000 }).click().type('10.00am');\ncy.get('#CastMember_CastMemberTimeEntries_0__PriorFitEnd', { timeout: 90000 }).click().type('10.30am');\n////cy.wait(2000);\n//Multiple Tracking Occured?\n//NO\ncy.get(\"input[name='CastMember.NoAudioMultiTracks']\", { timeout: 90000 }).click();\n//Sweeten # of Tracks:\ncy.get('#CastMember_AudioSweetenings', { timeout: 90000 }).click().type('5');\n////cy.wait(2000);\n//PRODUCER ENGAGES PERFORMER AND PERFORMER AGREES TO PERFORM SERVICES FOR PRODUCER IN TELEVISION COMMERCIALS AS FOLLOWS:\n// Commercial Title(s)\ncy.get('#CastMember_CreativeCodes_0__Title', { timeout: 90000 }).click().type('Marry');\n//Ad-ID(s)\ncy.get('#CastMember_CreativeCodes_0__MediaId', { timeout: 90000 }).click().type('M112233');\n//# Spots\ncy.get('#CastMember_CreativeCodes_0__SpotCount', { timeout: 90000 }).click().type('Spot99');\n// \t# Tags\ncy.get('#CastMember_CreativeCodes_0__TagCount', { timeout: 90000 }).click().type('Tag345');\n//# Demos\ncy.get('#CastMember_CreativeCodes_0__DemoCount', { timeout: 90000 }).click().type('Demo 23');\n// 11. To add additional names, enter Talent Name, Agent, and Part Played and add new rows until done.\n////cy.wait(2000);\n//Commercial Type (check all that apply)\ncy.get(\"input[value='TestOrTestMarketsCommercials']\", { timeout: 90000 }).click();\ncy.get(\"input[value='TraditionalDigitalCommercials']\", { timeout: 90000 }).click();\ncy.get(\"input[value='TheatricalIndustrialExhibition']\", { timeout: 90000 }).click();\n//acting as agent for Advertiser\ncy.get('#CastMember_AdvertiserName', { timeout: 90000 }).click().type('World Wide World');\n//Products\ncy.get('#CastMember_BrandName', { timeout: 90000 }).click().type('Brand New World');\n////cy.wait(2000);\n//City, State (In which services rendered):\ncy.get('#CastMember_SessionLocation_LocationCity', { timeout: 90000 }).click().type('New York');\ncy.get('#CastMember_SessionLocation_LocationStateName', { timeout: 90000 }).click().type('New York City');\n//Place of Engagement\ncy.get('#CastMember_SessionLocation_LocationName', { timeout: 90000 }).click().type('Aplha World');\n////cy.wait(2000);\n// Performer Type\ncy.get(\"input[value='P']\", { timeout: 90000 }).click();\ncy.get(\"input[value='SignatureSoloOrDuo']\", { timeout: 90000 }).click();\ncy.get(\"input[value='SpecialtyAct']\", { timeout: 90000 }).click();\n// Classification\ncy.get(\"input[value='True']\", { timeout: 90000 }).click();\n//Part to be played\ncy.get('#CastMember_PartToBePlayed', { timeout: 90000 }).click().type('Lady Bug');\n//Compensation\ncy.get('#CastMember_Compensation', { timeout: 90000 }).click().type('None');\n//Date(s) and Hour(s) of Employment\ncy.get('#CastMember_Dates_And_Hours_Of_Employment', { timeout: 90000 }).click().type('2/1/25 45hours');\n// Adjustments (check all that apply)\ncy.get(\"input[name='CastMember.IsWardrobeProducer']\", { timeout: 90000 }).click();\n////cy.wait(2000);\n// SPECIAL PROVISIONS (INCLUDING ADJUSTMENTS, IF ANY, FOR STUNT PERFORMERS)\ncy.get('textarea#CastMember_SpecialProvisions', { timeout: 90000 }).click().type('Not Available');\n////cy.wait(2000);\n//Until Performer shall otherwise direct in writing, Performer authorizes Producer to make all payments to which Performer may be entitled hereunder, as follows:\n//To Perfomer at (Address):\ncy.get('[name=\"CastMember.IsPayPerformer\"]', { timeout: 90000 }).click();\ncy.get('#CastMember_PerformerAddress', { timeout: 90000 }).click().type('Address 123, Street 4');\ncy.get('#CastMember_PerformerAddressCity', { timeout: 90000 }).click().type('Tuscon');\ncy.get('#CastMember_PerformerAddressStateName', { timeout: 90000 }).click().type('TN');\ncy.get('#CastMember_PerformerAddressPostalCode', { timeout: 90000 }).click().type('10050');\ncy.get('#CastMember_PerformerEmail', { timeout: 90000 }).click().type('email@gmail.com');\ncy.get('#CastMember_PerformerPhone', { timeout: 90000 }).click().type('001001001001');\n//To Performer c/o (Talent Agency Name and Address):\ncy.get('#token-input-CastMember_TalentAgencyCustomerId', { timeout: 90000 })\n    .should('be.visible')\n    .click()\n    .type('9100-7815 Quebec Inc', { delay: 100 })\n    .trigger('keydown', { key: 'Enter' });\ncy.get('#CastMember_AgentAddress', { timeout: 90000 }).click().type('1628 Rue Fleury Est Local 2');\ncy.get('#CastMember_AgentAddressCity', { timeout: 90000 }).click().type('Montreal Quebec');\n//cy.wait(1000);\n//All notices to Performer shall be sent to the address designated above for payments and, if Performer desires, to one other address as follows (Name, Address):\ncy.get('#CastMember_NoticesName', { timeout: 90000 }).click().type('Natasya');\ncy.get('#CastMember_NoticesAddress', { timeout: 90000 }).click().type('Address 123, Street 4');\ncy.get('#CastMember_NoticesAddressCity', { timeout: 90000 }).click().type('Tuscon');\ncy.get('#CastMember_NoticesAddressStateName', { timeout: 90000 }).click().type('TN');\ncy.get('#CastMember_NoticesAddressPostalCode', { timeout: 90000 }).click().type('10050');\n//STANDARD PROVISIONS\ncy.get('#CastMember_StandardProvisions', { timeout: 90000 }).click().type('Not Applicable');\n// 9. Save the contract.\ncy.get(':nth-child(29) > .row > .span4 > :nth-child(1) > input', { timeout: 90000 }).click();\n////cy.wait(2000);\n// 10. Click “View Contract PDF” or “Get PDF for Multiple Names”\ncy.get(':nth-child(2) > .row > .span8 > div > .stop-if-unsaved', { timeout: 90000 }).click();\ncy.window().then((win) => {\n    cy.stub(win, 'open').callsFake((url) => {\n        win.location.href = url;\n    });\n}); //open in same tab\ncy.get('.dialog-content > :nth-child(2) > .btn-primary', { timeout: 90000 }).click();",
+              "err": {},
+              "uuid": "5a1687e0-e3d9-43bc-9f58-094dd577b43b",
+              "parentUUID": "663653b9-f5e5-4a98-84e6-4acf34df379d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5a1687e0-e3d9-43bc-9f58-094dd577b43b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 56718,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b2599491-017d-47b1-beb3-8118e3d301eb",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC022.cy.ts",
+      "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC022.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "95b4b794-12b3-4098-ba02-56d2e99dfd3d",
+          "title": "marketer-TC022",
+          "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC022.cy.ts",
+          "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC022.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC022",
+              "fullTitle": "marketer-TC022 TC022",
+              "timedOut": null,
+              "duration": 101860,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: MArketer - Talent & Rights\nLast Updated: Rosnisa 6/1/2025, 17/3/2025\nHigh Level test steps:\nAfter a production, I want to upload all talent contracts and production information.\n1. Log in to the XR platform\n2. Navigate to the Talent & Rights menu.\n3. Session/Completion Reports in the left nav menu.\n4. Create a new report in one of the following ways:\n    A. As an internal user, click “New Report (CS)” and choose Report Type = Session\n    B. Click “New Session Report”\n5. On the General tab, fill out the Creative Codes section by entering ISCI/Ad-ID, Title, Length, and any other known information.\n6. On the General tab, enter at minimum Advertiser, Agency/Customer, and Media Type.\n7. Click “Create.”\n8. Click the “Cast Members” tab.\n9. Enter session information:\n    A. Click “Add/Edit Sessions”\n    B. Under F1 for film studio, R1 for recording studio, or M1 for music studio, enter the name, city, state, country, 1st service date, and last work date.\n    C. Click “Add Sessions” to add a second line under F1, R1, or M1.\n    D. When finished, click “Update Sessions” to save data and close the window.\n10. Enter cast members:\n    A. Click “Add Cast Member”\n    B. Enter as much information as possible on the “Add/Edit Cast Member Contract” screen, at minimum the Name, Union, Contract Type, Category, Camera, Year, Session Location, and Compensation\n    C. Click the “Save” button to save data and close the window.\n11. To upload a contract from the cast list, click the paper clip icon in the Actions column.\n    A. Click “Choose File” and select a file from a location on your computer.\n    B. Select a type from the drop-down list.\n    C. Enter a description.\n    D. Click “Upload.”\n    E. Click “Close” when finished.\n12. To upload all contracts at once or to upload any other file to the session report, click the “Attachments” tab and then click “Attach Documents.”\n    A. Select a file from your local computer.\n    B. Select a type from the drop-down list.\n    C. Enter a description.\n    D. When finished, click “Upload Files.”\n*/\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_CORE_PAYROLL');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_CORE_PAYROLL');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit('/adbridge/tal/talent/commercialreports');\ncy.intercept('GET', '**/api/shared/customization-and-extensibility/metadata-field-map/static-data').as('metadata');\ncy.intercept('GET', '**/api/shared/customization-and-extensibility/metadata-field-map/currency-codes').as('currencyCodes');\ncy.intercept('GET', '**/apis/talent/commercial/reports/getUserContext').as('getUserContext');\ncy.contains('div.page-heading', 'Commercial Reports', { timeout: 90000 }).should('be.visible');\ncy.contains('button', 'New Report (CS)', { timeout: 90000 }).should('be.visible').click();\ncy.intercept('GET', '**/apis/shared/customer/getAdvertisers?customerId=*').as('getAdvertisers');\ncy.intercept('POST', '**/apis/talent/commercial/reports/customerlist').as('customerlist');\ncy.intercept('GET', '**/apis/shared/customer/getAdvertisers?customerId=135448').as('getAdvertisers');\ncy.intercept('POST', '**/apis/talent/commercial/reports/saveCommercialReport').as('saveCommercialReport');\ncy.intercept('POST', '/apis/talent/commercial/reports/search').as('getTypeaheadResults');\ncy.get('[name=\"commercialReport.commercialReportType\"]', { timeout: 30000 }).select('Completion', { force: true });\ncy.get('[name=\"commercialReport.commercialReportMediaType\"]', { timeout: 30000 }).select('TV Commercial', { force: true });\ncy.get(\"input[placeholder='Type to search']\", { timeout: 30000 }).should('be.visible').type('AdBridge TEST');\ncy.wait(1000);\ncy.get('.ngb-highlight', { timeout: 30000 }).should('be.visible').click();\ncy.wait(1000);\ncy.get('advertiser-component.error select#advertiserId', { timeout: 90000 }).select('AdBridge TEST', { force: true });\ncy.window().then((win) => {\n    cy.stub(win, 'open').callsFake((url) => {\n        win.location.href = url;\n    });\n});\ncy.contains('button', 'Add Report', { timeout: 90000 }).should('be.visible').click({ force: true });\ncy.wait('@saveCommercialReport', { timeout: 90000 }).then((interception) => {\n    expect(interception.response.statusCode).to.eq(200);\n    cy.log('Report saved successfully:', interception.response.body);\n});\ncy.intercept('POST', '**/Talent/LoadProductionDetailsSections').as('loadProductionDetails');\ncy.intercept('POST', '**/Advertiser/EffectiveUserAssignmentUsers').as('effectiveUserAssignment');\ncy.intercept('GET', '**/Attachment/Attachments/?linkedEntityType=18&linkedEntityId=*').as('getAttachments');\ncy.intercept('GET', '**/Talent/ReportCastPanel/*').as('getReportCastPanel');\ncy.intercept('GET', '**/Talent/ReportMusicPanel/*').as('getReportMusicPanel');\ncy.intercept('GET', '**/Talent/ReportRightsPanel/*').as('getReportRightsPanel');\ncy.intercept('GET', '**/api/talent-and-rights/embed-dashboard-items/can-access').as('canAccessDashboard');\ncy.intercept('GET', '**/api/talent-and-rights/embed-dashboard-items/user-context-data').as('userContextData');\ncy.url().should('match', /\\/Talent\\/Report\\/\\d+$/);\ncy.get('table#addCreative', { timeout: 90000 }).should('be.visible');\ncy.wait(3000);\ncy.get('a#CastTab', { timeout: 90000 }).should('be.visible').click({ force: true });\ncy.intercept('GET', '**/api/talent-and-rights/embed-dashboard-items/static-data').as('getStaticData');\ncy.intercept('POST', '**/api/talent-and-rights/embed-dashboard-items/item').as('postDashboardItem');\ncy.intercept('POST', '**/api/talent-and-rights/embed-dashboard-items/refresh-dashboard').as('refreshDashboard');\ncy.get('body').then(($body) => {\n    if ($body.find('.error-placeholder').length) {\n        cy.log('Error detected! Refreshing the page...');\n    }\n    else {\n        cy.log('No error found, continuing test...');\n    }\n});\ncy.get(\"a:contains('Add / Edit Sessions')\", { timeout: 90000 }).should('be.visible').click({ force: true });\nconst today = new Date();\nconst formattedDate = `${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}/${today.getFullYear()}`;\nconst futureDate = new Date();\nfutureDate.setMonth(futureDate.getMonth() + 6); // Add 6 months\nconst formattedFDate = `${String(futureDate.getMonth() + 1).padStart(2, '0')}/${String(futureDate.getDate()).padStart(2, '0')}/${futureDate.getFullYear()}`;\n// Filling in location 1 details\ncy.get('input[id=\"locationName_+0\"]', { timeout: 30000 }).should('be.visible').click().type('Film Studio Test');\ncy.get('input[id=\"locationCity_+0\"]', { timeout: 30000 }).should('be.visible').click().type('New York');\ncy.get('input[id=\"locationState_0\"]', { timeout: 30000 }).should('be.visible').click().type('NYC');\ncy.get('#CastSessionLocations_0__SessionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedDate}{enter}`);\ncy.get('#CastSessionLocations_0__LastProductionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedFDate}{enter}`);\n// Filling in location 2 details\ncy.get('input[id=\"locationName_+1\"]', { timeout: 30000 }).should('be.visible').click().type('Recording Studio Test');\ncy.get('input[id=\"locationCity_+1\"]', { timeout: 30000 }).should('be.visible').click().type('Tucson');\ncy.get('input[id=\"locationState_1\"]', { timeout: 30000 }).should('be.visible').click().type('TN');\ncy.get('#CastSessionLocations_1__SessionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedDate}{enter}`);\ncy.get('#CastSessionLocations_1__LastProductionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedFDate}{enter}`);\n// Filling in location 3 details\ncy.get('input[id=\"locationName_+2\"]', { timeout: 30000 }).should('be.visible').click().type('Music Studio Test');\ncy.get('input[id=\"locationCity_+2\"]', { timeout: 30000 }).should('be.visible').click().type('Montreal Quebec');\ncy.get('input[id=\"locationState_2\"]', { timeout: 30000 }).should('be.visible').click().type('MQ');\ncy.get('#CastSessionLocations_2__SessionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedDate}{enter}`);\ncy.get('#CastSessionLocations_2__LastProductionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedFDate}{enter}`);\n// Add new sessions\ncy.get(\"button:contains('Add Sessions')\", { timeout: 30000 }).should('be.visible').click();\ncy.get('input[id=\"locationName_+3\"]', { timeout: 30000 }).should('be.visible').click().type('New session Test');\ncy.get('input[id=\"locationCity_+3\"]', { timeout: 30000 }).should('be.visible').click().type('New session');\ncy.get('input[id=\"locationState_3\"]', { timeout: 30000 }).should('be.visible').click().type('NS');\ncy.get('#CastSessionLocations_3__SessionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedDate}{enter}`);\ncy.get('#CastSessionLocations_3__LastProductionDateTime', { timeout: 90000 })\n    .invoke('removeAttr', 'readonly')\n    .clear()\n    .type(`${formattedFDate}{enter}`);\ncy.get(\"button:contains('Update Sessions')\", { timeout: 30000 }).should('be.visible').click(); // D. When finished, click \"Update Sessions\" to save data and close the window.\ncy.get('h2', { timeout: 90000 }).should('exist');\ncy.wait(3000);\n//Click “Add Cast Member”\ncy.get(\"a:contains('Add Cast Member')\", { timeout: 90000 })\n    .should('exist')\n    .scrollIntoView()\n    .should('be.visible')\n    .click({ force: true });\ncy.get('#castDialog', { timeout: 90000 })\n    .should('exist')\n    .should('not.have.css', 'display', 'none')\n    .then(($dialog) => {\n    if (!$dialog.is(':visible')) {\n        cy.get(\"a:contains('Add Cast Member')\").click({ force: true });\n    }\n});\n//Enter as much information as possible on the “Add/Edit Cast Member Contract” screen\ncy.wait(3000);\ncy.get('.ui-dialog-titlebar', { timeout: 90000 }).should('be.visible').contains('Add/Edit Cast Member Contract'); // Confirms correct title\ncy.get('#castDialog', { timeout: 90000 }).should('be.visible');\ncy.get('#CastMember', { timeout: 90000 }).should('exist').should('be.visible').invoke('show');\ncy.get('input[id=\"CastMember_FullNameWithCorpName_\"]', { timeout: 90000 }).should('not.be.disabled').type('Julia');\ncy.get('#CastMember_CorporationName', { timeout: 90000 })\n    .should('not.be.disabled')\n    .invoke('removeAttr', 'disabled')\n    .type('Julia Test'); // Click and enter Corporation Name\ncy.get('#token-input-CastMember_TalentAgencyCustomerId', { timeout: 90000 }).should('be.visible').type('Stacey Testro');\ncy.wait(2000);\ncy.get('#token-input-CastMember_TalentAgencyCustomerId', { timeout: 90000 }).type('{enter}', { force: true });\ncy.get('select#CastMember_GenderId', { timeout: 90000 }).should('be.visible').select('Female', { force: true });\ncy.get('select#CastMember_EthnicityId', { timeout: 90000 }).select('White / Caucasian', { force: true });\ncy.get('select#CastMember_Union_', { timeout: 90000 }).select('SAG', { force: true });\ncy.get('input#IsOnCameraTrue', { timeout: 90000 }).click();\ncy.get('select#CastMember_UnionContractYear_', { timeout: 90000 }).select('23', { force: true });\ncy.get('select#CastMember_SessionLocationId', { timeout: 90000 }).select('F1', { force: true });\ncy.get('input#CastMember_PartToBePlayed', { timeout: 90000 }).should('be.visible').type('Test');\ncy.get('select#CastMember_DowngradeType', { timeout: 90000 }).select('Downgrade', { force: true });\ncy.get(\"input[name='CastMember.AudioMultiTracks']\", { timeout: 90000 }).should('be.visible').click();\ncy.get('input[id=\"CastMember_AudioSweetenings\"]', { timeout: 90000 }).should('be.visible').click().type('1', { force: true });\ncy.get('input[id=\"CastMember_Compensation_\"]', { timeout: 90000 }).should('be.visible').click().type('yes', { force: true });\ncy.get('select#CastMember_CastRelationshipType', { timeout: 90000 }).select('Lift', { force: true });\ncy.get('input[id=\"CastMember_SourceMediaId\"]', { timeout: 90000 }).should('be.visible').type('12345');\ncy.get('input[id=\"CastMember_FirstServiceDateTime_\"]', { timeout: 90000 }).should('exist').clear().type(`${formattedDate}{enter}`);\nfutureDate.setFullYear(futureDate.getFullYear() + 2);\nconst maxformattedDate = futureDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });\ncy.get('input[id=\"CastMember_MaxUseDateTime\"]', { timeout: 90000 }).clear().type(`${maxformattedDate}{enter}`);\ncy.get('textarea#CastMember_Comments', { timeout: 30000 }).type('testing only');\ncy.contains('.ui-dialog-buttonset button', 'Save', { timeout: 90000 }).should('exist').click({ force: true });\ncy.on('window:alert', () => { });\ncy.wait(2000);\ncy.get('.ui-dialog-buttonset')\n    .should('exist')\n    .then(($dialog) => {\n    if ($dialog.is(':visible')) {\n        cy.log('Dialog still visible, retrying...');\n        cy.contains('.ui-dialog-buttonset button', 'Save', { timeout: 90000 }).should('exist').click({ force: true });\n    }\n    else {\n        cy.log('Dialog closed successfully.');\n    }\n});\nconst filePath = 'TestingOnly-marketer-tc022.pdf';\ncy.get('#castMembersContainer-Principals', { timeout: 90000 }).should('exist');\ncy.wait(2000);\n//To upload a contract from the cast list, click the paper clip icon in the Actions column\ncy.get('#castMembersContainer-Regrades', { timeout: 90000 }).should('exist');\ncy.get('a.openCastMemberAttachmentDialog', { timeout: 90000 }).eq(1).should('exist').click({ force: true });\ncy.get('#attachmentDialog', { timeout: 90000 }).should('be.visible');\ncy.get('input[type=\"file\"]', { timeout: 90000 }).eq(1).attachFile(filePath).trigger('change', { force: true }); // Attach the file\ncy.get('input[id=\"subject\"]', { timeout: 90000 }).eq(1).should('exist').invoke('show').type('Test Subject', { force: true }); // Type with force if still hidden\ncy.get('.ui-button-text', { timeout: 90000 }).contains('Upload').should('be.visible').click();\ncy.intercept('POST', '/Attachment/ListAttachments').as('fileUpload'); // Track the upload request\ncy.wait('@fileUpload', { timeout: 90000 }).its('response.statusCode').should('eq', 200); // Verify success\ncy.get('#uploadingDiv', { timeout: 90000 }).should('not.be.visible');\ncy.contains('.ui-dialog-buttonset button', 'Close', { timeout: 90000 }).click({ force: true });\ncy.get('.ui-dialog-buttonset', { timeout: 90000 })\n    .should('exist')\n    .then(($dialog) => {\n    if ($dialog.is(':visible')) {\n        cy.log('Dialog still visible, retrying...');\n        cy.contains('.ui-dialog-buttonset button', 'Close', { timeout: 90000 }).should('exist').click({ force: true });\n    }\n    else {\n        cy.log('Dialog closed successfully.');\n    }\n});\ncy.get('table.datatable.castSessionLocations', { timeout: 90000 }).should('be.visible');\n//To upload all contracts at once or to upload any other file to the session report, click the “Attachments” tab and then click “Attach Documents.\ncy.get('#AttachmentsTab', { timeout: 90000 }).should('be.visible').click();\ncy.wait(2000);\ncy.get('.attach-document', { timeout: 90000 }).first().should('exist').should('be.visible').click({ force: true });\ncy.get('.select-files', { timeout: 90000 }).should('exist');\ncy.get('.select-files', { timeout: 90000 }).eq(0).attachFile(filePath).trigger('change', { force: true });\ncy.get('input[type=\"submit\"].start-upload', { timeout: 90000 }).should('be.visible').and('be.enabled');\ncy.get('.progress-message', { timeout: 90000 }).should('contain', 'Uploading...');\ncy.get('h2', { timeout: 90000 }).contains('Report Attachments').should('be.visible');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 90000ms: Expected to find content: 'Commercial Reports' within the selector: 'div.page-heading' but never did.",
+                "estack": "AssertionError: Timed out retrying after 90000ms: Expected to find content: 'Commercial Reports' within the selector: 'div.page-heading' but never did.\n    at Context.eval (webpack:///./src/e2e/kl/e2e-scenarios/marketer-TC022.cy.ts:58:80)",
+                "diff": null
+              },
+              "uuid": "70eda4d1-dba5-4fad-9e82-10db8a110681",
+              "parentUUID": "95b4b794-12b3-4098-ba02-56d2e99dfd3d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "70eda4d1-dba5-4fad-9e82-10db8a110681"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 101860,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "c97b93b8-8aed-489f-ac49-3ed228b266e4",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC025.cy.ts",
+      "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC025.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2a0d1de9-4c9c-4a26-ad18-8da7a7abb32e",
+          "title": "marketer-TC025",
+          "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC025.cy.ts",
+          "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC025.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC025",
+              "fullTitle": "marketer-TC025 TC025",
+              "timedOut": null,
+              "duration": 102369,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: MArketer - Talent & Rights\nLast Updated: Rosnisa 6/1/2025\nHigh Level test steps:\n\"When paying a license fee for content to use in a commercial, I want to track the effective dates, terms, media, and territories for that license.\n1. Log in to the XR platform.\n2. Navigate to the Talent & Rights menu.\n3. Click on Session/Completion Reports in the left nav menu.\n4. Create a new Completion Report or select one in Created status.\n5. Click on the Rights tab.\n6. Click “Add new Right”\n7. Select a type from the drop-down list.\n8. Enter a description (text).\n9. Click “Term Length.”\n10. In the “Update Terms” window, enter the terms of usage.\n    A. If selecting “Period,” also enter the start and end dates.\n    B. If selecting “Licensed from First Use For,” also select a number of months or weeks.\n11. Click the “Update” button to save and close the window.\n12. Click “Media.”\n13. Select all the media types covered.\n14. Click “Update” to save data and close the window.\n15. Click “Territories.”\n16. Select all the territories covered.\n17. Click the “Update” button to save data and close the window.\n18. Click “Create Right” to save and return to the completion report.\"\n*/\n//2. Navigate to the Talent & Rights menu.\n// Click on \"Talent and Rights\"\ncy.get(\"span.er-sidebar-label:contains('Talent and Rights')\", { timeout: 90000 }).click();\n// Click on \"Session, Completion Reports\" in the left nav menu\ncy.get(\"span:contains('Session, Completion Reports')\", { timeout: 90000 }).click();\ncy.visit(`/adbridge/cs/talent/report/423244`, { timeout: 90000 });\ncy.get('a#RightsTab', { timeout: 90000 }).should('be.visible').click({ force: true });\n//6. Click “Add new Right”\ncy.visit(`/tal/rights-details/create?rpt=423244&c=8642&a=150334&b=168611&p=\"`, { timeout: 90000 });\n//7. Select a type from the drop-down list.\ncy.get('[data-cy=\"right-type-dropdown\"]', { timeout: 90000 }).click();\ncy.get('[role=\"listbox\"]').should('be.visible');\ncy.get('[role=\"listbox\"] li').contains('Celebrity Guarantee', { timeout: 90000 }).click();\n//8. Enter a description (text).\ncy.get('[data-cy=\"right-description-textarea\"] > .k-input-inner', { timeout: 90000 }).type('Rose Test');\n//9. Click “Term Length.”\ncy.get('.pt-2 > .form-control').click();\n//10. In the “Update Terms” window, enter the terms of usage.\n//    A. If selecting “Period,” also enter the start and end dates.\ncy.get('.right-term-dialog > :nth-child(1) > :nth-child(1) > :nth-child(1) > .ng-untouched', { timeout: 90000 }).click();\ncy.get(':nth-child(1) > .k-datepicker > .k-input-button > .k-icon-wrapper-host > .k-i-calendar').click();\ncy.get(':nth-child(2) > .k-datepicker > .k-input-button > .k-icon-wrapper-host > .k-i-calendar').click();\n//    B. If selecting “Licensed from First Use For,” also select a number of months or weeks.\ncy.get(':nth-child(1) > :nth-child(1) > :nth-child(3) > .ng-untouched').click();\n//up\ncy.get(':nth-child(1) > .k-input > .k-input-spinner > .k-spinner-increase > .k-icon-wrapper-host > .k-i-caret-alt-up', {\n    timeout: 90000\n}).click();\ncy.get(':nth-child(1) > :nth-child(1) > div.ng-star-inserted > :nth-child(2)', { timeout: 90000 }).type('3');\n//Owned by authenticator\ncy.get(':nth-child(1) > :nth-child(1) > :nth-child(4) > .ng-valid', { timeout: 90000 }).click();\ncy.get('.k-button-solid-primary', { timeout: 90000 }).click();\ncy.get('.right-term-dialog > :nth-child(2) > .ng-pristine', { timeout: 90000 }).type('Rose Test');\ncy.get(':nth-child(1) > :nth-child(1) > :nth-child(4) > .ng-valid', { timeout: 90000 }).click();\n//11. Click the “Update” button to save and close the window.\ncy.get('.btn-success').click({ force: true });\n//12. Click “Media.”\ncy.get('.form-section > :nth-child(2) > :nth-child(4)', { timeout: 90000 }).click();\n//13. Select all the media types covered.\ncy.get('.ng-tns-c252451573-8.k-treeview-bot > .k-checkbox-wrap').click();\ncy.get('[kendotreeviewitem=\"\"][data-treeindex=\"0_1_6\"] > .ng-tns-c252451573-11.k-treeview-mid > .k-checkbox-wrap > .k-checkbox', {\n    timeout: 90000\n}).click();\ncy.get('[kendotreeviewitem=\"\"][data-treeindex=\"0_3\"] > .ng-tns-c252451573-6.k-treeview-mid > .k-checkbox-wrap > .k-checkbox', {\n    timeout: 90000\n}).click();\n//14. Click “Update” to save data and close the window.\ncy.get('.btn-success', { timeout: 90000 }).click();\n//15. Click “Territories.”\ncy.get('.form-section > :nth-child(2) > :nth-child(6)', { timeout: 90000 }).click();\n//16. Select all the territories covered.\ncy.get('[kendotreeviewitem=\"\"][data-treeindex=\"0_1\"] > .k-treeview-mid > .k-checkbox-wrap > .k-checkbox', {\n    timeout: 90000\n}).click();\n//cy.wait(3000);\n//enter territories\n//asia\ncy.get('[tabindex=\"0\"] > .k-treeview-mid > .k-checkbox-wrap > .k-checkbox', { timeout: 90000 }).should('be.visible').click();\n//north america\ncy.get('[kendotreeviewitem=\"\"][data-treeindex=\"0_5\"] > .k-treeview-mid > .k-checkbox-wrap > .k-checkbox', { timeout: 90000 })\n    .should('be.visible')\n    .click();\n//17. Click the “Update” button to save data and close the window.\ncy.get('.btn-success', { timeout: 90000 }).click();\n//territories\ncy.get('[data-cy=\"territory-terms-textarea\"] > .k-input-inner', { timeout: 90000 }).type('Territories');\n//18. Click “Create Right” to save and return to the completion report.\"\ncy.get('.create-rights-actions > .btn', { timeout: 90000 }).click();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 90000ms: Expected to find element: `a#RightsTab`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 90000ms: Expected to find element: `a#RightsTab`, but never found it.\n    at Context.eval (webpack:///./src/e2e/kl/e2e-scenarios/marketer-TC025.cy.ts:42:48)",
+                "diff": null
+              },
+              "uuid": "45bab586-d68d-473d-a5aa-f45fe2548902",
+              "parentUUID": "2a0d1de9-4c9c-4a26-ad18-8da7a7abb32e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "45bab586-d68d-473d-a5aa-f45fe2548902"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 102369,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "ecabdf9b-ccbb-40c0-a702-1e2cdc78e522",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC029.cy.ts",
+      "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC029.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "036c878b-34c2-43d2-95a4-91887c489c33",
+          "title": "Verify the Holding Fee",
+          "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC029.cy.ts",
+          "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC029.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC029",
+              "fullTitle": "Verify the Holding Fee TC029",
+              "timedOut": null,
+              "duration": 60065,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : Mani (8/1/2025)\n    Module : Talent & Rights > Holding Fee\n    High Level Test Step :\n    1. Log in to the XR platform.\n    2. Navigate to the Talent & Rights menu.\n    3. Click on Holding Fees in the left nav menu.\n    4. The default search is for Holding Fees due one week ago or later with Response = No Response. Perform a new search if desired.\n    5. Click on the “View Details” icon under the Actions column.\n    6. If desired, enter comments, estimate #, PO #, and job number(s).\n    7. Click one of the following buttons to enter a response:\n    A. Release/Mark Inactive\n    B. Hold/Pay\n    */\ncy.log(JSON.stringify(this.local));\nconst talentId = this.local.marketer.TC029.talentId; // Extract talentId from JSON\ncy.visit(this.local.marketer.envi.websiteUrl);\n//cy.viewport(1552, 832); // Set the window size\n// Click on Talent from menu\ncy.contains('span.er-sidebar-label', 'Talent and Rights').click();\n//click on Holding Fee in menu\ncy.get('li[data-sidebar-item-id=\"7290\"]').find('a.er-sidebar-link').should('be.visible').click();\n// Click the search input\ncy.get('[name=\"Search\"]').click();\n//click on view details\ncy.get('#HFN_searchResults tbody tr')\n    .contains('td.hfn-status', 'Unprocessed')\n    .parent()\n    .find('a.image-only') // Find all 'View Details' links\n    .eq(0) // Click the first match\n    .should('not.be.disabled') // Ensure the link is not disabled\n    .click();\n// Fill out the response comments\ncy.get(':nth-child(1) > .control-group > .controls > .autosize').click().type(this.local.marketer.TC029.xr_comments);\n// Fill out the Estimate Number field\ncy.get(':nth-child(2) > .control-group > .controls > .autosize').click().type(this.local.marketer.TC029.estimate);\n// Fill out the PO Number field\ncy.get(':nth-child(3) > .control-group > .controls > .autosize').click().type(this.local.marketer.TC029.po);\n// Click the \"release performers\" button\ncy.get('[value=\"Release\"]').click();",
+              "err": {},
+              "uuid": "c8cb7037-b820-4fb2-87a3-d58ad8311bc4",
+              "parentUUID": "036c878b-34c2-43d2-95a4-91887c489c33",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c8cb7037-b820-4fb2-87a3-d58ad8311bc4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 60065,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f4e524ce-41ab-470a-9be8-34ead22b89cd",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC031.cy.ts",
+      "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC031.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e187960d-3923-45ce-80f4-87d7850f7e60",
+          "title": "Verify the Talent Advise",
+          "fullFile": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC031.cy.ts",
+          "file": "src\\e2e\\kl\\e2e-scenarios\\marketer-TC031.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC031",
+              "fullTitle": "Verify the Talent Advise TC031",
+              "timedOut": null,
+              "duration": 39974,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Last Updated : Mani (6/1/2025)\n    Module : Talent & Rights > Advice Marketer\n    High Level Test Step :\n    1. Log in to the XR platform.\n    2. Navigate to the Talent & Rights menu.\n    3. Click on Talent Advices in the left nav menu.\n    4. Click “+ New Talent Advice.”\n    5. In the “Create New Talent Advice” window, enter ISCI/Ad-ID, Title, Length, Media Type, Advertiser, Brand, and Product and then click “Create Talent Advice.”\n    6. Enter “New Structure” as the Compensation Model.\n    7. Select a type from the drop-down list.\n    8. Select a use type from the drop-down list.\n    9. Enter cycle start and end dates.\n    10. Optionally, enter reference numbers and comments.\n    11. Click “Save Advice” to save data.\n    12. When finished, click “Submit to TM.”\n    */\ncy.log(JSON.stringify(this.local));\ncy.visit(this.local.marketer.envi.websiteUrl);\n//cy.viewport(1552, 832); // Set the window size\n// Click on Talent from menu\ncy.contains('span.er-sidebar-label', 'Talent and Rights').click();\n// Click on Advices from menu under Talent Advices\ncy.contains('span.er-sidebar-label', 'Advices').click();\n// Click on \"New Talent Advice\" link\ncy.contains('a', 'New Talent Advice').click();\n// Fill the \"Customer ID\" field\ncy.get('[name=\"createAdviceCtrl.newTalentAdvice.CustomerId\"]')\n    .click()\n    .type(this.local.marketer.TC031.customerID)\n    .wait(2000)\n    .type('{enter}');\n//Fill the ISCI Code\ncy.get('input[type=\"text\"][placeholder=\"ISCI Code / Ad-ID\"]').type(this.local.marketer.TC031.isciCode);\ncy.wait(10000); //wait required to load the popup\n// Fill the title\ncy.get('input[type=\"text\"][placeholder=\"Title\"]').type(this.local.marketer.TC031.title);\n//fill the length\ncy.get('input[ng-model=\"createAdviceCtrl.newTalentAdvice.CreativeCode.Length\"]').type(this.local.marketer.TC031.length);\n// Select dropdown media value for \"Audio\"\ncy.get('select[ng-model=\"createAdviceCtrl.newTalentAdvice.MediaTypeId\"]').select(this.local.marketer.TC031.media);\n// Click on \"Create Advice\"\ncy.get('[ng-click=\"createAdviceCtrl.saveNewAdvice()\"]').click();\n// Select values in compensation dropdowns\ncy.get('select[ng-model=\"talentAdvice.CompensationModel\"]').select(this.local.marketer.TC031.compensationmodel1);\ncy.get('select[ng-model=\"talentAdvice.FilterCompensationModel\"]').select(this.local.marketer.TC031.compensationmodel2);\n//select the type\ncy.get('select[ng-model=\"talentAdvice.TalentAdviceType\"]').select(this.local.marketer.TC031.type);\n//select use type\ncy.get('select[name=\"Talent Advice Use Type\"]').select(this.local.marketer.TC031.useType);\n// Select dates\n//cycle start date\ncy.get('input[ng-model=\"inputModel\"]')\n    .eq(0)\n    .clear()\n    .type(this.local.marketer.TC031.cycledatestarts + '{enter}');\n//cycle end date\ncy.get('input[ng-model=\"inputModel\"]')\n    .eq(1)\n    .clear()\n    .type(this.local.marketer.TC031.cycledateends + '{enter}');\n// Move to an element\ncy.get('.center').scrollIntoView();\n// Click on the button with value=\"Save Advice\"\ncy.get('input[value=\"Save Advice\"]').should('be.visible').click();\n// Assert that the button is now enabled\ncy.get('input[value=\"Save Advice\"]', { timeout: 10000 }).should('not.be.disabled');\n// click on submit to TM\ncy.get('input[value=\"Submit to TM\"]').should('be.visible').and('not.be.disabled').click();",
+              "err": {},
+              "uuid": "14225367-74a1-4d3f-b7b0-c33060443ff3",
+              "parentUUID": "e187960d-3923-45ce-80f4-87d7850f7e60",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "14225367-74a1-4d3f-b7b0-c33060443ff3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 39974,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "6535b099-604b-4abe-8a55-0980f14351dd",
+      "title": "",
+      "fullFile": "src\\e2e\\blr\\vendor-payments-TR-888.cy.ts",
+      "file": "src\\e2e\\blr\\vendor-payments-TR-888.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "41e80af5-cf75-40f4-a2ce-afd78881570e",
+          "title": "Talent Payee Sync Maintenance",
+          "fullFile": "src\\e2e\\blr\\vendor-payments-TR-888.cy.ts",
+          "file": "src\\e2e\\blr\\vendor-payments-TR-888.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TR888 - Vendor & ER Invoice Dropdowns",
+              "fullTitle": "Talent Payee Sync Maintenance TR888 - Vendor & ER Invoice Dropdowns",
+              "timedOut": null,
+              "duration": 20404,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n  Last Updated : Sasi (06/05/2025)\n  Module : Test Vendor Payments\n  TC101\n  Description: Request for two additional filters in the search page\n*/\n//#Navigate to the Vendor Payments page\ncy.visit('/ps/vendor-payment-details');\n//#Assert page loads with required labels\ncy.contains('Vendor Payments', { timeout: 10000 }).should('be.visible');\ncy.contains('Vendor Payment Request Status:').should('be.visible');\ncy.contains('ER Invoice Status:').should('be.visible');\n//#Define expected options for Vendor Payment Request Status\nconst vendorOptions = [\n    'Approved',\n    'Created',\n    'In Revision',\n    'Processed',\n    'Ready to be Processed',\n    'Voided',\n    'Waiting for Approval'\n];\n//#Open Vendor Payment Request Status dropdown\ncy.contains('Vendor Payment Request Status:')\n    .parents('div.col-md-2')\n    .find('button[aria-label=\"Select\"]')\n    .click({ force: true });\n//Verify all vendor dropdown options are visible\nvendorOptions.forEach((option) => {\n    cy.contains('span.k-list-item-text', option, { timeout: 10000 }).should('be.visible');\n});\n//Define expected top options for ER Invoice Status\nconst erInvoiceTopOptions = [\n    'Calculation Error',\n    'Delivered',\n    'On Hold',\n    'Payment Received',\n    'PDF Error',\n    'PDF Generation In Process',\n];\n// Open ER Invoice Status dropdown\ncy.contains('ER Invoice Status:')\n    .parent()\n    .find('button')\n    .click({ force: true });\n// Verify top ER Invoice Status options (before scroll)\nerInvoiceTopOptions.forEach((option) => {\n    cy.contains('span.k-list-item-text', option, { timeout: 10000 }).should('be.visible');\n});\n//Scroll dropdown to bottom to reveal remaining options\ncy.get('.k-list-content', { timeout: 10000 }).scrollTo('bottom', { duration: 500 });\n// Define expected bottom options for ER Invoice Status\nconst erInvoiceBottomOptions = [\n    'Pending Calculation',\n    'Pending PDF Creation',\n    'Pending Review',\n    'Ready For Delivery',\n    'Void'\n];\n// Verify bottom ER Invoice Status options (after scroll)\nerInvoiceBottomOptions.forEach((option) => {\n    cy.contains('span.k-list-item-text', option, { timeout: 10000 }).should('be.visible');\n});",
+              "err": {},
+              "uuid": "bc605882-78b5-48c7-bc00-312b672b0989",
+              "parentUUID": "41e80af5-cf75-40f4-a2ce-afd78881570e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bc605882-78b5-48c7-bc00-312b672b0989"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 20404,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "..\\..\\..\\..\\cypress\\results\\mochawesome\\ui\\payroll\\marketer-payroll\\.jsons",
+        "charts": true,
+        "reportPageTitle": "ER Test Suite - UI - Payroll/MarketerPayroll",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "ignoreVideos": false,
+        "saveAllAttempts": false,
+        "videoOnFailOnly": false,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

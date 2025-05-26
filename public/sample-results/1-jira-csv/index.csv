@@ -1,0 +1,861 @@
+﻿Summary,Issue key,Issue id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project lead id,Project description,Priority,Resolution,Assignee,Assignee Id,Reporter,Reporter Id,Creator,Creator Id,Created,Updated,Last Viewed,Resolved,Due date,Votes,Description,Environment,Watchers,Watchers,Watchers,Watchers,Watchers,Watchers,Watchers Id,Watchers Id,Watchers Id,Watchers Id,Watchers Id,Watchers Id,Log Work,Original estimate,Remaining Estimate,Time Spent,Work Ratio,Σ Original Estimate,Σ Remaining Estimate,Σ Time Spent,Security Level,Inward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Outward issue link (Blocks),Inward issue link (Test),Inward issue link (Test),Attachment,Attachment,Attachment,Attachment,Attachment,Attachment,Attachment,Attachment,Custom field (Actual end),Custom field (Actual start),Custom field (Affected hardware),Custom field (Affected services),Custom field (Affected version(s)),Custom field (Alpha Start date),Custom field (Approvals),Custom field (Approver),Custom field (Approver)Id,Custom field (Apps/Modules),Custom field (Atlas goals),Custom field (Atlas project),Custom field (Atlas project status),Custom field (Atlassian project),Custom field (Atlassian project status),Custom field (Backout plan),Custom field (Begin Date),Custom field (Business Justification/ Case),Custom field (Business Value (ICE)),Custom field (Category),Custom field (Change Check List),Custom field (Change Environment),Custom field (Change Roll Back),Custom field (Change Roll Out),Custom field (Change reason),Custom field (Change risk),Custom field (Change type),Custom field (Classification),Custom field (Closed Beta Start Date),Custom field (Collaborators),Custom field (Collaborators)Id,Custom field (Comments),Custom field (Comments),Custom field (Confidence),Custom field (Confluence Product Links ),Custom field (Cost Type),Custom field (Delivery progress),Custom field (Delivery progress),Custom field (Delivery status),Custom field (Delivery status),Custom field (Designs ready),Custom field (Developer),Custom field (Developer)Id,Custom field (Development),Custom field (Development Start Date ),Custom field (Effort),Custom field (End Date),Custom field (Epic Color),Custom field (Epic Link),Epic Link Summary,Custom field (Epic Name),Custom field (Epic Status),Custom field (Epic Value Stream),Custom field (General Availability Start Date),Custom field (Generated Test Cases),Custom field (Goals),Custom field (Idea archived),Custom field (Idea archived),Custom field (Idea archived on),Custom field (Idea archived on),Custom field (Impact),Custom field (Impact),Custom field (Impact score),Custom field (Implementation plan),Custom field (Insights),Custom field (Insights),Custom field (Inspired By),Custom field (Investigation reason),Custom field (Issue color),Custom field (Linked Release Issues Count),Custom field (Linked issues),Custom field (Linked issues),Custom field (Locked forms),Custom field (Major incident),Custom field (Open Beta Start Date),Custom field (Open forms),Custom field (Pending reason),Custom field (Planned end),Custom field (Planned start),Custom field (Precondition),Custom field (Product (single select)),Custom field (Product Marketing Brief Link),Custom field (Product Tier Grades),Custom field (Product/Area),Custom field (Production Deployment Approver),Custom field (Project overview key),Custom field (Project overview status),Custom field (Pull request link),Custom field (QA tester),Custom field (QA tester)Id,Custom field (Quarter),Custom field (Quick Fix),Custom field (ROI/Key Benefit),Custom field (Rank),Custom field (Reaction),Custom field (Regression),Custom field (Release Date),Custom field (Release Notes),Custom field (Release URL),Custom field (Request Type),Custom field (Request language),Custom field (Request participants),Custom field (Requested Date),Custom field (Research Start Date),Custom field (Responders),Custom field (Reviewer),Custom field (Reviewer)Id,Custom field (Revision),Custom field (Roadmap),Custom field (Root cause),Satisfaction rating,Custom field (Satisfaction date),Custom field (Security Severity),Custom field (Sentiment),Custom field (Severity),Custom field (Smartsheet Link),Custom field (Source),Custom field (Spec ready),Custom field (Sponsor),Sprint,Custom field (Start date),Custom field (Story Points),Custom field (Story point estimate),Custom field (Stretch),Custom field (Submitted forms),Custom field (Target end),Custom field (Target start),Team Id,Team Name,Custom field (Test Category),Custom field (Test plan),Custom field (Time to close after resolution),Custom field (Time to first response),Custom field (Time to resolution),Custom field (Time to review normal change),Custom field (Total forms),Custom field (Urgency),Custom field (VP Approved for Prioritisation),Custom field (Value),Custom field (Value Statement),Custom field (Value Stream ),Custom field (Vulnerability),Custom field (Work category),Custom field (Workaround),Custom field (XR Confidence),Custom field (XR Ease),Custom field (XR ICE Score),Custom field (XR Impact),Custom field ([CHART] Date of First Response),Custom field ([CHART] Time in Status),Custom field (test),Comment,Comment,Comment,Comment,Comment,Comment,Parent,Parent summary,Status Category,Status Category Changed
+(NOTC) Soft Error Logged in web application console,TR-947,46918,Bug,To Do,TR,Talent & Rights (Elward),software,John Bassett,62d575d39189e98a2017f088,,Medium,,,,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,15/May/25 11:18 PM,15/May/25 11:20 PM,,,,0,"This soft error appears in the browser console and is detected by Cypress. While it does not affect the functionality or user experience on the website, it causes Cypress tests to fail. We need to handle this by adding an exception in the Cypress configuration.
+
+
+
+!image-20250516-031712.png|width=66.66666666666666%,alt=""image-20250516-031712.png""!",,Nur Adlina Mohd Afendi - Al AiN IT,,,,,,712020:ae0f9821-b4c5-473d-908a-0749329ac456,,,,,,,,,,,,,,,,,,,,,15/May/25 11:20 PM;31e72c26-50e9-4261-bfe3-dccff707703f;enchancement-to-talent-payment-TC304.cy.ts (1).mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/22501,15/May/25 11:18 PM;31e72c26-50e9-4261-bfe3-dccff707703f;image-20250516-031712.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22500,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@18e83b71,,,Talent and Rights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i04bkl:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,15/May/25 11:18 PM
+(TC30006) Performance Issue on Check Print page,XPCPP-1268,42112,Bug,In Progress,XPCPP,XR Pay - Core Payroll (Prometheus),software,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,,High,,Nihal De Silva,62d575eb39248e8689eac2a4,Siti Khalidah A Ramli,712020:343113b7-51f1-4172-850c-696dd9e07fa2,Siti Khalidah A Ramli,712020:343113b7-51f1-4172-850c-696dd9e07fa2,10/Apr/25 9:39 PM,19/May/25 4:48 AM,,,,0,"TC30006 - Select Batch(es) to send to Check Printing
+
+Steps to reproduce:
+
+# Login and go to Check Printing page
+
+
+
+Most of the time when the script is running in the Azure pipeline, the loading time for the Check Printing page is too long because of error message. I have attached the video from the pipeline run. This issue is frequent and have caused the test scripts to fail mostly in the automation test result. I have tried executing it manually and the page shows this error too.
+
+**Note: I have attached the pipeline run for this error.
+
+!image-20250411-013728.png|width=1267,height=633,alt=""image-20250411-013728.png""!",UAT2,Ram Kumaran,Siti Khalidah A Ramli,Vaishali Derola,,,,712020:96c4f1cf-37be-4953-bf35-28c125538216,712020:343113b7-51f1-4172-850c-696dd9e07fa2,62d5761a83067f68f84fdfec,,,,Investigation;01/May/25 9:49 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;3600,,0,3600,,,0,3600,,,QA-875,TR-569,TR-577,,,10/Apr/25 9:39 PM;35a85006-1ff9-4616-a216-4ecfcbd6a49c;100425 run_check-printing-TC30006-TC30008.cy.ts.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/18693,01/May/25 9:48 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;2025-05-01_18-38-40.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/20981,10/Apr/25 9:39 PM;35a85006-1ff9-4616-a216-4ecfcbd6a49c;image-20250411-013728.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/18694,01/May/25 9:44 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;image-20250502-014415.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/20980,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@59949f13,,,Core Payroll,,,,,,,,,,,,,,,,,,,,,,,,,,OPEX,,,,,,,,{},,,,,XPCPP-1033,Idea: Enhance Retro-Rate Adjustments,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Core Payroll,,,,,,,,Archana Tirupathi,6336c8be88ed2ebef97ce976,,No,,0|i03tcd:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,XRCPP Sprint 9,,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-05-01 23:04:45.793,,,01/May/25 7:04 PM;712020:96c4f1cf-37be-4953-bf35-28c125538216;Butch will double confirm with Vaishali,"01/May/25 9:44 PM;62d5761a83067f68f84fdfec;Team,
+I was able to reproduced this issue.  My question is, why this is failing for Vendor Payment ? 
+
+I directly went to Check Printing screen and received same error.  [Please refer attached recording]
+
+!image-20250502-014415.png|width=2118,height=629,alt=""image-20250502-014415.png""!","05/May/25 2:08 PM;62d5761a83067f68f84fdfec;Team,
+
+I wanted to update you following my discussion with Ankita.  After our conversation, she also acknowledged that this is indded a defect.  She has requested that I assign a ticke to Ravi so it can be prioritized accordingly.
+
+Please let me know if you need any additional details from my side.",,,,39874,Idea: Enhance Retro-Rate Adjustments,In Progress,19/May/25 4:48 AM
+"(TC60012,TC1097,TC1098,TC1099) Unable to Add new Account in XR-Support --> Account Edit",XPL-5397,41282,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,High,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,01/Apr/25 10:54 PM,01/May/25 7:06 PM,,,,0,"Raised by [~accountid:712020:49831c1f-3fc9-4dad-955f-1f94eaa71816] 
+
+[Ticket 585683 - Unable to Add new Account in XR-Support --> Account Edit|https://app.extremereach.com/cs/tickets/details/585683/details]
+
+
+
+Problem Analysis:
+
+# Unable to add new account as error message display ""Error executing query""
+
+# After one of the existing data has set to inactive, the data still displays in Setup --> Payroll --> Labor Offset Config section.
+
+Expected Result: System able to add new account and once existing data set to inactive, the system will not display inactive data.
+
+Actual: System does not add account and display inactive data",,Ram Kumaran,Tan Li Lian,,,,,712020:96c4f1cf-37be-4953-bf35-28c125538216,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@46ab14de,,,Production Accounting (LUCA) -> Setup Account Types,,,,,,,,,,,,,,,,,,,,Hairul Mirwwaaj - Al AiN IT,712020:49831c1f-3fc9-4dad-955f-1f94eaa71816,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i03opx:,,No,,,,,,,,,,,,,,,,,,,Critical,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-05-01 23:06:01.159,,,01/May/25 7:06 PM;712020:96c4f1cf-37be-4953-bf35-28c125538216;Will be prioritized by product,,,,,,,,To Do,01/Apr/25 10:54 PM
+(TC6017) Luca - Purchase Order Transactions column sorting is not working as expected,XPL-4867,39306,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,19/Mar/25 9:26 PM,26/Mar/25 1:02 PM,,,,0,"Failing test case: TC6017
+
+This test was originally developed using a different account ([*vendor-hilmi.azmi@extremereach.com*|mailto:vendor-hilmi.azmi@extremereach.com]) and was passing successfully. However, after running it in the Azure pipeline using the SmokeTest account, it is now failing.
+
+Further debugging indicates that column sorting is not functioning as expected. For example, when clicking on the ""Vendor Name"" column to sort, vendor names starting with K appear before those starting with A, which is incorrect.
+
+h3. *Steps to Reproduce:*
+
+# Log in to LUCA using the SmokeTest account.
+# Navigate to [Purchase Order Transactions.|https://extremereachinc-tst.outsystemsenterprise.com/SimplyFastPA2/PurchaseOrderTransactions.aspx]
+# Click on the ""Vendor Name"" column to sort the table.
+# Observe that the table is not sorted correctly—vendor names starting with K appear before those starting with A.
+
+
+!image-20250320-012135.png|width=646,height=684,alt=""image-20250320-012135.png""!",,Ex-Phang Min Si - Al AiN IT,,,,,,712020:234f585d-74e8-4464-9b3b-749cc87be23b,,,,,,,,,,,,,,,,,,,,,19/Mar/25 9:26 PM;2fe9b6f5-caff-43bb-b74f-bb08802a7498;image-20250320-012135.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/16642,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@3fd09114,,,Production Accounting (LUCA) -> PO Edit,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i03gz1:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,19/Mar/25 9:26 PM
+(TC67016) Not able to change banner colour of Luca page,XPL-135,31482,Bug,In Test,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,Vaishali Derola,62d5761a83067f68f84fdfec,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,11/Mar/25 9:44 AM,20/May/25 4:18 AM,,,,0,"# Login to LUCA
+# Go to XR-Support → Control Table
+# Go to Default & Switches tab
+# Randomly change the color wheel and click Save
+
+!image-20250311-134100.png|width=54.880095923261386%,alt=""image-20250311-134100.png""!
+# Observer that the banner color did not change to the one selected in the colour wheel
+
+!image-20250311-134204.png|width=1184,height=405,alt=""image-20250311-134204.png""!",,Chris Woodruff,Tan Li Lian,,,,,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,XPL-4543,,11/Mar/25 9:44 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250311-134100.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15629,11/Mar/25 9:44 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250311-134204.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15628,19/May/25 7:15 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;image-20250519-231511.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22716,19/May/25 7:18 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;image-20250519-231818.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22717,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@846f9f1,,,Production Accounting (LUCA) -> Main Pages,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,No,,0|i029ut:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,Luca 142 05/23/2025,,1.0,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-05-19 23:15:23.872,,,"19/May/25 7:15 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;Works in Dev…
+
+!image-20250519-231511.png|width=2133,height=1200,alt=""image-20250519-231511.png""!
+
+Works in Test as well…
+
+!image-20250519-231818.png|width=2133,height=1200,alt=""image-20250519-231818.png""!",,,,,,,,In Progress,19/May/25 7:14 PM
+(TC40091) LUCA - PC Entry - System Allow Saving New Transaction When the Account is Invalid,XPL-132,31361,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,10/Mar/25 3:39 AM,26/Mar/25 1:02 PM,,,,0,"Issue: System allows saving new entry when the Account is not valid.
+
+Expected: add dash in drop down for Account so invalid account will pick this up and program will give an error message
+
+
+
+TC reference: pc-entry-TC40091",,Nur Adlina Mohd Afendi - Al AiN IT,,,,,,712020:ae0f9821-b4c5-473d-908a-0749329ac456,,,,,,,,,,,,,,,,,,,,,10/Mar/25 3:38 AM;31e72c26-50e9-4261-bfe3-dccff707703f;20250310_153153.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15491,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@3b789b7,,,Production Accounting (LUCA) -> PC Entry,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0297h:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0843d096-6fb7-4b1b-bef2-b6b46269e6a1,XR PAY - LUCA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,10/Mar/25 3:39 AM
+"(TC70069) Should not allow to save when ""Do Not Tax"" is enabled and ""Default Tax Code"" is not given",XPL-130,31286,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,08/Mar/25 9:39 PM,26/Mar/25 1:02 PM,,,,0,"Failing test case: 70069
+
+
+
+# Login to LUCA
+# Go to Studio → Centralized Vendor Master
+# Click New Vendor 
+# Fill up the mandatory fields
+# Enable *“Do Not Tax”* and do not select anything for *“Default Tax Code”*
+# Click Save - the form able to save
+
+
+!image-20250309-023607.png|width=1168,height=632,alt=""image-20250309-023607.png""!
+
+
+
+*Expectation*: Should not allow to save when ""Do Not Tax"" is enabled and ""Default Tax Code"" is not given",[https://extremereachinc-tst.outsystemsenterprise.com/|https://extremereachinc-tst.outsystemsenterprise.com/],Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,XPL-4657,,08/Mar/25 9:39 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250309-023607.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15418,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@1c225a87,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0295p:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,08/Mar/25 9:39 PM
+(TC40075) LUCA - PC Entry: System allows saving duplicate Doc Number for Shows that does not allow duplicates,XPL-129,31096,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,06/Mar/25 12:07 AM,26/Mar/25 1:03 PM,,,,0,"*Test Cases Failed: 40075* - For show that does *NOT* allow duplicates, try saving transaction for same Vendor and with a *duplicate Doc Number.*
+
+
+
+*Issue:* System allows saving duplicate Doc Number for Shows that does not allow duplicates
+
+*Expected:* Error message displays:  Duplicate numbers are not allowed.
+
+
+
+*Steps:*
+
+{{Step 1: Go to XR Support > Control Table}}
+
+{{Step 2: Go to tab Defaults and Switches}}
+
+{{Step 3: Ensure the Allow Duplicates Checkbox is Unchecked}}
+
+{{Step 4: Visit Petty Cash > Entry}}
+
+{{Step 5: Create New Entry and save the first entry with a unique Doc number}}
+
+{{Step 6: Create another New Entry and save the second entry with a duplicate Doc number}}
+
+{{Step 7: System supposed to not allow the user to save and show error message: ""Duplicate numbers are not allowed""}}",,Nur Adlina Mohd Afendi - Al AiN IT,,,,,,712020:ae0f9821-b4c5-473d-908a-0749329ac456,,,,,,,,,,,,,,,,,,,,,06/Mar/25 12:08 AM;31e72c26-50e9-4261-bfe3-dccff707703f;20250306_130254.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15202,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@65cccf29,,,Production Accounting (LUCA) -> PC Entry,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i02879:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0843d096-6fb7-4b1b-bef2-b6b46269e6a1,XR PAY - LUCA,,,,,,,,,,,,,,,,,,,,,,,"06/Mar/25 12:08 AM;712020:ae0f9821-b4c5-473d-908a-0749329ac456;Simulated steps:
+
+!20250306_130254.mp4|width=1920,height=1080,alt=""20250306_130254.mp4""!",,,,,,,,To Do,06/Mar/25 12:07 AM
+(TC70067) Tax id for show that masks the tax id.,XPL-127,31093,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,05/Mar/25 9:57 PM,26/Mar/25 1:03 PM,,,,0,"Failing test case: 70067
+
+
+# Login to LUCA
+# Go to XR-Support → Control Table
+# Enable “Mask Tax Id?”
+
+!image-20250306-025754.png|width=1210,height=720,alt=""image-20250306-025754.png""!
+# Go to Studio → Centralized Vendor Master
+# Create New Vendor
+# Key in Tax ID
+
+!image-20250306-015852.png|width=1061,height=626,alt=""image-20250306-015852.png""!
+
+Expected: Tax ID should be masked",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,XPL-4655,,05/Mar/25 9:57 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250306-015852.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15200,05/Mar/25 9:58 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250306-025754.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15201,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@644db50b,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0286t:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,05/Mar/25 9:57 PM
+(TC70064) Tax ID is required for tenants as selected in Control Table Setup,XPL-125,31091,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,05/Mar/25 8:47 PM,26/Mar/25 1:03 PM,,,,0,"Failing test case: 70064
+
+# Login to LUCA
+# Go to XR-Support → Control Table
+# Navigate to Default & Switches tab
+# Enable the check box “Require Tax Id?”
+# Save
+# Go to Studio → Centralized Vendor Master
+# Create New Vendor
+# Fill up the mandatory fields
+# Leave Tax ID as blank
+
+!image-20250306-014542.png|width=1050,height=597,alt=""image-20250306-014542.png""!
+
+# The Vendor can be saved even there is no Tax ID 
+
+Expected: Should not allow to save/create the vendor there is Tax ID when it is set as required in the Control Table Setup",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,XPL-4652,,05/Mar/25 8:47 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250306-014542.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15198,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@12beb254,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0286l:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,05/Mar/25 8:47 PM
+(TC70063) Vendor Type is required when there's a Tax ID.,XPL-124,31090,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,05/Mar/25 8:37 PM,26/Mar/25 1:03 PM,,,,0,"Test case failing: 70063
+
+
+
+# Login to LUCA
+# Go to Studio → Centralized Vendor Master
+# Create New Vendor
+# Fill up all the mandatory fills (the ones with asterisk)
+# Then select a Vendor Type but leave Tax ID as blank
+
+!image-20250306-013413.png|width=1100,height=650,alt=""image-20250306-013413.png""!
+
+# Click Save
+# Observation: Should not allow to create the vendor when +Vendor Type is selected without its Tax ID+
+
+Requirements: [Ticket 536878 - Centralized Vendor Master - Clean up ticket|https://app.extremereach.com/cs/tickets/details/536878/details]",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,XPL-4651,,05/Mar/25 8:37 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250306-013413.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15196,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5c25bf30,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0286d:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,05/Mar/25 8:37 PM
+"(TC70053) Save should strip the leading spaces for Company/Last, First, Check Name & TIN Name.",XPL-123,31088,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,05/Mar/25 8:07 PM,02/Apr/25 2:28 AM,,,,0,"Failing test case: 70063,70086
+
+# Login to LUCA
+# Go to Studio → Centralized Vendor Master
+# Click on New Vendor
+# Key in *Company/Last Name* as *“    Bear and Cat company”*
+NOTE: Include leading spaces in front ie. “<space><space><space>*Bear and Cat company*
+
+!image-20250306-010642.png|width=1274,height=682,alt=""image-20250306-010642.png""!
+# Save the form
+# Go to the Vendor table.
+# Look at the vendor created in step 4. The Company/Last Name has leading spaces. It should strip of the leading spaces as per requirement [Ticket 536878 - Centralized Vendor Master - Clean up ticket|https://app.extremereach.com/cs/tickets/details/536878/details]
+
+!image-20250306-010723.png|width=1290,height=510,alt=""image-20250306-010723.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,XPL-4641,,,,,,05/Mar/25 8:07 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250306-010642.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15195,05/Mar/25 8:07 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250306-010723.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15194,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@55c9ad6f,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0285x:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,05/Mar/25 8:07 PM
+(TC70107) LUCA - Studio DL Offset Account is not showing as a drop down menu,XPL-121,31009,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,05/Mar/25 8:28 AM,26/Mar/25 10:04 PM,,,,0,"Failing test case: 70107
+
+
+
+# Login to LUCA
+# Navigate to XR-Support → Control Table
+# Go to Default & Switches tab
+# Notice that the Studio DL OffSet Account should be a drop down menu as per requirement [https://app.extremereach.com/cs/tickets/details/473680/details?noteid=5316388|https://app.extremereach.com/cs/tickets/details/473680/details?noteid=5316388]
+
+!image-20250305-132459.png|width=925,height=600,alt=""image-20250305-132459.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4695,,,,,05/Mar/25 8:28 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250305-132459.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15137,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@2ee27e12,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,,,,No,,0|i027ot:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,05/Mar/25 8:28 AM
+(TC70077) Centralized Vendor Master: Focus stays in the field and does not pull up the Attach W9 screen,XPL-120,30601,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,05/Mar/25 2:03 AM,26/Mar/25 10:11 PM,,,,0,"Failing test case: 70077
+
+
+
+# Navigate to Studio → Centralized Vendor Master
+# Click on New Vendor
+# Key in “Company/Last”
+!image-20250305-070348.png|width=1173,height=766,alt=""image-20250305-070348.png""!
+# Hit Enter
+
+!image-20250305-070442.png|width=1202,height=746,alt=""image-20250305-070442.png""!
+# The Attach W9 screen appear - This should not appear.
+
+
+
+*Expected:* Focus stays in the field and does not pull up the Attach W9 screen",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4665,,,,,05/Mar/25 2:04 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250305-070348.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15119,05/Mar/25 2:04 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250305-070442.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15120,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@7ba935e6,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,,,,No,,0|i02565:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,05/Mar/25 2:03 AM
+"(TC50003,TC67040) Luca>Reports>Taxes-X-Shows - Child/Popup window navigating and displaying outside the main window ",XPL-113,30052,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Mar/25 1:04 AM,26/Mar/25 1:04 PM,,,,0,"[Ticket 585009 - Luca>Reports>Taxes-X-Shows - Child/Popup window navigating and displaying outside the main window|https://app.extremereach.com/cs/tickets/details/585009/details]
+
+Raised by [~accountid:712020:378439ee-3127-4324-82d7-e97448a717fa] 
+
+Go through Luca> Reports and click on Taxes-X-Shows
+
+The Child/Pop-up window is navigating and displaying outside the main window.
+
+Expected: Child/pop-up window should display within the main window similar to how other reports displaying.
+
+Menu: Luca>Reports>Taxes-X-Shows
+
+URL: [https://extremereachinc-tst.outsystemsenterprise.com/SimplyFastPA2/HomePage.aspx|https://extremereachinc-tst.outsystemsenterprise.com/SimplyFastPA2/HomePage.aspx|smart-link] 
+
+!image-20250304-060300.png|width=2365,height=1216,alt=""image-20250304-060300.png""!
+
+
+
+!image-20250304-060315.png|width=2390,height=1214,alt=""image-20250304-060315.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,XPL-4567,,04/Mar/25 1:04 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-060300.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15021,04/Mar/25 1:04 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-060315.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15022,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@755793ed,,,Production Accounting (LUCA) -> Tax Reports,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i021wd:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,04/Mar/25 1:04 AM
+(TC7044)LUCA - PO Reports - Column order in reports is not sorted correctly ,XPL-112,30051,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Mar/25 1:00 AM,26/Mar/25 10:12 PM,,,,0,"[Ticket 585621 - LUCA - PO Reports - Column order in reports is not sorted correctly|https://app.extremereach.com/cs/tickets/details/585621/details]
+
+Raised by [~accountid:712020:343113b7-51f1-4172-850c-696dd9e07fa2] 
+
+
+
+Steps to reproduce:
+
+# Login into Luca and go to this menu.
+
+!image-20250304-055156.png|width=303,height=309,alt=""image-20250304-055156.png""!
+
+
+# Click these reports (Account Detail, Detail with History, Summary by Vendor)
+
+!image-20250304-055213.png|width=514,height=585,alt=""image-20250304-055213.png""!
+
+# The order in each of these reports should be the same as what has been expected, based on this scenario.
+
+!image-20250304-055234.png|width=567,height=433,alt=""image-20250304-055234.png""!
+
+**Real result:
+
+* Account Detail: Column started with Distribution Description instead.
+
+!image-20250304-055250.png|width=1263,height=348,alt=""image-20250304-055250.png""!
+
+* Detail with History: After PO # column, supposedly followed by Account but in generated report, it is Vendor instead.
+
+!image-20250304-055312.png|width=1260,height=295,alt=""image-20250304-055312.png""!
+
+* ",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4632,,,,,04/Mar/25 1:00 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-055156.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15018,04/Mar/25 1:00 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-055213.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15017,04/Mar/25 1:00 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-055234.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15016,04/Mar/25 1:00 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-055250.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15019,04/Mar/25 1:00 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-055312.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15020,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@76dd2aee,,,Production Accounting (LUCA) -> PO Reports,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i021w5:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,04/Mar/25 1:01 AM
+(TC55044) LUCA: Verify the CI Payment # From/To fields - Expected result different from Actuall Result,XPL-111,30050,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Mar/25 12:48 AM,26/Mar/25 10:12 PM,,,,0,"Raised by [~accountid:712020:c009a27c-96f2-4073-8a52-787e65360af5] 
+
+[Ticket 585488 - LUCA: Verify the CI Payment # From/To fields - Expected result different from Actuall Result|https://app.extremereach.com/cs/tickets/details/585488/details]
+
+
+
+In the Expected Result : 10 character maximum.
+
+!image-20250304-054814.png|width=548,height=216,alt=""image-20250304-054814.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,,04/Mar/25 12:48 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-054814.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15015,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@4904031b,,,Production Accounting (LUCA) -> Setup Bank,,,,,,,,,,,,,,,,,,,,Mohamad Afiq Ashraf bin Amran Al AiN IT,712020:c009a27c-96f2-4073-8a52-787e65360af5,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i021vx:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,04/Mar/25 6:53 PM;712020:597ca6aa-8555-4e77-8a29-c57d51764813;Failing TC 550044,,,,,,,,To Do,04/Mar/25 12:48 AM
+(TC70178) LUCA: Universal Send - file is not downloaded as expected,XPL-110,30047,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Low,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Mar/25 12:38 AM,26/Mar/25 10:14 PM,,,,0,"[Ticket 585476 - LUCA: Universal Send - file is not downloaded as expected|https://app.extremereach.com/cs/tickets/details/585476/details]
+
+Raised by [~accountid:712020:597ca6aa-8555-4e77-8a29-c57d51764813] 
+
+Failing TC : 70178
+
+*Test scenario:*
+
+# Select the Generate File button again then the YES button.
+
+# Verify the file name.
+
+Expected: The file name is the value in the Studio License #, Studio File Counter, MMDDYY, time, .dat extension.
+
+*Steps to reproduce:*
+
+# Go to Studio > Universal Send
+
+# Click on the Generate File button
+
+# 
+# The report generated in another browser window rather than a file downloaded. There is no file downloaded.
+
+!image-20250304-053708.png|width=1325,height=735,alt=""image-20250304-053708.png""!
+
+!image-20250304-053718.png|width=1742,height=831,alt=""image-20250304-053718.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4766,,,,,04/Mar/25 12:38 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-053708.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15013,04/Mar/25 12:38 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-053718.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15014,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@3c017141,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i021v9:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,04/Mar/25 12:38 AM
+(TC7046) LUCA - PO Reports - Null is displayed in Summary report,XPL-109,30046,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Mar/25 12:34 AM,26/Mar/25 10:14 PM,,,,0,"[Ticket 585339 - LUCA - PO Reports - Null is displayed in Summary report|https://app.extremereach.com/cs/tickets/details/585339/details]
+
+Raised by [~accountid:712020:343113b7-51f1-4172-850c-696dd9e07fa2] 
+
+Failed Test Case: TC7046 (LUCA - PO Reports)
+
+
+
+# Go to Purchase Order > PO History Reports
+!image-20250304-053217.png|width=303,height=309,alt=""image-20250304-053217.png""!
+
+# Click Summary button
+
+!image-20250304-053334.png|width=514,height=585,alt=""image-20250304-053334.png""!
+
+# There is a null when searching for the word in the PDF report
+
+
+!image-20250304-053354.png|width=1272,height=416,alt=""image-20250304-053354.png""!
+
+
+
+**Note = Expected to not have any null in each report based on this scenario -
+
+!image-20250304-053409.png|width=1221,height=37,alt=""image-20250304-053409.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4634,,,,,04/Mar/25 12:34 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-053217.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15011,04/Mar/25 12:34 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-053334.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15012,04/Mar/25 12:34 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-053354.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15009,04/Mar/25 12:34 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-053409.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15010,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@6b4f5d96,,,Production Accounting (LUCA) -> PO Reports,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i021v1:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,04/Mar/25 12:34 AM
+(TC17010) LUCA: Payment Adjustments - Column labels not in light blue background shading.,XPL-108,30045,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Mar/25 12:26 AM,26/Mar/25 10:15 PM,,,,0,"[Ticket 585318 - LUCA: Payment Adjustments - Column labels not in light blue background shading.|https://app.extremereach.com/cs/tickets/details/585318/details]
+
+Raised by [~accountid:712020:6a6159a6-4061-4a78-a36c-8a09384c73c3] 
+
+Issue: LUCA: Payment Adjustments - Column labels not in light blue background shading.
+
+Test case failing: 17010
+
+
+
+Steps to reproduce:
+
+# Go to *Payments > Payment Adjustments*
+
+# Expected behavior: Confirm column labels are in Bold font, all CAPS with light blue background shading.
+
+# Expected Result:
+
+# Verify Confirm column labels are in Bold font [Passed]
+# Verify Confirm column labels are all CAPS [Passed]
+# Verify Confirm column labels are with light blue background shading. [*Failed*] ***Failed because of Column labels not in light blue background shading.
+
+!image-20250304-052626.png|width=1478,height=410,alt=""image-20250304-052626.png""!",,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4598,,,,,04/Mar/25 12:26 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-052626.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15008,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@69a11e8b,,,Production Accounting (LUCA) -> Payment Adjustments,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i021ut:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,04/Mar/25 12:26 AM
+"(TC70102,TC70104,TC70106) LUCA: Control Table Setup - issue with Studio License#, Studio Prod Code, Studio Company Code input",XPL-105,25342,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Low,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,03/Mar/25 9:57 PM,26/Mar/25 10:16 PM,,,,0,"Raised by [~accountid:712020:597ca6aa-8555-4e77-8a29-c57d51764813] 
+
+
+
++*Issue 1:*+ [+*Ticket 585127 - LUCA: Control Table Setup - Studio License# can accept more than 4 digits/non-digits*+|https://app.extremereach.com/cs/tickets/details/585127/details]
+
+Failed test case: 70102
+*Test case description:*
+Save a 4-digit *Studio License #*
+
+*Steps to reproduce:*
+
+*Scenario 1*
+
+# Go to XR-Support > Control Table Setup > Default & Switches
+
+# Give ""Studio License#"" more than 4 digits
+
+# Save
+
+Expected: It should only accept 4-digit
+
+!image-20250304-025755.png|width=1058,height=665,alt=""image-20250304-025755.png""!
+
+*Scenario 2*
+
+# Go to XR-Support > Control Table Setup > Default & Switches
+
+# Give ""Studio License#"" non-digit eg. ""onetwothree""
+
+# Save
+
+Expected: It should return error or cannot save
+
+!image-20250304-025804.png|width=785,height=457,alt=""image-20250304-025804.png""!
+
+
++*Issue 2:*+ [+*Ticket 585150 - LUCA: Control Table Setup - Studio Prod Code can accept more than 6 digits/non-digits*+|https://app.extremereach.com/cs/tickets/details/585150/details]
+
+Failed test cases: 70104
+*Test case description:*
+Save a 6-digit *Studio Prod Code*
+
+*Steps to reproduce:*
+
+*Scenario 1*
+
+# Go to XR-Support > Control Table Setup > Default & Switches
+
+# Give ""Studio Prod Code"" more than 6 digits
+
+# Save
+
+Expected: It should only accept 6-digit
+
+
+!image-20250304-035400.png|width=807,height=852,alt=""image-20250304-035400.png""!
+
+*Scenario 2*
+
+# Go to XR-Support > Control Table Setup > Default & Switches
+
+# Give ""Studio Prod Code"" non-digit eg. ""iamnot6digit""
+
+# Save
+
+Expected: It should only accept 6-digit
+
+!image-20250304-035425.png|width=820,height=755,alt=""image-20250304-035425.png""!
+
+
+
+
+
++*Issue 3:*+ [+*Ticket 585153 - LUCA: Control Table Setup - Studio Company Code can accept more than 3 digits/non-digits*+|https://app.extremereach.com/cs/tickets/details/585153/details]
+
+Failed Test case: 70106
+
+ *Test case description:*
+Save a 4-digit *Studio License #*
+
+*Steps to reproduce:*
+
+*Scenario 1*
+
+# Go to XR-Support > Control Table Setup > Default & Switches
+
+# Give ""Studio Company Code"" more than 3 digits
+
+# Save
+
+Expected: It should only accept 3-digit
+
+
+!image-20250304-052217.png|width=786,height=653,alt=""image-20250304-052217.png""!
+
+*Scenario 2*
+
+# Go to XR-Support > Control Table Setup > Default & Switches
+
+# Give ""Studio Company Code"" non-digit eg. ""onetwothree""
+
+# Save
+
+Expected: It should return error or cannot save
+
+
+
+!image-20250304-052235.png|width=783,height=701,alt=""image-20250304-052235.png""!",,Tan Li Lian,Vaishali Derola,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,62d5761a83067f68f84fdfec,,,,,,,,,,,,,,,XPL-4690,XPL-4692,XPL-4694,,,03/Mar/25 9:58 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-025755.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15002,03/Mar/25 9:58 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-025804.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15001,07/Mar/25 8:45 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-035400.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15343,07/Mar/25 8:45 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-035425.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15341,07/Mar/25 8:45 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-052217.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15344,07/Mar/25 8:45 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-052235.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15342,06/Mar/25 3:37 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;image-20250306-203730.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15289,06/Mar/25 3:37 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;image-20250306-203735.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15288,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@61958ea9,,,Production Accounting (LUCA) -> Control Table Setup,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,No,,0|i018ut:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-06 20:37:46.251,,,"06/Mar/25 3:37 PM;62d5761a83067f68f84fdfec;I am able to reproduced the issue.  For more details please refer below screens.
+
+!image-20250306-203730.png|width=1621,height=730,alt=""image-20250306-203730.png""!
+
+
+
+!image-20250306-203735.png|width=1634,height=718,alt=""image-20250306-203735.png""!","07/Mar/25 8:46 AM;712020:597ca6aa-8555-4e77-8a29-c57d51764813;Merging [[XPL-106] LUCA: Control Table Setup - Studio Prod Code can accept more than 6 digits/non-digits - Jira|https://extremereach.atlassian.net/browse/XPL-106] and [[XPL-107] (TC70106) LUCA: Control Table Setup - Studio Company Code can accept more than 3 digits/non-digits - Jira|https://extremereach.atlassian.net/browse/XPL-107] into [[XPL-105] (TC70102,TC70104,TC70106) LUCA: Control Table Setup - issue with Studio License#, Studio Prod Code, Studio Company Code input - Jira|https://extremereach.atlassian.net/browse/XPL-105]",,,,,,,To Do,03/Mar/25 9:57 PM
+(TC4111) Tab button does not recognize element,XPL-95,25330,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,High,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,03/Mar/25 8:48 PM,01/May/25 7:06 PM,,,,0,"[Ticket 584858 - Tab button does not recognize element|https://app.extremereach.com/cs/tickets/details/584858/details]
+
+Raised by [~accountid:712020:49831c1f-3fc9-4dad-955f-1f94eaa71816] 
+
+Test case failing: 4111
+
+
+
+Problem Analysis: The automation does not capture ""Cancel"" button in the PO Entry Page. Upon checking manually, when i enter the ""tab"" button, the button does not recognize the ""Cancel"" button as if it skips to another button.
+
+Steps:
+
+# Login and click Purchase --> Entry
+
+# Click ""tab"" button until reaches to ""Cancel"" button.",,Ram Kumaran,Tan Li Lian,Vaishali Derola,,,,712020:96c4f1cf-37be-4953-bf35-28c125538216,712020:597ca6aa-8555-4e77-8a29-c57d51764813,62d5761a83067f68f84fdfec,,,,,,,,,,,,,,,,,,,05/Mar/25 6:27 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;Ticket # 584858_XPL-95_Tab button does not recognize element_2025-03-04_10-14-48.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15177,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@65029e2b,,,Production Accounting (LUCA) -> PO Entry,,,,,,,,,,,,,,,,,,,,Hairul Mirwwaaj - Al AiN IT,712020:49831c1f-3fc9-4dad-955f-1f94eaa71816,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i018ud:,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-05 23:26:51.947,,,"05/Mar/25 6:26 PM;62d5761a83067f68f84fdfec;I am able to reproduced this issue.  Please refer attached recording.  
+
+When using ""tab"" button, system is not recognize the ""Audit Reports, Import, Template, Cancel, Exist and Save"" buttons.",01/May/25 7:06 PM;712020:96c4f1cf-37be-4953-bf35-28c125538216;Will be prioritized by product,,,,,,,To Do,03/Mar/25 8:48 PM
+"(TC40044,TC40043,TC40045) PC Entry - Wrong Error Message Displayed",XPL-91,25326,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Low,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,03/Mar/25 8:26 PM,26/Mar/25 10:17 PM,,,,0,"[Ticket 584685 - LUCA - PC Entry - Wrong Error Message Displayed When Not Key In Effective Date|https://app.extremereach.com/cs/tickets/details/584685/details]
+[Ticket 584686 - LUCA - PC Entry - Wrong Error Message Displayed When Not Key In Document Date|https://app.extremereach.com/cs/tickets/details/584686/details]
+[+Ticket 584690 - LUCA - PC Entry - Wrong Error Message Displayed When Key In Envelope Amount and Not Advanced Amount+|https://app.extremereach.com/cs/tickets/details/584690/details]
+Raised by [~accountid:712020:ae0f9821-b4c5-473d-908a-0749329ac456] 
+
+
++*Issue 1: Wrong error message displayed when not key in effective date during PC Entry.*+
+Expected: 'Date' is a required field and can not be empty.
+
+Actual: Effective Date is invalid
+
+TC reference: pc-entry-TC40044
+
+
+
+!image-20250304-012252.png|width=1876,height=927,alt=""image-20250304-012252.png""!
+
+
+
++*Issue 2: Wrong error message displayed when not key in document date during PC Entry.*+
+
+Expected: 'Date' is a required field and can not be empty.
+
+Actual: ""Document Date is invalid"" & ""Year entered is not the same as current year.""
+
+TC reference: pc-entry-TC40043
+
+!image-20250304-013526.png|width=1889,height=933,alt=""image-20250304-013526.png""!
+
+
+
++*Issue 3: Wrong Error Message Displayed When Key In Envelope Amount and Not Advanced Amount*+
+
+Expected: Account is Required
+
+Actual: Description is Required
+
+TC reference: pc-entry-TC40045
+
+!image-20250304-013735.png|width=1879,height=924,alt=""image-20250304-013735.png""!",UAT2,Nur Adlina Mohd Afendi - Al AiN IT,Tan Li Lian,Vaishali Derola,,,,712020:ae0f9821-b4c5-473d-908a-0749329ac456,712020:597ca6aa-8555-4e77-8a29-c57d51764813,62d5761a83067f68f84fdfec,,,,,,,,,,,,,,,,,,,05/Mar/25 6:58 PM;31e72c26-50e9-4261-bfe3-dccff707703f;20250306_074812.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15189,05/Mar/25 6:58 PM;31e72c26-50e9-4261-bfe3-dccff707703f;20250306_075724.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15190,03/Mar/25 8:26 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-012252.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14997,07/Mar/25 8:38 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-013526.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15340,07/Mar/25 8:38 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250304-013735.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15339,06/Mar/25 11:43 AM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;image-20250306-164239.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15249,06/Mar/25 11:43 AM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;image-20250306-164305.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15248,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@372937d6,,,Production Accounting (LUCA) -> PC Entry,,,,,,,,,,,,,,,,,,,,Nur Adlina Mohd Afendi - Al AiN IT,712020:ae0f9821-b4c5-473d-908a-0749329ac456,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,No,,0|i018th:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-05 23:58:30.863,,,"05/Mar/25 6:58 PM;712020:ae0f9821-b4c5-473d-908a-0749329ac456;Test steps can be found simulated as below.
+
+# Unfocused the field
+
+!20250306_074812.mp4|width=1920,height=1080,alt=""20250306_074812.mp4""!
+
+
+
+# Fill in another mandatory field and click save
+
+!20250306_075724.mp4|width=1920,height=1080,alt=""20250306_075724.mp4""!","06/Mar/25 11:43 AM;62d5761a83067f68f84fdfec;Thank You Adlina !
+
+I am able to reproduced and needs to fix the *Verbiage* of error message when Effective Date field is empty.
+
+Expected Results: 'Effective Date' is a required field and can not be empty.
+
+!image-20250306-164239.png|width=1725,height=788,alt=""image-20250306-164239.png""!
+
+
+
+!image-20250306-164305.png|width=1683,height=724,alt=""image-20250306-164305.png""!","07/Mar/25 8:37 AM;712020:597ca6aa-8555-4e77-8a29-c57d51764813;Merging [[XPL-92] (TC40043) LUCA - PC Entry - Wrong Error Message Displayed When Not Key In Document Date - Jira|https://extremereach.atlassian.net/browse/XPL-92] and [[XPL-93] (TC40045) LUCA - PC Entry - Wrong Error Message Displayed When Key In Envelope Amount and Not Advanced Amount - Jira|https://extremereach.atlassian.net/browse/XPL-93] into [[XPL-91] (TC40044,TC40043,TC40045) PC Entry - Wrong Error Message Displayed - Jira|https://extremereach.atlassian.net/browse/XPL-91] since all three are inter-related",,,,,,To Do,03/Mar/25 8:26 PM
+Data dropdown display after clicked several times,XRPCF-313,25066,Bug,To Do,XRPCF,XR Pay - Portal,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,Brian Tilton,5aa02b1779c4ca4270269f23,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,03/Mar/25 3:05 AM,13/May/25 1:21 PM,,,,0,"[Ticket 580390 - Data dropdown display after clicked several times|https://app.extremereach.com/cs/tickets/details/580390/details]
+
+Raised by [~accountid:712020:49831c1f-3fc9-4dad-955f-1f94eaa71816] 
+
+Problem Analysis: When perform automation test, the script does recognize and click the dropdown, but the data does not display many times. For manual, the data dropdown display after 2 clicks.
+
+Steps:
+
+# Login -> Payee
+# Search for existing ID and click View
+# Click Work Authorization
+# Click dropdown for the field ""Work Location"" and ""Resident Location"".
+
+Expected Result: System able to display dropdown data after one click.
+
+Actual Result: System displayed dropdown data after more than one click.
+
+Recording: [+https://extremereach0-my.sharepoint.com/✌️/g/personal/vendor-hairul_mirwwaaj_extremereach_com/EVwUux3_SzBLjTTTwBO1b7UB6j1xZreZzmpb8KXTKbYmgw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Qr33VU+|https://extremereach0-my.sharepoint.com/%E2%9C%8C%EF%B8%8F/g/personal/vendor-hairul_mirwwaaj_extremereach_com/EVwUux3_SzBLjTTTwBO1b7UB6j1xZreZzmpb8KXTKbYmgw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Qr33VU]",UAT2,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@49294588,,,Payroll,,,,,,,,,,,,,,,,,,,,Hairul Mirwwaaj - Al AiN IT,712020:49831c1f-3fc9-4dad-955f-1f94eaa71816,,,,,,,,,,,,,{},,,,,XRPCF-807,Onboarding/Time Entry - QoS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i006mb:00003,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,41462,Onboarding/Time Entry - QoS,To Do,03/Mar/25 3:05 AM
+"(NOTC) Click on Accounting (Luca), system redirects to wrong Luca Production Accounting URL",XPL-87,25057,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,02/Mar/25 8:59 PM,26/Mar/25 10:21 PM,,,,0,"[Ticket 583792 - Click on Accounting (Luca), system redirects to wrong Luca Production Accounting URL|https://app.extremereach.com/cs/tickets/details/583792/details]
+
+Raised by [~accountid:712020:6a6159a6-4061-4a78-a36c-8a09384c73c3] 
+
+# Go to this page [+XR Pay - Extreme Reach+|https://app.uat2-extremereach.com/fo/dashboard/0/payroll-accountant]
+# Click *Accounting* > *Accounting (Luca)*
+
+!image-20250303-015809.png|width=784,height=486,alt=""image-20250303-015809.png""!
+
+# Verify system redirects to [+IdP+|https://extremereachinc.outsystemsenterprise.com/IdP/SSO.aspx] (wrong URL)
+
+!image-20250303-015829.png|width=1188,height=696,alt=""image-20250303-015829.png""!
+
+# System should redirect to [+Login+|https://extremereachinc-tst.outsystemsenterprise.com/SimplyFastPA2/Vendors.aspx]
+
+!image-20250303-015851.png|width=1002,height=735,alt=""image-20250303-015851.png""!
+
+
+*Expected result:* System should redirect to correct *Luca Production Accounting* URL[+Login+|https://extremereachinc-tst.outsystemsenterprise.com/SimplyFastPA2/Vendors.aspx]",[https://linxtest.extremereach.com/tpuat2/c/pes|https://linxtest.extremereach.com/tpuat2/c/pes],Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,,02/Mar/25 8:59 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-015809.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14878,02/Mar/25 8:59 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-015829.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14877,02/Mar/25 8:59 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-015851.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14879,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@7b7d6fbd,,,Production Accounting (LUCA) -> Setup Account Types,,,,,,,,,,,,,,,,,,,,Rosnisa Razak,712020:6a6159a6-4061-4a78-a36c-8a09384c73c3,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,,,,No,,0|i017kl:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,02/Mar/25 8:59 PM
+"(TC70013) LUCA: Vendor Setup - ""Industry Terms, Certifications & Ownership Classification"" alignment too close",XPL-86,25056,Bug,In Test,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Low,,Vaishali Derola,62d5761a83067f68f84fdfec,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,02/Mar/25 8:56 PM,20/May/25 4:19 AM,,,,0,"[Ticket 584063 - LUCA: Vendor Setup - ""Industry Terms, Certifications & Ownership Classification"" alignment too close|https://app.extremereach.com/cs/tickets/details/584063/details]
+
+Raised by [~accountid:712020:597ca6aa-8555-4e77-8a29-c57d51764813] 
+
+Failed test cases: 70013
+
+
+
+# With ""Dick Clark"" studio, launch Studio > Centralized Vendor Master > New Vendor
+
+# See screnshot - the ""Click to add Industry Terms, Certifications & Ownership Classification"" alignment is too close to each other.
+
+!image-20250303-015543.png|width=1853,height=1086,alt=""image-20250303-015543.png""!",[https://linxtest.extremereach.com/tpuat2/c/pes|https://linxtest.extremereach.com/tpuat2/c/pes],Chris Woodruff,Tan Li Lian,Vaishali Derola,,,,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,712020:597ca6aa-8555-4e77-8a29-c57d51764813,62d5761a83067f68f84fdfec,,,,,,,,,,,,,,,,,,,02/Mar/25 8:56 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-015543.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14876,04/Mar/25 5:16 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;image-20250304-221554.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15086,16/May/25 3:40 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;image-20250516-194021.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22564,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5708e55f,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,No,,0|i017kd:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,Luca 142 05/23/2025,,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-04 22:16:30.525,,,"04/Mar/25 5:16 PM;62d5761a83067f68f84fdfec;I was able to reproduced the issue.  
+
+Click to add Industry Terms, Certifications & Ownership Classification is overlapping.
+
+!image-20250304-221554.png|width=1377,height=735,alt=""image-20250304-221554.png""!
+
+ ","16/May/25 3:40 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;!image-20250516-194021.png|width=1707,height=1067,alt=""image-20250516-194021.png""!",,,,,,,In Progress,16/May/25 3:39 PM
+"(TC0035,TC0046,TC0049,TC0074,TC0086,TC0089) Server Error in '/' Application",TR-121,25054,Bug,To Do,TR,Talent & Rights (Elward),software,John Bassett,62d575d39189e98a2017f088,,Medium,,Qian Ma,557058:4b12fd30-5a66-46c5-a786-625513545ce7,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,02/Mar/25 8:50 PM,14/Apr/25 1:38 AM,,,,0,"Related to [https://app.extremereach.com/cs/tickets/details/583646/details|https://app.extremereach.com/cs/tickets/details/583646/details]
+
+Create Jira issue to track the open defect raised in XR Portal above. 
+
+Original Issue:
+
+""Defect Title"": Server Error in '/' Application.
+Failing TC: notification-TC35, TC46,TC49,TC74,TC86, TC89
+
+""Steps to Reproduce"": Click on below links and check.
+
+# TC35 - Reset Due To Failed QC
+[+https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/c7514570-97ea-40f4-a623-fc07265f1abe?CustomerId=12528&MediaObjectId=fa54a9ee-a0e0-45b7-b9f4-599d4c3205bd&FailedQcReasonIds=148+|https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/c7514570-97ea-40f4-a623-fc07265f1abe?CustomerId=12528&MediaObjectId=fa54a9ee-a0e0-45b7-b9f4-599d4c3205bd&FailedQcReasonIds=148]
+# TC46 - Spot QC Failed NotAutoQC
+[+https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/3387ca81-ac88-4863-b745-e5dfa643152c?CustomerId=130353&MediaObjectId=05956d40-3380-473a-9653-88227983b156&FailedQcReasonIds=0+|https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/3387ca81-ac88-4863-b745-e5dfa643152c?CustomerId=130353&MediaObjectId=05956d40-3380-473a-9653-88227983b156&FailedQcReasonIds=0]
+# TC49 - Media Put On Hold
+[+https://app.uat2-extremereach.com/Email/MediaOnHoldQcNotification/b208bb05-bdd1-4cec-a199-81a7a87113c0?CustomerId=9423&MediaObjectId=66c822a3-9561-411e-b52d-52913125fbed&FailedQcReasonIds=166+|https://app.uat2-extremereach.com/Email/MediaOnHoldQcNotification/b208bb05-bdd1-4cec-a199-81a7a87113c0?CustomerId=9423&MediaObjectId=66c822a3-9561-411e-b52d-52913125fbed&FailedQcReasonIds=166]
+# TC86 - PreUpload Media Validation Failed QC
+[+https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/737e3155-d7e2-4003-9e1d-599ce24c8519?CustomerId=25644&MediaObjectId=3d47b165-d7d5-4e1e-8afc-4b693edd5028&FailedQcReasonIds={FailedQcReasonIds}+|https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/737e3155-d7e2-4003-9e1d-599ce24c8519?CustomerId=25644&MediaObjectId=3d47b165-d7d5-4e1e-8afc-4b693edd5028&FailedQcReasonIds={FailedQcReasonIds}]
+# TC89 - Video Asset Gateway Share Notification
+[+https://traffic.extremereach.com/Email/VideoAssetGatewayShare?customerId=36615&shareType=Creative&advertiserId=&catalogId=&creativeId=5A9EB518-449E-4BA4-9A19-3DF2917BA31A&message=+|https://traffic.extremereach.com/Email/VideoAssetGatewayShare?customerId=36615&shareType=Creative&advertiserId=&catalogId=&creativeId=5A9EB518-449E-4BA4-9A19-3DF2917BA31A&message=]
+
+""Expected Result"": Page should open with original content
+
+""Actual Result"": Getting ""Server Error in '/' Application"" and ""Sorry, something went wrong."" error (TC89)
+
+""Environment"":UAT-2",,Ex-Phang Min Si - Al AiN IT,Qian Ma,,,,,712020:234f585d-74e8-4464-9b3b-749cc87be23b,557058:4b12fd30-5a66-46c5-a786-625513545ce7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@5acbe2c1,,,Talent and Rights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i017jx:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-04-11 15:54:47.575,,,"01/Apr/25 10:54 PM;712020:234f585d-74e8-4464-9b3b-749cc87be23b;hi [~accountid:557058:4b12fd30-5a66-46c5-a786-625513545ce7] 
+Can you please assign this to the correct owner? According to Butch, these are not under XR Pay. Thank you. ","11/Apr/25 11:54 AM;557058:4b12fd30-5a66-46c5-a786-625513545ce7;Hi, 
+
+For the first URL you provided in the ticket - [Cannot perform runtime binding on a null reference|https://app.uat2-extremereach.com/Email/UploaderFailedQcNotification/c7514570-97ea-40f4-a623-fc07265f1abe?CustomerId=12528&MediaObjectId=fa54a9ee-a0e0-45b7-b9f4-599d4c3205bd&FailedQcReasonIds=148]
+
+ which workflow did you run to get to the URL? I looked at the NotificationId, and it is not in the UAT2 db.
+
+select * from [Common].Notifications where notificationid ='c7514570-97ea-40f4-a623-fc07265f1abe'
+
+
+
+-Qian
+
+
+
+ ","14/Apr/25 1:38 AM;712020:234f585d-74e8-4464-9b3b-749cc87be23b;hi [~accountid:557058:4b12fd30-5a66-46c5-a786-625513545ce7] We automated the notification tests based on the manual test plan we received from Sowmya and Vaishali: [https://extremereach0-my.sharepoint.com/:x:/r/personal/butch_cadavona_extremereach_com/_layouts/15/Doc.aspx?sourcedoc=%7B8404D550-B3C6-4E3F-BAF7-71528877E7E2%7D&file=Talent%20and%20Vendor%20Payment%20regression%20test%20document.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1|https://extremereach0-my.sharepoint.com/:x:/r/personal/butch_cadavona_extremereach_com/_layouts/15/Doc.aspx?sourcedoc=%7B8404D550-B3C6-4E3F-BAF7-71528877E7E2%7D&file=Talent%20and%20Vendor%20Payment%20regression%20test%20document.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1|smart-link] 
+
+My understanding is that the URLs were extracted by [~accountid:62d575d39189e98a2017f088] . John, could you please advise? Thanks. ",,,,,,To Do,02/Mar/25 8:50 PM
+(NOTC) Manage Customer Template: Add template not scrollable when resize,XRPCF-312,25053,Bug,To Do,XRPCF,XR Pay - Portal,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,Brian Tilton,5aa02b1779c4ca4270269f23,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,02/Mar/25 8:48 PM,13/May/25 1:21 PM,,,,0,"# Login to [+https://app.uat2-extremereach.com/fo/purchase-order/admin+|https://app.uat2-extremereach.com/fo/purchase-order/admin] as Admin - using full size .
+
+# Fill in
+
+Customer: Regression Test Customer
+
+Project: Productions ABC
+
+# Click Add Template
+
+!image-20250303-014718.png|width=1897,height=1012,alt=""image-20250303-014718.png""!
+
+
+# Now, resize the browser as below screenshot - notice the Save and Cancel button is no longer visible. Suggest to put a scrollbar as a UX enhancement.
+
+FYI - At this moment it is blocking automation element detection. Workaround for automation to set a larger resolution.
+
+
+!image-20250303-014733.png|width=1232,height=962,alt=""image-20250303-014733.png""!
+
+
+",UAT2,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,,02/Mar/25 8:48 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-014718.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14872,02/Mar/25 8:48 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-014733.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14873,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@653cea1b,,,Onboarding and Timecard Entry,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,XRPCF-807,Onboarding/Time Entry - QoS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Onboarding & Timecard Entry,,,,,,,,,,,No,,0|i006mb:00002,,No,,,,,,,,,,,,,,,,,,,Major,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,41462,Onboarding/Time Entry - QoS,To Do,02/Mar/25 8:48 PM
+(TC0089) 584692 - Video Asset Gateway Share Notification failed to load,TR-120,25052,Bug,To Do,TR,Talent & Rights (Elward),software,John Bassett,62d575d39189e98a2017f088,,Medium,,Heather Hearn,62d575ca657fc166e25f95ca,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,02/Mar/25 8:40 PM,30/Mar/25 9:27 PM,,,,0,"Related to [https://app.extremereach.com/cs/tickets/details/584692/details|https://app.extremereach.com/cs/tickets/details/584692/details]
+Creating this ticket in Jira (From XR Portal). 
+
+
+Referring to the test cases to set the hotfix issue above: [+https://extremereach0-my.sharepoint.com/❌/r/personal/butch_cadavona_extremereach_com/_layouts/15/Doc.aspx?sourcedoc=%7B8404D550-B3C6-4E3F-BAF7-71528877E7E2%7D&file=Talent%20and%20Vendor%20Payment%20regression%20test%20document.xlsx&action=default&mobileredirect=true+|https://extremereach0-my.sharepoint.com/%E2%9D%8C/r/personal/butch_cadavona_extremereach_com/_layouts/15/Doc.aspx?sourcedoc=%7B8404D550-B3C6-4E3F-BAF7-71528877E7E2%7D&file=Talent%20and%20Vendor%20Payment%20regression%20test%20document.xlsx&action=default&mobileredirect=true]
+
+For TC89, the provided URL link cannot be loaded with error:
+
+*Sorry, something went wrong.*
+*Please return to the previous page and try your request again. Restarting*
+*your browser may also solve the problem. If the error persists, please notify*
+*Extreme Reach Customer Support and we'll help you out.*
+
+
+URL: [+https://traffic.extremereach.com/Email/VideoAssetGatewayShare?customerId=36615&shareType=Creative&advertiserId=&catalogId=&creativeId=5A9EB518-449E-4BA4-9A19-3DF2917BA31A&message=+|https://traffic.extremereach.com/Email/VideoAssetGatewayShare?customerId=36615&shareType=Creative&advertiserId=&catalogId=&creativeId=5A9EB518-449E-4BA4-9A19-3DF2917BA31A&message=]
+
+Please see screenshot attached.
+
+!image-20250303-014010.png|width=1454,height=753,alt=""image-20250303-014010.png""!",,Ex-Phang Min Si - Al AiN IT,John Bassett,,,,,712020:234f585d-74e8-4464-9b3b-749cc87be23b,62d575d39189e98a2017f088,,,,,,,,,,,,,,,,,,,,02/Mar/25 8:40 PM;2fe9b6f5-caff-43bb-b74f-bb08802a7498;image-20250303-014010.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14869,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@576cfb24,,,Talent and Rights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i017jh:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-10 18:25:59.084,,,10/Mar/25 2:25 PM;62d575d39189e98a2017f088;Unassigning from myself. This is not a Talent and Rights Notification.,10/Mar/25 6:32 PM;712020:234f585d-74e8-4464-9b3b-749cc87be23b;hi [~accountid:62f2cad4a41ecbd0ba19b3c2] Can you please assign to the correct owner / team ? Thank you. ,,,,,,,To Do,02/Mar/25 8:40 PM
+(NOTC) Symbols do not count as characters ,XPCPP-301,25050,Bug,To Do,XPCPP,XR Pay - Core Payroll (Prometheus),software,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,,Low,,Ravi PV Sathyam,6317776eb433b060db56dec9,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,02/Mar/25 7:54 PM,01/May/25 7:11 PM,,,,0,"[3-March-205 Transferred from XR ticketing system to Jira [Ticket 579618 - Symbols do not count as characters|https://app.extremereach.com/cs/tickets/details/579618/details]]
+
+
+Raised by [~accountid:712020:343113b7-51f1-4172-850c-696dd9e07fa2] 
+
+[3020/Verify that the system highlights in RED the invalid COA based on the setup for the project (under the Chart of accounts).
+
+Note: Refer Chart of accounts screen for the project used in testing]
+
+According to COA for Group Code PILGRIM, the Segment Codes for Account Code, EPI, M1 and M2 uses four '%' type segment masks. The symbol % indicates that any character can be entered in the input field. However, this is not the case during testing as other symbols cannot be detected as characters when input as the system highlights them with red. Only the symbol underscore is accepted and combination of alphabets and numerals. These are the links as references:
+
+Search Group Code 'PILGRIM' = [+Payroll COA Groups - Extreme Reach+|https://app.uat2-extremereach.com/ps/chart-of-accounts/groups]
+
+!image-20250303-004500.png|width=954,height=538,alt=""image-20250303-004500.png""!
+
+
+
+COA input in Timecard Details = [+Timecard Details - Extreme Reach+|https://app.uat2-extremereach.com/ps/timecard-details/1209229/paylines?batchurl=%2Fps%2Fbatch-details%2F153340%2Fdetails&batchid=153340]
+
+!image-20250303-004520.png|width=865,height=505,alt=""image-20250303-004520.png""!",UAT2,Ravi PV Sathyam,Tan Li Lian,,,,,6317776eb433b060db56dec9,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,02/Mar/25 7:54 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-004500.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14864,02/Mar/25 7:54 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250303-004520.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14863,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@a84c7b9,Ravi PV Sathyam,6317776eb433b060db56dec9,Payroll,,,,,,,,,,,,,,,,,,,,Siti Khalidah A Ramli,712020:343113b7-51f1-4172-850c-696dd9e07fa2,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Payroll,,,,,,,,,,,No,,0|i017j1:,,No,,,,,,,,,,,,,,,,,,,Minor,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-04-09 11:58:43.189,,,09/Apr/25 7:58 AM;6317776eb433b060db56dec9;Great catch. Will be prioritized in future as client users have not reported this as an issue ,,,,,,,,To Do,02/Mar/25 7:54 PM
+"(TC0015,TC0041,TC0042) Cycle Expiration Notification link cannot be loaded with ""Server Error in '/' Application"" error",TR-105,18926,Bug,To Do,TR,Talent & Rights (Elward),software,John Bassett,62d575d39189e98a2017f088,,Medium,,Heather Hearn,62d575ca657fc166e25f95ca,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,25/Feb/25 11:51 PM,30/Mar/25 9:28 PM,,,,0,"This is part of the Notification test case, where the following test cases were previously passing but currently failed in the Azure automation pipeline. 
+
+*TC15 : Notification Type = Cycle Expiration*
+[https://app.uat2-extremereach.com/Email/TalentExpirationsCycle?notificationTypeId=43&cmId=1031648&talentAdviceUseTypeId=1270&daysTillExpiration=60&today=12/3/2024&paymentTypeId=0|https://app.uat2-extremereach.com/Email/TalentExpirationsCycle?notificationTypeId=43&cmId=1031648&talentAdviceUseTypeId=1270&daysTillExpiration=60&today=12/3/2024&paymentTypeId=0]
+*TC41: Cycle Expiration Internet,Industrial and Media* 
+[https://app.uat2-extremereach.com/Email/TalentExpirationsCycle?notificationTypeId=139&cmId=1031648&talentAdviceUseTypeId=1270&daysTillExpiration=60&today=12/3/2024&paymentTypeId=0|https://app.uat2-extremereach.com/Email/TalentExpirationsCycle?notificationTypeId=139&cmId=1031648&talentAdviceUseTypeId=1270&daysTillExpiration=60&today=12/3/2024&paymentTypeId=0]
+*TC42: Creative Send For Review*
+[https://app.uat2-extremereach.com/Email/SendForReview/179445|https://app.uat2-extremereach.com/Email/SendForReview/179445]
+
+
+*Example screenshot for TC15*
+
+In UAT2:
+
+
+!image-20250226-044722.png|width=1100,height=236,alt=""image-20250226-044722.png""!
+
+Checking also in Dev env:
+[https://app.dev-extremereach.com/Email/TalentExpirationsCycle?notificationTypeId=43&cmId=1031648&talentAdviceUseTypeId=1270&daysTillExpiration=60&today=12/3/2024&paymentTypeId=0|https://app.dev-extremereach.com/Email/TalentExpirationsCycle?notificationTypeId=43&cmId=1031648&talentAdviceUseTypeId=1270&daysTillExpiration=60&today=12/3/2024&paymentTypeId=0]
+
+!image-20250226-044758.png|width=1132,height=476,alt=""image-20250226-044758.png""!
+
+To [~accountid:62f2cad4a41ecbd0ba19b3c2]  
+Since the Notification link's ownership spans different projects, I'm unsure who or which project it belongs to. Please reassign accordingly. Thanks.
+",,Ex-Phang Min Si - Al AiN IT,,,,,,712020:234f585d-74e8-4464-9b3b-749cc87be23b,,,,,,,,,,,,,,,,,,,,,25/Feb/25 11:51 PM;2fe9b6f5-caff-43bb-b74f-bb08802a7498;image-20250226-044722.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14335,25/Feb/25 11:51 PM;2fe9b6f5-caff-43bb-b74f-bb08802a7498;image-20250226-044758.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/14336,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@1f418cc9,,,Talent and Rights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,No,,0|i0136l:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,25/Feb/25 11:51 PM
+585629 - Payee Details - bank account - wrong warning message prompted when user select the Live Check Only option,XPCPP-269,17888,Bug,To Do,XPCPP,XR Pay - Core Payroll (Prometheus),software,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,,Medium,,Ravi PV Sathyam,6317776eb433b060db56dec9,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,Ex-Phang Min Si - Al AiN IT,712020:234f585d-74e8-4464-9b3b-749cc87be23b,25/Feb/25 1:01 AM,01/May/25 7:15 PM,,,,0,"Related to [https://app.extremereach.com/cs/tickets/details/585629/details|https://app.extremereach.com/cs/tickets/details/585629/details]
+
+Create issue in Jira for product team’s review and prioritization. 
+
+Original issue:
+
+
+URL: [+https://app.uat2-extremereach.com/ps/payee-details/1213190/bankaccounts+|https://app.uat2-extremereach.com/ps/payee-details/1213190/bankaccounts]
+
+*Observed Behavior:*
+When editing the Payee's bank account details, checking the ""Live Check Only"" checkbox and clicking ""Save"" triggers a warning message:
+_""Please enter the reason for unchecking Live Check Only.""_
+This is incorrect, as the user is selecting (checking) the option, not unchecking it.
+
+*Expected Behavior:*
+
+* If the system is intended to prompt for a reason when the ""Live Check Only"" checkbox is selected, the warning message should say:
+_""Please enter the reason for checking Live Check Only.""_
+* If the prompt is not intended, the warning message should not appear.",,Archana Tirupathi,,,,,,6336c8be88ed2ebef97ce976,,,,,,,,,,,,,,,,,,,,,02/Apr/25 4:49 AM;d63f68ed-ca39-4923-99ae-2cf3b8f06e01;image-20250402-084538.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/17877,,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@110882db,Ravi PV Sathyam,6317776eb433b060db56dec9,Core Payroll -> Payee Maintenance (40-79),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Core Payroll,,,,,,,,,,,No,,0|i010kd:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-04-02 08:49:45.744,,,"02/Apr/25 4:49 AM;6336c8be88ed2ebef97ce976;Verified on UAT2.
+
+Issue : Its displaying same warning message when user check/uncheck the live check only option. Please see below ss.
+
+!image-20250402-084538.png|width=1536,height=740,alt=""image-20250402-084538.png""!
+
+[~accountid:6317776eb433b060db56dec9] Please prioritize this.
+
+Thank you,
+
+Archana",,,,,,,,To Do,25/Feb/25 1:01 AM
+(TC583646) LUCA: Deleted data reappears after refreshing the page,XPL-47,13480,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,04/Feb/25 10:15 PM,26/Mar/25 10:26 PM,,,,0,"(Raising on behalf of Aiman)
+
+Failing test cases: 44113
+
+*Steps to reproduce:*
+
+# Navigate to the following URL: 
+{noformat}https://extremereachinc-tst.outsystemsenterprise.com/SimplyFastPA2/SupportEditAccounts.aspx?(Not.Licensed.For.Production)=&PageTenantID={noformat}
+
+# Select the account code and click the delete button.
+
+# The data should be removed, and no error message should be displayed.
+
+# Navigate to the card transaction section and select a transaction.
+
+# Open the account dropdown and ensure that the deleted account code does not appear in the list.
+
+# If the account code cannot be deleted, the expected output is shown in the screenshot below.
+
+
+!image-20250205-031357.png|width=376,height=40,alt=""image-20250205-031357.png""!
+
+!image-20250205-031404.png|width=405,height=93,alt=""image-20250205-031404.png""!
+
+After refresh:
+
+!image-20250205-031419.png|width=409,height=88,alt=""image-20250205-031419.png""!
+
+
+
+*Expected Results:*
+
+Deleted codes do NOT display in drop downs.",UAT2,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,,,,,,04/Feb/25 10:15 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250205-031357.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/12465,04/Feb/25 10:15 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250205-031404.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/12466,04/Feb/25 10:15 PM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250205-031419.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/12464,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@6a271342,,,Production Accounting (LUCA) -> Cards,,,,,,,,,,,,,,,,,,,,Aiman Tahrim,712020:9cfe1e05-ef10-41cf-9ca9-a8cd36fa79f7,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,,,,No,,0|i00e3x:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,04/Feb/25 10:15 PM
+(TC70086) Vendor missing name from Purchase Order,XPL-24,12387,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,27/Jan/25 1:01 AM,26/Mar/25 10:30 PM,,,,0,"Failing test cases: 70086
+
+
+
+*Steps to reproduce:*
+1. From Studio > Centralized Vendor Master, create 2 vendors with a similar name but one is active, one is inactive. In this example, we are using *“Beer - Kshlerin”* and *“Beer and Sons” .*
+2. Mark *“Beer - Kshlerin*” as inactive.
+
+!image-20250127-055301.png|width=1534,height=678,alt=""image-20250127-055301.png""!
+
+
+3. Now open to *“Purchase Order → Entry”*
+4. Under Vendor → Name, search for *“Beer”*
+5. Nothing appears. Expected to list down *“Beer and Sons” (ACTIVE)*
+
+!image-20250127-055705.png|width=1534,height=796,alt=""image-20250127-055705.png""!
+
+
+Found other names as well which does not appear 
+
+
+Inactive: Hyatt, Hahn and Lehner
+Active  : Hyatt, Mohr and Hammes
+*Observation: Both cannot be found*
+
+Inactive: Greenholt, Mayer and Zulauf
+Active  : Green, Botsford and Lynch
+*Observation: Both cannot be found*
+
+Inactive: Beer - Kshlerin
+Active  : Beer and Sons
+*Observation: Both cannot be found*
+
+Inactive: Baumbach, Roob and Pollich
+Active  : Baumbach, Hessel and Beatty
+*Observation: Both cannot be found*",UAT2,Tan Li Lian,,,,,,712020:597ca6aa-8555-4e77-8a29-c57d51764813,,,,,,,,,,,,,,,,XPL-4674,,,,,27/Jan/25 1:01 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250127-055301.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/11426,27/Jan/25 1:01 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250127-055705.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/11425,,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@4826c86c,,,Production Accounting (LUCA) -> Studio,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,,,,No,,0|i00917:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,To Do,27/Jan/25 1:01 AM
+(TC7076) LUCA - PO History Reports - PO Number displayed is not accurate based on filter,XPL-21,11680,Bug,To Do,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,John Catrett,712020:22021d63-5999-4b5f-b1cc-6b584406e31b,Siti Khalidah A Ramli,712020:343113b7-51f1-4172-850c-696dd9e07fa2,Siti Khalidah A Ramli,712020:343113b7-51f1-4172-850c-696dd9e07fa2,23/Jan/25 1:43 AM,26/Mar/25 1:04 PM,,,,0,"h2. Description
+
+*Steps to reproduce:*
+
+# Launch LUCA
+# Go Purchase Order > PO History Reports
+# Fill in the PO Number filter and click the Listing report button.
+
+!image-20250123-064051.png|width=100%,alt=""image-20250123-064051.png""!
+
+# The header of report displayed the po number filter correctly. However, the data in the report is not accurate.
+
+!image-20250123-064232.png|width=100%,alt=""image-20250123-064232.png""!
+
+***Note:* All other reports have the same issue.",UAT2,Vaishali Derola,,,,,,62d5761a83067f68f84fdfec,,,,,,,,,,,,,,,,,,,,,04/Mar/25 3:09 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;PO Search parameters _2025-03-04_12-03-44.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/15078,04/Mar/25 3:09 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;POListingReport.pdf;https://extremereach.atlassian.net/rest/api/3/attachment/content/15077,23/Jan/25 1:43 AM;35a85006-1ff9-4616-a216-4ecfcbd6a49c;image-20250123-064051.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/11167,23/Jan/25 1:43 AM;35a85006-1ff9-4616-a216-4ecfcbd6a49c;image-20250123-064232.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/11166,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@2992de93,,,Production Accounting (LUCA) -> PO Reports,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,No,,0|i00757:,,No,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-04 20:09:39.241,,,04/Mar/25 3:09 PM;62d5761a83067f68f84fdfec;I am able to reproduced this issue.  Please refer attached documents.,,,,,,,,To Do,23/Jan/25 1:43 AM
+(TC67021) How-to videos & Release notes links are broken,XPL-15,11571,Bug,In Test,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,Tan Li Lian,712020:597ca6aa-8555-4e77-8a29-c57d51764813,22/Jan/25 7:32 AM,20/May/25 3:26 PM,,,,0,"Test case failing: 67021
+
+*Steps to reproduce:*
+1. Launch LUCA
+2. Go to upper right corner and click on the “?”
+3. The link opened points to here: [https://www.xr.global/luca-how-to|https://www.xr.global/luca-how-to] but it is seen as broken. See screenshot
+
+Check w/ marketing - perhaps some broken links due to marketing related changes
+
+!image-20250122-123020.png|width=1518,height=850,alt=""image-20250122-123020.png""!",UAT2,Aishwarya Ninganure-Accion,Chris Woodruff,Rolando Manansala,Tan Li Lian,Tatsat Divetia,Vaishali Derola,712020:fba66aff-2cd6-4ceb-aff7-760fe02722e1,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,5dd317cdc7ac480ee5671608,712020:597ca6aa-8555-4e77-8a29-c57d51764813,5e44cb3ea17f930c9b94467a,62d5761a83067f68f84fdfec,Test case design is done and tested;19/May/25 11:32 AM;11bf10d5-a818-494f-9aae-c6112a5de94d;3600,,0,3600,,,0,3600,,,,,,XPL-4548,XPL-5476,04/Mar/25 2:16 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;XPL-15_2025-03-04_11-14-57.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15068,22/Jan/25 7:32 AM;269ea19f-f8cd-41aa-abd0-f32c54b3fe23;image-20250122-123020.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/11081,16/May/25 3:41 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;image-20250516-194058.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22565,19/May/25 3:50 AM;11bf10d5-a818-494f-9aae-c6112a5de94d;image-20250519-075030.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22611,20/May/25 3:26 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;image-20250520-192634.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22814,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@24a2e604,,,Production Accounting (LUCA) -> Main Pages,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,Aishwarya Ninganure-Accion,712020:fba66aff-2cd6-4ceb-aff7-760fe02722e1,,No,,0|i006f7:0mi,,No,,,,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,,,,,,,,,,,,Luca 142 05/23/2025,,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-04 19:15:48.485,,,04/Mar/25 2:15 PM;62d5761a83067f68f84fdfec;I am able to reproduced the issue.  For more details please find attached recording. ,13/May/25 11:42 AM;5e44cb3ea17f930c9b94467a;Please add the right link to show. ,"13/May/25 11:43 AM;5dd317cdc7ac480ee5671608;This is the link from our site that opens the Luca “how to” videos.
+
+[Luca How-To Videos – Extreme Reach Help Center|https://helpcenter.xr.global/hc/en-us/articles/13828292968724-Luca-How-To-Videos]","16/May/25 3:41 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;!image-20250516-194058.png|width=1707,height=1067,alt=""image-20250516-194058.png""!","19/May/25 3:50 AM;712020:fba66aff-2cd6-4ceb-aff7-760fe02722e1;Hi [~accountid:557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9] , i verified in test and dev env, but still it is failing. actually it must land to the link of “[https://helpcenter.xr.global/hc/en-us/articles/13828292968724-Luca-How-To-Videos|https://helpcenter.xr.global/hc/en-us/articles/13828292968724-Luca-How-To-Videos|smart-link] “ as per Rolando’s previous comment. could you please check this.
+
+
+!image-20250519-075030.png|width=1920,height=1080,alt=""image-20250519-075030.png""!","20/May/25 3:26 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;We are good correct?
+
+!image-20250520-192634.png|width=2133,height=1200,alt=""image-20250520-192634.png""!",,,In Progress,16/May/25 3:08 PM
+(TC63006) Setup JE Source Code- Search button and Refresh Button are not functioning properly,XPL-13,11544,Bug,In Test,XPL,XR PAY-LUCA,software,Randall Smith,712020:202ef155-42e5-4c85-94ae-99789653774a,,Medium,,Vaishali Derola,62d5761a83067f68f84fdfec,Mohamad Afiq Ashraf bin Amran Al AiN IT,712020:c009a27c-96f2-4073-8a52-787e65360af5,Mohamad Afiq Ashraf bin Amran Al AiN IT,712020:c009a27c-96f2-4073-8a52-787e65360af5,21/Jan/25 9:43 PM,20/May/25 4:19 AM,,,,0,"
+
+!Button  not function as expected.mp4|width=1920,height=1080,alt=""Button  not function as expected.mp4""!
+
+Button not functioning as per Test Case. Here are the vide captured as intended to be",,Chris Woodruff,Mohamad Afiq Ashraf bin Amran Al AiN IT,Vaishali Derola,,,,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,712020:c009a27c-96f2-4073-8a52-787e65360af5,62d5761a83067f68f84fdfec,,,,,,,,,,,,,,,,,,,21/Jan/25 9:43 PM;cc169a7b-0346-44e8-976c-c744a2b689f1;Button  not function as expected.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/11065,04/Mar/25 1:56 PM;2b23d141-5ea7-431c-9e3d-bcaf7931adad;XPL-13_JE Source Code_2025-03-04_10-53-33.mp4;https://extremereach.atlassian.net/rest/api/3/attachment/content/15064,19/May/25 5:37 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;image-20250519-213709.png;https://extremereach.atlassian.net/rest/api/3/attachment/content/22701,,,,,,,,,,,,com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@445800a2,,,Production Accounting (LUCA) -> Setup JE Source Codes,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Chris Woodruff,557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9,{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Production Accounting (LUCA),,,,,,,,Vaishali Derola,62d5761a83067f68f84fdfec,,No,,0|i006ff:,,No,,,,,,,,,,,,,,,,,,,,,,,,Luca 142 05/23/2025,,2.0,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-04 18:55:47.861,,,04/Mar/25 1:55 PM;62d5761a83067f68f84fdfec;I am able to reproduced this issue in LUCA Test.  Please find my attached recording.,"19/May/25 5:37 PM;557058:2f7c1ec7-5319-41f0-af98-a4a7853321d9;Done
+
+!image-20250519-213709.png|width=2133,height=1200,alt=""image-20250519-213709.png""!",,,,,,,In Progress,16/May/25 7:39 PM

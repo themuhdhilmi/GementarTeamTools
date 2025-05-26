@@ -1,0 +1,954 @@
+{
+  "stats": {
+    "suites": 12,
+    "tests": 20,
+    "passes": 8,
+    "pending": 0,
+    "failures": 12,
+    "testsRegistered": 20,
+    "passPercent": 40,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-05-19T16:21:40.218Z",
+    "end": "2025-05-19T16:52:14.600Z",
+    "duration": 1834382
+  },
+  "results": [
+    {
+      "uuid": "9579db76-3262-4f38-8c4c-1a82b2e65e57",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-general\\general-TC107.cy.ts",
+      "file": "src\\e2e\\kl\\100-general\\general-TC107.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d7e6f71a-befd-4beb-a617-2b8773758c3e",
+          "title": "General Use Case",
+          "fullFile": "src\\e2e\\kl\\100-general\\general-TC107.cy.ts",
+          "file": "src\\e2e\\kl\\100-general\\general-TC107.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC107",
+              "fullTitle": "General Use Case TC107",
+              "timedOut": null,
+              "duration": 145601,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Syakirah (17/3/2025), Syakirah (21/2/2025)\nHigh Level test steps:\n8. Verify the fringe calculation using Fringe and Scale table\n   Expected: User should see Fringe/scale calculation based on Fringe/scale table setup in UAM\n*/\n// View Project\n// Check 'Use InHouse Fringe Calculation\"\ncy.visit(`${this.uamEndPoints.projectDetails}`, { timeout: 60000 });\ncy.wait(10000); // need to wait for 10 seconds because the system are not stable, sometimes slow and\n// sometimes fast process will skip the next code execution\ncy.get('input[name=\"inHouseFringeCalculation\"]', { timeout: 60000 })\n    .should('be.visible') // Ensure checkbox is visible\n    .then(($checkbox) => {\n    if (!$checkbox.prop('checked')) {\n        // If NOT checked, check it\n        cy.wrap($checkbox)\n            .click({ force: true }) // Click to check\n            .should('be.checked'); // Validate it's checked\n    }\n});\ncy.contains('button', 'Save Changes', { timeout: 60000 }) // Ensure we target the correct button\n    .should('be.visible') // Ensure it's visible\n    .then(($btn) => {\n    if (!$btn.is(':disabled')) {\n        // Check if the button is NOT disabled\n        cy.wrap($btn).click(); // Click only if enabled\n    }\n    else {\n        cy.log('Save Changes button is disabled, skipping click.');\n    }\n});\n// Create New Payee\n// US Individual\npayeeType = 'US Individual';\nconst firstDigit = faker_1.faker.number.int({ min: 1, max: 8 });\nconst remainingDigits = faker_1.faker.string.numeric(8);\ntextField_addNewIndividual_SocialSecurityNumber = `${firstDigit}${remainingDigits}`;\ntextField_addNewIndividual_LegalNameFirst = 'Auto' + faker_1.faker.person.firstName();\ntextField_addNewIndividual_MiddleName = faker_1.faker.person.firstName();\ntextField_addNewIndividual_LastName = faker_1.faker.person.lastName();\ntextField_addNewIndividual_Suffix = faker_1.faker.person.prefix();\ndate_addNewIndividual_BirthDate = '01-01-1999';\ndropDown_addNewIndividual_Gender = 'Female';\ndropDown_addNewIndividual_Ethnicity = 'Additional category not listed';\ndate_addNewIndividual_HireDate = '11-11-2024';\ndropDown_addNewIndividual_WorkAuthorizationType = 'Corporation';\ntextField_payeeAddressInformation_Type = 'Resident W2 Address';\ntextField_payeeAddressInformation_Line1 = faker_1.faker.location.streetAddress();\ntextField_payeeAddressInformation_Line2 = faker_1.faker.location.secondaryAddress();\ntextField_payeeAddressInformation_City = faker_1.faker.location.city();\ndropDown_payeeAddressInformation_Country = 'United States of America';\ndropDown_payeeAddressInformation_State = 'Alabama';\ntextField_payeeAddressInformation_PostalCode = faker_1.faker.location.zipCode();\ntextField_payeeAddressInformation_Comment = faker_1.faker.lorem.sentence();\ntextField_payeeAddressInformation_PhoneNumber = faker_1.faker.phone.number('###########');\ntextField_payeeAddressInformation_EmailAddress = faker_1.faker.internet.email();\ncheckBox_payeeAddressInformation_ClickIfNonUsCanadaPhone = true;\ncheckBox_payeeAddressInformation_TypeInviteToPayeePortal = false;\ndropDown_payeeAddressResidenceCountry = 'Canada';\ndropDown_payeeAddressWorkCountry = 'United States of America';\ndropDown_payeeAddressResidentLocation = 'Alberta';\ndropDown_payeeAddressWorkState = 'California ';\ndropDown_payeeAddressWorkCity = 'California ';\ntextField_AddDirectDeposit_RoutingNumber = '514067890';\ntextField_AddDirectDeposit_AccountNumber = '64710309233';\ndropDown_AddDirectDeposit_AccountType = 'Savings';\ntextField_AddDirectDeposit_AccountNickName = 'Main Checking';\ntextField_AddDirectDeposit_BankName = 'Bank of America';\ntextField_AddDirectDeposit_BankAddress = '1234 Bank St.';\ntextField_AddDirectDeposit_City = 'Los Angeles';\ntextField_AddDirectDeposit_State = 'CA';\ntextField_AddDirectDeposit_Zip = '90001';\ndropDown_AddDirectDeposit_Country = 'United States of America';\ndropDown_AddDirectDeposit_AllocationType = 'Percentage';\ntextField_AddDirectDeposit_AllocationPercentage = '100';\ndropDown_AddDirectDeposit_ProcessingOrder = 1;\ndropDown_AddDirectDeposit_PreNote = 1;\ntextField_AddDirectDeposit_Active = false;\ntextField_AddDirectDeposit_LiveCheckOnly = true;\ndate_AddPayeeTaxConfiguration_StartDate = '1/1/2012';\ndate_AddPayeeTaxConfiguration_EndDate = '4/12/2025';\ntextField_AddPayeeTaxConfiguration_TaxExemptYear = '2024';\ndropDown_AddPayeeTaxConfiguration_Country = 'Canada';\ndropDown_AddPayeeTaxConfiguration_FederalMaritalStatus = 'Single';\ntextField_AddPayeeTaxConfiguration_TwoJobs = true;\ntextField_AddPayeeTaxConfiguration_Dependents3 = 'Mother Demo';\ntextField_AddPayeeTaxConfiguration_OtherIncome = 'Father Demo';\ntextField_AddPayeeTaxConfiguration_Deductions = 'Wife Demo';\ntextField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount = '500';\ntextField_AddPayeeTaxConfiguration_TaxExempt = true;\ntextField_AddPayeeTaxConfiguration_IRSfederalLockIn = true;\ndropDown_AddPayeeTaxConfiguration_Province = 'Quebec';\ndropDown_AddPayeeUnion_AcalEmplStatus = 'Full Time';\ndropDown_AddPayeeUnion_HireCountry = 'United States of America';\ndropDown_AddPayeeUnion_HireState = 'California (US)';\ndropDown_AddPayeeUnion_WorkState = 'California (US)';\ndropDown_AddPayeeUnion_UnionCode = 'Local 44 - Property Craftperson (44)';\ndropDown_AddPayeeUnion_HomeOccupationCode = '1826 - Lead Person';\ndropDown_AddPayeeUnion_ScheduleCode = 'A - SCHEDULE A ';\ndropDown_AddPayeeUnion_PayRate = '50';\nfourDigitNumber = Math.floor(1000 + Math.random() * 9000);\ndropDown_batchType = 'Payroll';\ntextField_batchName = `Batch Automation Test ${fourDigitNumber}`;\ncy.visit(`${this.uamEndPoints.searchPayee}`);\ncy.contains('button', 'New Payee', { timeout: 180000 }).should('be.visible').click();\ncy.contains(payeeType).click();\ncy.get('[for=\"newPayee.firstName\"]').parent().parent().parent().parent().parent().parent().as('addNewIndividual');\ncy.get('@addNewIndividual').find('[name=\"newPayee.taxId\"]').type(textField_addNewIndividual_SocialSecurityNumber);\ncy.get('@addNewIndividual').find('[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\ncy.get('@addNewIndividual').find('[name=\"middleName\"]').type(textField_addNewIndividual_MiddleName);\ncy.get('@addNewIndividual').find('[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\ncy.get('@addNewIndividual').find('[name=\"suffix\"]').type(textField_addNewIndividual_Suffix);\ncy.get('@addNewIndividual')\n    .find(':nth-child(4) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_BirthDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Gender --')\n    .type(dropDown_addNewIndividual_Gender + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Ethinicity --')\n    .type(dropDown_addNewIndividual_Ethnicity + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(6) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_HireDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('Resident')\n    .type(dropDown_addNewIndividual_WorkAuthorizationType + '{enter}');\ncy.contains('[class=\"k-input-value-text\"]', 'Resident W2 Address').type(textField_payeeAddressInformation_Type);\ncy.get('@addNewIndividual').find('[name=\"editable.line1\"]').type(textField_payeeAddressInformation_Line1);\ncy.get('@addNewIndividual').find('[name=\"editable.line2\"]').type(textField_payeeAddressInformation_Line2);\ncy.get('@addNewIndividual').find('[name=\"editable.city\"]').type(textField_payeeAddressInformation_City);\ncy.get('@addNewIndividual')\n    .find('[class=\"k-input-value-text\"]')\n    .contains('United States of America')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[class=\"k-input-value-text\"]').contains('United States of America').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressInformation_Country);\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"editable.stateId\"]')\n    .type(dropDown_payeeAddressInformation_State + '{downarrow}{enter}');\ncy.get('@addNewIndividual').find('[name=\"editable.zip\"]').type(textField_payeeAddressInformation_PostalCode);\ncy.get('@addNewIndividual').find('[name=\"editable.comments\"]').type(textField_payeeAddressInformation_Comment);\ncy.get('@addNewIndividual').find('[name=\"newPayee.email\"]').type(textField_payeeAddressInformation_EmailAddress);\nif (checkBox_payeeAddressInformation_ClickIfNonUsCanadaPhone) {\n    cy.get('@addNewIndividual').find('[name=\"foreignPhone\"]').click();\n}\ncy.get('@addNewIndividual').find('[name=\"newPayee.phone\"]').type(textField_payeeAddressInformation_PhoneNumber);\nif (checkBox_payeeAddressInformation_TypeInviteToPayeePortal) {\n    cy.get('@addNewIndividual').find('[name=\"inviteToPayeePortal\"]').click();\n}\ncy.get('@addNewIndividual')\n    .find(':nth-child(13) > .col-md-3')\n    .type(dropDown_payeeAddressResidenceCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.modal-body > :nth-child(15) > :nth-child(1)')\n    .type(dropDown_payeeAddressWorkCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(15) > .col-md-3.ng-star-inserted')\n    .type('{uparrow}' + dropDown_payeeAddressWorkState + '{enter}');\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.residentLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.residentLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressResidentLocation + '{enter}');\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.workLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.workLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressWorkCity + '{enter}');\n    });\n});\ncy.contains('button', 'Add Direct Deposit').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'Add Direct Deposit').parent().parent().as('addDirectDeposit');\ncy.get('@addDirectDeposit').find('[name=\"routingNumber\"]').type(textField_AddDirectDeposit_RoutingNumber);\ncy.get('@addDirectDeposit').find('[name=\"accountNumber\"]').type(textField_AddDirectDeposit_AccountNumber);\ncy.get('@addDirectDeposit')\n    .find('[name=\"accountType\"]')\n    .type(dropDown_AddDirectDeposit_AccountType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"accountNickName\"]').type(textField_AddDirectDeposit_AccountNickName);\ncy.get('@addDirectDeposit').find('[name=\"bankName\"]').type(textField_AddDirectDeposit_BankName);\ncy.get('@addDirectDeposit').find('[name=\"bankAddress\"]').type(textField_AddDirectDeposit_BankAddress);\ncy.get('@addDirectDeposit').find('[name=\"bankCity\"]').type(textField_AddDirectDeposit_City);\ncy.get('@addDirectDeposit')\n    .find('[name=\"bankStateId\"]')\n    .type(textField_AddDirectDeposit_State + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"bankPostalCode\"]').type(textField_AddDirectDeposit_Zip);\ncy.get('@addDirectDeposit')\n    .find('[textfield=\"countryName\"]')\n    .type(dropDown_AddDirectDeposit_Country + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"allocationType\"]')\n    .type(dropDown_AddDirectDeposit_AllocationType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"allocationPercentage\"]').type(textField_AddDirectDeposit_AllocationPercentage);\ncy.get('@addDirectDeposit')\n    .find('[name=\"processingOrder\"]')\n    .type(dropDown_AddDirectDeposit_ProcessingOrder + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"preNote\"]')\n    .type(dropDown_AddDirectDeposit_PreNote + '{enter}');\nif (textField_AddDirectDeposit_Active) {\n    cy.get('@addDirectDeposit').find('[name=\"isActive\"]').click();\n}\nif (textField_AddDirectDeposit_LiveCheckOnly) {\n    cy.get('@addDirectDeposit').find('[name=\"liveCheckOnly\"]').click();\n}\ncy.get('@addDirectDeposit').find('[class=\"k-button-text\"]').contains('Save').click();\ncy.contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeTaxConfiguration');\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(2) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_StartDate}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(4) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_EndDate}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxExemptYear\"]').type(`${textField_AddPayeeTaxConfiguration_TaxExemptYear}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[textfield=\"countryName\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Country}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFilingStatus\"]')\n    .select(dropDown_AddPayeeTaxConfiguration_FederalMaritalStatus);\nif (textField_AddPayeeTaxConfiguration_TwoJobs) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"hasTwoJobs\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalDependentsAmount\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_Dependents3}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalOtherIncome\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_OtherIncome}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxFederalDeductions\"]').type(`${textField_AddPayeeTaxConfiguration_Deductions}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFlatWithholdingDollars\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount}`);\nif (textField_AddPayeeTaxConfiguration_TaxExempt) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"federalTaxExempt\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[placeholder=\"-- Type to select a State --\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Province}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration').find('[class=\"k-button-text\"]').contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeUnion');\ncy.get('.col-md-5 > .row > :nth-child(1) > .form-group > .ng-valid').click();\ncy.get('.col-md-5 > .row > :nth-child(2) > .form-group > .ng-untouched').click();\ncy.get('@addPayeeUnion')\n    .find('[name=\"CustomerSelected\"]')\n    .type(this.projectDetails.customerName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.customerName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"ProjectSelected\"]')\n    .type(this.projectDetails.projectName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.projectName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[valuefield=\"value\"]')\n    .contains('-- Select Employment Status --')\n    .type(dropDown_AddPayeeUnion_AcalEmplStatus + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire Country --\"]')\n    .type(dropDown_AddPayeeUnion_HireCountry + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_HireState + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Work State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_WorkState + '{enter}');\ncy.get('[name=\"unions.laborOrganizationId\"]', { timeout: 20000 }).type('w');\n//cy.wait(5000);\ncy.intercept('GET', '/api/payroll/shared/unions/occcode/*').as('laborOrgInfo');\ncy.get('[name=\"unions.laborOrganizationId\"]').type('{enter}');\n//cy.wait(2000);\ncy.wait('@laborOrgInfo').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200);\n    cy.get('[for=\"unions.occupationId\"]').parent().parent().find('[placeholder=\"Type to search\"]').click();\n    //cy.wait(2000);\n    cy.get('.row.ng-star-inserted > :nth-child(3) > .form-group > .input-group > .k-input-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click();\n    //cy.wait(2000);\n    cy.get('[class=\"k-list-item-text ng-star-inserted\"]').first().click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"unions.scheduleId\"]')\n    .type(dropDown_AddPayeeUnion_ScheduleCode)\n    .then(() => {\n    cy.contains('[class=\"k-list-item-text ng-star-inserted\"]', dropDown_AddPayeeUnion_ScheduleCode, { timeout: 10000 }).click({\n        force: true\n    });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"payRate\"]')\n    .type(dropDown_AddPayeeUnion_PayRate + '{enter}');\ncy.contains('Continue').click();\ncy.intercept('PUT', '/api/payroll/shared/common-logic/payee/create').as('cp1');\ncy.contains('Create Payee').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Payee is being saved');\ncy.get('.k-notification-content', { timeout: 60000 }).should('not.exist');\n// Create New Batch\ncy.userLogin();\ncy.visit(`${this.uamEndPoints.createBatch}`);\ncy.intercept('POST', '/api/payroll/batch-details/create-new-batch').as('newBatch');\ncy.clickKendoDropDown('[name=\"batchTypeId\"]', dropDown_batchType, { timeout: 60000 });\ncy.getAndTypeEnter('[name=\"batchName\"]', textField_batchName, { timeout: 60000 });\ncy.getAndType('[name=\"customerId\"]', this.projectDetails.customerName, { timeout: 60000 });\ncy.get('.k-i-loading', { timeout: 60000 }).should('not.exist'); // Wait for page to complete load\ncy.getAndType('[name=\"customerId\"]', '{enter}');\ncy.clickKendoDropDown('[name=\"projectId\"]', this.projectDetails.projectName);\ncy.clickKendoDropDown('[name=\"employerOfRecordId\"]', this.projectDetails.employerOfRecordId);\ncy.getClearAndTypeEnter('[name=\"batchOwnerUserId\"]', this.projectDetails.batchOwner);\ncy.get('button.btn.btn-info').contains('Create Batch').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'New Batch');\ncy.get('header.page-heading .page-title').should('contain.text', textField_batchName);\ncy.get('input[type=\"button\"][value=\"Add New Timecard\"]', { timeout: 60000 }).should('be.visible').click();\ncy.wait('@newBatch').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200); // Ensure batch creation succeeded\n    const response = intercept.response.body;\n    batchId = response.batchId;\n    cy.log(`Batch ID: ${batchId}`);\n    expect(batchId).to.not.be.undefined; // Ensure batchId is retrieved\n    expect(batchId).to.not.be.null;\n    // Create new Timecard\n    date_CreateTimeCard_BeginDate = '11/11/2012';\n    date_CreateTimeCard_EndDate = '12/12/2025';\n    cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\n    cy.wait(10000); //need to wait at least 10sec because the system are not stable (sometimes slow, sometimes fast)\n    cy.get('input[name=\"editableTimecard.payeeFullName\"]', { timeout: 60000 }).click();\n    cy.get('input[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\n    cy.get('input[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\n    cy.contains('button', 'Search Payees').click();\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('be.visible').and('contain', 'Searching payees...');\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('not.exist');\n    cy.get('button.ng-star-inserted').click();\n    cy.get('input[id=\"datepicker-1\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_BeginDate);\n    cy.get('input[id=\"datepicker-2\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_EndDate);\n    cy.wait(10000);\n    cy.contains('button', 'Create', { timeout: 60000 }).click();\n    cy.get('button.btn.btn-info').within(() => {\n        cy.get('i.fa.fa-spin.fa-spinner', { timeout: 60000 }).should('not.exist');\n    });\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'failed');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'Error');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'are required');\n    cy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Timecard Created Successfully.');\n});\n// Verify Day Entry tab are not be visible\ncy.get('ul.nav-tabs').should('be.visible').find('li.nav-item a.nav-link').should('contain', 'Calc-Trace');\ncy.contains('li.nav-item a.nav-link', 'Calc-Trace', { timeout: 60000 }).should('be.visible').click();\n// General table\ncy.get('span.k-column-title.ng-star-inserted').contains('Date').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Category').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Rule').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Calculation Data').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Output').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Rule Data').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Parameters').should('exist');\n// Employer Fringes\ncy.contains('div', 'Employer Fringes:').should('exist');\ncy.contains('.col-12', 'Employer Fringes')\n    .should('exist')\n    .within(() => {\n    cy.get('kendo-grid').should('exist');\n    const columnTitles = [\n        'Line Id',\n        'Union/Job',\n        'Deduction Code',\n        'Pay Code',\n        'Amount',\n        'Episode',\n        'SeasonId',\n        'Location',\n        'Set',\n        'Account Code',\n        'Ins',\n        'M1',\n        'M2',\n        'M3',\n        'M4'\n    ];\n    columnTitles.forEach((title) => {\n        cy.get('.k-grid-header').contains(title).should('exist');\n    });\n});\n// Grouped Fringes\ncy.contains('div', 'Grouped Fringes:').should('exist');\ncy.contains('.col-12', 'Grouped Fringes')\n    .should('exist')\n    .within(() => {\n    cy.get('kendo-grid').should('exist');\n    const columnTitles = [\n        'Union/Job',\n        'Deduction Code',\n        'Amount',\n        'Episode',\n        'SeasonId',\n        'Location',\n        'Set',\n        'Account Code',\n        'Ins',\n        'M1',\n        'M2',\n        'M3',\n        'M4'\n    ];\n    columnTitles.forEach((title) => {\n        cy.get('.k-grid-header').contains(title).should('exist');\n    });\n});",
+              "err": {},
+              "uuid": "e730edfa-78cf-4c82-8164-c9de00cef0f4",
+              "parentUUID": "d7e6f71a-befd-4beb-a617-2b8773758c3e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e730edfa-78cf-4c82-8164-c9de00cef0f4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 145601,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "73f1bd0c-7c48-426c-a60b-44f2b5511932",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-general\\general-TC108.cy.ts",
+      "file": "src\\e2e\\kl\\100-general\\general-TC108.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3af59cf5-6f03-4fa6-9502-0465fed90a76",
+          "title": "General Use Case",
+          "fullFile": "src\\e2e\\kl\\100-general\\general-TC108.cy.ts",
+          "file": "src\\e2e\\kl\\100-general\\general-TC108.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC108",
+              "fullTitle": "General Use Case TC108",
+              "timedOut": null,
+              "duration": 225767,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Syakirah (17/3/2025), Syakirah (21/2/2025)\nHigh Level test steps:\n11. Verify the Payroll batch tc's\n   Expected: User should not see Day Entry tab in tc details\n*/\n// View Project\n// Uncheck 'Use InHouse Fringe Calculation\"\ncy.visit(`${this.uamEndPoints.projectDetails}`, { timeout: 60000 });\ncy.wait(10000); // need to wait for 10 seconds because the system are not stable, sometimes slow and\n// sometimes fast process will skip the next code execution\ncy.get('input[name=\"inHouseFringeCalculation\"]', { timeout: 60000 })\n    .should('be.visible') // Ensure checkbox is visible\n    .then(($checkbox) => {\n    if ($checkbox.prop('checked')) {\n        // If checked, uncheck it\n        cy.wrap($checkbox)\n            .click({ force: true }) // Click to uncheck\n            .should('not.be.checked'); // Validate it's unchecked\n    }\n});\n// cy.get('input[name=\"inHouseFringeCalculation\"]', { timeout: 60000 })\n//     .should('be.visible') // Ensure checkbox is visible\n//     .then(($checkbox) => {\n//         if (!$checkbox.prop('checked')) {\n//             // If NOT checked, check it\n//             cy.wrap($checkbox)\n//                 .click({ force: true }) // Click to check\n//                 .should('be.checked'); // Validate it's checked\n//         }\n//     });\ncy.contains('button', 'Save Changes', { timeout: 60000 }) // Ensure we target the correct button\n    .should('be.visible') // Ensure it's visible\n    .then(($btn) => {\n    if (!$btn.is(':disabled')) {\n        // Check if the button is NOT disabled\n        cy.wrap($btn).click(); // Click only if enabled\n    }\n    else {\n        cy.log('Save Changes button is disabled, skipping click.');\n    }\n});\n// Create New Payee\n// US Individual\npayeeType = 'US Individual';\nconst firstDigit = faker_1.faker.number.int({ min: 1, max: 8 });\nconst remainingDigits = faker_1.faker.string.numeric(8);\ntextField_addNewIndividual_SocialSecurityNumber = `${firstDigit}${remainingDigits}`;\ntextField_addNewIndividual_LegalNameFirst = 'Auto' + faker_1.faker.person.firstName();\ntextField_addNewIndividual_MiddleName = faker_1.faker.person.firstName();\ntextField_addNewIndividual_LastName = faker_1.faker.person.lastName();\ntextField_addNewIndividual_Suffix = faker_1.faker.person.prefix();\ndate_addNewIndividual_BirthDate = '01-01-1999';\ndropDown_addNewIndividual_Gender = 'Female';\ndropDown_addNewIndividual_Ethnicity = 'Additional category not listed';\ndate_addNewIndividual_HireDate = '11-11-2024';\ndropDown_addNewIndividual_WorkAuthorizationType = 'Corporation';\ntextField_payeeAddressInformation_Type = 'Resident W2 Address';\ntextField_payeeAddressInformation_Line1 = faker_1.faker.location.streetAddress();\ntextField_payeeAddressInformation_Line2 = faker_1.faker.location.secondaryAddress();\ntextField_payeeAddressInformation_City = faker_1.faker.location.city();\ndropDown_payeeAddressInformation_Country = 'United States of America';\ndropDown_payeeAddressInformation_State = 'Alabama';\ntextField_payeeAddressInformation_PostalCode = faker_1.faker.location.zipCode();\ntextField_payeeAddressInformation_Comment = faker_1.faker.lorem.sentence();\ntextField_payeeAddressInformation_PhoneNumber = faker_1.faker.phone.number('###########');\ntextField_payeeAddressInformation_EmailAddress = faker_1.faker.internet.email();\ncheckBox_payeeAddressInformation_ClickIfNonUsCanadaPhone = true;\ncheckBox_payeeAddressInformation_TypeInviteToPayeePortal = false;\ndropDown_payeeAddressResidenceCountry = 'Canada';\ndropDown_payeeAddressWorkCountry = 'United States of America';\ndropDown_payeeAddressResidentLocation = 'Alberta';\ndropDown_payeeAddressWorkState = 'California ';\ndropDown_payeeAddressWorkCity = 'California ';\ntextField_AddDirectDeposit_RoutingNumber = '514067890';\ntextField_AddDirectDeposit_AccountNumber = '64710309233';\ndropDown_AddDirectDeposit_AccountType = 'Savings';\ntextField_AddDirectDeposit_AccountNickName = 'Main Checking';\ntextField_AddDirectDeposit_BankName = 'Bank of America';\ntextField_AddDirectDeposit_BankAddress = '1234 Bank St.';\ntextField_AddDirectDeposit_City = 'Los Angeles';\ntextField_AddDirectDeposit_State = 'CA';\ntextField_AddDirectDeposit_Zip = '90001';\ndropDown_AddDirectDeposit_Country = 'United States of America';\ndropDown_AddDirectDeposit_AllocationType = 'Percentage';\ntextField_AddDirectDeposit_AllocationPercentage = '100';\ndropDown_AddDirectDeposit_ProcessingOrder = 1;\ndropDown_AddDirectDeposit_PreNote = 1;\ntextField_AddDirectDeposit_Active = false;\ntextField_AddDirectDeposit_LiveCheckOnly = true;\ndate_AddPayeeTaxConfiguration_StartDate = '1/1/2012';\ndate_AddPayeeTaxConfiguration_EndDate = '4/12/2025';\ntextField_AddPayeeTaxConfiguration_TaxExemptYear = '2024';\ndropDown_AddPayeeTaxConfiguration_Country = 'Canada';\ndropDown_AddPayeeTaxConfiguration_FederalMaritalStatus = 'Single';\ntextField_AddPayeeTaxConfiguration_TwoJobs = true;\ntextField_AddPayeeTaxConfiguration_Dependents3 = 'Mother Demo';\ntextField_AddPayeeTaxConfiguration_OtherIncome = 'Father Demo';\ntextField_AddPayeeTaxConfiguration_Deductions = 'Wife Demo';\ntextField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount = '500';\ntextField_AddPayeeTaxConfiguration_TaxExempt = true;\ntextField_AddPayeeTaxConfiguration_IRSfederalLockIn = true;\ndropDown_AddPayeeTaxConfiguration_Province = 'Quebec';\ndropDown_AddPayeeUnion_AcalEmplStatus = 'Full Time';\ndropDown_AddPayeeUnion_HireCountry = 'United States of America';\ndropDown_AddPayeeUnion_HireState = 'California (US)';\ndropDown_AddPayeeUnion_WorkState = 'California (US)';\ndropDown_AddPayeeUnion_UnionCode = 'Local 44 - Property Craftperson (44)';\ndropDown_AddPayeeUnion_HomeOccupationCode = '1826 - Lead Person';\ndropDown_AddPayeeUnion_ScheduleCode = 'A - SCHEDULE A ';\ndropDown_AddPayeeUnion_PayRate = '50';\nfourDigitNumber = Math.floor(1000 + Math.random() * 9000);\ndropDown_batchType = 'Payroll';\ntextField_batchName = `Batch Automation Test ${fourDigitNumber}`;\ncy.visit(`${this.uamEndPoints.searchPayee}`);\ncy.contains('button', 'New Payee', { timeout: 180000 }).should('be.visible').click();\ncy.contains(payeeType).click();\ncy.get('[for=\"newPayee.firstName\"]').parent().parent().parent().parent().parent().parent().as('addNewIndividual');\ncy.get('@addNewIndividual').find('[name=\"newPayee.taxId\"]').type(textField_addNewIndividual_SocialSecurityNumber);\ncy.get('@addNewIndividual').find('[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\ncy.get('@addNewIndividual').find('[name=\"middleName\"]').type(textField_addNewIndividual_MiddleName);\ncy.get('@addNewIndividual').find('[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\ncy.get('@addNewIndividual').find('[name=\"suffix\"]').type(textField_addNewIndividual_Suffix);\ncy.get('@addNewIndividual')\n    .find(':nth-child(4) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_BirthDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Gender --')\n    .type(dropDown_addNewIndividual_Gender + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Ethinicity --')\n    .type(dropDown_addNewIndividual_Ethnicity + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(6) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_HireDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('Resident')\n    .type(dropDown_addNewIndividual_WorkAuthorizationType + '{enter}');\ncy.contains('[class=\"k-input-value-text\"]', 'Resident W2 Address').type(textField_payeeAddressInformation_Type);\ncy.get('@addNewIndividual').find('[name=\"editable.line1\"]').type(textField_payeeAddressInformation_Line1);\ncy.get('@addNewIndividual').find('[name=\"editable.line2\"]').type(textField_payeeAddressInformation_Line2);\ncy.get('@addNewIndividual').find('[name=\"editable.city\"]').type(textField_payeeAddressInformation_City);\ncy.get('@addNewIndividual')\n    .find('[class=\"k-input-value-text\"]')\n    .contains('United States of America')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[class=\"k-input-value-text\"]').contains('United States of America').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressInformation_Country);\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"editable.stateId\"]')\n    .type(dropDown_payeeAddressInformation_State + '{downarrow}{enter}');\ncy.get('@addNewIndividual').find('[name=\"editable.zip\"]').type(textField_payeeAddressInformation_PostalCode);\ncy.get('@addNewIndividual').find('[name=\"editable.comments\"]').type(textField_payeeAddressInformation_Comment);\ncy.get('@addNewIndividual').find('[name=\"newPayee.email\"]').type(textField_payeeAddressInformation_EmailAddress);\nif (checkBox_payeeAddressInformation_ClickIfNonUsCanadaPhone) {\n    cy.get('@addNewIndividual').find('[name=\"foreignPhone\"]').click();\n}\ncy.get('@addNewIndividual').find('[name=\"newPayee.phone\"]').type(textField_payeeAddressInformation_PhoneNumber);\nif (checkBox_payeeAddressInformation_TypeInviteToPayeePortal) {\n    cy.get('@addNewIndividual').find('[name=\"inviteToPayeePortal\"]').click();\n}\ncy.get('@addNewIndividual')\n    .find(':nth-child(13) > .col-md-3')\n    .type(dropDown_payeeAddressResidenceCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.modal-body > :nth-child(15) > :nth-child(1)')\n    .type(dropDown_payeeAddressWorkCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(15) > .col-md-3.ng-star-inserted')\n    .type('{uparrow}' + dropDown_payeeAddressWorkState + '{enter}');\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.residentLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.residentLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressResidentLocation + '{enter}');\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.workLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.workLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressWorkCity + '{enter}');\n    });\n});\ncy.contains('button', 'Add Direct Deposit').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'Add Direct Deposit').parent().parent().as('addDirectDeposit');\ncy.get('@addDirectDeposit').find('[name=\"routingNumber\"]').type(textField_AddDirectDeposit_RoutingNumber);\ncy.get('@addDirectDeposit').find('[name=\"accountNumber\"]').type(textField_AddDirectDeposit_AccountNumber);\ncy.get('@addDirectDeposit')\n    .find('[name=\"accountType\"]')\n    .type(dropDown_AddDirectDeposit_AccountType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"accountNickName\"]').type(textField_AddDirectDeposit_AccountNickName);\ncy.get('@addDirectDeposit').find('[name=\"bankName\"]').type(textField_AddDirectDeposit_BankName);\ncy.get('@addDirectDeposit').find('[name=\"bankAddress\"]').type(textField_AddDirectDeposit_BankAddress);\ncy.get('@addDirectDeposit').find('[name=\"bankCity\"]').type(textField_AddDirectDeposit_City);\ncy.get('@addDirectDeposit')\n    .find('[name=\"bankStateId\"]')\n    .type(textField_AddDirectDeposit_State + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"bankPostalCode\"]').type(textField_AddDirectDeposit_Zip);\ncy.get('@addDirectDeposit')\n    .find('[textfield=\"countryName\"]')\n    .type(dropDown_AddDirectDeposit_Country + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"allocationType\"]')\n    .type(dropDown_AddDirectDeposit_AllocationType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"allocationPercentage\"]').type(textField_AddDirectDeposit_AllocationPercentage);\ncy.get('@addDirectDeposit')\n    .find('[name=\"processingOrder\"]')\n    .type(dropDown_AddDirectDeposit_ProcessingOrder + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"preNote\"]')\n    .type(dropDown_AddDirectDeposit_PreNote + '{enter}');\nif (textField_AddDirectDeposit_Active) {\n    cy.get('@addDirectDeposit').find('[name=\"isActive\"]').click();\n}\nif (textField_AddDirectDeposit_LiveCheckOnly) {\n    cy.get('@addDirectDeposit').find('[name=\"liveCheckOnly\"]').click();\n}\ncy.get('@addDirectDeposit').find('[class=\"k-button-text\"]').contains('Save').click();\ncy.contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeTaxConfiguration');\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(2) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_StartDate}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(4) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_EndDate}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxExemptYear\"]').type(`${textField_AddPayeeTaxConfiguration_TaxExemptYear}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[textfield=\"countryName\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Country}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFilingStatus\"]')\n    .select(dropDown_AddPayeeTaxConfiguration_FederalMaritalStatus);\nif (textField_AddPayeeTaxConfiguration_TwoJobs) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"hasTwoJobs\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalDependentsAmount\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_Dependents3}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalOtherIncome\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_OtherIncome}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxFederalDeductions\"]').type(`${textField_AddPayeeTaxConfiguration_Deductions}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFlatWithholdingDollars\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount}`);\nif (textField_AddPayeeTaxConfiguration_TaxExempt) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"federalTaxExempt\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[placeholder=\"-- Type to select a State --\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Province}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration').find('[class=\"k-button-text\"]').contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeUnion');\ncy.get('.col-md-5 > .row > :nth-child(1) > .form-group > .ng-valid').click();\ncy.get('.col-md-5 > .row > :nth-child(2) > .form-group > .ng-untouched').click();\ncy.get('@addPayeeUnion')\n    .find('[name=\"CustomerSelected\"]')\n    .type(this.projectDetails.customerName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.customerName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"ProjectSelected\"]')\n    .type(this.projectDetails.projectName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.projectName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[valuefield=\"value\"]')\n    .contains('-- Select Employment Status --')\n    .type(dropDown_AddPayeeUnion_AcalEmplStatus + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire Country --\"]')\n    .type(dropDown_AddPayeeUnion_HireCountry + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_HireState + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Work State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_WorkState + '{enter}');\ncy.get('[name=\"unions.laborOrganizationId\"]', { timeout: 20000 }).type('w');\n//cy.wait(5000);\ncy.intercept('GET', '/api/payroll/shared/unions/occcode/*').as('laborOrgInfo');\ncy.get('[name=\"unions.laborOrganizationId\"]').type('{enter}');\n//cy.wait(2000);\ncy.wait('@laborOrgInfo').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200);\n    cy.get('[for=\"unions.occupationId\"]').parent().parent().find('[placeholder=\"Type to search\"]').click();\n    //cy.wait(2000);\n    cy.get('.row.ng-star-inserted > :nth-child(3) > .form-group > .input-group > .k-input-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click();\n    //cy.wait(2000);\n    cy.get('[class=\"k-list-item-text ng-star-inserted\"]').first().click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"unions.scheduleId\"]')\n    .type(dropDown_AddPayeeUnion_ScheduleCode)\n    .then(() => {\n    cy.contains('[class=\"k-list-item-text ng-star-inserted\"]', dropDown_AddPayeeUnion_ScheduleCode, { timeout: 10000 }).click({\n        force: true\n    });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"payRate\"]')\n    .type(dropDown_AddPayeeUnion_PayRate + '{enter}');\ncy.contains('Continue').click();\ncy.intercept('PUT', '/api/payroll/shared/common-logic/payee/create').as('cp1');\ncy.contains('Create Payee').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Payee is being saved');\n//cy.get('.k-notification-content', { timeout: 60000 }).should('not.exist');\n// Create New Batch\ncy.userLogin();\ncy.visit(`${this.uamEndPoints.createBatch}`);\ncy.intercept('POST', '/api/payroll/batch-details/create-new-batch').as('newBatch');\ncy.clickKendoDropDown('[name=\"batchTypeId\"]', dropDown_batchType);\ncy.getAndTypeEnter('[name=\"batchName\"]', textField_batchName);\ncy.getAndType('[name=\"customerId\"]', this.projectDetails.customerName);\ncy.get('.k-i-loading', { timeout: 60000 }).should('not.exist'); // Wait for page to complete load\ncy.getAndType('[name=\"customerId\"]', '{enter}');\ncy.clickKendoDropDown('[name=\"projectId\"]', this.projectDetails.projectName);\ncy.clickKendoDropDown('[name=\"employerOfRecordId\"]', this.projectDetails.employerOfRecordId);\ncy.getClearAndTypeEnter('[name=\"batchOwnerUserId\"]', this.projectDetails.batchOwner);\ncy.get('button.btn.btn-info').contains('Create Batch').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'New Batch');\ncy.get('header.page-heading .page-title').should('contain.text', textField_batchName);\ncy.get('input[type=\"button\"][value=\"Add New Timecard\"]', { timeout: 60000 }).should('be.visible').click();\ncy.wait('@newBatch').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200); // Ensure batch creation succeeded\n    const response = intercept.response.body;\n    batchId = response.batchId;\n    cy.log(`Batch ID: ${batchId}`);\n    expect(batchId).to.not.be.undefined; // Ensure batchId is retrieved\n    expect(batchId).to.not.be.null;\n    // Create new Timecard\n    date_CreateTimeCard_BeginDate = '11/11/2012';\n    date_CreateTimeCard_EndDate = '12/12/2025';\n    cy.wait(30000); //need to wait at least 30sec because the system are not stable (sometimes slow, sometimes fast)\n    cy.get('input[name=\"editableTimecard.payeeFullName\"]').click();\n    cy.get('input[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\n    cy.get('input[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\n    cy.contains('button', 'Search Payees').click();\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('be.visible').and('contain', 'Searching payees...');\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('not.exist');\n    cy.get('button.ng-star-inserted').click();\n    cy.get('input[id=\"datepicker-1\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_BeginDate);\n    cy.get('input[id=\"datepicker-2\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_EndDate);\n    cy.contains('button', 'Create', { timeout: 10000 }).click();\n    cy.get('button.btn.btn-info').within(() => {\n        cy.get('i.fa.fa-spin.fa-spinner', { timeout: 60000 }).should('not.exist');\n    });\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'failed');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'Error');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'are required');\n    cy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Timecard Created Successfully.');\n});\n// Verify Day Entry tab are not be visible\ncy.get('ul.nav-tabs', { timeout: 60000 })\n    .should('be.visible') // Ensure the tab list is visible\n    .find('li.nav-item a.nav-link') // Select all tab links\n    .should('not.contain', 'Day Entry'); // Ensure \"Day Entry\" is NOT in the list\n// View Project\n// Uncheck 'Use InHouse Fringe Calculation\"\ncy.visit(`${this.uamEndPoints.projectDetails}`, { timeout: 60000 });\ncy.wait(10000); // need to wait for 10 senconds because the process will skip the next code execution\ncy.get('input[name=\"inHouseFringeCalculation\"]', { timeout: 60000 })\n    .should('be.visible') // Ensure it's visible\n    .then(($checkbox) => {\n    if (!$checkbox.prop('checked')) {\n        // Correct way to check if it's NOT checked\n        cy.wrap($checkbox)\n            .click({ force: true }) // Click to check\n            .should('be.checked'); // Validate it's checked\n    }\n});\ncy.contains('button', 'Save Changes').click();",
+              "err": {},
+              "uuid": "a8cc50ed-2f29-4e6c-b177-5213433b46dc",
+              "parentUUID": "3af59cf5-6f03-4fa6-9502-0465fed90a76",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a8cc50ed-2f29-4e6c-b177-5213433b46dc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 225767,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bcceeeb0-7663-4be5-9b5c-57b462349c79",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-general\\general-TC109.cy.ts",
+      "file": "src\\e2e\\kl\\100-general\\general-TC109.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "244e9942-a3a1-42bb-8cf5-0df1e736899b",
+          "title": "General Use Case",
+          "fullFile": "src\\e2e\\kl\\100-general\\general-TC109.cy.ts",
+          "file": "src\\e2e\\kl\\100-general\\general-TC109.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC109",
+              "fullTitle": "General Use Case TC109",
+              "timedOut": null,
+              "duration": 160935,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Syakirah (17/3/2025), Syakirah (21/2/2025)\nHigh Level test steps:\n11. Verify the Calc_trace Tab in payroll batch timecard details\n   Expected: User should not see fringe calculation in it.\n*/\n// View Project\n// Uncheck 'Use InHouse Fringe Calculation\"\ncy.visit(`${this.uamEndPoints.projectDetails}`, { timeout: 60000 });\ncy.wait(10000); // need to wait for 10 seconds because the system are not stable, sometimes slow and\n// sometimes fast process will skip the next code execution\ncy.get('input[name=\"inHouseFringeCalculation\"]', { timeout: 60000 })\n    .should('be.visible') // Ensure checkbox is visible\n    .then(($checkbox) => {\n    if ($checkbox.prop('checked')) {\n        // If checked, uncheck it\n        cy.wrap($checkbox)\n            .click({ force: true }) // Click to uncheck\n            .should('not.be.checked'); // Validate it's unchecked\n    }\n});\ncy.contains('button', 'Save Changes', { timeout: 60000 }) // Ensure we target the correct button\n    .should('be.visible') // Ensure it's visible\n    .then(($btn) => {\n    if (!$btn.is(':disabled')) {\n        // Check if the button is NOT disabled\n        cy.wrap($btn).click(); // Click only if enabled\n    }\n    else {\n        cy.log('Save Changes button is disabled, skipping click.');\n    }\n});\n// Create New Payee\n// US Individual\npayeeType = 'US Individual';\nconst firstDigit = faker_1.faker.number.int({ min: 1, max: 8 });\nconst remainingDigits = faker_1.faker.string.numeric(8);\ntextField_addNewIndividual_SocialSecurityNumber = `${firstDigit}${remainingDigits}`;\ntextField_addNewIndividual_LegalNameFirst = 'Auto' + faker_1.faker.person.firstName();\ntextField_addNewIndividual_MiddleName = faker_1.faker.person.firstName();\ntextField_addNewIndividual_LastName = faker_1.faker.person.lastName();\ntextField_addNewIndividual_Suffix = faker_1.faker.person.prefix();\ndate_addNewIndividual_BirthDate = '01-01-1999';\ndropDown_addNewIndividual_Gender = 'Female';\ndropDown_addNewIndividual_Ethnicity = 'Additional category not listed';\ndate_addNewIndividual_HireDate = '11-11-2024';\ndropDown_addNewIndividual_WorkAuthorizationType = 'Corporation';\ntextField_payeeAddressInformation_Type = 'Resident W2 Address';\ntextField_payeeAddressInformation_Line1 = faker_1.faker.location.streetAddress();\ntextField_payeeAddressInformation_Line2 = faker_1.faker.location.secondaryAddress();\ntextField_payeeAddressInformation_City = faker_1.faker.location.city();\ndropDown_payeeAddressInformation_Country = 'United States of America';\ndropDown_payeeAddressInformation_State = 'Alabama';\ntextField_payeeAddressInformation_PostalCode = faker_1.faker.location.zipCode();\ntextField_payeeAddressInformation_Comment = faker_1.faker.lorem.sentence();\ntextField_payeeAddressInformation_PhoneNumber = faker_1.faker.phone.number('###########');\ntextField_payeeAddressInformation_EmailAddress = faker_1.faker.internet.email();\ncheckBox_payeeAddressInformation_ClickIfNonUsCanadaPhone = true;\ncheckBox_payeeAddressInformation_TypeInviteToPayeePortal = false;\ndropDown_payeeAddressResidenceCountry = 'Canada';\ndropDown_payeeAddressWorkCountry = 'United States of America';\ndropDown_payeeAddressResidentLocation = 'Alberta';\ndropDown_payeeAddressWorkState = 'California ';\ndropDown_payeeAddressWorkCity = 'California ';\ntextField_AddDirectDeposit_RoutingNumber = '514067890';\ntextField_AddDirectDeposit_AccountNumber = '64710309233';\ndropDown_AddDirectDeposit_AccountType = 'Savings';\ntextField_AddDirectDeposit_AccountNickName = 'Main Checking';\ntextField_AddDirectDeposit_BankName = 'Bank of America';\ntextField_AddDirectDeposit_BankAddress = '1234 Bank St.';\ntextField_AddDirectDeposit_City = 'Los Angeles';\ntextField_AddDirectDeposit_State = 'CA';\ntextField_AddDirectDeposit_Zip = '90001';\ndropDown_AddDirectDeposit_Country = 'United States of America';\ndropDown_AddDirectDeposit_AllocationType = 'Percentage';\ntextField_AddDirectDeposit_AllocationPercentage = '100';\ndropDown_AddDirectDeposit_ProcessingOrder = 1;\ndropDown_AddDirectDeposit_PreNote = 1;\ntextField_AddDirectDeposit_Active = false;\ntextField_AddDirectDeposit_LiveCheckOnly = true;\ndate_AddPayeeTaxConfiguration_StartDate = '1/1/2012';\ndate_AddPayeeTaxConfiguration_EndDate = '4/12/2025';\ntextField_AddPayeeTaxConfiguration_TaxExemptYear = '2024';\ndropDown_AddPayeeTaxConfiguration_Country = 'Canada';\ndropDown_AddPayeeTaxConfiguration_FederalMaritalStatus = 'Single';\ntextField_AddPayeeTaxConfiguration_TwoJobs = true;\ntextField_AddPayeeTaxConfiguration_Dependents3 = 'Mother Demo';\ntextField_AddPayeeTaxConfiguration_OtherIncome = 'Father Demo';\ntextField_AddPayeeTaxConfiguration_Deductions = 'Wife Demo';\ntextField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount = '500';\ntextField_AddPayeeTaxConfiguration_TaxExempt = true;\ntextField_AddPayeeTaxConfiguration_IRSfederalLockIn = true;\ndropDown_AddPayeeTaxConfiguration_Province = 'Quebec';\ndropDown_AddPayeeUnion_AcalEmplStatus = 'Full Time';\ndropDown_AddPayeeUnion_HireCountry = 'United States of America';\ndropDown_AddPayeeUnion_HireState = 'California (US)';\ndropDown_AddPayeeUnion_WorkState = 'California (US)';\ndropDown_AddPayeeUnion_UnionCode = 'Local 44 - Property Craftperson (44)';\ndropDown_AddPayeeUnion_HomeOccupationCode = '1826 - Lead Person';\ndropDown_AddPayeeUnion_ScheduleCode = 'A - SCHEDULE A ';\ndropDown_AddPayeeUnion_PayRate = '50';\nfourDigitNumber = Math.floor(1000 + Math.random() * 9000);\ndropDown_batchType = 'Payroll';\ntextField_batchName = `Batch Automation Test ${fourDigitNumber}`;\ncy.visit(`${this.uamEndPoints.searchPayee}`);\ncy.contains('button', 'New Payee', { timeout: 180000 }).should('be.visible').click();\ncy.contains(payeeType).click();\ncy.get('[for=\"newPayee.firstName\"]').parent().parent().parent().parent().parent().parent().as('addNewIndividual');\ncy.get('@addNewIndividual').find('[name=\"newPayee.taxId\"]').type(textField_addNewIndividual_SocialSecurityNumber);\ncy.get('@addNewIndividual').find('[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\ncy.get('@addNewIndividual').find('[name=\"middleName\"]').type(textField_addNewIndividual_MiddleName);\ncy.get('@addNewIndividual').find('[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\ncy.get('@addNewIndividual').find('[name=\"suffix\"]').type(textField_addNewIndividual_Suffix);\ncy.get('@addNewIndividual')\n    .find(':nth-child(4) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_BirthDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Gender --')\n    .type(dropDown_addNewIndividual_Gender + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Ethinicity --')\n    .type(dropDown_addNewIndividual_Ethnicity + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(6) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_HireDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('Resident')\n    .type(dropDown_addNewIndividual_WorkAuthorizationType + '{enter}');\ncy.contains('[class=\"k-input-value-text\"]', 'Resident W2 Address').type(textField_payeeAddressInformation_Type);\ncy.get('@addNewIndividual').find('[name=\"editable.line1\"]').type(textField_payeeAddressInformation_Line1);\ncy.get('@addNewIndividual').find('[name=\"editable.line2\"]').type(textField_payeeAddressInformation_Line2);\ncy.get('@addNewIndividual').find('[name=\"editable.city\"]').type(textField_payeeAddressInformation_City);\ncy.get('@addNewIndividual')\n    .find('[class=\"k-input-value-text\"]')\n    .contains('United States of America')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[class=\"k-input-value-text\"]').contains('United States of America').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressInformation_Country);\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"editable.stateId\"]')\n    .type(dropDown_payeeAddressInformation_State + '{downarrow}{enter}');\ncy.get('@addNewIndividual').find('[name=\"editable.zip\"]').type(textField_payeeAddressInformation_PostalCode);\ncy.get('@addNewIndividual').find('[name=\"editable.comments\"]').type(textField_payeeAddressInformation_Comment);\ncy.get('@addNewIndividual').find('[name=\"newPayee.email\"]').type(textField_payeeAddressInformation_EmailAddress);\nif (checkBox_payeeAddressInformation_ClickIfNonUsCanadaPhone) {\n    cy.get('@addNewIndividual').find('[name=\"foreignPhone\"]').click();\n}\ncy.get('@addNewIndividual').find('[name=\"newPayee.phone\"]').type(textField_payeeAddressInformation_PhoneNumber);\nif (checkBox_payeeAddressInformation_TypeInviteToPayeePortal) {\n    cy.get('@addNewIndividual').find('[name=\"inviteToPayeePortal\"]').click();\n}\ncy.get('@addNewIndividual')\n    .find(':nth-child(13) > .col-md-3')\n    .type(dropDown_payeeAddressResidenceCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.modal-body > :nth-child(15) > :nth-child(1)')\n    .type(dropDown_payeeAddressWorkCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(15) > .col-md-3.ng-star-inserted')\n    .type('{uparrow}' + dropDown_payeeAddressWorkState + '{enter}');\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.residentLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.residentLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressResidentLocation + '{enter}');\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.workLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.workLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressWorkCity + '{enter}');\n    });\n});\ncy.contains('button', 'Add Direct Deposit').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'Add Direct Deposit').parent().parent().as('addDirectDeposit');\ncy.get('@addDirectDeposit').find('[name=\"routingNumber\"]').type(textField_AddDirectDeposit_RoutingNumber);\ncy.get('@addDirectDeposit').find('[name=\"accountNumber\"]').type(textField_AddDirectDeposit_AccountNumber);\ncy.get('@addDirectDeposit')\n    .find('[name=\"accountType\"]')\n    .type(dropDown_AddDirectDeposit_AccountType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"accountNickName\"]').type(textField_AddDirectDeposit_AccountNickName);\ncy.get('@addDirectDeposit').find('[name=\"bankName\"]').type(textField_AddDirectDeposit_BankName);\ncy.get('@addDirectDeposit').find('[name=\"bankAddress\"]').type(textField_AddDirectDeposit_BankAddress);\ncy.get('@addDirectDeposit').find('[name=\"bankCity\"]').type(textField_AddDirectDeposit_City);\ncy.get('@addDirectDeposit')\n    .find('[name=\"bankStateId\"]')\n    .type(textField_AddDirectDeposit_State + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"bankPostalCode\"]').type(textField_AddDirectDeposit_Zip);\ncy.get('@addDirectDeposit')\n    .find('[textfield=\"countryName\"]')\n    .type(dropDown_AddDirectDeposit_Country + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"allocationType\"]')\n    .type(dropDown_AddDirectDeposit_AllocationType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"allocationPercentage\"]').type(textField_AddDirectDeposit_AllocationPercentage);\ncy.get('@addDirectDeposit')\n    .find('[name=\"processingOrder\"]')\n    .type(dropDown_AddDirectDeposit_ProcessingOrder + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"preNote\"]')\n    .type(dropDown_AddDirectDeposit_PreNote + '{enter}');\nif (textField_AddDirectDeposit_Active) {\n    cy.get('@addDirectDeposit').find('[name=\"isActive\"]').click();\n}\nif (textField_AddDirectDeposit_LiveCheckOnly) {\n    cy.get('@addDirectDeposit').find('[name=\"liveCheckOnly\"]').click();\n}\ncy.get('@addDirectDeposit').find('[class=\"k-button-text\"]').contains('Save').click();\ncy.contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeTaxConfiguration');\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(2) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_StartDate}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(4) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_EndDate}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxExemptYear\"]').type(`${textField_AddPayeeTaxConfiguration_TaxExemptYear}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[textfield=\"countryName\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Country}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFilingStatus\"]')\n    .select(dropDown_AddPayeeTaxConfiguration_FederalMaritalStatus);\nif (textField_AddPayeeTaxConfiguration_TwoJobs) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"hasTwoJobs\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalDependentsAmount\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_Dependents3}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalOtherIncome\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_OtherIncome}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxFederalDeductions\"]').type(`${textField_AddPayeeTaxConfiguration_Deductions}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFlatWithholdingDollars\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount}`);\nif (textField_AddPayeeTaxConfiguration_TaxExempt) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"federalTaxExempt\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[placeholder=\"-- Type to select a State --\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Province}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration').find('[class=\"k-button-text\"]').contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeUnion');\ncy.get('.col-md-5 > .row > :nth-child(1) > .form-group > .ng-valid').click();\ncy.get('.col-md-5 > .row > :nth-child(2) > .form-group > .ng-untouched').click();\ncy.get('@addPayeeUnion')\n    .find('[name=\"CustomerSelected\"]')\n    .type(this.projectDetails.customerName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.customerName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"ProjectSelected\"]')\n    .type(this.projectDetails.projectName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.projectName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[valuefield=\"value\"]')\n    .contains('-- Select Employment Status --')\n    .type(dropDown_AddPayeeUnion_AcalEmplStatus + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire Country --\"]')\n    .type(dropDown_AddPayeeUnion_HireCountry + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_HireState + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Work State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_WorkState + '{enter}');\ncy.get('[name=\"unions.laborOrganizationId\"]', { timeout: 20000 }).type('w');\n//cy.wait(5000);\ncy.intercept('GET', '/api/payroll/shared/unions/occcode/*').as('laborOrgInfo');\ncy.get('[name=\"unions.laborOrganizationId\"]').type('{enter}');\n//cy.wait(2000);\ncy.wait('@laborOrgInfo').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200);\n    cy.get('[for=\"unions.occupationId\"]').parent().parent().find('[placeholder=\"Type to search\"]').click();\n    //cy.wait(2000);\n    cy.get('.row.ng-star-inserted > :nth-child(3) > .form-group > .input-group > .k-input-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click();\n    //cy.wait(2000);\n    cy.get('[class=\"k-list-item-text ng-star-inserted\"]').first().click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"unions.scheduleId\"]')\n    .type(dropDown_AddPayeeUnion_ScheduleCode)\n    .then(() => {\n    cy.contains('[class=\"k-list-item-text ng-star-inserted\"]', dropDown_AddPayeeUnion_ScheduleCode, { timeout: 10000 }).click({\n        force: true\n    });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"payRate\"]')\n    .type(dropDown_AddPayeeUnion_PayRate + '{enter}');\ncy.contains('Continue').click();\ncy.intercept('PUT', '/api/payroll/shared/common-logic/payee/create').as('cp1');\ncy.contains('Create Payee').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Payee is being saved');\n//cy.get('.k-notification-content', { timeout: 60000 }).should('not.exist');\n// Create New Batch\ncy.userLogin();\ncy.visit(`${this.uamEndPoints.createBatch}`);\ncy.intercept('POST', '/api/payroll/batch-details/create-new-batch').as('newBatch');\ncy.clickKendoDropDown('[name=\"batchTypeId\"]', dropDown_batchType);\ncy.getAndTypeEnter('[name=\"batchName\"]', textField_batchName);\ncy.getAndType('[name=\"customerId\"]', this.projectDetails.customerName);\ncy.get('.k-i-loading', { timeout: 60000 }).should('not.exist'); // Wait for page to complete load\ncy.getAndType('[name=\"customerId\"]', '{enter}');\ncy.clickKendoDropDown('[name=\"projectId\"]', this.projectDetails.projectName);\ncy.clickKendoDropDown('[name=\"employerOfRecordId\"]', this.projectDetails.employerOfRecordId);\ncy.getClearAndTypeEnter('[name=\"batchOwnerUserId\"]', this.projectDetails.batchOwner);\ncy.get('button.btn.btn-info').contains('Create Batch').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'New Batch');\ncy.get('header.page-heading .page-title', { timeout: 60000 }).should('contain.text', textField_batchName);\ncy.get('input[type=\"button\"][value=\"Add New Timecard\"]', { timeout: 60000 }).should('be.visible').click();\ncy.wait('@newBatch').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200); // Ensure batch creation succeeded\n    const response = intercept.response.body;\n    batchId = response.batchId;\n    cy.log(`Batch ID: ${batchId}`);\n    expect(batchId).to.not.be.undefined; // Ensure batchId is retrieved\n    expect(batchId).to.not.be.null;\n    // Create new Timecard\n    date_CreateTimeCard_BeginDate = '11/11/2012';\n    date_CreateTimeCard_EndDate = '12/12/2025';\n    // cy.get('.spinner-threedots', { timeout: 60000 }).should('be.visible');\n    cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\n    cy.wait(10000); //need to wait at least 10sec because the system are not stable (sometimes slow, sometimes fast)\n    cy.get('input[name=\"editableTimecard.payeeFullName\"]', { timeout: 60000 }).click({ force: true });\n    cy.get('input[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\n    cy.get('input[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\n    cy.contains('button', 'Search Payees').click();\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('be.visible').and('contain', 'Searching payees...');\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('not.exist');\n    // cy.get('button.ng-star-inserted', { timeout: 60000 }).should('be.visible').click({ force: true });\n    cy.get('button.ng-star-inserted', { timeout: 60000 })\n        .should('be.visible')\n        .first() // Clicks the first matching button\n        .click({ force: true });\n    cy.get('input[id=\"datepicker-1\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_BeginDate);\n    cy.get('input[id=\"datepicker-2\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_EndDate);\n    cy.contains('button', 'Create', { timeout: 10000 }).click();\n    cy.get('button.btn.btn-info').within(() => {\n        cy.get('i.fa.fa-spin.fa-spinner', { timeout: 60000 }).should('not.exist');\n    });\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'failed');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'Error');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'are required');\n    cy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Timecard Created Successfully.');\n});\n// Verify Day Entry tab are not be visible\ncy.get('ul.nav-tabs', { timeout: 60000 })\n    .should('be.visible') // Ensure the tab list is visible\n    .find('li.nav-item a.nav-link') // Select all tab links\n    .should('not.contain', 'Calc-Trace'); // Ensure \"Day Entry\" is NOT in the list\n// View Project\n// Check 'Use InHouse Fringe Calculation\"\ncy.visit(`${this.uamEndPoints.projectDetails}`, { timeout: 60000 });\ncy.wait(20000); //need to wait at least 20sec because the system are not stable (sometimes slow, sometimes fast)\ncy.get('input[name=\"inHouseFringeCalculation\"]', { timeout: 60000 })\n    .should('be.visible') // Ensure it's visible\n    .then(($checkbox) => {\n    if (!$checkbox.prop('checked')) {\n        // Correct way to check if it's NOT checked\n        cy.wrap($checkbox)\n            .click({ force: true }) // Click to check\n            .should('be.checked'); // Validate it's checked\n    }\n});\ncy.contains('button', 'Save Changes').click();",
+              "err": {},
+              "uuid": "008850ee-925b-4600-8517-a91979416fac",
+              "parentUUID": "244e9942-a3a1-42bb-8cf5-0df1e736899b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "008850ee-925b-4600-8517-a91979416fac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 160935,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "8aaf317e-1047-4672-9f2b-8ccefdcf65a2",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-general\\general-TC110.cy.ts",
+      "file": "src\\e2e\\kl\\100-general\\general-TC110.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "975ce48f-c464-4080-988e-70bf2cf53974",
+          "title": "General Use Case",
+          "fullFile": "src\\e2e\\kl\\100-general\\general-TC110.cy.ts",
+          "file": "src\\e2e\\kl\\100-general\\general-TC110.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC110",
+              "fullTitle": "General Use Case TC110",
+              "timedOut": null,
+              "duration": 173465,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Syakirah (17/3/2025), Syakirah (20/2/2025)\nHigh Level test steps:\n11. Verify the Audit messagesin Audit tab\n   Expected: User should see Audit messages in audit tab\n*/\n// Create New Payee\n// US Individual\npayeeType = 'US Individual';\nconst firstDigit = faker_1.faker.number.int({ min: 1, max: 8 });\nconst remainingDigits = faker_1.faker.string.numeric(8);\ntextField_addNewIndividual_SocialSecurityNumber = `${firstDigit}${remainingDigits}`;\ntextField_addNewIndividual_LegalNameFirst = 'Auto' + faker_1.faker.person.firstName();\ntextField_addNewIndividual_MiddleName = faker_1.faker.person.firstName();\ntextField_addNewIndividual_LastName = faker_1.faker.person.lastName();\ntextField_addNewIndividual_Suffix = faker_1.faker.person.prefix();\ndate_addNewIndividual_BirthDate = '01-01-1999';\ndropDown_addNewIndividual_Gender = 'Female';\ndropDown_addNewIndividual_Ethnicity = 'Additional category not listed';\ndate_addNewIndividual_HireDate = '11-11-2024';\ndropDown_addNewIndividual_WorkAuthorizationType = 'Corporation';\ntextField_payeeAddressInformation_Type = 'Resident W2 Address';\ntextField_payeeAddressInformation_Line1 = faker_1.faker.location.streetAddress();\ntextField_payeeAddressInformation_Line2 = faker_1.faker.location.secondaryAddress();\ntextField_payeeAddressInformation_City = faker_1.faker.location.city();\ndropDown_payeeAddressInformation_Country = 'United States of America';\ndropDown_payeeAddressInformation_State = 'Alabama';\ntextField_payeeAddressInformation_PostalCode = faker_1.faker.location.zipCode();\ntextField_payeeAddressInformation_Comment = faker_1.faker.lorem.sentence();\ntextField_payeeAddressInformation_PhoneNumber = faker_1.faker.phone.number('###########');\ntextField_payeeAddressInformation_EmailAddress = faker_1.faker.internet.email();\ncheckBox_payeeAddressInformation_ClickIfNonUsCanadaPhone = true;\ncheckBox_payeeAddressInformation_TypeInviteToPayeePortal = false;\ndropDown_payeeAddressResidenceCountry = 'Canada';\ndropDown_payeeAddressWorkCountry = 'United States of America';\ndropDown_payeeAddressResidentLocation = 'Alberta';\ndropDown_payeeAddressWorkState = 'California ';\ndropDown_payeeAddressWorkCity = 'California ';\ntextField_AddDirectDeposit_RoutingNumber = '514067890';\ntextField_AddDirectDeposit_AccountNumber = '64710309233';\ndropDown_AddDirectDeposit_AccountType = 'Savings';\ntextField_AddDirectDeposit_AccountNickName = 'Main Checking';\ntextField_AddDirectDeposit_BankName = 'Bank of America';\ntextField_AddDirectDeposit_BankAddress = '1234 Bank St.';\ntextField_AddDirectDeposit_City = 'Los Angeles';\ntextField_AddDirectDeposit_State = 'CA';\ntextField_AddDirectDeposit_Zip = '90001';\ndropDown_AddDirectDeposit_Country = 'United States of America';\ndropDown_AddDirectDeposit_AllocationType = 'Percentage';\ntextField_AddDirectDeposit_AllocationPercentage = '100';\ndropDown_AddDirectDeposit_ProcessingOrder = 1;\ndropDown_AddDirectDeposit_PreNote = 1;\ntextField_AddDirectDeposit_Active = false;\ntextField_AddDirectDeposit_LiveCheckOnly = true;\ndate_AddPayeeTaxConfiguration_StartDate = '1/1/2012';\ndate_AddPayeeTaxConfiguration_EndDate = '4/12/2025';\ntextField_AddPayeeTaxConfiguration_TaxExemptYear = '2024';\ndropDown_AddPayeeTaxConfiguration_Country = 'Canada';\ndropDown_AddPayeeTaxConfiguration_FederalMaritalStatus = 'Single';\ntextField_AddPayeeTaxConfiguration_TwoJobs = true;\ntextField_AddPayeeTaxConfiguration_Dependents3 = 'Mother Demo';\ntextField_AddPayeeTaxConfiguration_OtherIncome = 'Father Demo';\ntextField_AddPayeeTaxConfiguration_Deductions = 'Wife Demo';\ntextField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount = '500';\ntextField_AddPayeeTaxConfiguration_TaxExempt = true;\ntextField_AddPayeeTaxConfiguration_IRSfederalLockIn = true;\ndropDown_AddPayeeTaxConfiguration_Province = 'Quebec';\ndropDown_AddPayeeUnion_AcalEmplStatus = 'Full Time';\ndropDown_AddPayeeUnion_HireCountry = 'United States of America';\ndropDown_AddPayeeUnion_HireState = 'California (US)';\ndropDown_AddPayeeUnion_WorkState = 'California (US)';\ndropDown_AddPayeeUnion_UnionCode = 'Local 44 - Property Craftperson (44)';\ndropDown_AddPayeeUnion_HomeOccupationCode = '1826 - Lead Person';\ndropDown_AddPayeeUnion_ScheduleCode = 'A - SCHEDULE A ';\ndropDown_AddPayeeUnion_PayRate = '50';\nfourDigitNumber = Math.floor(1000 + Math.random() * 9000);\ndropDown_batchType = 'Payroll';\ntextField_batchName = `Batch Automation Test ${fourDigitNumber}`;\ncy.visit(`${this.uamEndPoints.searchPayee}`);\ncy.contains('button', 'New Payee', { timeout: 180000 }).should('be.visible').click();\ncy.contains(payeeType).click();\ncy.get('[for=\"newPayee.firstName\"]').parent().parent().parent().parent().parent().parent().as('addNewIndividual');\ncy.get('@addNewIndividual').find('[name=\"newPayee.taxId\"]').type(textField_addNewIndividual_SocialSecurityNumber);\ncy.get('@addNewIndividual').find('[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\ncy.get('@addNewIndividual').find('[name=\"middleName\"]').type(textField_addNewIndividual_MiddleName);\ncy.get('@addNewIndividual').find('[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\ncy.get('@addNewIndividual').find('[name=\"suffix\"]').type(textField_addNewIndividual_Suffix);\ncy.get('@addNewIndividual')\n    .find(':nth-child(4) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_BirthDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Gender --')\n    .type(dropDown_addNewIndividual_Gender + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Ethinicity --')\n    .type(dropDown_addNewIndividual_Ethnicity + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(6) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_HireDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('Resident')\n    .type(dropDown_addNewIndividual_WorkAuthorizationType + '{enter}');\ncy.contains('[class=\"k-input-value-text\"]', 'Resident W2 Address').type(textField_payeeAddressInformation_Type);\ncy.get('@addNewIndividual').find('[name=\"editable.line1\"]').type(textField_payeeAddressInformation_Line1);\ncy.get('@addNewIndividual').find('[name=\"editable.line2\"]').type(textField_payeeAddressInformation_Line2);\ncy.get('@addNewIndividual').find('[name=\"editable.city\"]').type(textField_payeeAddressInformation_City);\ncy.get('@addNewIndividual')\n    .find('[class=\"k-input-value-text\"]')\n    .contains('United States of America')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[class=\"k-input-value-text\"]').contains('United States of America').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressInformation_Country);\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"editable.stateId\"]')\n    .type(dropDown_payeeAddressInformation_State + '{downarrow}{enter}');\ncy.get('@addNewIndividual').find('[name=\"editable.zip\"]').type(textField_payeeAddressInformation_PostalCode);\ncy.get('@addNewIndividual').find('[name=\"editable.comments\"]').type(textField_payeeAddressInformation_Comment);\ncy.get('@addNewIndividual').find('[name=\"newPayee.email\"]').type(textField_payeeAddressInformation_EmailAddress);\nif (checkBox_payeeAddressInformation_ClickIfNonUsCanadaPhone) {\n    cy.get('@addNewIndividual').find('[name=\"foreignPhone\"]').click();\n}\ncy.get('@addNewIndividual').find('[name=\"newPayee.phone\"]').type(textField_payeeAddressInformation_PhoneNumber);\nif (checkBox_payeeAddressInformation_TypeInviteToPayeePortal) {\n    cy.get('@addNewIndividual').find('[name=\"inviteToPayeePortal\"]').click();\n}\ncy.get('@addNewIndividual')\n    .find(':nth-child(13) > .col-md-3')\n    .type(dropDown_payeeAddressResidenceCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.modal-body > :nth-child(15) > :nth-child(1)')\n    .type(dropDown_payeeAddressWorkCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(15) > .col-md-3.ng-star-inserted')\n    .type('{uparrow}' + dropDown_payeeAddressWorkState + '{enter}');\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.residentLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.residentLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressResidentLocation + '{enter}');\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.workLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.workLocationId\"]').find('[type=\"button\"]').click();\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressWorkCity + '{enter}');\n    });\n});\ncy.contains('button', 'Add Direct Deposit').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'Add Direct Deposit').parent().parent().as('addDirectDeposit');\ncy.get('@addDirectDeposit').find('[name=\"routingNumber\"]').type(textField_AddDirectDeposit_RoutingNumber);\ncy.get('@addDirectDeposit').find('[name=\"accountNumber\"]').type(textField_AddDirectDeposit_AccountNumber);\ncy.get('@addDirectDeposit')\n    .find('[name=\"accountType\"]')\n    .type(dropDown_AddDirectDeposit_AccountType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"accountNickName\"]').type(textField_AddDirectDeposit_AccountNickName);\ncy.get('@addDirectDeposit').find('[name=\"bankName\"]').type(textField_AddDirectDeposit_BankName);\ncy.get('@addDirectDeposit').find('[name=\"bankAddress\"]').type(textField_AddDirectDeposit_BankAddress);\ncy.get('@addDirectDeposit').find('[name=\"bankCity\"]').type(textField_AddDirectDeposit_City);\ncy.get('@addDirectDeposit')\n    .find('[name=\"bankStateId\"]')\n    .type(textField_AddDirectDeposit_State + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"bankPostalCode\"]').type(textField_AddDirectDeposit_Zip);\ncy.get('@addDirectDeposit')\n    .find('[textfield=\"countryName\"]')\n    .type(dropDown_AddDirectDeposit_Country + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"allocationType\"]')\n    .type(dropDown_AddDirectDeposit_AllocationType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"allocationPercentage\"]').type(textField_AddDirectDeposit_AllocationPercentage);\ncy.get('@addDirectDeposit')\n    .find('[name=\"processingOrder\"]')\n    .type(dropDown_AddDirectDeposit_ProcessingOrder + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"preNote\"]')\n    .type(dropDown_AddDirectDeposit_PreNote + '{enter}');\nif (textField_AddDirectDeposit_Active) {\n    cy.get('@addDirectDeposit').find('[name=\"isActive\"]').click();\n}\nif (textField_AddDirectDeposit_LiveCheckOnly) {\n    cy.get('@addDirectDeposit').find('[name=\"liveCheckOnly\"]').click();\n}\ncy.get('@addDirectDeposit').find('[class=\"k-button-text\"]').contains('Save').click();\ncy.contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeTaxConfiguration');\ncy.get('@addPayeeTaxConfiguration', { timeout: 60000 })\n    .find(':nth-child(2) > .k-datepicker', { timeout: 60000 })\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_StartDate}`);\ncy.get('@addPayeeTaxConfiguration', { timeout: 60000 })\n    .find(':nth-child(4) > .k-datepicker', { timeout: 60000 })\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_EndDate}`);\ncy.get('@addPayeeTaxConfiguration', { timeout: 60000 })\n    .find('[name=\"taxExemptYear\"]', { timeout: 60000 })\n    .type(`${textField_AddPayeeTaxConfiguration_TaxExemptYear}`);\ncy.get('@addPayeeTaxConfiguration', { timeout: 60000 })\n    .find('[textfield=\"countryName\"]', { timeout: 60000 })\n    .type(`${dropDown_AddPayeeTaxConfiguration_Country}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration', { timeout: 60000 })\n    .find('[name=\"federalFilingStatus\"]', { timeout: 60000 })\n    .select(dropDown_AddPayeeTaxConfiguration_FederalMaritalStatus);\nif (textField_AddPayeeTaxConfiguration_TwoJobs) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"hasTwoJobs\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalDependentsAmount\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_Dependents3}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalOtherIncome\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_OtherIncome}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxFederalDeductions\"]').type(`${textField_AddPayeeTaxConfiguration_Deductions}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFlatWithholdingDollars\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount}`);\nif (textField_AddPayeeTaxConfiguration_TaxExempt) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"federalTaxExempt\"]').click();\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[placeholder=\"-- Type to select a State --\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Province}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration').find('[class=\"k-button-text\"]').contains('Continue').click();\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeUnion');\ncy.get('.col-md-5 > .row > :nth-child(1) > .form-group > .ng-valid').click();\ncy.get('.col-md-5 > .row > :nth-child(2) > .form-group > .ng-untouched').click();\ncy.get('@addPayeeUnion')\n    .find('[name=\"CustomerSelected\"]')\n    .type(this.projectDetails.customerName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.customerName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"ProjectSelected\"]')\n    .type(this.projectDetails.projectName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.projectName, {\n        timeout: 10000\n    }).click();\n});\ncy.get('@addPayeeUnion')\n    .find('[valuefield=\"value\"]')\n    .contains('-- Select Employment Status --')\n    .type(dropDown_AddPayeeUnion_AcalEmplStatus + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire Country --\"]')\n    .type(dropDown_AddPayeeUnion_HireCountry + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_HireState + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Work State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_WorkState + '{enter}');\ncy.get('[name=\"unions.laborOrganizationId\"]', { timeout: 20000 }).type('w');\n//cy.wait(5000);\ncy.intercept('GET', '/api/payroll/shared/unions/occcode/*').as('laborOrgInfo');\ncy.get('[name=\"unions.laborOrganizationId\"]').type('{enter}');\n//cy.wait(2000);\ncy.wait('@laborOrgInfo').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200);\n    cy.get('[for=\"unions.occupationId\"]').parent().parent().find('[placeholder=\"Type to search\"]').click();\n    //cy.wait(2000);\n    cy.get('.row.ng-star-inserted > :nth-child(3) > .form-group > .input-group > .k-input-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click();\n    //cy.wait(2000);\n    cy.get('[class=\"k-list-item-text ng-star-inserted\"]').first().click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"unions.scheduleId\"]')\n    .type(dropDown_AddPayeeUnion_ScheduleCode)\n    .then(() => {\n    cy.contains('[class=\"k-list-item-text ng-star-inserted\"]', dropDown_AddPayeeUnion_ScheduleCode, { timeout: 10000 }).click({\n        force: true\n    });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"payRate\"]')\n    .type(dropDown_AddPayeeUnion_PayRate + '{enter}');\ncy.contains('Continue').click();\ncy.intercept('PUT', '/api/payroll/shared/common-logic/payee/create').as('cp1');\ncy.contains('Create Payee').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Payee is being saved');\ncy.get('.k-notification-content', { timeout: 60000 }).should('not.exist');\n// Create New Batch\ncy.userLogin();\ncy.visit(`${this.uamEndPoints.createBatch}`);\ncy.intercept('POST', '/api/payroll/batch-details/create-new-batch').as('newBatch');\ncy.wait(10000); // need to wait atleast 10 sec because the system are not stable, sometimes fast and sometimes slow\ncy.clickKendoDropDown('[name=\"batchTypeId\"]', dropDown_batchType);\ncy.getAndTypeEnter('[name=\"batchName\"]', textField_batchName);\ncy.getAndType('[name=\"customerId\"]', this.projectDetails.customerName);\ncy.get('.k-i-loading', { timeout: 60000 }).should('not.exist'); // Wait for page to complete load\ncy.getAndType('[name=\"customerId\"]', '{enter}');\ncy.clickKendoDropDown('[name=\"projectId\"]', this.projectDetails.projectName);\ncy.clickKendoDropDown('[name=\"employerOfRecordId\"]', this.projectDetails.employerOfRecordId);\ncy.getClearAndTypeEnter('[name=\"batchOwnerUserId\"]', this.projectDetails.batchOwner);\ncy.get('button.btn.btn-info').contains('Create Batch').click();\ncy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'New Batch');\ncy.get('header.page-heading .page-title', { timeout: 60000 }).should('contain.text', textField_batchName);\ncy.get('input[type=\"button\"][value=\"Add New Timecard\"]', { timeout: 60000 }).should('be.visible').click();\ncy.wait('@newBatch').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200); // Ensure batch creation succeeded\n    const response = intercept.response.body;\n    batchId = response.batchId;\n    cy.log(`Batch ID: ${batchId}`);\n    expect(batchId).to.not.be.undefined; // Ensure batchId is retrieved\n    expect(batchId).to.not.be.null;\n    // Create new Timecard\n    date_CreateTimeCard_BeginDate = '11/11/2012';\n    date_CreateTimeCard_EndDate = '12/12/2025';\n    // cy.get('.spinner-threedots', { timeout: 60000 }).should('be.visible');\n    cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\n    cy.wait(5000); // TODO : Try to find load point for time out;\n    cy.get('input[name=\"editableTimecard.payeeFullName\"]').click();\n    cy.get('input[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\n    cy.get('input[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\n    cy.contains('button', 'Search Payees').click();\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('be.visible').and('contain', 'Searching payees...');\n    cy.get('.font-weight-bold', { timeout: 60000 }).should('not.exist');\n    // cy.get('button.ng-star-inserted', { timeout: 60000 }).should('be.visible').click({ force: true });\n    cy.get('button.ng-star-inserted', { timeout: 60000 })\n        .should('be.visible')\n        .first() // Clicks the first matching button\n        .click({ force: true });\n    cy.wait(10000); // TODO : Try to find load point for time out;\n    cy.get('input[id=\"datepicker-1\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_BeginDate);\n    cy.get('input[id=\"datepicker-2\"]', { timeout: 10000 }).clear().type(date_CreateTimeCard_EndDate);\n    cy.contains('button', 'Create', { timeout: 10000 }).click();\n    cy.get('button.btn.btn-info').within(() => {\n        cy.get('i.fa.fa-spin.fa-spinner', { timeout: 60000 }).should('not.exist');\n    });\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'failed');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'Error');\n    cy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'are required');\n    cy.get('.k-notification-content', { timeout: 60000 }).should('be.visible').and('contain', 'Timecard Created Successfully.');\n});\n// Verify Audit tab visible\ncy.contains('li.nav-item a.nav-link', 'Audit', { timeout: 60000 }).should('be.visible');",
+              "err": {},
+              "uuid": "04bf0076-0a7f-437d-80e8-64c0edd52e33",
+              "parentUUID": "975ce48f-c464-4080-988e-70bf2cf53974",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "04bf0076-0a7f-437d-80e8-64c0edd52e33"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 173465,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "0f38458d-5f14-41d0-aa89-7cd1d940d95e",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC301.cy.ts",
+      "file": "src\\e2e\\kl\\300-selection\\selection-TC301.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "065444d0-174d-4eef-bdf1-5d10cebdfbd4",
+          "title": "Verify Fringe calculation for payee in test project using selection items",
+          "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC301.cy.ts",
+          "file": "src\\e2e\\kl\\300-selection\\selection-TC301.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC301",
+              "fullTitle": "Verify Fringe calculation for payee in test project using selection items TC301",
+              "timedOut": null,
+              "duration": 14118,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Starts\nLast Updated: Mani (24/2/2025)\nHigh Level test steps:\n1. Verify Fringe calculation for payee\n    in test project using one selection item\n    It should apply the selection with AND condition on fringe deduction code\n*/\ncy.verifyFringeCalcTimecard(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_ACTIVE_HEALTH, this.fringeDetails.deductionCode_IAP);\ncy.createSelectionTravelExclude(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317);\ncy.updateFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameExclude01);\ncy.verifyFringeCalcExclude(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_IAP);\ncy.cleanupFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameTravel);\ncy.deleteSelectionTravel(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:323:0)",
+                "diff": null
+              },
+              "uuid": "3e5d7421-e12c-4566-8f9a-51200c6cf760",
+              "parentUUID": "065444d0-174d-4eef-bdf1-5d10cebdfbd4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "3e5d7421-e12c-4566-8f9a-51200c6cf760"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 14118,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "c6ab0f6f-c293-4299-8bbe-7c11691c033d",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC302.cy.ts",
+      "file": "src\\e2e\\kl\\300-selection\\selection-TC302.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1337a809-c488-4a26-b616-a1d21de2ddbb",
+          "title": "Verify fringe calculation for payee in test project using 2 selection item",
+          "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC302.cy.ts",
+          "file": "src\\e2e\\kl\\300-selection\\selection-TC302.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC302",
+              "fullTitle": "Verify fringe calculation for payee in test project using 2 selection item TC302",
+              "timedOut": null,
+              "duration": 12997,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Starts\nLast Updated: Mani (25/2/2025)\nHigh Level test steps:\n1.Verify fringe calculation for payee\n  in test project using one selection item\n   It should apply the selection with or condition on fringe deduction code\n*/\ncy.verifyFringeCalcTimecard(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_ACTIVE_HEALTH, this.fringeDetails.deductionCode_IAP);\ncy.createSelectionTravelInclude(this.fringeDetails.selectionNameInclude01, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317);\ncy.updateFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameInclude01);\ncy.verifyFringeCalcInclude(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_IAP);\ncy.cleanupFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameTravel);\ncy.deleteSelectionTravel(this.fringeDetails.selectionNameInclude01, this.fringeDetails.selectionPurpose1);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:323:0)",
+                "diff": null
+              },
+              "uuid": "446e9f84-9a93-4cc9-878c-c1e648800887",
+              "parentUUID": "1337a809-c488-4a26-b616-a1d21de2ddbb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "446e9f84-9a93-4cc9-878c-c1e648800887"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 12997,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "dc7bb8e1-c357-470d-80ad-0222f301992d",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC303.cy.ts",
+      "file": "src\\e2e\\kl\\300-selection\\selection-TC303.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c051715b-1100-45cf-a7ba-619fd393c9e4",
+          "title": "Verify Fringe calculation for payee in test project using 2 selection item",
+          "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC303.cy.ts",
+          "file": "src\\e2e\\kl\\300-selection\\selection-TC303.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC303",
+              "fullTitle": "Verify Fringe calculation for payee in test project using 2 selection item TC303",
+              "timedOut": null,
+              "duration": 15003,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Module: Starts\n      Last Updated: Mani (25/2/2025)\n      High Level test steps:\n      1. Verify Fringe calculation for payee\nin test project using 2 selection item\n  It should apply the selection with and condition on fringe deduction code\n      */\ncy.verifyFringeCalcTimecard(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_ACTIVE_HEALTH, this.fringeDetails.deductionCode_IAP);\ncy.createSelectionTravelExclude(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317);\ncy.createSelectionTravelingExclude(this.fringeDetails.selectionNameExclude02, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317);\ncy.updateFringeTableTwoItems(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionNameExclude02);\ncy.verifyFringeCalcExclude(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_IAP);\ncy.cleanupFringeTableTwoitems(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameTravel);\ncy.deleteSelectionTravelTwoItems(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionNameExclude02, this.fringeDetails.selectionPurpose1);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:323:0)",
+                "diff": null
+              },
+              "uuid": "aa8b2b21-f6e8-432d-867f-7c04526de02f",
+              "parentUUID": "c051715b-1100-45cf-a7ba-619fd393c9e4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "aa8b2b21-f6e8-432d-867f-7c04526de02f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 15003,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "79af7f65-7764-4403-9540-5c83b7617bb2",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC304.cy.ts",
+      "file": "src\\e2e\\kl\\300-selection\\selection-TC304.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "eed37741-7036-40aa-a2fb-a72e342dd7af",
+          "title": "Verify Fringe calculation for payee in test project using 2 selection item",
+          "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC304.cy.ts",
+          "file": "src\\e2e\\kl\\300-selection\\selection-TC304.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC304",
+              "fullTitle": "Verify Fringe calculation for payee in test project using 2 selection item TC304",
+              "timedOut": null,
+              "duration": 18618,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Module: Starts\n      Last Updated: Mani (25/2/2025)\n      High Level test steps:\n      1. Verify Fringe calculation for payee\nin test project using 2 selection item\n  It should apply the selection with and condition on fringe deduction code\n      */\ncy.verifyFringeCalcTimecard(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_ACTIVE_HEALTH, this.fringeDetails.deductionCode_IAP);\ncy.createSelectionTravelExclude(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317);\ncy.createSelectionTravelingExclude(this.fringeDetails.selectionNameExclude02, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317);\ncy.updateFringeTableTwoItems(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionNameExclude02);\ncy.verifyFringeCalcExclude(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_IAP);\ncy.cleanupFringeTableTwoitems(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameTravel);\ncy.deleteSelectionTravelTwoItems(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionNameExclude02, this.fringeDetails.selectionPurpose1);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:323:0)",
+                "diff": null
+              },
+              "uuid": "951b7315-0430-4414-9c91-18a2fc859c8e",
+              "parentUUID": "eed37741-7036-40aa-a2fb-a72e342dd7af",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "951b7315-0430-4414-9c91-18a2fc859c8e"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 18618,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b4850910-6226-49da-b196-dfe51e7e3f04",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC305.cy.ts",
+      "file": "src\\e2e\\kl\\300-selection\\selection-TC305.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1d91f1f2-8316-48c9-b1a0-4503dbc7d107",
+          "title": "Verify Fringe calculation for payee in test project using selection items",
+          "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC305.cy.ts",
+          "file": "src\\e2e\\kl\\300-selection\\selection-TC305.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC305",
+              "fullTitle": "Verify Fringe calculation for payee in test project using selection items TC305",
+              "timedOut": null,
+              "duration": 15355,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Starts\nLast Updated: Mani (26/2/2025)\nHigh Level test steps:\n1. Process Fringe calculation for payee\nin test project using single  selection with multiple condition(ex:work or hire location) applied on it\n    It should apply the selection with AND condition on fringe deduction code\n*/\ncy.verifyFringeCalcTimecard(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_ACTIVE_HEALTH, this.fringeDetails.deductionCode_IAP);\ncy.createSelectionTravelExcludeWorkLoc(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317, this.fringeDetails.workLoc);\ncy.updateFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameExclude01);\ncy.verifyFringeCalcExclude(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_IAP);\ncy.cleanupFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameTravel);\ncy.deleteSelectionTravel(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:323:0)",
+                "diff": null
+              },
+              "uuid": "e62febaa-f9eb-4744-9b82-78d4b7ebf5a4",
+              "parentUUID": "1d91f1f2-8316-48c9-b1a0-4503dbc7d107",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "e62febaa-f9eb-4744-9b82-78d4b7ebf5a4"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 15355,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "696aa842-2c93-4d08-add8-892e36115ac5",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC306.cy.ts",
+      "file": "src\\e2e\\kl\\300-selection\\selection-TC306.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "331ed5c4-7b12-4066-8b19-0908b0c7bf56",
+          "title": "Verify Fringe calculation for payee in test project using selection items",
+          "fullFile": "src\\e2e\\kl\\300-selection\\selection-TC306.cy.ts",
+          "file": "src\\e2e\\kl\\300-selection\\selection-TC306.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC306",
+              "fullTitle": "Verify Fringe calculation for payee in test project using selection items TC306",
+              "timedOut": null,
+              "duration": 12528,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Starts\nLast Updated: Mani (27/2/2025)\nHigh Level test steps:\n1. Process Fringe calculation for payee\nin test project using single  selection with multiple condition(ex:paycode) applied on it\n    It should apply the selection with AND condition on fringe deduction code\n*/\ncy.verifyFringeCalcTimecard(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_ACTIVE_HEALTH, this.fringeDetails.deductionCode_IAP);\ncy.createSelectionTravelExcludeProjectCode(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1, this.fringeDetails.selectionNotes1, this.fringeDetails.payCode219, this.fringeDetails.payCode312, this.fringeDetails.payCode317, this.fringeDetails.projectCode);\ncy.updateFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameExclude01);\ncy.verifyFringeCalcExclude(this.fringeDetails.selectionBatchid, this.fringeDetails.selectionTimecardid, this.fringeDetails.calcTrace, this.fringeDetails.deductionCode_IAP);\ncy.cleanupFringeTable(this.fringeDetails.fringeTable, this.fringeDetails.selectionNameTravel);\ncy.deleteSelectionTravel(this.fringeDetails.selectionNameExclude01, this.fringeDetails.selectionPurpose1);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `a[href*=\"timecard-details/1429454\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:323:0)",
+                "diff": null
+              },
+              "uuid": "fcc542dc-dddc-4d84-83be-faee04fe4acc",
+              "parentUUID": "331ed5c4-7b12-4066-8b19-0908b0c7bf56",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "fcc542dc-dddc-4d84-83be-faee04fe4acc"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 12528,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "e6882929-8646-4216-9d42-f06fe37be52c",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\500-htg2a6\\htg2a6-TC501-TC503.cy.ts",
+      "file": "src\\e2e\\kl\\500-htg2a6\\htg2a6-TC501-TC503.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3c5351ee-fdef-4f06-9eb6-c82081fd547d",
+          "title": "HTG to A6 End to End Workflow",
+          "fullFile": "src\\e2e\\kl\\500-htg2a6\\htg2a6-TC501-TC503.cy.ts",
+          "file": "src\\e2e\\kl\\500-htg2a6\\htg2a6-TC501-TC503.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC501",
+              "fullTitle": "HTG to A6 End to End Workflow TC501",
+              "timedOut": null,
+              "duration": 2849,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Module: Starts\n      Last Updated: Mani (21/2/2025)\n      High Level test steps:\n      1. Create a tc in HTG.\nNote:Identify projects on which agreement should applicable\n      */\ncy.userLoginLinx();\ncy.identifyProjects(this.employeeDetails.exportclientUnion, this.employeeDetails.exportprojectUnion, this.employeeDetails.exportweekendingTimeCard);",
+              "err": {},
+              "uuid": "5270dd08-67eb-44cf-b4f3-ce05f29b1614",
+              "parentUUID": "3c5351ee-fdef-4f06-9eb6-c82081fd547d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC502",
+              "fullTitle": "HTG to A6 End to End Workflow TC502",
+              "timedOut": null,
+              "duration": 10750,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Starts\nLast Updated: Mani (21/2/2025)\nHigh Level test steps:\n1. delete existing timecard andcreate timecard\n*/\n// Deleting Timecard\ncy.userLoginLinx();\ncy.deleteExportTimecard(this.employeeDetails.exportclientUnion, this.employeeDetails.exportprojectUnion, this.employeeDetails.exportweekendingTimeCard, this.employeeDetails.exportssnNumberUnion, 'Union');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[name=\"TCSupersede\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[name=\"TCSupersede\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:192:0)",
+                "diff": null
+              },
+              "uuid": "a71c1a03-194b-49d3-ae92-94d72f8c9d2f",
+              "parentUUID": "3c5351ee-fdef-4f06-9eb6-c82081fd547d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC503",
+              "fullTitle": "HTG to A6 End to End Workflow TC503",
+              "timedOut": null,
+              "duration": 8323,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n    Module: Starts\n    Last Updated: Mani (21/2/2025)\n    High Level test steps:\n    1. create a time card in htg\n    */\ncy.userLoginLinx();\ncy.createExportTimeCard(this.employeeDetails.exportclientUnion, this.employeeDetails.exportprojectUnion, this.employeeDetails.exportweekendingTimeCard, this.employeeDetails.exportssnNumberUnion, this.employeeDetails.exportlastNameUnion, this.employeeDetails.exportfirstNameUnion, this.employeeDetails.exportjobUnionTitle1, this.employeeDetails.exportjobUnion1, this.employeeDetails.exportwageUnion1, this.employeeDetails.exportbaseUnionRate1, this.employeeDetails.exportdepartmentUnion);\n// Monday\ncy.get('#DailyAicpday1dt0').should('be.visible').type('18-18');\ncy.get('#DailyTimeInday1dt0').should('be.visible').type('08:00 AM');\ncy.get('#DailyMeal1Startday1dt0').should('be.visible').type('02:00 PM');\ncy.get('#DailyMeal1Endday1dt0').should('be.visible').type('03:00 PM');\ncy.get('#DailyTimeOutday1dt0').should('be.visible').type('07:00 PM');\n// Tuesday\ncy.get('#DailyAicpday2dt0').should('be.visible').type('18-18');\ncy.get('#DailyTimeInday2dt0').should('be.visible').type('08:00 AM');\ncy.get('#DailyMeal1Startday2dt0').should('be.visible').type('02:00 PM');\ncy.get('#DailyMeal1Endday2dt0').should('be.visible').type('03:00 PM');\ncy.get('#DailyTimeOutday2dt0').should('be.visible').type('08:00 PM');\n// Wednesday\ncy.get('#DailyAicpday3dt0').should('be.visible').type('18-18');\ncy.get('#DailyTimeInday3dt0').should('be.visible').type('08:00 AM');\ncy.get('#DailyMeal1Startday3dt0').should('be.visible').type('02:00 PM');\ncy.get('#DailyMeal1Endday3dt0').should('be.visible').type('03:00 PM');\ncy.get('#DailyTimeOutday3dt0').should('be.visible').type('09:00 PM');\n// Thursday\ncy.get('#DailyAicpday4dt0').should('be.visible').type('18-18');\ncy.get('#DailyTimeInday4dt0').should('be.visible').type('08:00 AM');\ncy.get('#DailyMeal1Startday4dt0').should('be.visible').type('02:00 PM');\ncy.get('#DailyMeal1Endday4dt0').should('be.visible').type('03:00 PM');\ncy.get('#DailyTimeOutday4dt0').should('be.visible').type('10:00 PM');\n// Friday\ncy.get('#DailyAicpday5dt0').should('be.visible').type('18-18');\ncy.get('#DailyTimeInday5dt0').should('be.visible').type('08:00 AM');\ncy.get('#DailyMeal1Startday5dt0').should('be.visible').type('02:00 PM');\ncy.get('#DailyMeal1Endday5dt0').should('be.visible').type('03:00 PM');\ncy.get('#DailyTimeOutday5dt0').should('be.visible').type('11:00 PM');\n// Audit Timecard\ncy.get('#TCComplete[type=\"checkbox\"]').should('be.visible').click();\n// Save Timecard\ncy.get('#TCSave').should('be.visible').click();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#spanEmployee`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#spanEmployee`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:232:0)",
+                "diff": null
+              },
+              "uuid": "d1077ca5-8c12-4da6-b743-288fbdbcbb23",
+              "parentUUID": "3c5351ee-fdef-4f06-9eb6-c82081fd547d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5270dd08-67eb-44cf-b4f3-ce05f29b1614"
+          ],
+          "failures": [
+            "a71c1a03-194b-49d3-ae92-94d72f8c9d2f",
+            "d1077ca5-8c12-4da6-b743-288fbdbcbb23"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 21922,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "457bddcc-5e06-4771-8093-390653d81897",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\100-general\\general-TC100-TC106.cy.ts",
+      "file": "src\\e2e\\kl\\100-general\\general-TC100-TC106.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+          "title": "General Use Case",
+          "fullFile": "src\\e2e\\kl\\100-general\\general-TC100-TC106.cy.ts",
+          "file": "src\\e2e\\kl\\100-general\\general-TC100-TC106.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC100",
+              "fullTitle": "General Use Case TC100",
+              "timedOut": null,
+              "duration": 63053,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nTODO - Check project is \"Use InHouse Fringe Calculation tick\"\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n1. Login Into Adbridge System and create new payee\n*/\n// Create New Payee\n// US Individual\npayeeType = 'US Individual';\ntextField_addNewIndividual_SocialSecurityNumber = faker_1.faker.number.int({ min: 100000000, max: 999999999 });\ntextField_addNewIndividual_LegalNameFirst = 'Auto' + faker_1.faker.person.firstName();\ntextField_addNewIndividual_MiddleName = faker_1.faker.person.firstName();\ntextField_addNewIndividual_LastName = faker_1.faker.person.lastName();\ntextField_addNewIndividual_Suffix = faker_1.faker.person.prefix();\ndate_addNewIndividual_BirthDate = '01-01-1999';\ndropDown_addNewIndividual_Gender = 'Female';\ndropDown_addNewIndividual_Ethnicity = 'Additional category not listed';\ndate_addNewIndividual_HireDate = '11-11-2024';\ndropDown_addNewIndividual_WorkAuthorizationType = 'Corporation';\ntextField_payeeAddressInformation_Type = 'Resident W2 Address';\ntextField_payeeAddressInformation_Line1 = faker_1.faker.location.streetAddress();\ntextField_payeeAddressInformation_Line2 = faker_1.faker.location.secondaryAddress();\ntextField_payeeAddressInformation_City = faker_1.faker.location.city();\ndropDown_payeeAddressInformation_Country = 'United States of America';\ndropDown_payeeAddressInformation_State = 'Alabama';\ntextField_payeeAddressInformation_PostalCode = faker_1.faker.location.zipCode();\ntextField_payeeAddressInformation_Comment = faker_1.faker.lorem.sentence();\ntextField_payeeAddressInformation_PhoneNumber = faker_1.faker.phone.number('###########');\ntextField_payeeAddressInformation_EmailAddress = faker_1.faker.internet.email();\ncheckBox_payeeAddressInformation_ClickIfNonUsCanadaPhone = true;\ncheckBox_payeeAddressInformation_TypeInviteToPayeePortal = false;\ndropDown_payeeAddressResidenceCountry = 'Canada';\ndropDown_payeeAddressWorkCountry = 'United States of America';\ndropDown_payeeAddressResidentLocation = 'Alberta';\ndropDown_payeeAddressWorkState = 'California ';\ndropDown_payeeAddressWorkCity = 'California ';\ntextField_AddDirectDeposit_RoutingNumber = '514067890';\ntextField_AddDirectDeposit_AccountNumber = '64710309233';\ndropDown_AddDirectDeposit_AccountType = 'Savings';\ntextField_AddDirectDeposit_AccountNickName = 'Main Checking';\ntextField_AddDirectDeposit_BankName = 'Bank of America';\ntextField_AddDirectDeposit_BankAddress = '1234 Bank St.';\ntextField_AddDirectDeposit_City = 'Los Angeles';\ntextField_AddDirectDeposit_State = 'CA';\ntextField_AddDirectDeposit_Zip = '90001';\ndropDown_AddDirectDeposit_Country = 'United States of America';\ndropDown_AddDirectDeposit_AllocationType = 'Percentage';\ntextField_AddDirectDeposit_AllocationPercentage = '100';\ndropDown_AddDirectDeposit_ProcessingOrder = 1;\ndropDown_AddDirectDeposit_PreNote = 1;\ntextField_AddDirectDeposit_Active = false;\ntextField_AddDirectDeposit_LiveCheckOnly = true;\ndate_AddPayeeTaxConfiguration_StartDate = '1/1/2012';\ndate_AddPayeeTaxConfiguration_EndDate = '4/12/2025';\ntextField_AddPayeeTaxConfiguration_TaxExemptYear = '2024';\ndropDown_AddPayeeTaxConfiguration_Country = 'Canada';\ndropDown_AddPayeeTaxConfiguration_FederalMaritalStatus = 'Single';\ntextField_AddPayeeTaxConfiguration_TwoJobs = true;\ntextField_AddPayeeTaxConfiguration_Dependents3 = 'Mother Demo';\ntextField_AddPayeeTaxConfiguration_OtherIncome = 'Father Demo';\ntextField_AddPayeeTaxConfiguration_Deductions = 'Wife Demo';\ntextField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount = '500';\ntextField_AddPayeeTaxConfiguration_TaxExempt = true;\ntextField_AddPayeeTaxConfiguration_IRSfederalLockIn = true;\ndropDown_AddPayeeTaxConfiguration_Province = 'Quebec';\ndropDown_AddPayeeUnion_AcalEmplStatus = 'Full Time';\ndropDown_AddPayeeUnion_HireCountry = 'United States of America';\ndropDown_AddPayeeUnion_HireState = 'California (US)';\ndropDown_AddPayeeUnion_WorkState = 'California (US)';\ndropDown_AddPayeeUnion_UnionCode = 'Local 44 - Property Craftperson (44)';\ndropDown_AddPayeeUnion_HomeOccupationCode = '1826 - Lead Person';\ndropDown_AddPayeeUnion_ScheduleCode = 'A - SCHEDULE A ';\ndropDown_AddPayeeUnion_PayRate = '50';\nfourDigitNumber = Math.floor(1000 + Math.random() * 9000);\ndropDown_batchType = 'Payroll';\ntextField_batchName = `Batch Automation Test ${fourDigitNumber}`;\ncy.visit(`${this.uamEndPoints.searchPayee}`);\ncy.contains('button', 'New Payee', { timeout: 180000 }).should('be.visible').click({ force: true });\ncy.contains(payeeType).click({ force: true });\ncy.get('[for=\"newPayee.firstName\"]').parent().parent().parent().parent().parent().parent().as('addNewIndividual');\ncy.get('@addNewIndividual').find('[name=\"newPayee.taxId\"]').type(textField_addNewIndividual_SocialSecurityNumber);\ncy.get('@addNewIndividual').find('[name=\"firstName\"]').type(textField_addNewIndividual_LegalNameFirst);\ncy.get('@addNewIndividual').find('[name=\"middleName\"]').type(textField_addNewIndividual_MiddleName);\ncy.get('@addNewIndividual').find('[name=\"lastName\"]').type(textField_addNewIndividual_LastName);\ncy.get('@addNewIndividual').find('[name=\"suffix\"]').type(textField_addNewIndividual_Suffix);\ncy.get('@addNewIndividual')\n    .find(':nth-child(4) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_BirthDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Gender --')\n    .type(dropDown_addNewIndividual_Gender + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('-- Select Ethinicity --')\n    .type(dropDown_addNewIndividual_Ethnicity + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(6) > .col-md-3 > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_addNewIndividual_HireDate}`);\ncy.get('@addNewIndividual')\n    .find('.k-input-value-text')\n    .contains('Resident')\n    .type(dropDown_addNewIndividual_WorkAuthorizationType + '{enter}');\ncy.contains('[class=\"k-input-value-text\"]', 'Resident W2 Address').type(textField_payeeAddressInformation_Type);\ncy.get('@addNewIndividual').find('[name=\"editable.line1\"]').type(textField_payeeAddressInformation_Line1);\ncy.get('@addNewIndividual').find('[name=\"editable.line2\"]').type(textField_payeeAddressInformation_Line2);\ncy.get('@addNewIndividual').find('[name=\"editable.city\"]').type(textField_payeeAddressInformation_City);\ncy.get('@addNewIndividual')\n    .find('[class=\"k-input-value-text\"]')\n    .contains('United States of America')\n    .then(() => {\n    cy.get('@addNewIndividual')\n        .find('[class=\"k-input-value-text\"]')\n        .contains('United States of America')\n        .click({ force: true });\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressInformation_Country);\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"editable.stateId\"]')\n    .type(dropDown_payeeAddressInformation_State + '{downarrow}{enter}');\ncy.get('@addNewIndividual').find('[name=\"editable.zip\"]').type(textField_payeeAddressInformation_PostalCode);\ncy.get('@addNewIndividual').find('[name=\"editable.comments\"]').type(textField_payeeAddressInformation_Comment);\ncy.get('@addNewIndividual').find('[name=\"newPayee.email\"]').type(textField_payeeAddressInformation_EmailAddress);\nif (checkBox_payeeAddressInformation_ClickIfNonUsCanadaPhone) {\n    cy.get('@addNewIndividual').find('[name=\"foreignPhone\"]').click({ force: true });\n}\ncy.get('@addNewIndividual').find('[name=\"newPayee.phone\"]').type(textField_payeeAddressInformation_PhoneNumber);\nif (checkBox_payeeAddressInformation_TypeInviteToPayeePortal) {\n    cy.get('@addNewIndividual').find('[name=\"inviteToPayeePortal\"]').click({ force: true });\n}\ncy.get('@addNewIndividual')\n    .find(':nth-child(13) > .col-md-3')\n    .type(dropDown_payeeAddressResidenceCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find('.modal-body > :nth-child(15) > :nth-child(1)')\n    .type(dropDown_payeeAddressWorkCountry + '{enter}');\ncy.get('@addNewIndividual')\n    .find(':nth-child(15) > .col-md-3.ng-star-inserted')\n    .type('{uparrow}' + dropDown_payeeAddressWorkState + '{enter}');\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.residentLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.residentLocationId\"]').find('[type=\"button\"]').click({ force: true });\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressResidentLocation + '{enter}');\n    });\n});\ncy.get('@addNewIndividual')\n    .find('[name=\"newPayee.workLocationId\"]')\n    .find('[class=\"k-input-inner\"]')\n    .then(() => {\n    cy.get('@addNewIndividual').find('[name=\"newPayee.workLocationId\"]').find('[type=\"button\"]').click({ force: true });\n    cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]')\n        .should('exist')\n        .then(($pa) => {\n        cy.get('[class=\"k-input-inner ng-untouched ng-pristine ng-valid\"]').type(dropDown_payeeAddressWorkCity + '{enter}');\n    });\n});\ncy.contains('button', 'Add Direct Deposit').click({ force: true });\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'Add Direct Deposit').parent().parent().as('addDirectDeposit');\ncy.get('@addDirectDeposit').find('[name=\"routingNumber\"]').type(textField_AddDirectDeposit_RoutingNumber);\ncy.get('@addDirectDeposit').find('[name=\"accountNumber\"]').type(textField_AddDirectDeposit_AccountNumber);\ncy.get('@addDirectDeposit')\n    .find('[name=\"accountType\"]')\n    .type(dropDown_AddDirectDeposit_AccountType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"accountNickName\"]').type(textField_AddDirectDeposit_AccountNickName);\ncy.get('@addDirectDeposit').find('[name=\"bankName\"]').type(textField_AddDirectDeposit_BankName);\ncy.get('@addDirectDeposit').find('[name=\"bankAddress\"]').type(textField_AddDirectDeposit_BankAddress);\ncy.get('@addDirectDeposit').find('[name=\"bankCity\"]').type(textField_AddDirectDeposit_City);\ncy.get('@addDirectDeposit')\n    .find('[name=\"bankStateId\"]')\n    .type(textField_AddDirectDeposit_State + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"bankPostalCode\"]').type(textField_AddDirectDeposit_Zip);\ncy.get('@addDirectDeposit')\n    .find('[textfield=\"countryName\"]')\n    .type(dropDown_AddDirectDeposit_Country + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"allocationType\"]')\n    .type(dropDown_AddDirectDeposit_AllocationType + '{enter}');\ncy.get('@addDirectDeposit').find('[name=\"allocationPercentage\"]').type(textField_AddDirectDeposit_AllocationPercentage);\ncy.get('@addDirectDeposit')\n    .find('[name=\"processingOrder\"]')\n    .type(dropDown_AddDirectDeposit_ProcessingOrder + '{enter}');\ncy.get('@addDirectDeposit')\n    .find('[name=\"preNote\"]')\n    .type(dropDown_AddDirectDeposit_PreNote + '{enter}');\nif (textField_AddDirectDeposit_Active) {\n    cy.get('@addDirectDeposit').find('[name=\"isActive\"]').click({ force: true });\n}\nif (textField_AddDirectDeposit_LiveCheckOnly) {\n    cy.get('@addDirectDeposit').find('[name=\"liveCheckOnly\"]').click({ force: true });\n}\ncy.get('@addDirectDeposit').find('[class=\"k-button-text\"]').contains('Save').click({ force: true });\ncy.contains('Continue').click({ force: true });\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeTaxConfiguration');\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(2) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_StartDate}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find(':nth-child(4) > .k-datepicker')\n    .type(`{leftarrow}{leftarrow}{leftarrow}${date_AddPayeeTaxConfiguration_EndDate}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxExemptYear\"]').type(`${textField_AddPayeeTaxConfiguration_TaxExemptYear}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[textfield=\"countryName\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Country}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFilingStatus\"]')\n    .select(dropDown_AddPayeeTaxConfiguration_FederalMaritalStatus);\nif (textField_AddPayeeTaxConfiguration_TwoJobs) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"hasTwoJobs\"]').click({ force: true });\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalDependentsAmount\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_Dependents3}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"taxFederalOtherIncome\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_OtherIncome}`);\ncy.get('@addPayeeTaxConfiguration').find('[name=\"taxFederalDeductions\"]').type(`${textField_AddPayeeTaxConfiguration_Deductions}`);\ncy.get('@addPayeeTaxConfiguration')\n    .find('[name=\"federalFlatWithholdingDollars\"]')\n    .type(`${textField_AddPayeeTaxConfiguration_FederalAdditionalWitholdingAmount}`);\nif (textField_AddPayeeTaxConfiguration_TaxExempt) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"federalTaxExempt\"]').click({ force: true });\n}\nif (textField_AddPayeeTaxConfiguration_IRSfederalLockIn) {\n    cy.get('@addPayeeTaxConfiguration').find('[name=\"irsFedLock\"]').click({ force: true });\n}\ncy.get('@addPayeeTaxConfiguration')\n    .find('[placeholder=\"-- Type to select a State --\"]')\n    .type(`${dropDown_AddPayeeTaxConfiguration_Province}` + '{enter}');\ncy.get('@addPayeeTaxConfiguration').find('[class=\"k-button-text\"]').contains('Continue').click({ force: true });\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'New Payee')\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .parent()\n    .as('addPayeeUnion');\ncy.get('.col-md-5 > .row > :nth-child(1) > .form-group > .ng-valid').click({ force: true });\ncy.get('.col-md-5 > .row > :nth-child(2) > .form-group > .ng-untouched').click({ force: true });\ncy.get('@addPayeeUnion')\n    .find('[name=\"CustomerSelected\"]')\n    .type(this.projectDetails.customerName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.customerName, {\n        timeout: 10000\n    }).click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"ProjectSelected\"]')\n    .type(this.projectDetails.projectName)\n    .then(() => {\n    cy.contains('[class=\"k-popup k-list-container k-combobox-popup\"]', this.projectDetails.projectName, {\n        timeout: 10000\n    }).click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[valuefield=\"value\"]')\n    .contains('-- Select Employment Status --')\n    .type(dropDown_AddPayeeUnion_AcalEmplStatus + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire Country --\"]')\n    .type(dropDown_AddPayeeUnion_HireCountry + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Hire State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_HireState + '{enter}');\ncy.get('@addPayeeUnion')\n    .find('[placeholder=\"-- Select Work State / Province --\"]')\n    .type(dropDown_AddPayeeUnion_WorkState + '{enter}');\ncy.get('[name=\"unions.laborOrganizationId\"]', { timeout: 20000 }).type('w');\n//cy.wait(5000);\ncy.intercept('GET', '/api/payroll/shared/unions/occcode/*').as('laborOrgInfo');\ncy.get('[name=\"unions.laborOrganizationId\"]').type('{enter}');\n//cy.wait(2000);\ncy.wait('@laborOrgInfo').then((intercept) => {\n    expect(intercept.response.statusCode).to.eq(200);\n    cy.get('[for=\"unions.occupationId\"]').parent().parent().find('[placeholder=\"Type to search\"]').click({ force: true });\n    //cy.wait(2000);\n    cy.get('.row.ng-star-inserted > :nth-child(3) > .form-group > .input-group > .k-input-md > .k-input-button > .k-icon-wrapper-host > .k-i-caret-alt-down').click({ force: true });\n    //cy.wait(2000);\n    cy.get('[class=\"k-list-item-text ng-star-inserted\"]').first().click({ force: true });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"unions.scheduleId\"]')\n    .type(dropDown_AddPayeeUnion_ScheduleCode)\n    .then(() => {\n    cy.contains('[class=\"k-list-item-text ng-star-inserted\"]', dropDown_AddPayeeUnion_ScheduleCode, { timeout: 10000 }).click({\n        force: true\n    });\n});\ncy.get('@addPayeeUnion')\n    .find('[name=\"payRate\"]')\n    .type(dropDown_AddPayeeUnion_PayRate + '{enter}');\ncy.contains('Continue').click({ force: true });\ncy.intercept('PUT', '/api/payroll/shared/common-logic/payee/create').as('cp1');\ncy.contains('Create Payee').click({ force: true });\ncy.get('.k-notification-content', { timeout: 9000 }).should('be.visible').and('contain', 'Payee is being saved');\ncy.get('.k-notification-content', { timeout: 9000 }).should('not.exist');",
+              "err": {},
+              "uuid": "ff713955-74ae-4088-a6e9-9e80196f04b5",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC101",
+              "fullTitle": "General Use Case TC101",
+              "timedOut": null,
+              "duration": 21650,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n2. Create a test batch\n   Expected: User Should able to create test batch\n*/\n// Create New Batch\ncy.visit(`${this.uamEndPoints.createBatch}`);\ncy.intercept('POST', '/api/payroll/batch-details/create-new-batch').as('newBatch');\ncy.contains('h1', 'Create Batch', { timeout: 9000 }).should('be.visible');\ncy.clickKendoDropDown('[name=\"batchTypeId\"]', this.projectDetails.dropDown_batchType);\ncy.getAndTypeEnter('[name=\"batchName\"]', textField_batchName);\ncy.getAndType('[name=\"customerId\"', this.projectDetails.customerName);\ncy.get('.k-i-loading', { timeout: 9000 }).should('not.exist'); // Wait for page to complete load\ncy.getAndType('[name=\"customerId\"', '{enter}');\ncy.clickKendoDropDown('[name=\"projectId\"]', this.projectDetails.projectName);\ncy.clickKendoDropDown('[name=\"employerOfRecordId\"]', this.projectDetails.employerOfRecordId);\ncy.getClearAndTypeEnter('[name=\"batchOwnerUserId\"]', this.projectDetails.batchOwner);\ncy.get('button.btn.btn-info').contains('Create Batch').click({ force: true });\ncy.get('.k-notification-content', { timeout: 9000 }).should('be.visible').and('contain', 'New Batch');\ncy.get('header.page-heading .page-title').should('contain.text', textField_batchName);\ncy.get('input[type=\"button\"][value=\"Add New Timecard\"]', { timeout: 9000 }).should('be.visible').click({ force: true });\ncy.wait('@newBatch').then((intercept) => {\n    const response = intercept.response.body;\n    batchId = response.batchId;\n    cy.log(`Batch ID: ${batchId}`);\n});",
+              "err": {},
+              "uuid": "e63997e2-346d-4a16-a89c-71bfd5e6483c",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC102",
+              "fullTitle": "General Use Case TC102",
+              "timedOut": null,
+              "duration": 33764,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n3. Create a new timecard in test batch\n   Expected: User should able to create new timecard\n*/\ndate_CreateTimeCard_BeginDate = '11/11/2012';\ndate_CreateTimeCard_EndDate = '12/12/2025';\ncy.visit(`${this.uamEndPoints.batchDetails}/${batchId}/details`);\ncy.intercept('POST', '/api/payroll/timecard-details/save-timecard').as('newTimecard');\ncy.get('.spinner-threedots', { timeout: 9000 }).should('not.be.visible');\ncy.get('.btn.btn-sm.btn-success', { timeout: 9000 }).click({ force: true });\ncy.get('.spinner-threedots', { timeout: 9000 }).should('not.be.visible');\ncy.get('input[name=\"editableTimecard.payeeFullName\"]').click({ force: true });\ncy.get('input[name=\"firstName\"]', { timeout: 9000 }).type(textField_addNewIndividual_LegalNameFirst);\ncy.get('input[name=\"lastName\"]', { timeout: 9000 }).type(textField_addNewIndividual_LastName);\ncy.contains('button', 'Search Payees', { timeout: 9000 }).click({ force: true });\ncy.get('.font-weight-bold', { timeout: 9000 }).should('be.visible').and('contain', 'Searching payees...');\ncy.get('.font-weight-bold', { timeout: 9000 }).should('not.exist');\ncy.get('td[data-kendo-grid-column-index=\"7\"] button.ng-star-inserted', { timeout: 9000 }).click();\ncy.get('input[id=\"datepicker-1\"]', { timeout: 10000 }).clear();\ncy.get('input[id=\"datepicker-1\"]', { timeout: 10000 }).type(date_CreateTimeCard_BeginDate);\ncy.get('input[id=\"datepicker-2\"]', { timeout: 10000 }).clear();\ncy.get('input[id=\"datepicker-2\"]', { timeout: 10000 }).type(date_CreateTimeCard_EndDate);\ncy.contains('button', 'Create', { timeout: 10000 }).click({ force: true });\ncy.get('button.btn.btn-info').within(() => {\n    cy.get('i.fa.fa-spin.fa-spinner', { timeout: 9000 }).should('not.exist');\n});\ncy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'failed');\ncy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'Error');\ncy.get('.k-notification-content', { timeout: 3000 }).should('not.contain', 'are required');\ncy.get('.k-notification-content', { timeout: 9000 }).should('be.visible').and('contain', 'Timecard Created Successfully.');\ncy.wait('@newTimecard').then((intercept) => {\n    const response = intercept.response.body;\n    timecardId = response.timecardId;\n    cy.log(`Timecard ID: ${timecardId}`);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 9000ms: Expected <i.fa.fa-spin.fa-spinner.ng-star-inserted> not to exist in the DOM, but it was continuously found.",
+                "estack": "AssertionError: Timed out retrying after 9000ms: Expected <i.fa.fa-spin.fa-spinner.ng-star-inserted> not to exist in the DOM, but it was continuously found.\n    at Context.eval (webpack:///./src/e2e/kl/100-general/general-TC100-TC106.cy.ts:454:63)",
+                "diff": null
+              },
+              "uuid": "59f6b706-e028-4466-bddc-fef4fa869fa7",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC103",
+              "fullTitle": "General Use Case TC103",
+              "timedOut": null,
+              "duration": 11201,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n4. Verify the save timecard in test batch\n   Expected: User should able to save the timecard\n*/\ncy.visit(`${this.uamEndPoints.batchDetails}/${batchId}/details`);\ncy.get('.spinner-threedots', { timeout: 9000 }).should('not.be.visible');\ncy.log(`Batch ID: ${batchId}`);\ncy.log(`Timecard ID: ${timecardId}`);\ncy.get('input[type=\"button\"][value=\"Add New Timecard\"]', { timeout: 9000 }).should('be.visible');\ncy.get('tr.k-master-row').each(($row) => {\n    const timecardCell = $row.find('td').eq(1);\n    const batchCell = $row.find('td').eq(2);\n    if (timecardCell.text().includes(timecardId) && batchCell.text().includes(batchId)) {\n        const statusFirstName = $row.find('td').eq(4);\n        const statusLastName = $row.find('td').eq(5);\n        const statusCell = $row.find('td').eq(10);\n        //cy.wrap(statusFirstName).invoke('text').should('include', textField_addNewIndividual_LegalNameFirst);\n        cy.wrap(statusFirstName)\n            .invoke('text')\n            .then((text) => {\n            const actualText = text.trim();\n            const expectedText = textField_addNewIndividual_LegalNameFirst.trim();\n            cy.log(`First Name Text: \"${actualText}\"`);\n            expect(actualText.toLowerCase()).to.include(expectedText.toLowerCase());\n        });\n        //cy.wrap(statusLastName).invoke('text').should('include', textField_addNewIndividual_LastName);\n        cy.wrap(statusLastName)\n            .invoke('text')\n            .then((text) => {\n            const actualText = text.trim();\n            const expectedText = textField_addNewIndividual_LastName.trim();\n            cy.log(`Last Name Text: \"${actualText}\"`);\n            expect(actualText.toLowerCase()).to.include(expectedText.toLowerCase());\n        });\n        cy.wrap(statusCell).invoke('text').should('include', 'Calculated');\n    }\n});",
+              "err": {},
+              "uuid": "c3baf855-528b-4eac-8165-36a1c1b7ca03",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC104",
+              "fullTitle": "General Use Case TC104",
+              "timedOut": null,
+              "duration": 131483,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n5. Verify the Day Entry Tab in Timecard details (Not visible for payroll coordinatators)\n   Expected: User should see Day Entry tab init\n*/\ncy.log(`Batch ID at TC104: ${batchId}`);\ncy.log(`Timecard ID at TC104: ${timecardId}`);\n// Check first is enabled\ncy.visit(`${this.uamEndPoints.projectDetails}`);\ncy.contains('h1', `${this.projectDetails.projectName}`, { timeout: 9000 }).should('be.visible');\ncy.get('input[name=\"inHouseFringeCalculation\"]').then(($checkbox) => {\n    if (!$checkbox.is(':checked')) {\n        cy.wrap($checkbox).check();\n        cy.get('button.btn.btn-primary').contains('Save Changes').click();\n    }\n});\ncy.visit(`${this.uamEndPoints.timeCardDetails}/${timecardId}/paylines`);\ncy.contains('li.nav-item a.nav-link', 'Day Entry', { timeout: 120000 }).should('be.visible'); // This takes longer to load",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 120000ms: Expected to find content: 'Day Entry' within the selector: 'li.nav-item a.nav-link' but never did.",
+                "estack": "AssertionError: Timed out retrying after 120000ms: Expected to find content: 'Day Entry' within the selector: 'li.nav-item a.nav-link' but never did.\n    at Context.eval (webpack:///./src/e2e/kl/100-general/general-TC100-TC106.cy.ts:528:78)",
+                "diff": null
+              },
+              "uuid": "5e4abe04-7b7e-4828-91d3-b325bf0b40b4",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC105",
+              "fullTitle": "General Use Case TC105",
+              "timedOut": null,
+              "duration": 17277,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n6. Verify the Calc_trace Tab in timecard details\n   Expected: User should see Employer fringe calculation in calc-trace tab\n*/\ncy.visit(`${this.uamEndPoints.timeCardDetails}/${timecardId}/paylines`);\ncy.contains('li.nav-item a.nav-link', 'Calc-Trace', { timeout: 9000 }).should('be.visible').click({ force: true });",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 9000ms: Expected to find content: 'Calc-Trace' within the selector: 'li.nav-item a.nav-link' but never did.",
+                "estack": "AssertionError: Timed out retrying after 9000ms: Expected to find content: 'Calc-Trace' within the selector: 'li.nav-item a.nav-link' but never did.\n    at Context.eval (webpack:///./src/e2e/kl/100-general/general-TC100-TC106.cy.ts:539:77)",
+                "diff": null
+              },
+              "uuid": "91d69a24-c60c-47ef-a6a0-7ed9fda06212",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC106",
+              "fullTitle": "General Use Case TC106",
+              "timedOut": null,
+              "duration": 18002,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Union Agreement Management (UAM) Regresion Test\nLast Updated: Lilian (2/1/2025), Syakirah (19/2/2025)\nHigh Level test steps:\n7. Verify the Fringe calculation in calc_trace tab\n   Expected: User should see fringe caluculation based on UAM setup in fringe table\n*/\ncy.visit(`${this.uamEndPoints.timeCardDetails}/${timecardId}/paylines`);\ncy.contains('li.nav-item a.nav-link', 'Calc-Trace', { timeout: 9000 }).should('be.visible').click({ force: true });\n// General table\ncy.get('span.k-column-title.ng-star-inserted').contains('Date').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Category').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Rule').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Calculation Data').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Output').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Rule Data').should('exist');\ncy.get('span.k-column-title.ng-star-inserted').contains('Parameters').should('exist');\n// Employer Fringes\ncy.contains('div', 'Employer Fringes:').should('exist');\ncy.contains('.col-12', 'Employer Fringes')\n    .should('exist')\n    .within(() => {\n    cy.get('kendo-grid').should('exist');\n    const columnTitles = [\n        'Line Id',\n        'Union/Job',\n        'Deduction Code',\n        'Pay Code',\n        'Amount',\n        'Episode',\n        'SeasonId',\n        'Location',\n        'Set',\n        'Account Code',\n        'Ins',\n        'M1',\n        'M2',\n        'M3',\n        'M4'\n    ];\n    columnTitles.forEach((title) => {\n        cy.get('.k-grid-header').contains(title).should('exist');\n    });\n});\n// Grouped Fringes\ncy.contains('div', 'Grouped Fringes:').should('exist');\ncy.contains('.col-12', 'Grouped Fringes')\n    .should('exist')\n    .within(() => {\n    cy.get('kendo-grid').should('exist');\n    const columnTitles = [\n        'Union/Job',\n        'Deduction Code',\n        'Amount',\n        'Episode',\n        'SeasonId',\n        'Location',\n        'Set',\n        'Account Code',\n        'Ins',\n        'M1',\n        'M2',\n        'M3',\n        'M4'\n    ];\n    columnTitles.forEach((title) => {\n        cy.get('.k-grid-header').contains(title).should('exist');\n    });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 9000ms: Expected to find content: 'Calc-Trace' within the selector: 'li.nav-item a.nav-link' but never did.",
+                "estack": "AssertionError: Timed out retrying after 9000ms: Expected to find content: 'Calc-Trace' within the selector: 'li.nav-item a.nav-link' but never did.\n    at Context.eval (webpack:///./src/e2e/kl/100-general/general-TC100-TC106.cy.ts:550:77)",
+                "diff": null
+              },
+              "uuid": "8b5a6a05-a308-40cb-b982-3fffcd173b31",
+              "parentUUID": "8897c4eb-9f9c-43db-a40b-07dd1579fb69",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ff713955-74ae-4088-a6e9-9e80196f04b5",
+            "e63997e2-346d-4a16-a89c-71bfd5e6483c",
+            "c3baf855-528b-4eac-8165-36a1c1b7ca03"
+          ],
+          "failures": [
+            "59f6b706-e028-4466-bddc-fef4fa869fa7",
+            "5e4abe04-7b7e-4828-91d3-b325bf0b40b4",
+            "91d69a24-c60c-47ef-a6a0-7ed9fda06212",
+            "8b5a6a05-a308-40cb-b982-3fffcd173b31"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 296430,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "..\\..\\..\\..\\cypress\\results\\mochawesome\\ui\\payroll\\uam\\.jsons",
+        "charts": true,
+        "reportPageTitle": "ER Test Suite - UI - Payroll/Uam",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "ignoreVideos": false,
+        "saveAllAttempts": false,
+        "videoOnFailOnly": false,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

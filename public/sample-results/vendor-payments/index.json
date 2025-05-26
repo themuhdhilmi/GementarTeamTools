@@ -1,0 +1,1647 @@
+{
+  "stats": {
+    "suites": 26,
+    "tests": 29,
+    "passes": 23,
+    "pending": 0,
+    "failures": 6,
+    "testsRegistered": 29,
+    "passPercent": 79.3103448275862,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-05-19T11:37:02.731Z",
+    "end": "2025-05-19T15:18:50.149Z",
+    "duration": 13307418
+  },
+  "results": [
+    {
+      "uuid": "0f010374-d663-4e4b-9b8c-81d404eb5a50",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC002.cy.ts",
+      "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC002.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "21af16fc-1752-4c9f-b090-d36181142231",
+          "title": "Create PUR user",
+          "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC002.cy.ts",
+          "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC002.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC002",
+              "fullTitle": "Create PUR user TC002",
+              "timedOut": null,
+              "duration": 71130,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Vendor Payments\nLast Updated: SK 25/04/25, SK 08/04/25, 26/03/25, 21/03/25, 13/03/25 ---SK 15/01/2025, SK 12/02/2025, SK 14/02/2025, SK 26/02/25\nHigh level steps:\n1. Create users for customer\n2. Assign permission\n3. Enable Activation and Notification\n4. Find users are created\n5. Enable UAT green button\n*/\n// Step 1: Login and search for PUR customer\ncy.visit(`${this.urls.customerPUR}`, { timeout: 60000 });\n// Step 2: Update customer preferences & click add user button\npreferenceCustomer();\n// Step 3: Create requester user\ncreateUser(`${this.urls.newUserPUR}`, this.users.vpPurFirstName, this.users.vpPurLastName, this.users.vpPurEmail);\n// Step 4: Update permissions\nassignRoles();\ncy.get('[data-cy=\"Vendor Payment Estimates Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payments Can Revert Status From Ready To Be Processed\"]').check();\ncy.get('[data-cy=\"Vendor Payments Listing Screen\"]').check();\ncy.get('[data-cy=\"Vendor Payments Search\"]').check();\ncy.get('[data-cy=\"Vendor Payment Estimates Search\"]').check();\ncy.get('[data-cy=\"Vendor Payments Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payments Requests Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payment Request Listing Screen\"]').check();\ncy.get('[data-cy=\"Vendor Payments Request Create/Edit\"]').check();\ncy.get('[data-cy=\"update-permissionn-button\"]').click();\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\nregisterUsers();\n// Step 5: Update advertisers\nadvertisersAccess();\n// Step 6: Update advanced settings\nadvancedSettings();\n// Step 7: Update advanced settings\n// cy.visit(`${this.urls.notificationSearch}`);\ncy.get('a[title=\"Extreme Reach\"]').click();\ncy.wait(5000); //need wait to ensure the iframe has loaded properly, timeout doesn't work\ncy.get('[data-cy=\"er-sidebar-toggle\"]', { timeout: 20000 }).click({ force: true });\ncy.get('[class=\"er-sidebar-link \"]', { timeout: 20000 }).eq(2).should('exist').click({ force: true });\ncy.get('.er-sidebar-link', { timeout: 20000 }).contains('Notifications').should('be.visible').click({ force: true });\ncompleteRegistration(this.users.vpPurPassword);\n// Step 8: Check vp PUR and enable UAT\ncy.visit(`${this.urls.customerUsersPUR}`);\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[data-cy=\"add-new-user-button\"]', { timeout: 20000 }).should('be.visible');\ncheckAndEnableUATAccess(this.users.vpPurEmail);",
+              "err": {},
+              "uuid": "817bba20-0198-4500-9358-0f32bb58079b",
+              "parentUUID": "21af16fc-1752-4c9f-b090-d36181142231",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "817bba20-0198-4500-9358-0f32bb58079b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 71130,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a768a8ea-be82-4444-ab7d-07da1ed485f5",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC003.cy.ts",
+      "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC003.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "12fa6121-53cd-4e30-9b70-539e2753264a",
+          "title": "Create NET user",
+          "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC003.cy.ts",
+          "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC003.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC003",
+              "fullTitle": "Create NET user TC003",
+              "timedOut": null,
+              "duration": 69558,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Vendor Payments\nLast Updated: SK 25/04/25, SK 08/04/25, SK 26/03/25, SK 21/03/25, SK 13/03/25 ---SK 15/01/2025, SK 12/02/2025, SK 14/02/2025, SK 26/02/25, Lilian 1/3/2025\nHigh level steps:\n1. Create users for customer\n2. Assign permission\n3. Enable Activation and Notification\n4. Find users are created\n5. Enable UAT green button\n*/\n// Step 1: Login and search for NET customer\ncy.visit(`${this.urls.customerNET}`, { timeout: 60000 });\n// Step 2: Update customer preferences & click add user button\npreferenceCustomer();\n// Step 3: Create requester user\ncreateUser(`${this.urls.newUserNET}`, this.users.vpNetFirstName, this.users.vpNetLastName, this.users.vpNetEmail);\n// Step 4: Update permissions\nassignRoles();\ncy.get('[data-cy=\"Vendor Payment Estimates Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payments Can Revert Status From Ready To Be Processed\"]').check();\ncy.get('[data-cy=\"Vendor Payments Listing Screen\"]').check();\ncy.get('[data-cy=\"Vendor Payments Search\"]').check();\ncy.get('[data-cy=\"Vendor Payment Estimates Search\"]').check();\ncy.get('[data-cy=\"Vendor Payments Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payments Requests Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payment Request Listing Screen\"]').check();\ncy.get('[data-cy=\"Vendor Payments Request Create/Edit\"]').check();\ncy.get('[data-cy=\"update-permissionn-button\"]').click();\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\nregisterUsers();\n// Step 5: Update advertisers\nadvertisersAccess();\n// Step 6: Update advanced settings\nadvancedSettings();\n// Step 7: Update advanced settings\n// cy.visit(`${this.urls.notificationSearch}`);\ncy.get('a[title=\"Extreme Reach\"]').click();\ncy.wait(5000); //need wait to ensure the iframe has loaded properly, timeout doesn't work\ncy.get('[data-cy=\"er-sidebar-toggle\"]', { timeout: 20000 }).click({ force: true });\ncy.get('[class=\"er-sidebar-link \"]', { timeout: 20000 }).eq(2).click({ force: true });\ncy.get('.er-sidebar-link', { timeout: 20000 }).contains('Notifications').should('be.visible').click({ force: true });\ncompleteRegistration(this.users.vpNetPassword);\n// Step 8: Check vp PUR and enable UAT\ncy.visit(`${this.urls.customerUsersNET}`);\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[data-cy=\"add-new-user-button\"]', { timeout: 20000 }).should('be.visible');\ncheckAndEnableUATAccess(this.users.vpNetEmail);",
+              "err": {},
+              "uuid": "dff5d1be-6e04-48ec-b1ec-30544021b2e2",
+              "parentUUID": "12fa6121-53cd-4e30-9b70-539e2753264a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "dff5d1be-6e04-48ec-b1ec-30544021b2e2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 69558,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "4f8268f8-afd1-4821-bee7-20b65a8405ab",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC004.cy.ts",
+      "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC004.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b7d779a9-5bf0-497b-9492-97a272476246",
+          "title": "Create CAD user",
+          "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC004.cy.ts",
+          "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC004.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC004",
+              "fullTitle": "Create CAD user TC004",
+              "timedOut": null,
+              "duration": 76786,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Vendor Payments\nLast Updated: SK 25/04/25, SK 08/04/25, SK 26/03/25, SK 21/03/25, SK 13/03/25 SK 15/01/2025, SK 12/02/2025, SK 14/02/2025, SK 17/02/2025, SK 26/02/25\nHigh level steps:\n1. Create users for customer\n2. Assign permission\n3. Enable Activation and Notification\n4. Find users are created\n5. Enable UAT green button\n*/\n// Step 1: Login and search for CAD customer\ncy.visit(`${this.urls.customerCAD}`, { timeout: 60000 });\n// Step 2: Update customer preferences & click add user button\npreferenceCustomer();\n// Step 3: Create requester user\ncreateUser(`${this.urls.newUserCAD}`, this.users.vpCadFirstName, this.users.vpCadLastName, this.users.vpCadEmail);\n// Step 4: Update permissions\nassignRoles();\ncy.get('[data-cy=\"Vendor Payment Estimates Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payments Can Revert Status From Ready To Be Processed\"]').check();\ncy.get('[data-cy=\"Vendor Payments Listing Screen\"]').check();\ncy.get('[data-cy=\"Vendor Payments Search\"]').check();\ncy.get('[data-cy=\"Vendor Payment Estimates Search\"]').check();\ncy.get('[data-cy=\"Vendor Payments Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payments Requests Create/Edit\"]').check();\ncy.get('[data-cy=\"Vendor Payment Request Listing Screen\"]').check();\ncy.get('[data-cy=\"Vendor Payments Request Create/Edit\"]').check();\ncy.get('[data-cy=\"update-permissionn-button\"]').click({ force: true });\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\nregisterUsers();\n// Step 5: Update advertisers\nadvertisersAccess();\n// Step 6: Update advanced settings\nadvancedSettings();\n// Step 7: Update advanced settings\n// cy.visit(`${this.urls.notificationSearch}`);\ncy.get('a[title=\"Extreme Reach\"]').click();\ncy.wait(5000); //need wait to ensure the iframe has loaded properly, timeout doesn't work\ncy.get('[data-cy=\"er-sidebar-toggle\"]', { timeout: 20000 }).click({ force: true });\ncy.get('[class=\"er-sidebar-link \"]', { timeout: 20000 }).eq(2).click({ force: true });\ncy.get('.er-sidebar-link', { timeout: 20000 }).contains('Notifications').should('be.visible').click({ force: true });\ncompleteRegistration(this.users.vpCadPassword);\n// Step 8: Check vp PUR and enable UAT\ncy.visit(`${this.urls.customerUsersCAD}`);\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[data-cy=\"add-new-user-button\"]', { timeout: 20000 }).should('be.visible');\ncheckAndEnableUATAccess(this.users.vpCadEmail);\n// Step 9: Activate Vendor Billing\ncy.visit(`${this.urls.vendorBillingCAD}`);\nvendorBilling();",
+              "err": {},
+              "uuid": "271c84fe-5825-47f7-bca4-425f3a241c1a",
+              "parentUUID": "b7d779a9-5bf0-497b-9492-97a272476246",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "271c84fe-5825-47f7-bca4-425f3a241c1a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 76786,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "3f836680-c8ee-4f11-9996-42fc470e78b5",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10001.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fc1a443b-9e76-4893-a7a3-b9012698e4d6",
+          "title": "Search Vendor Payment Request",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10001.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10001",
+              "fullTitle": "Search Vendor Payment Request TC10001",
+              "timedOut": null,
+              "duration": 23061,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 16/04/25, SK 13/03/25 ---SK 16/12/24, SK 30/12/24, SK 12/02/2025, SK 24/02/25, SK 06/03/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Insert filter and click search\n      3. Results shown based on filter\n      */\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch, { timeout: 60000 }); // Ensures the page loads completely\n// cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 }).contains('Search', { timeout: 60000 }).should('be.visible');\n// // Fill in details using fixture data\n// cy.KendoComboBoxUse('[name=\"searchCriteria.customerId\"]', this.customerData.searchVendorCustomer, false, 0);\n// cy.wait(1700); // Allow dropdown to load properly\n// cy.KendoComboBoxUse('[name=\"searchCriteria.advertiserId\"]', this.customerData.searchVendorAdvertiser, false, 0);\n// cy.wait(1000);\n// cy.KendoComboBoxUse('[name=\"searchCriteria.payeeName\"]', this.customerData.searchVendorPayee, false, 0);\n// cy.wait(1000);\n// Validate that the input fields exist before interacting with them\ncy.get('[name=\"searchCriteria.customerId\"]')\n    .should('exist')\n    .type(this.customerData.searchVendorCustomer, { delay: 200 })\n    .wait(1000)\n    .type('{downarrow}')\n    .wait(500)\n    .type('{enter}');\ncy.get('[name=\"searchCriteria.advertiserId\"]')\n    .should('exist')\n    .type(this.customerData.searchVendorAdvertiser, { delay: 200 })\n    .wait(1000)\n    .type('{downarrow}')\n    .wait(500)\n    .type('{enter}');\ncy.get('[name=\"searchCriteria.payeeName\"]')\n    .should('exist')\n    .type(this.customerData.searchVendorPayee, { delay: 200 })\n    .wait(1000)\n    .type('{downarrow}')\n    .wait(500)\n    .type('{enter}');\n// Click the search button only if it exists\ncy.get('[type=\"submit\"]').contains('Search').should('exist').click();\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10001xTC10001 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "f587f769-197a-4d27-8f46-a363ee3aa980",
+              "parentUUID": "fc1a443b-9e76-4893-a7a3-b9012698e4d6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f587f769-197a-4d27-8f46-a363ee3aa980"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 23061,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "acb6df8d-87a5-43d4-b436-0e69d69690e9",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10002.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10002.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0a7c3533-3907-4c53-99ac-f8378575f0cf",
+          "title": "Search Vendor Payment Request - Void",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10002.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10002.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10002",
+              "fullTitle": "Search Vendor Payment Request - Void TC10002",
+              "timedOut": null,
+              "duration": 9665,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 16/04/25, SK 13/12/24, SK 30/12/24, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Insert filter - provided specifically\n      3. Click search\n      4. Results shown based on filter\n      */\ncy.visit(this.urls.vendorPaymentSearch);\n// cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 }).contains('Search', { timeout: 60000 }).should('be.visible');\n// Fill in details - provided by Manual QA Team\ncy.get('[name=\"vendorPaymentId\"]').type('13042', { delay: 200 });\ncy.get('[type=\"submit\"]').contains('Search').click();\n//Validate search\ncy.get('.k-loading-image', { timeout: 60000 }).should('not.exist');\ncy.get('#k-grid0-checkbox0').should('exist').should('not.be.checked');\ncy.get('[data-kendo-grid-column-index=\"3\"]', { timeout: 60000 }).contains('13042').should('be.visible');\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10002xTC10002 = true;\n    data.TC10009xTC30002 = true;\n    data.TC10010xTC20002 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "542811bf-829b-4133-a6d5-a165dc3e4a51",
+              "parentUUID": "0a7c3533-3907-4c53-99ac-f8378575f0cf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "542811bf-829b-4133-a6d5-a165dc3e4a51"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9665,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "9c8b7127-5c1a-48b5-8eb0-eb5865927508",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10003.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10003.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b5b7e29f-7f7d-49c7-91b0-164dc373af7e",
+          "title": "Export search results into Excel and PDF",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10003.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10003.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10003",
+              "fullTitle": "Export search results into Excel and PDF TC10003",
+              "timedOut": null,
+              "duration": 13078,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 16/04/25, SK 16/12/24, SK 30/12/24, SK 12/02/2025, SK 17/02/2025 - commented readFile function, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Insert filter\n      3. Click search\n      4. Results shown based on filter\n      5. Select checkbox for all results\n      6. Click either button PDF or Excel\n      7. Reselect the results to donwload in another version of file\n      */\ncy.visit(this.urls.vendorPaymentSearch);\n// cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 }).contains('Search', { timeout: 60000 }).should('be.visible');\n//search --------------------------------------------------------------------\ncy.KendoComboBoxUse('[name=\"searchCriteria.customerId\"]', this.customerData.searchVendorCustomer, false, 0);\ncy.wait(1500); //need to use so that the dropdown can  load properly\ncy.get('[name=\"dueDateStart\"]').type('{leftArrow}{leftArrow}11112024');\n//cy.wait(1000);\ncy.get('[name=\"dueDateEnd\"]').type('{leftArrow}{leftArrow}11142024');\ncy.get('[type=\"submit\"]').contains('Search').click({ force: true });\n//download pdf---------------------------------------------------------------\ncy.get('.k-loading-image', { timeout: 60000 }).should('not.exist');\ncy.get('[class=\"k-grid-aria-root\"]').find('[type=\"checkbox\"]').first().click();\ncy.get('.search-actions > :nth-child(5)').click();\n//cy.wait(3000);\n//download excel-------------------------------------------------------------\ncy.get('[class=\"k-grid-aria-root\"]').find('[type=\"checkbox\"]').first().click();\ncy.get('.search-actions > :nth-child(4)').click();\n// const downloadPath = Cypress.config('downloadsFolder') + '\\\\VendorPayments.xlsx';\n// cy.readFile(downloadPath, { timeout: 30000 }).should('exist');\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10003xTC10003 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "2dbcde62-188f-4334-8a23-c84c1fc64866",
+              "parentUUID": "b5b7e29f-7f7d-49c7-91b0-164dc373af7e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2dbcde62-188f-4334-8a23-c84c1fc64866"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 13078,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "70c87957-efb0-4c2a-a9b2-7186a095a496",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10004.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10004.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b9becf3f-5a28-4375-8343-bc07a020b505",
+          "title": "Deductions - DGA Pension Vendor Reporting",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10004.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10004.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10004",
+              "fullTitle": "Deductions - DGA Pension Vendor Reporting TC10004",
+              "timedOut": null,
+              "duration": 44595,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 18/04/25, SK 17/04/25, SK 16/04/25, SK 26/03/25, SK 12/12/24, SK 30/12/24, SK 12/02/2025, SK 14/02/2025, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Insert filter - provided specifically\n      3. Click search\n      4. Results shown based on filter - has description 'DGA RESID PH&W'\n      */\ncy.visit(this.urls.deductions);\n// cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 }).contains('Search', { timeout: 60000 }).should('be.visible');\ncy.get('[name=\"deductionDescription\"]').type('DGA RESID PH&W');\ncy.get('[name=\"clientIds\"]')\n    .type('Extreme Reach', { delay: 200 })\n    .wait(500)\n    .type('{downarrow}', { delay: 100 })\n    .wait(500)\n    .type('{enter}', { delay: 100 });\ncy.get('[class=\"btn btn-primary\"]').contains('Search').click();\n//validate search\ncy.get('.k-loading-image', { timeout: 100000 }).should('be.visible');\ncy.get('.k-loading-image', { timeout: 200000 }).should('not.exist');\ncy.get('[role=\"rowgroup\"]', { timeout: 100000 }).last().should('be.visible');\ncy.get('[role=\"rowgroup\"]') // Get all rows\n    .eq(1) // Index 0 is often the header row in Kendo Grid, so use index 1 for the first data row\n    .within(() => {\n    cy.get('td').should('contain.text', 'DGA RESID PH&W');\n});\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10004xTC10004 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "fbba7ac3-1b2e-41e7-987a-a80f0d070d4b",
+              "parentUUID": "b9becf3f-5a28-4375-8343-bc07a020b505",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fbba7ac3-1b2e-41e7-987a-a80f0d070d4b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 44595,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "5e5cd295-18c3-4aec-be75-dad95e9da038",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10005.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10005.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "90ca9222-308c-487f-984b-cd8ef5a61424",
+          "title": "Create New Vendor Payment Request - PUR",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10005.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10005.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10005",
+              "fullTitle": "Create New Vendor Payment Request - PUR TC10005",
+              "timedOut": null,
+              "duration": 144177,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 14/05/25, SK 16/04/25, SK 08/04/25, SK 26/03/25, SK 14/03/25 SK/07/03/25-----SK 20/12/24, SK 31/12/24, SK 15/1/25, SK 14/02/2025, SK 24/02/25, SK 26/02/25, SK 27/02/25\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Click Add Request button\n      3. Fill in advertiser\n      4. Click Add Payment button\n      5. Fill in details - Pay Type = Check By Mail\n      6. Tick Request Estimate checkbox\n      7. Save\n      8. Click hyperlink Create Estimate\n      9. Click hyperlink Process Payment\n      10. Logout and relogin as internal user\n      11. Go to vendor payment page and click view on recent request\n      12. Click on hyperlink Process Payment\n      13. Fill in mandatory fields\n      14. Click Save > Calculate > Ready > Approved > Pay\n      15. Click on Batch ID generated\n      16. Click Calculate Batch\n      17. Validate batch > Finalize batch manually\n      */\n//Login as requester\ncy.userLoginNonAdmin();\ncy.get('[data-cy=\"username\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpPurEmail);\ncy.get('[data-cy=\"next\"]', { timeout: 30000 }).should('be.visible').click();\ncy.get('[data-cy=\"password\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpPurPassword);\ncy.get('[data-cy=\"login\"]', { timeout: 30000 }).should('be.visible').and('be.enabled').click({ force: true });\ncy.get('body').then(($body) => {\n    if ($body.find('.sendbutton').length > 0) {\n        // If the button exists, scroll into view and click\n        cy.get('.sendbutton').scrollIntoView().should('be.visible').click();\n    }\n    else {\n        // Log a message if the button doesn't exist\n        cy.log('Send button does not exist, skipping...');\n    }\n});\ncy.foVpRequestDetailsCreateNewRequest({\n    useFaker: false,\n    advertiser: 'PRODUCTION ON 5TH- VENDOR PAYMENTS(168139)-Vendor_Payments_Only',\n    payeeName: 'HOUSE STUDIOS LTD',\n    vendorInvoice: 'INV-ANX9AT6894',\n    issueDate: '1/1/2030',\n    poNumber: '551AAA30100',\n    jobNumber: 'JOB-003',\n    estimate: true,\n    payType: 'Check By Mail',\n    description: 'Misc',\n    quantity: '1',\n    rate: '250'\n});\n// Create Estimate\ncy.contains('.link.text-info.ng-star-inserted', 'Create Estimate', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true }); // Force click in case of re-render issues\n});\ncy.contains('.k-notification-content', 'Estimate', { timeout: 15000 }).should('contain', 'created.');\n// Process payment\ncy.contains('.link.text-info.ng-star-inserted', 'Process Payment', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true });\n});\ncy.contains('.k-notification-content', 'Payment', { timeout: 15000 }).should('contain', 'processed.');\nlogout();\n//login with internal account------------------------------------------------\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\nselectVendorPayment();\nprocessVendorRequest();\nfinalizeBatchManual();\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10005xTC10005 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "a2c40ae5-d757-4a22-9b6c-e7045e84fb85",
+              "parentUUID": "90ca9222-308c-487f-984b-cd8ef5a61424",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a2c40ae5-d757-4a22-9b6c-e7045e84fb85"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 144177,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f6ae94a4-2be9-49e8-8595-162e6ce76c53",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10006.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10006.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "abcbb814-fc98-422a-b046-858c3caff889",
+          "title": "Create New Vendor Payment Request - NET",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10006.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10006.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10006",
+              "fullTitle": "Create New Vendor Payment Request - NET TC10006",
+              "timedOut": null,
+              "duration": 86981,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 14/05/25, SK 16/04/25, SK 27/03/25, SK 26/03/25, SK 14/03/25 ---SK 30/12/24, SK 30/12/24, SK 15/1/25, SK 14/02/2025, 28/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Click Add Request button\n      3. Fill in advertiser\n      4. Click Add Payment button\n      5. Fill in details - Pay Type = Check By Mail\n      6. Tick Request Estimate checkbox\n      7. Save\n      8. Click hyperlink Create Estimate\n      9. Click hyperlink Process Payment\n      10. Logout and relogin as internal user\n      11. Go to vendor payment page and click view on recent request\n      12. Click on hyperlink Process Payment\n      13. Fill in mandatory fields\n      14. Click Save > Calculate > Ready > Approved > Pay\n      15. Click on Batch ID generated\n      16. Batch finalized automatically\n      */\n//Login as requester\ncy.userLoginNonAdmin();\ncy.get('[data-cy=\"username\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpNetEmail);\ncy.get('[data-cy=\"next\"]', { timeout: 30000 }).should('be.visible').click();\ncy.get('[data-cy=\"password\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpNetPassword);\ncy.get('[data-cy=\"login\"]', { timeout: 30000 }).should('be.visible').and('be.enabled').click({ force: true });\n//cy.get('.sendbutton').click();\ncy.get('body').then(($body) => {\n    if ($body.find('.sendbutton').length > 0) {\n        // If the button exists, scroll into view and click\n        cy.get('.sendbutton').scrollIntoView().should('be.visible').click();\n    }\n    else {\n        // Log a message if the button doesn't exist\n        cy.log('Send button does not exist, skipping...');\n    }\n});\ncy.foVpRequestDetailsCreateNewRequest({\n    useFaker: false,\n    advertiser: 'Anheuser-Busch',\n    payeeName: 'Daniel Hoff Agency Inc',\n    vendorInvoice: 'INV-ANX9AT6894',\n    issueDate: '1/1/2030',\n    poNumber: '551AAA30100',\n    jobNumber: 'JOB-003',\n    estimate: true,\n    payType: 'Check By Mail',\n    description: 'Misc',\n    quantity: '15',\n    rate: '15'\n});\n// Create Estimate\ncy.contains('.link.text-info.ng-star-inserted', 'Create Estimate', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true }); // Force click in case of re-render issues\n});\ncy.contains('.k-notification-content', 'Estimate', { timeout: 15000 }).should('contain', 'created.');\n// Process payment\ncy.contains('.link.text-info.ng-star-inserted', 'Process Payment', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true });\n});\ncy.contains('.k-notification-content', 'Payment', { timeout: 15000 }).should('contain', 'processed.');\nlogout();\n//login with internal account------------------------------------------------\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\nselectVendorPayment();\nprocessVendorRequest();\nfinalizeBatch();\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10006xTC10006 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "94c6ee6a-532e-4789-b7ac-4f8417d7e767",
+              "parentUUID": "abcbb814-fc98-422a-b046-858c3caff889",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "94c6ee6a-532e-4789-b7ac-4f8417d7e767"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 86981,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "c6a1a797-7000-49cd-9057-338cf0569bb7",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10007.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10007.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1e1d9ad0-39b7-4fe2-a104-ef67215cec4c",
+          "title": "Validate Billing Program Address",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10007.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10007.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10007",
+              "fullTitle": "Validate Billing Program Address TC10007",
+              "timedOut": null,
+              "duration": 34796,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 24/01/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Go to Customer's Billing Summary page > Vendor Solutions\n      2. Select billing program ID 2500 - US Dollar, check to Chicago (BOA) and update\n      3. Go to batch search page\n      2. Filter Batch\n      3. Click result\n      4. Click Create Check PDF button\n      5. Open check and verify manually billing address (based on Excel)\n      */\ncy.visit(`${this.urls.vendorBillingNET}`);\ndefaultBilling();\n//Vendor Payments search----------------------------------------------\ncy.visit(this.urls.batchSearch);\ncy.intercept('POST', '/api/payroll/batch-search/batches/search').as('loadPageBatchSearch');\ncy.wait('@loadPageBatchSearch', { timeout: 50000 });\n//filter batch---------------------------------------------------------------\nfilterBatch();\ncy.disablePopUps();\ncy.contains('[class=\"btn btn-primary\"]', 'View').first().click();\ncy.wait(8000);\n//create check pdf----------------------------------------------------\ncy.get('.col > .btn-info').click();\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10007xTC10007 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "233a9906-3120-4b94-a34b-05a472a61e89",
+              "parentUUID": "1e1d9ad0-39b7-4fe2-a104-ef67215cec4c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "233a9906-3120-4b94-a34b-05a472a61e89"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 34796,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "64cb71f6-ac7d-42ce-871c-3a2312c98677",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10008.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10008.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7d9c3a19-e3a2-45df-bc95-ae76e3556218",
+          "title": "Create New Vendor Payment Request - CAN",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10008.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10008.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10008",
+              "fullTitle": "Create New Vendor Payment Request - CAN TC10008",
+              "timedOut": null,
+              "duration": 63687,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 14/05/25, SK 16/04/25, SK 27/03/25, SK 26/03/25, SK 14/03/25 ---SK 26/12/24, SK 31/12/24, SK 15/1/25, SK 14/02/2025, SK 17/02/2025, SK 24/02/25, 28/2/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Click Add Request button\n      3. Fill in advertiser\n      4. Click Add Payment button\n      5. Fill in details - Pay Type = Check By Mail\n      6. Tick Request Estimate checkbox\n      7. Save\n      8. Click hyperlink Create Estimate\n      9. Click hyperlink Process Payment\n      10. Logout and relogin as internal user\n      11. Go to vendor payment page and click view on recent request\n      12. Click on hyperlink Process Payment\n      13. Fill in mandatory fields\n      14. Click Save > Calculate > Ready > Approved > Pay\n      15. Click on Batch ID generated\n      16. Batch finalized automatically\n      */\n//Login as requester\ncy.userLoginNonAdmin();\ncy.get('[data-cy=\"username\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpCadEmail);\ncy.get('[data-cy=\"next\"]', { timeout: 30000 }).should('be.visible').click();\ncy.get('[data-cy=\"password\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpCadPassword);\ncy.get('[data-cy=\"login\"]', { timeout: 30000 }).should('be.visible').and('be.enabled').click({ force: true });\n//cy.get('.sendbutton').click();\ncy.get('body').then(($body) => {\n    if ($body.find('.sendbutton').length > 0) {\n        // If the button exists, scroll into view and click\n        cy.get('.sendbutton').scrollIntoView().should('be.visible').click();\n    }\n    else {\n        // Log a message if the button doesn't exist\n        cy.log('Send button does not exist, skipping...');\n    }\n});\ncy.foVpRequestDetailsCreateNewRequest({\n    useFaker: false,\n    advertiser: 'Conagra Foods',\n    payeeName: '1011218',\n    vendorInvoice: 'INV-ANX9AT6894',\n    issueDate: '1/1/2030',\n    poNumber: '551AAA30100',\n    jobNumber: 'JOB-003',\n    estimate: true,\n    payType: 'Check By Mail',\n    description: 'Misc',\n    quantity: '10',\n    rate: '36'\n});\n// Create Estimate\ncy.contains('.link.text-info.ng-star-inserted', 'Create Estimate', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true }); // Force click in case of re-render issues\n});\ncy.contains('.k-notification-content', 'Estimate', { timeout: 15000 }).should('contain', 'created.');\n// Process payment\ncy.contains('.link.text-info.ng-star-inserted', 'Process Payment', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true });\n});\ncy.contains('.k-notification-content', 'Payment', { timeout: 15000 }).should('contain', 'processed.');\nlogout();\n//login with internal account------------------------------------------------\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\nselectVendorPayment();\nprocessVendorRequest();\nfinalizeBatch();\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10008xTC10008 = true;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "5377618b-7598-447f-9345-56ce5e686fac",
+              "parentUUID": "7d9c3a19-e3a2-45df-bc95-ae76e3556218",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5377618b-7598-447f-9345-56ce5e686fac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 63687,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "adca5e99-7a07-4a77-99b0-a64c7fe2a476",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10009.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10009.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5418a640-862d-498a-907d-67a4ff3bbf3b",
+          "title": "Default Invoice through ER Inc. flag",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10009.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10009.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10009",
+              "fullTitle": "Default Invoice through ER Inc. flag TC10009",
+              "timedOut": null,
+              "duration": 55791,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 16/04/25, 13/03/25 ---SK 24/01/25, SK 14/02/2025, SK 24/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to Customer's Billing Summary page (Anheuser-Busch Companies)\n      2. Tick Invoice Through ER Inc checkbox and save\n      3. Logout\n      4. Login and go to vendor payment page\n      5. Click Add Request button\n      6. Fill in advertiser\n      7. Click Add Payment button\n      8. Fill in details - Pay Type = Check By Mail\n      9. Tick Request Estimate checkbox\n      10. Save\n      11. Click hyperlink Create Estimate\n      12. Click hyperlink Process Payment\n      13. Logout and relogin as internal user\n      14. Go to vendor payment page and click view on recent request\n      15. Click on hyperlink Process Payment\n      16. Fill in mandatory fields\n      17. Verify that the checkbox is ticked based on configuration\n      */\n// High-level steps: Module Vendor Payments\ncy.visit(`${this.urls.vendorBillingNET}`);\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 }).contains('Update Profile').should('be.visible');\ncheckboxInvoice();\nlogout();\n// Login as non-admin\ncy.userLoginNonAdmin();\ncy.get('[data-cy=\"username\"]').should('be.visible').type(this.users.vpNetEmail);\ncy.get('[data-cy=\"next\"]').click();\ncy.get('[data-cy=\"password\"]').type(this.users.vpNetPassword);\ncy.get('[data-cy=\"login\"]').click({ force: true });\ncy.foVpRequestDetailsCreateNewRequest({\n    useFaker: false,\n    advertiser: 'Anheuser-Busch',\n    payeeName: 'Daniel Hoff Agency Inc',\n    vendorInvoice: 'INV-ANX9AT6894',\n    issueDate: '1/1/2030',\n    poNumber: '551AAA30100',\n    jobNumber: 'JOB-003',\n    estimate: true,\n    payType: 'Check By Mail',\n    description: 'Misc',\n    quantity: '15',\n    rate: '15'\n});\n// Create Estimate\ncy.contains('.link.text-info.ng-star-inserted', 'Create Estimate', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true }); // Force click in case of re-render issues\n});\ncy.contains('.k-notification-content', 'Estimate', { timeout: 15000 }).should('contain', 'created.');\n// Process payment\ncy.contains('.link.text-info.ng-star-inserted', 'Process Payment', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true });\n});\ncy.contains('.k-notification-content', 'Payment', { timeout: 15000 }).should('contain', 'processed.');\nlogout();\n// Login with internal account and process vendor payments\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\nselectVendorPayment();\ncheckFlag();\ncy.visit(`${this.urls.vendorBillingNET}`);\ncy.get('[class=\"btn btn-primary\"]', { timeout: 60000 }).contains('Update Profile').should('be.visible');\ncy.wait(2000);\nresetFlag();",
+              "err": {},
+              "uuid": "71df59e9-bcc8-467a-b5d6-4aac95d45346",
+              "parentUUID": "5418a640-862d-498a-907d-67a4ff3bbf3b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "71df59e9-bcc8-467a-b5d6-4aac95d45346"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 55791,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "91b0303d-883a-483e-a89c-d3826d62500c",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10010.cy.ts",
+      "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10010.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "27cc70ca-0881-496b-8007-a39cd322e5f5",
+          "title": "Create New Vendor Payment Request - WIRE",
+          "fullFile": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10010.cy.ts",
+          "file": "src\\e2e\\kl\\10000-vendor-payments\\vendor-payments-TC10010.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC10010",
+              "fullTitle": "Create New Vendor Payment Request - WIRE TC10010",
+              "timedOut": null,
+              "duration": 3689518,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 16/04/25, SK 26/03/25, SK 24/03/25, SK 14/03/25 SK 07/03/25-------------SK 23/12/24, SK 15/1/25, SK 14/02/2025, SK 17-19 Feb 2025, 24/02/25, SK 06/03/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment page\n      2. Click Add Request button\n      3. Fill in advertiser\n      4. Click Add Payment button\n      5. Fill in details - Pay Type = Wire\n      6. Fill in Wire details and attach BVD file\n      7. Tick Request Estimate checkbox\n      8. Save\n      9. Click hyperlink Create Estimate\n      10. Click hyperlink Process Payment\n      11. Logout and relogin as internal user\n      12. Go to vendor payment page and click view on recent request\n      12. Click on hyperlink Process Payment\n      13. Fill in mandatory fields\n      14. Attach file - BVD Redacted Bank Stmt\n      14. Click Save > Calculate > Ready > Approved > Pay\n      15. Click on Batch ID generated\n      16. Batch finalized automatically\n      */\n//Login as requester\ncy.userLoginNonAdmin();\ncy.get('[data-cy=\"username\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpPurEmail);\ncy.get('[data-cy=\"next\"]', { timeout: 30000 }).should('be.visible').click();\ncy.get('[data-cy=\"password\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpPurPassword);\ncy.get('[data-cy=\"login\"]', { timeout: 30000 }).should('be.visible').and('be.enabled').click({ force: true });\n//cy.get('.sendbutton').click();\ncy.get('body').then(($body) => {\n    if ($body.find('.sendbutton').length > 0) {\n        // If the button exists, scroll into view and click\n        cy.get('.sendbutton').scrollIntoView().should('be.visible').click();\n    }\n    else {\n        // Log a message if the button doesn't exist\n        cy.log('Send button does not exist, skipping...');\n    }\n});\ncy.foVpRequestDetailsCreateNewRequest({\n    useFaker: true,\n    advertiser: 'PRODUCTION ON 5TH- VENDOR PAYMENTS(168139)-Vendor_Payments_Only',\n    payeeName: 'Southern Music Publishing Co Inc',\n    requestDate: '!!skip',\n    brand: '!!skip',\n    product: '!!skip',\n    project: '!!skip',\n    newPayee: undefined,\n    taxId: '!!skip',\n    country: '!!skip',\n    email: '!!skip',\n    phoneNumber: '!!skip',\n    address: '!!skip',\n    addressTwo: '!!skip',\n    city: '!!skip',\n    state: '!!skip',\n    postalCode: '!!skip',\n    estimate: true,\n    description: 'Misc',\n    quantity: '1',\n    rate: '10'\n});\n//attach file---------------------------------------------------------------------------------\ncy.wait(2000);\ncy.get('[data-cy=\"attach-files-btn\"]').click();\n//upload button\ncy.get('.k-upload-button').click();\n//get file from fixture\ncy.get('input[type=\"file\"][name=\"files\"]').attachFile('BVD_MatthewBrooks.pdf');\n//upload\ncy.wait(3000);\ncy.KendoDropDownListUse('[data-cy=\"attachment-type-dropdownlist\"]', 'Vendor Payment Request Form');\ncy.get('[data-cy=\"upload-file-splitbtn\"] > [tabindex=\"0\"]').click();\ncy.get('[data-cy=\"attachment-close-btn\"]', { timeout: 60000 })\n    .should('be.visible')\n    .should('not.be.disabled')\n    .then(($btn) => {\n    cy.wrap($btn).click();\n});\ncy.get('span').contains('Uploaded').should('be.visible');\n//cy.get('[data-cy=\"attachment-close-btn\"]').click();\ncy.get('.vendor-payment-save-button > .btn').click();\ncy.get('[class=\"k-button-text\"]').contains('Submit').click();\ncy.get('[type=\"button\"]').contains('Confirm').click();\n// Create Estimate\ncy.contains('.link.text-info.ng-star-inserted', 'Create Estimate', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true }); // Force click in case of re-render issues\n});\ncy.contains('.k-notification-content', 'Estimate', { timeout: 15000 }).should('contain', 'created.');\n// Process payment\ncy.contains('.link.text-info.ng-star-inserted', 'Process Payment', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true });\n});\ncy.contains('.k-notification-content', 'Payment', { timeout: 15000 }).should('contain', 'processed.');\nlogout();\n//login with internal account------------------------------------------------\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\n//setup Misc Deduction\ncy.visit(this.urls.miscDeduction);\ncy.wait(5000); //need to put wait because screen does not load fully\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\nsetupOrCleanMiscDeduction();\ncy.visit(this.urls.vendorPaymentSearch);\nselectVendorPayment();\nprocessVendorRequest();\nfinalizeBatch();\n//delete Misc Deduction\ncy.visit(this.urls.miscDeduction);\ncy.wait(3000); //need to put wait because screen does not load fully\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[data-cy=\"misc-deductions-table\"]', { timeout: 20000 })\n    .contains('td', 'PRODUCTION ON 5TH - VENDOR PAYMENTS', { timeout: 20000 })\n    .parents('tr')\n    .find('[data-cy=\"delete-misc-deduction-btn\"]')\n    .click();\ncy.get('.k-notification-content', { timeout: 20000 }).should('contain.text', 'Successfully Deleted Miscellaneous Deduction');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.k-grid-add-command`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.k-grid-add-command`, but never found it.\n    at Context.eval (webpack:///../../../../libs/core-payroll/src/lib/99-legacy/path/fo-vp-request-details.ts:5:0)",
+                "diff": null
+              },
+              "uuid": "025e7635-3e00-48b0-b911-0482cabaa73c",
+              "parentUUID": "27cc70ca-0881-496b-8007-a39cd322e5f5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "025e7635-3e00-48b0-b911-0482cabaa73c"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 3689518,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "7cf0a700-6c02-4453-8fe3-c0593c9074e2",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\20000-batch\\batch-TC20001.cy.ts",
+      "file": "src\\e2e\\kl\\20000-batch\\batch-TC20001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d2503016-0bdc-4f5f-8ae5-d048cbfe5249",
+          "title": "Post Invoice Generation",
+          "fullFile": "src\\e2e\\kl\\20000-batch\\batch-TC20001.cy.ts",
+          "file": "src\\e2e\\kl\\20000-batch\\batch-TC20001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC20001",
+              "fullTitle": "Post Invoice Generation TC20001",
+              "timedOut": null,
+              "duration": 43656,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 13/03/25---SK 24/12/24, SK 31/12/24, SK 14/02/2025, SK 26/02/25, Lilian 1/3/2025\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter batch - completed, customer name and batch type Vendor\n      3. Click result\n      4. Click any report checkbox\n      5. Click button Combined PDF or Individual PDF\n      */\n//filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '105232',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\n//click batch\ncy.disablePopUps();\ncy.contains('[class=\"btn btn-primary\"]', 'View').first().invoke('removeAttr', 'target').click();\n//validate page has loaded fully\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('.page-title', { timeout: 20000 }).should('be.visible');\n//checkbox for reports\n//payroll register\ncy.get('li[data-treeindex=\"0_3\"] input[type=\"checkbox\"]', { timeout: 5000 }).click({ force: true });\n//invoice fringe detail\ncy.get('li[data-treeindex=\"0_8\"] input[type=\"checkbox\"]', { timeout: 5000 }).click({ force: true });\n//payroll journal\ncy.get('li[data-treeindex=\"0_11\"] input[type=\"checkbox\"]', { timeout: 5000 }).click({ force: true });\n//individual download\ncy.contains('button', 'Individual PDF').should('be.visible').should('not.be.disabled').click();\n//combined download\ncy.contains('button', 'Combined PDF', { timeout: 20000 }).should('be.visible').should('not.be.disabled').click();\n// //validate download\n// const downloadsFolder = Cypress.config('downloadsFolder');\n// // List all PDFs in the downloads folder\n// cy.task('readDownloadsFolder', downloadsFolder).then((files: string[]) => {\n//     // Define the expected filename patterns\n//     const expectedPatterns = [\n//         /-Consolidate Fringe\\.pdf$/i,\n//         /-Payroll Edit\\.pdf$/i,\n//         /-Workers Compensation\\.pdf$/i,\n//         /reports\\.pdf$/i\n//     ];\n//     // Check each expected pattern has a matching file\n//     expectedPatterns.forEach((pattern) => {\n//         const matchingFile = files.find((file) => pattern.test(file));\n//         expect(matchingFile, `File matching pattern \"${pattern}\" should exist`).to.exist;\n//         // Validate the file content if needed\n//         if (matchingFile) {\n//             const filePath = `${downloadsFolder}/${matchingFile}`;\n//             cy.task('getPdfContent', filePath).then((text: string) => {\n//                 cy.log(`Content of ${matchingFile}:`, text);\n//                 // Add content assertions here (e.g., expect(text).to.include('Expected Text'));\n//             });\n//         }\n//     });\n//     // Delete all matching files after validation\n//     files.forEach((file) => {\n//         if (expectedPatterns.some((pattern) => pattern.test(file))) {\n//             cy.task('deleteFileIfExists', `${downloadsFolder}/${file}`);\n//         }\n//     });\n// });",
+              "err": {},
+              "uuid": "1bacb9b4-9e40-4721-a18c-87ee5635f54f",
+              "parentUUID": "d2503016-0bdc-4f5f-8ae5-d048cbfe5249",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1bacb9b4-9e40-4721-a18c-87ee5635f54f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 43656,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b65b070a-8dc4-4197-9de5-98fb72803c48",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30001.cy.ts",
+      "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f465ac72-ca78-4497-8bf4-3f76febd20b4",
+          "title": "Verify check is generated - Payee Without DD Setup",
+          "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30001.cy.ts",
+          "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC30001",
+              "fullTitle": "Verify check is generated - Payee Without DD Setup TC30001",
+              "timedOut": null,
+              "duration": 30799,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 13/03/25 ---SK 26/12/24, SK 02/01/25, SK 22/01/25, SK 26/02/25, SK 06/03/25\n      Module: Vendor Payment\n      #---Using NET company\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter Batch ID and batch type Vendor\n      3. Click result\n      4. Click Create Check PDF button\n      5. Verify check is generated\n      */\n//filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '34367',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\n//click batch\ncy.disablePopUps();\ncy.contains('.btn.btn-primary', 'View').first().click();\n//create check pdf----------------------------------------------------\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('.page-title', { timeout: 20000 }).should('be.visible');\ncy.get('.btn.btn-info.mt-4', { timeout: 20000 }).should('contain.text', 'Create Check PDF').should('be.visible').click();\ncy.get('.fa-spinner.fa-spin', { timeout: 15000 }).should('not.exist');",
+              "err": {},
+              "uuid": "b63f58cf-b0e5-4e76-b215-092cd24f2007",
+              "parentUUID": "f465ac72-ca78-4497-8bf4-3f76febd20b4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b63f58cf-b0e5-4e76-b215-092cd24f2007"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 30799,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "7c51a965-9082-46f9-a565-9812f996d40f",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30002.cy.ts",
+      "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30002.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ac3d727d-2cd0-4626-a08c-bc88024fb6fc",
+          "title": "Verify check is generated - Payee With DD Setup",
+          "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30002.cy.ts",
+          "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30002.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC30002",
+              "fullTitle": "Verify check is generated - Payee With DD Setup TC30002",
+              "timedOut": null,
+              "duration": 24186,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 11/03/25 SK 07/03/25-------SK 22/01/25, SK 17/02/2025, SK 26/02/25, SK 06/03/25\n      Module: Vendor Payment\n      #---Using CAN company\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter Batch ID and batch type Vendor\n      3. Click result\n      4. Click Create Check PDF button\n      5. Verify check is generated\n      */\n//filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '105232',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\n//click batch\ncy.disablePopUps();\ncy.contains('.btn.btn-primary', 'View').first().click();\n// Create Check PDF\ncy.get('.page-title', { timeout: 20000 }).should('be.visible');\ncy.get('.btn.btn-info.mt-4', { timeout: 20000 }).should('be.visible').should('contain.text', 'Create Check PDF').click();\n// Wait for spinner to disappear before proceeding\ncy.get('.fa-spinner.fa-spin', { timeout: 15000 }).should('not.exist');",
+              "err": {},
+              "uuid": "938ef1f7-c091-4e9b-91f3-4c743d33a689",
+              "parentUUID": "ac3d727d-2cd0-4626-a08c-bc88024fb6fc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "938ef1f7-c091-4e9b-91f3-4c743d33a689"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 24186,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2bd047f7-3567-4d35-9fe2-000a18784514",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30003.cy.ts",
+      "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30003.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0d5ad960-4349-4532-b12c-cc2e243da0e6",
+          "title": "Verify ERVS Checks for USA client have MICR Line.",
+          "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30003.cy.ts",
+          "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30003.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC30003",
+              "fullTitle": "Verify ERVS Checks for USA client have MICR Line. TC30003",
+              "timedOut": null,
+              "duration": 51750,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 13/03/25 SK 11/03/25----SK 31/12/24, SK 22/01/25, SK 14/02/2025, SK 26/02/25, SK 06/03/25\n      Module: Vendor Payment\n      #---Using NET company\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter Batch ID - USA and batch type Vendor\n      3. Click result\n      4. Click Create Check PDF button\n      5. Open check and verify MICR line MANUALLY\n      */\n//filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '34367',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\n//click batch\ncy.disablePopUps();\ncy.contains('.btn.btn-primary', 'View').first().click();\n// Create Check PDF\ncy.get('.page-title', { timeout: 20000 }).should('be.visible');\ncy.get('.btn.btn-info.mt-4', { timeout: 20000 }).should('be.visible').should('contain.text', 'Create Check PDF').click();\n// Wait for spinner to disappear before proceeding\ncy.get('.fa-spinner.fa-spin', { timeout: 15000 }).should('not.exist');",
+              "err": {},
+              "uuid": "fb9edaae-2c62-430b-b4d6-dee2d2c7404b",
+              "parentUUID": "0d5ad960-4349-4532-b12c-cc2e243da0e6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fb9edaae-2c62-430b-b4d6-dee2d2c7404b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 51750,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "a48eba72-609d-45bc-822d-1a38468eba38",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30004.cy.ts",
+      "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30004.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fe7d479a-4384-4297-a5a4-67f111f66de7",
+          "title": "Verify ERVS Checks for CANADA client have MICR Line.",
+          "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30004.cy.ts",
+          "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30004.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC30004",
+              "fullTitle": "Verify ERVS Checks for CANADA client have MICR Line. TC30004",
+              "timedOut": null,
+              "duration": 21755,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 13/03/25 SK 11/03/25 ---SK 26/12/24, SK 31/12/24, SK 22/01/25, SK 17/02/2025, SK 26/02/25, SK 06/03/25\n      Module: Vendor Payment\n      #---Using CAN company\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter Batch ID - CAN and batch type Vendor\n      3. Click result\n      4. Click Create Check PDF button\n      5. Open check and verify MICR line MANUALLY\n      */\n//filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '105232',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\n//click batch\ncy.disablePopUps();\ncy.contains('.btn.btn-primary', 'View').first().click();\n// Create Check PDF\ncy.get('.page-title', { timeout: 20000 }).should('be.visible');\ncy.get('.btn.btn-info.mt-4', { timeout: 20000 }).should('be.visible').should('contain.text', 'Create Check PDF').click();\n// Wait for spinner to disappear before proceeding\ncy.get('.fa-spinner.fa-spin', { timeout: 15000 }).should('not.exist');",
+              "err": {},
+              "uuid": "00c7e62f-d039-4022-9840-bdd3452fee3f",
+              "parentUUID": "fe7d479a-4384-4297-a5a4-67f111f66de7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "00c7e62f-d039-4022-9840-bdd3452fee3f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 21755,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "6c610d00-8845-480f-ad0e-a9dff5394eeb",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30005.cy.ts",
+      "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30005.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4416bc1b-1f40-4c83-9644-05f58fb2d0f4",
+          "title": "Confirm Chandlers signature on CHECK STUBS",
+          "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30005.cy.ts",
+          "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30005.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC30005",
+              "fullTitle": "Confirm Chandlers signature on CHECK STUBS TC30005",
+              "timedOut": null,
+              "duration": 20307,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 13/03/25 ---SK 26/12/24, SK 31/12/24, SK 14/02/2025, SK 26/02/25, SK 06/03/25\n      Module: Vendor Payment\n      #---Using NET company\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter Batch ID - CAN and batch type Vendor\n      3. Click result\n      4. Click Create Check PDF button\n      5. Verify signature is automatically generated on check MANUALLY\n      */\n//filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '34367',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\n//click batch\ncy.disablePopUps();\ncy.contains('.btn.btn-primary', 'View').first().click();\n// Create Check PDF\ncy.get('.page-title', { timeout: 20000 }).should('be.visible');\ncy.get('.btn.btn-info.mt-4', { timeout: 20000 }).should('be.visible').should('contain.text', 'Create Check PDF').click();\n// Wait for spinner to disappear before proceeding\ncy.get('.fa-spinner.fa-spin', { timeout: 15000 }).should('not.exist');",
+              "err": {},
+              "uuid": "618fbac8-28ea-4e59-bb0c-f14d36978f2e",
+              "parentUUID": "4416bc1b-1f40-4c83-9644-05f58fb2d0f4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "618fbac8-28ea-4e59-bb0c-f14d36978f2e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 20307,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "9b838ca3-390d-4b8e-8b01-9808a1b8c2a5",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30006-TC30008.cy.ts",
+      "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30006-TC30008.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c2bbe3ec-b248-4704-8ff4-120abfc4cef3",
+          "title": "Select Batch(es) to send to Check Printing",
+          "fullFile": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30006-TC30008.cy.ts",
+          "file": "src\\e2e\\kl\\30000-check-printing\\check-printing-TC30006-TC30008.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC30006",
+              "fullTitle": "Select Batch(es) to send to Check Printing TC30006",
+              "timedOut": null,
+              "duration": 91820,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 26/03/25, SK 13/03/25 ---SK 22/01/25, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to batch search page\n      2. Filter Batch - Completed, batch type Vendor\n      3. Tick checkbox\n      */\n// Filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '34367',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\ntickCheckbox();\nprintInstruction();\ncy.visit(this.urls.checkPrinting);\ncheckPrint();\ncy.get('strong').click();\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('.btn.btn-primary.mr-1', { timeout: 60000 }).should('be.visible').and('contain.text', 'Save');\ncy.get('[routerlink=\"audit-logs\"]').click();\nvalidateHistory();",
+              "err": {},
+              "uuid": "9ccbcbb1-546d-4cc4-b1d1-b8c7fc70fdd7",
+              "parentUUID": "c2bbe3ec-b248-4704-8ff4-120abfc4cef3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC30007",
+              "fullTitle": "Select Batch(es) to send to Check Printing TC30007",
+              "timedOut": null,
+              "duration": 285,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 13/03/25 --- SK 22/01/25, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Click Print Instruction button\n      2. Update print instruction\n      3. Click button Sent to Check Printing\n      */\ncy.readFile('src/fixtures/check-printing-result.json').then((data) => {\n    data.TC30006.isPassed = false;\n    cy.writeFile('src/fixtures/check-printing-result.json', data);\n});\n// Uncomment these if you want them to run\n// printInstruction();\n// cy.visit(this.urls.checkPrinting);\n// checkPrint();",
+              "err": {},
+              "uuid": "169d43da-d625-4404-9aa2-c14e18cdc001",
+              "parentUUID": "c2bbe3ec-b248-4704-8ff4-120abfc4cef3",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC30008",
+              "fullTitle": "Select Batch(es) to send to Check Printing TC30008",
+              "timedOut": null,
+              "duration": 43,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 13/03/25 --- SK 22/01/25, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Click Batch ID link\n      2. Click History tab\n      3. Validate status\n    */\ncy.readFile('src/fixtures/check-printing-result.json').then((data) => {\n    data.TC30007.isPassed = false;\n    cy.writeFile('src/fixtures/check-printing-result.json', data);\n});\n// Uncomment these if you want them to run\n// cy.get('strong').click();\n// cy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\n// cy.get('.btn.btn-primary.mr-1', { timeout: 60000 }).should('be.visible').and('contain.text', 'Save');\n// cy.get('[routerlink=\"audit-logs\"]').click();\n// validateHistory();",
+              "err": {},
+              "uuid": "4da456d7-246c-4020-a5c9-c1831fa6a43f",
+              "parentUUID": "c2bbe3ec-b248-4704-8ff4-120abfc4cef3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9ccbcbb1-546d-4cc4-b1d1-b8c7fc70fdd7",
+            "169d43da-d625-4404-9aa2-c14e18cdc001",
+            "4da456d7-246c-4020-a5c9-c1831fa6a43f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 92148,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "df14fe5f-a514-4fc7-aa21-2b1af35c0769",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\50000-canadian-payroll\\canadian-payroll-TC50001.cy.ts",
+      "file": "src\\e2e\\kl\\50000-canadian-payroll\\canadian-payroll-TC50001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ad5aa3c5-06f3-41ca-bcc5-8c0bcf6ac2f9",
+          "title": "Create New Vendor Payment Request - CAN",
+          "fullFile": "src\\e2e\\kl\\50000-canadian-payroll\\canadian-payroll-TC50001.cy.ts",
+          "file": "src\\e2e\\kl\\50000-canadian-payroll\\canadian-payroll-TC50001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC50001",
+              "fullTitle": "Create New Vendor Payment Request - CAN TC50001",
+              "timedOut": null,
+              "duration": 282972,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 16/04/25, SK 08/04/25, SK 27/03/25, SK 13/03/25 ---SK 22/01/25, SK 17/02/2025, SK 24\n      Module: Vendor Payment\n      High-level Steps:\n\n      *Payee with DD setup\n      *Check MICR Line\n      *Check Signature\n      *Sent check to printing\n\n      1. Login and go to vendor payment page\n      2. Click Add Request button\n      3. Fill in advertiser\n      4. Click Add Payment button\n      5. Fill in details - Pay Type = Check By Mail\n      6. Tick Request Estimate checkbox\n      7. Save\n      8. Click hyperlink Create Estimate\n      9. Click hyperlink Process Payment\n      10. Logout and relogin as internal user\n      11. Go to vendor payment page and click view on recent request\n      12. Click on hyperlink Process Payment\n      13. Fill in mandatory fields\n      14. Click Save > Calculate > Ready > Approved > Pay\n      15. Click on Batch ID generated\n      16. Batch finalized automatically\n      17. Click Create Check PDF\n    - check MICR Line\n    - check signature\n      18. Sent check to printing > batch search, print instructions\n      19. Verify status in History tab (batch details)\n\n      */\n//Login as requester\ncy.userLoginNonAdmin();\ncy.get('[data-cy=\"username\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpCadEmail);\ncy.get('[data-cy=\"next\"]', { timeout: 30000 }).should('be.visible').click();\ncy.get('[data-cy=\"password\"]', { timeout: 30000 }).should('be.visible').type(this.users.vpCadPassword);\ncy.get('[data-cy=\"login\"]', { timeout: 30000 }).should('be.visible').and('be.enabled').click({ force: true });\n//cy.get('.sendbutton').click();\ncy.get('body').then(($body) => {\n    if ($body.find('.sendbutton').length > 0) {\n        // If the button exists, scroll into view and click\n        cy.get('.sendbutton').scrollIntoView().should('be.visible').click();\n    }\n    else {\n        // Log a message if the button doesn't exist\n        cy.log('Send button does not exist, skipping...');\n    }\n});\ncy.foVpRequestDetailsCreateNewRequest({\n    useFaker: false,\n    advertiser: 'Conagra Foods',\n    payeeName: '1011218',\n    vendorInvoice: 'INV-ANX9AT6894',\n    issueDate: '1/1/2030',\n    poNumber: '551AAA30100',\n    jobNumber: 'JOB-003',\n    estimate: true,\n    payType: 'Check By Mail',\n    description: 'Misc',\n    quantity: '10',\n    rate: '36'\n});\n// Create Estimate\ncy.contains('.link.text-info.ng-star-inserted', 'Create Estimate', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true }); // Force click in case of re-render issues\n});\ncy.contains('.k-notification-content', 'Estimate', { timeout: 15000 }).should('contain', 'created.');\n// Process payment\ncy.contains('.link.text-info.ng-star-inserted', 'Process Payment', { timeout: 60000 })\n    .should('be.visible')\n    .then(($el) => {\n    cy.wrap($el).click({ force: true });\n});\ncy.contains('.k-notification-content', 'Payment', { timeout: 15000 }).should('contain', 'processed.');\nlogout();\n//login with internal account------------------------------------------------\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\nselectVendorPayment();\nprocessVendorRequest();\nfinalizeBatch();\n// Create Check PDF\ncy.get('.page-title', { timeout: 60000 }).should('be.visible');\ncy.get('.btn.btn-info.mt-4', { timeout: 60000 })\n    .should('be.visible')\n    .should('contain.text', 'Create Check PDF')\n    .click({ force: true });\n// Wait for spinner to disappear before proceeding\ncy.get('.fa-spinner.fa-spin', { timeout: 60000 }).should('not.exist');\nfilterBatch();\ncy.psBatchSearchSearch({\n    useFaker: false,\n    customerId: '105232',\n    batchOwnerUserId: 'ALAIN VendorPaymentTestAutomation',\n    batchTypeList: 'Vendor',\n    batchStatusList: 'Completed'\n});\ntickCheckbox();\nprintInstruction();\ncy.visit(this.urls.checkPrinting);\ncheckPrint();\ncy.get('strong').click();\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('.btn.btn-primary.mr-1', { timeout: 60000 }).should('be.visible').and('contain.text', 'Save');\ncy.get('[routerlink=\"audit-logs\"]').click();\nvalidateHistory();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 30000ms: Expected to find element: `[role=\"gridcell\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 30000ms: Expected to find element: `[role=\"gridcell\"]`, but never found it.\n    at Context.eval (webpack:///../../../../libs/core-payroll/src/lib/99-legacy/path/ps-batch-search.ts:5:0)",
+                "diff": null
+              },
+              "uuid": "c708b35f-a296-4762-bb8c-0a2dbb3d4848",
+              "parentUUID": "ad5aa3c5-06f3-41ca-bcc5-8c0bcf6ac2f9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "c708b35f-a296-4762-bb8c-0a2dbb3d4848"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 282972,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b74369eb-ed6d-43f0-b739-577c58936cf3",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40001.cy.ts",
+      "file": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4612a1d1-c183-4943-97d7-6a6892bae56d",
+          "title": "Verify VOID process successfully",
+          "fullFile": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40001.cy.ts",
+          "file": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC40001",
+              "fullTitle": "Verify VOID process successfully TC40001",
+              "timedOut": null,
+              "duration": 62967,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 09/05/25, SK 27/03/25, SK 25/03/25, SK 24/01/25, SK 14/02/2025, SK 24/02/25, SK 27/02/25, SK 06/03/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment search page\n      2. Filter search\n      3. Click View button\n      4. Click Credit button\n      5. Fill in details > Checks Voided\n      6. When credit ID is generated, click on it > the value will be negative\n      7. Click on Batch ID generated\n      8. Verify > Batch Type = Void, Check amount is negative\n    */\n//login with internal account------------------------------------------------\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\ncy.selectKendoDatePickerFieldCustomChild('[name=\"paymentIssueDateStart\"]', '11/4/2024', 0);\ncy.selectKendoDatePickerFieldCustomChild('[name=\"paymentIssueDateEnd\"]', '11/6/2024', 0);\ncy.get('[class=\"btn btn-primary\"]').click({ force: true }).wait(2000);\ncy.get('[title=\"Page 1\"]')\n    .scrollIntoView()\n    .should('be.visible') // Ensure it's visible before clicking\n    .click({ force: true })\n    .wait(2000);\ncy.disablePopUps();\ncy.contains('button', 'View').first().click();\n// cy.get('[role=\"grid\"] tbody tr').each(($row, index) => {\n//     if ($row.text().includes('Payment Received / Paid In Full')) {\n//         cy.wrap($row).scrollIntoView(); // Ensure the row is visible\n//         cy.disablePopUps();\n//         cy.wrap($row)\n//             .find('[class=\"k-button-text\"]') // Find \"View\" button within this row only\n//             .contains('View')\n//             .click({ force: true });\n//         return false; // Stop after clicking the first match\n//     }\n// });\ncreditVoid();\nvalidateNotification();\ncy.get('.form-group.alert.alert-danger', { timeout: 60000 })\n    .should('exist')\n    .should('be.visible')\n    .find('a')\n    .should('exist')\n    .should('be.visible')\n    .click();\nvalidateNegativeNumber();\n//batch link\ncy.get('a[href^=\"/ps/batch-details/\"]', { timeout: 60000 }).invoke('removeAttr', 'target').click();\nvalidateVoid();",
+              "err": {
+                "message": "CypressError: Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.ts` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.",
+                "estack": "CypressError: Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.ts` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.\n    at timedOutWaitingForPageLoad (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:130639:64)\n    at <unknown> (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:130955:16)\n    at tryCatcher (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at <unknown> (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:4209:41)\n    at tryCatcher (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1720:18)\n    at _drainQueueStep (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2430:12)\n    at _drainQueue (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2423:9)\n    at Async._drainQueues (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2439:5)\n    at Async.drainQueues (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2309:14)\nFrom Your Spec Code:\n    at Context.eval (webpack:///../../../../libs/login/src/lib/platform-login.ts:191:0)",
+                "diff": null
+              },
+              "uuid": "7b58aed4-305c-49d9-a211-a7de6986d1e0",
+              "parentUUID": "4612a1d1-c183-4943-97d7-6a6892bae56d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "7b58aed4-305c-49d9-a211-a7de6986d1e0"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 62967,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "78f79dc9-a1f1-4dcc-a28a-955a4a128f41",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40002.cy.ts",
+      "file": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40002.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e5dc59b3-7b55-4b79-ad2c-cf717f820a77",
+          "title": "Verify V/R process successfully",
+          "fullFile": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40002.cy.ts",
+          "file": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40002.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC40002",
+              "fullTitle": "Verify V/R process successfully TC40002",
+              "timedOut": null,
+              "duration": 60207,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 09/05/25, SK 08/04/25, SK 27/03/25, SK 25/03/25, SK 24/01/25, SK 14/02/2025, SK 24/02/25, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment search page\n      2. Filter search\n      3. Click View button\n      4. Click Credit button\n      5. Fill in details > Checks Voided\n      6. Tick two checkboxes\n      7. When credit ID is generated, click on it > the replacement credit ID\n      8. Re-click buttons Ready > Approved > Pay\n      9. Click on new Batch ID generated\n      10. Validate status message > BATCH FINALIZED\n    */\n// Login with internal account and visit vendor payment search\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\ncy.get('[role=\"rowgroup\"]', { timeout: 20000 }).should('be.visible');\ncy.get('[name=\"searchCriteria.customerId\"]').type('Anheuser-Busch Companies', { delay: 100 }).type('{enter}');\ncy.selectKendoComboBoxCustomChild('[name=\"searchCriteria.vendorPaymentStatus\"]', 'Processed');\ncy.selectKendoComboBoxCustomChild('[name=\"searchCriteria.invoiceStatus\"]', 'Delivered');\ncy.get('[class=\"btn btn-primary\"]').click({ force: true }).wait(2000);\ncy.get('[title=\"Page 2\"]')\n    .scrollIntoView()\n    .should('be.visible') // Ensure it's visible before clicking\n    .click({ force: true })\n    .wait(2000);\ncy.disablePopUps();\ncy.contains('button', 'View').first().click();\n// cy.selectKendoDatePickerFieldCustomChild('[name=\"paymentIssueDateStart\"]', '10/7/2024', 0);\n// cy.selectKendoDatePickerFieldCustomChild('[name=\"paymentIssueDateEnd\"]', '10/11/2024', 0);\n// cy.get('[class=\"btn btn-primary\"]').click({ force: true }).wait(2000);\n// cy.get('[title=\"Page 2\"]')\n//     .scrollIntoView()\n//     .should('be.visible') // Ensure it's visible before clicking\n//     .click({ force: true })\n//     .wait(2000);\n// cy.get('[role=\"grid\"] tbody tr').each(($row, index) => {\n//     if ($row.text().includes('Payment Received / Paid In Full')) {\n//         cy.wrap($row).scrollIntoView(); // Ensure the row is visible\n//         cy.disablePopUps();\n//         cy.wrap($row)\n//             .find('[class=\"k-button-text\"]') // Find \"View\" button within this row only\n//             .contains('View')\n//             .click({ force: true });\n//         return false; // Stop after clicking the first match\n//     }\n// });\ncreditVoid();\nvalidateNotification();\ncy.get('a')\n    .contains(/^\\d+ \\(Replacement\\)$/)\n    .click({ force: true });\ncy.selectKendoDatePickerFieldCustomChild('[name=\"dueDate\"]', '1/1/2030', 0);\n//save\ncy.get('[class=\"btn btn-primary\"]').contains('Save').click();\n//calculate\ncy.get('[title=\"Calculate Subtotal & Total Due\"]').click().wait(2000);\n//ready\ncy.contains('button.btn.btn-success', 'Ready', { timeout: 20000 })\n    .should('be.visible')\n    .then(($btn) => {\n    cy.wrap($btn).click();\n});\n//approved\ncy.get('[class=\"btn btn-primary\"]', { timeout: 25000 }).contains('Approved', { timeout: 10000 }).click();\n//pay\ncy.get('[class=\"btn btn-primary\"]', { timeout: 25000 }).contains(' Pay Vendor & Invoice Customer ', { timeout: 10000 }).click();\n// cy.get('.form-group.alert.alert-danger', { timeout: 60000 })\n//     .should('exist')\n//     .should('be.visible')\n//     .find('a')\n//     .should('exist')\n//     .should('be.visible')\n//     .click();\n//batch link\ncy.get('a[href^=\"/ps/batch-details/\"]', { timeout: 60000 }).invoke('removeAttr', 'target').click();\nvalidateStatus();",
+              "err": {
+                "message": "CypressError: Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.ts` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.",
+                "estack": "CypressError: Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `cypress.config.ts` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.\n    at timedOutWaitingForPageLoad (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:130639:64)\n    at <unknown> (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:131624:16)\n    at tryCatcher (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at <unknown> (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:4209:41)\n    at tryCatcher (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1720:18)\n    at _drainQueueStep (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2430:12)\n    at _drainQueue (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2423:9)\n    at Async._drainQueues (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2439:5)\n    at Async.drainQueues (https://app.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2309:14)\nFrom Your Spec Code:\n    at Context.eval (webpack:///../../../../libs/login/src/lib/platform-login.ts:177:0)",
+                "diff": null
+              },
+              "uuid": "8c45ed48-79d2-4529-9d38-c0174ed20bd8",
+              "parentUUID": "e5dc59b3-7b55-4b79-ad2c-cf717f820a77",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "8c45ed48-79d2-4529-9d38-c0174ed20bd8"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 60207,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "c8f00f67-7544-4fdf-9e9d-5e9db476f50c",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40003.cy.ts",
+      "file": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40003.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "69a66b0a-35ff-4329-a7a1-a2589c3db465",
+          "title": "Verify TC reverse/adjustments process successfully",
+          "fullFile": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40003.cy.ts",
+          "file": "src\\e2e\\kl\\40000-ervs-credit\\ervs-credit-TC40003.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC40003",
+              "fullTitle": "Verify TC reverse/adjustments process successfully TC40003",
+              "timedOut": null,
+              "duration": 37122,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 09/05/25, SK 17/04/25, SK 14/04/25, SK 08/04/25, SK 27/03/25, SK 25/03/25, SK 14/03/25 ---SK 24/01/25, SK 26/02/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to vendor payment search page\n      2. Filter search\n      3. Click View button\n      4. Click Credit button\n      5. Fill in details > Refund Sent By Recipient\n      6. Tick two checkboxes\n      7. When credit ID is generated, click on it > the replacement credit ID\n      8. Adjust amount and click Save > Calculate\n      9. Re-click buttons Ready > Approved > Pay\n      10. Click on new Batch ID generated\n      11. Validate status message > BATCH FINALIZED\n    */\n// Login with internal account and visit vendor payment search\nconst userName = Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_VENDOR_PAYMENT');\nconst password = Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_VENDOR_PAYMENT');\ncy.userLoginWithAspectRatio(userName, password);\ncy.visit(this.urls.vendorPaymentSearch);\ncy.get('[role=\"rowgroup\"]', { timeout: 20000 }).should('be.visible');\ncy.get('[name=\"searchCriteria.customerId\"]').type('Anheuser-Busch Companies', { delay: 100 }).type('{enter}');\ncy.selectKendoComboBoxCustomChild('[name=\"searchCriteria.vendorPaymentStatus\"]', 'Processed');\ncy.selectKendoComboBoxCustomChild('[name=\"searchCriteria.invoiceStatus\"]', 'Delivered');\ncy.get('[class=\"btn btn-primary\"]').click({ force: true }).wait(2000);\ncy.get('[title=\"Page 3\"]')\n    .scrollIntoView()\n    .should('be.visible') // Ensure it's visible before clicking\n    .click({ force: true })\n    .wait(2000);\ncy.disablePopUps();\ncy.contains('button', 'View').first().click();\n// cy.selectKendoDatePickerFieldCustomChild('[name=\"paymentIssueDateStart\"]', '9/16/2024', 0);\n// cy.selectKendoDatePickerFieldCustomChild('[name=\"paymentIssueDateEnd\"]', '9/19/2024', 0);\n// cy.get('[class=\"btn btn-primary\"]').click({ force: true }).wait(2000);\n// cy.get('[title=\"Page 2\"]')\n//     .scrollIntoView()\n//     .should('be.visible') // Ensure it's visible before clicking\n//     .click({ force: true })\n//     .wait(2000);\n// cy.get('[role=\"grid\"] tbody tr').each(($row, index) => {\n//     const rowText = $row.text();\n//     if (rowText.includes('Payment Received / Paid In Full') && !rowText.includes('Wire') && !rowText.includes('PUR')) {\n//         cy.wrap($row).scrollIntoView(); // Ensure the row is visible\n//         cy.disablePopUps();\n//         cy.wrap($row)\n//             .find('[class=\"k-button-text\"]') // Find \"View\" button within this row only\n//             .contains('View')\n//             .click({ force: true });\n//         return false; // Stop after clicking the first match\n//     }\n// });\ncreditAdjust();\nvalidateNotification();\ncy.get('a')\n    .contains(/^\\d+ \\(Replacement\\)$/)\n    .click({ force: true });\ncy.get('div.form-group.alert.alert-warning', { timeout: 60000 }).should('contain.text', 'Relacement');\neditAmount();\n//batch link\ncy.get('a[href^=\"/ps/batch-details/\"]', { timeout: 60000 })\n    .invoke('removeAttr', 'target') // Prevents opening in a new tab\n    .click();\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.contains('button', 'Calculate', { timeout: 20000 }).should('exist').should('be.visible');\nvalidateStatus();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 20000ms: Expected to find element: `[role=\"rowgroup\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 20000ms: Expected to find element: `[role=\"rowgroup\"]`, but never found it.\n    at Context.eval (webpack:///./src/e2e/kl/40000-ervs-credit/ervs-credit-TC40003.cy.ts:86:54)",
+                "diff": null
+              },
+              "uuid": "e1115bd4-07e7-49e5-afc1-aced0b2414cc",
+              "parentUUID": "69a66b0a-35ff-4329-a7a1-a2589c3db465",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "e1115bd4-07e7-49e5-afc1-aced0b2414cc"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 37122,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1da15308-1665-4f47-8a0d-eacf7eacc141",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\60000-post-payments\\post-payments-TC60001-TC60002.cy.ts",
+      "file": "src\\e2e\\kl\\60000-post-payments\\post-payments-TC60001-TC60002.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [
+        {
+          "title": "TC60002",
+          "fullTitle": "TC60002",
+          "timedOut": null,
+          "duration": 55,
+          "state": "passed",
+          "speed": "fast",
+          "pass": true,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "/*\n  Last Updated: SK 15/04/25\n  Module: Vendor Payment\n  High-level Steps:\n  1. Generate positive file and validate\n*/\ncy.readFile('src/fixtures/positive-pay-result.json').then((data) => {\n    data.TC60001.isPassed = false;\n    cy.writeFile('src/fixtures/positive-pay-result.json', data);\n});",
+          "err": {},
+          "uuid": "9d6eea30-8a5c-4670-8de9-bba3ad34292e",
+          "parentUUID": "1da15308-1665-4f47-8a0d-eacf7eacc141",
+          "isHook": false,
+          "skipped": false
+        }
+      ],
+      "suites": [
+        {
+          "uuid": "84adcbf5-dd9f-462e-98fc-c40369ea6515",
+          "title": "Create positive payments and generate reports",
+          "fullFile": "src\\e2e\\kl\\60000-post-payments\\post-payments-TC60001-TC60002.cy.ts",
+          "file": "src\\e2e\\kl\\60000-post-payments\\post-payments-TC60001-TC60002.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC60001",
+              "fullTitle": "Create positive payments and generate reports TC60001",
+              "timedOut": null,
+              "duration": 21175,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\n      Last Updated: SK 17/04/25, SK 15/04/25\n      Module: Vendor Payment\n      High-level Steps:\n      1. Login and go to positive pay page\n      2. Fill in details to generate positive pay file\n      */\n//visit positive pay page\ncy.visit(this.urls.positivePay);\ncy.get('.spinner-threedots', { timeout: 60000 }).should('not.be.visible');\ncy.get('[class=\"search-results\"]', { timeout: 30000 }).should('be.visible');\n//fill in details\n//eor\ncy.selectKendoComboBoxListItemCustomChild('[name=\"employerOfRecordId\"]', 'ERVS');\n//bank account\ncy.get('[name=\"BankAccounts\"]').eq(1).type('ERVS - BOA  Payroll - 66581').type('{enter}');\n//run type\ncy.get('[name=\"runType\"]').select('Payroll');\n//file type\ncy.get('[name=\"fileType\"]').select('CSV');\n//period start date\ncy.selectKendoDatePickerFieldCustomChild('[class=\"k-datepicker k-input k-input-md k-rounded-md k-input-solid\"]', '1/12/2025', 3); //NODATACY\n//period end date\ncy.get('[pickertype=\"datepicker\"]').last().type('01182025');\n//check latest row to have current date - validation that POSPAY has finished generating\ncy.get('[role=\"grid\"] tbody tr')\n    .first()\n    .within(() => {\n    // Format today's date as MM/DD/YYYY\n    const today = new Date();\n    const todayFormatted = `${String(today.getMonth() + 1).padStart(2, '0')}/` +\n        `${String(today.getDate()).padStart(2, '0')}/` +\n        `${today.getFullYear()}`;\n    cy.get('td').then(($cells) => {\n        const texts = [...$cells].map((cell) => cell.innerText.trim());\n        const matchFound = texts.some((text) => text.includes(todayFormatted)); // <-- now using includes\n        expect(matchFound, `Row contains today's date: ${todayFormatted}`).to.be.true;\n    });\n});\n//Download POSPAY file\ncy.get('[role=\"presentation\"]').find('a[href^=\"/Media/Download/\"]').should('contain.text', 'POSPAYUSD').first().click();",
+              "err": {
+                "message": "AssertionError: Row contains today's date: 05/19/2025: expected false to be true",
+                "estack": "AssertionError: Row contains today's date: 05/19/2025: expected false to be true\n    at Context.eval (webpack:///./src/e2e/kl/60000-post-payments/post-payments-TC60001-TC60002.cy.ts:50:80)",
+                "diff": null
+              },
+              "uuid": "b58f366c-e6c0-42f7-9530-0e6c1c162bd3",
+              "parentUUID": "84adcbf5-dd9f-462e-98fc-c40369ea6515",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "b58f366c-e6c0-42f7-9530-0e6c1c162bd3"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 21175,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [
+        "9d6eea30-8a5c-4670-8de9-bba3ad34292e"
+      ],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 55,
+      "root": true,
+      "rootEmpty": false,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "411c6023-1551-4b54-ad04-18ec703e9891",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC001.cy.ts",
+      "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "436c2e64-7b44-4e83-bbec-594ed1d27e95",
+          "title": "Generate and store a Faker users details",
+          "fullFile": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC001.cy.ts",
+          "file": "src\\e2e\\kl\\000-prerequisites\\prerequisites-TC001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC001",
+              "fullTitle": "Generate and store a Faker users details TC001",
+              "timedOut": null,
+              "duration": 163,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Vendor Payments\nLast Updated: SK 14/01/2025, SK 12/02/2025\nHigh Level test steps:\n1. Script to generate random users to be used in other test cases\n    - vendor requester - PUR\n    - vendor requester - NET\n    - vendor requester - CAD\n*/\n//If fake-users.json exist, run this to remove and create a new one\n// const filePath = 'cypress/fixtures/fake-users.json';\n// // Delete the file if it exists using the custom task\n// cy.task('deleteFileIfExists', filePath);\nconst vp_purEmail = faker_1.faker.internet.email();\nconst vp_purFirstName = faker_1.faker.person.firstName();\nconst vp_purTempLastName = faker_1.faker.person.lastName();\nconst vp_purLastName = vp_purTempLastName + ' PUR TEST';\nconst vp_purPassword = (0, utils_1.generatePasswordWithSpecialChar)();\nconst vp_netEmail = faker_1.faker.internet.email();\nconst vp_netFirstName = faker_1.faker.person.firstName();\nconst vp_netTempLastName = faker_1.faker.person.lastName();\nconst vp_netPassword = (0, utils_1.generatePasswordWithSpecialChar)();\nconst vp_netLastName = vp_netTempLastName + ' NET TEST';\nconst vp_cadEmail = faker_1.faker.internet.email();\nconst vp_cadFirstName = faker_1.faker.person.firstName();\nconst vp_cadTempLastName = faker_1.faker.person.lastName();\nconst vp_cadPassword = (0, utils_1.generatePasswordWithSpecialChar)();\nconst vp_cadLastName = vp_cadTempLastName + ' CAD TEST';\n// Log generated details in Cypress Test Runner\ncy.log('**Generated Vendor PUR User:**');\ncy.log(`Last Name: ${vp_purLastName}`);\ncy.log(`Email: ${vp_purEmail}`);\ncy.log(`Password: ${vp_purPassword}`);\ncy.log('**Generated Vendor NET User:**');\ncy.log(`Last Name: ${vp_netLastName}`);\ncy.log(`Email: ${vp_netEmail}`);\ncy.log(`Password: ${vp_netPassword}`);\ncy.log('**Generated Vendor CAD User:**');\ncy.log(`Last Name: ${vp_cadLastName}`);\ncy.log(`Email: ${vp_cadEmail}`);\ncy.log(`Password: ${vp_cadPassword}`);\n// Combine entries into an object\nconst fakerData = {\n    vpPurEmail: vp_purEmail,\n    vpPurFirstName: vp_purFirstName,\n    vpPurLastName: vp_purLastName,\n    vpPurPassword: vp_purPassword,\n    vpNetEmail: vp_netEmail,\n    vpNetFirstName: vp_netFirstName,\n    vpNetLastName: vp_netLastName,\n    vpNetPassword: vp_netPassword,\n    vpCadEmail: vp_cadEmail,\n    vpCadFirstName: vp_cadFirstName,\n    vpCadLastName: vp_cadLastName,\n    vpCadPassword: vp_cadPassword\n};\n// Write the  to a JSON fixture file\ncy.writeFile('src/fixtures/fake-users.json', fakerData);\ncy.readFile('src/fixtures/vendor-payment-result-share-core-payroll.json').then((data) => {\n    data.TC10001xTC10001 = false;\n    data.TC10002xTC10002 = false;\n    data.TC10003xTC10003 = false;\n    data.TC10004xTC10004 = false;\n    data.TC10005xTC10005 = false;\n    data.TC10006xTC10006 = false;\n    data.TC10007xTC10007 = false;\n    data.TC10008xTC10008 = false;\n    data.TC10009xTC30002 = false;\n    data.TC10010xTC20002 = false;\n    cy.writeFile('src/fixtures/vendor-payment-result-share-core-payroll.json', data);\n});",
+              "err": {},
+              "uuid": "094608f7-215d-454c-b916-cd51b0ddf219",
+              "parentUUID": "436c2e64-7b44-4e83-bbec-594ed1d27e95",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "094608f7-215d-454c-b916-cd51b0ddf219"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 163,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "..\\..\\..\\..\\cypress\\results\\mochawesome\\ui\\payroll\\vendor-payments\\.jsons",
+        "charts": true,
+        "reportPageTitle": "ER Test Suite - UI - Payroll/VendorPayments",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "ignoreVideos": false,
+        "saveAllAttempts": false,
+        "videoOnFailOnly": false,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

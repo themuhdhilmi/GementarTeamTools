@@ -46,14 +46,20 @@ export function getDashboardData(mochaData: MochaDataAPI[]) {
       totalDuration: 0,
     },
   );
-  const statsPerPath = getDashboardDataPerPath(mochaData, "kl");
-  const statsPerPathPerModule = getDashboardDataPerPathPerModule(mochaData, "kl");
+
+  const paths = ["kl", "blr", "er", "us"];
+
+  const statsPerPath = paths.map((path) => getDashboardDataPerPath(mochaData, path));
+  const statsPerPathPerModule = paths.map((path) => getDashboardDataPerPathPerModule(mochaData, path));
+
+  const statsPerPathPerModuleFlat = statsPerPathPerModule.flat();
 
   return {
     statsPerModule,
     statsModuleTotal,
     statsPerPath,
-    statsPerPathPerModule,
+    statsPerPathPerModule : statsPerPathPerModuleFlat,
+    paths
   };
 }
 
@@ -99,7 +105,7 @@ function getDashboardDataPerPath(mochaData: MochaDataAPI[], path: string) {
 }
 
 function getDashboardDataPerPathPerModule(mochaData: MochaDataAPI[], path: string) {
-  const statsPerModule = mochaData.map((module) => {
+  const statsPerModule = mochaData.flatMap((module) => {
     const filteredResults = module.upload.flatMap(
       (uploadData) =>
         uploadData.results?.filter((result) =>
@@ -113,6 +119,7 @@ function getDashboardDataPerPathPerModule(mochaData: MochaDataAPI[], path: strin
     let totalFailed = 0;
     let totalPending = 0;
     let totalSkipped = 0;
+    let totalDuration = 0;
 
     filteredResults.forEach((result) => {
       result.suites?.forEach((suite) => {
@@ -123,6 +130,7 @@ function getDashboardDataPerPathPerModule(mochaData: MochaDataAPI[], path: strin
           totalFailed += test.state === "failed" ? 1 : 0;
           totalPending += test.pending === true ? 1 : 0;
           totalSkipped += test.skipped === true ? 1 : 0;
+          totalDuration += test.duration ?? 0;
         });
       });
     });
@@ -136,8 +144,10 @@ function getDashboardDataPerPathPerModule(mochaData: MochaDataAPI[], path: strin
       totalFailed,
       totalPending,
       totalSkipped,
+      totalDuration,
     };
   });
+  
 
   return statsPerModule;
 }

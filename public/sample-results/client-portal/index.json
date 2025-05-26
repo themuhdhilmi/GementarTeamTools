@@ -1,0 +1,626 @@
+{
+  "stats": {
+    "suites": 7,
+    "tests": 14,
+    "passes": 7,
+    "pending": 0,
+    "failures": 7,
+    "testsRegistered": 14,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-05-19T11:48:36.089Z",
+    "end": "2025-05-19T11:53:49.263Z",
+    "duration": 313174
+  },
+  "results": [
+    {
+      "uuid": "08a7b2e6-74cb-45e5-a975-84b279abf667",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC108.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC108.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5607ab38-2b8e-42b3-836c-4c7f6eefef1a",
+          "title": "Validate Ready for Approval",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC108.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC108.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC108",
+              "fullTitle": "Validate Ready for Approval TC108",
+              "timedOut": null,
+              "duration": 22925,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (21/03/25), SK (19/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Validate approval\n*/\ncy.visit(this.urls.payrollInvoice);\ncy.get('td.k-table-td', { timeout: 15000 }).should('be.visible').and('contain.text', 'Ready For Approval');\ncy.get('button[data-cy=\"approve-btn\"]').should('have.attr', 'disabled');\ncy.get('button[data-cy=\"return-btn\"]').should('have.attr', 'disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: expected '<td.k-table-td>' to contain text 'Ready For Approval', but the text was ' No records available. '",
+                "estack": "AssertionError: Timed out retrying after 15000ms: expected '<td.k-table-td>' to contain text 'Ready For Approval', but the text was ' No records available. '\n    at Context.eval (webpack:///./src/e2e/kl/client-portal-TC108.cy.ts:16:50)",
+                "diff": "- ' No records available. '\n+ 'Ready For Approval'\n"
+              },
+              "uuid": "bbc187b4-ea37-4778-845d-9fabf6ef0d2e",
+              "parentUUID": "5607ab38-2b8e-42b3-836c-4c7f6eefef1a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "bbc187b4-ea37-4778-845d-9fabf6ef0d2e"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 22925,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "60c364bb-dba7-4301-897c-a86fd11751bf",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC109-TC110.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC109-TC110.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dde93cf3-6d95-4808-bbc7-a1588e6605a0",
+          "title": "Client Reply",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC109-TC110.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC109-TC110.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC109",
+              "fullTitle": "Client Reply TC109",
+              "timedOut": null,
+              "duration": 282,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK 28/03/25, SK (20/03/25), SK (19/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. View Invoice\n*/\n// region TC109-------------------------------------------\n//view invoice\ncy.visit(this.urls.payrollInvoice);\ncy.get('td.k-table-td', { timeout: 15000 }).should('be.visible').and('contain.text', 'Ready For Approval');\ncy.get('button[data-cy=\"approve-btn\"]').should('be.enabled');\ncy.get('button[data-cy=\"return-btn\"]').should('be.enabled');\n//click View button\ncy.get('[data-cy=\"view-btn\"]').last().click();\n//validate comment\ncy.get('.k-grid-table tbody tr', { timeout: 15000 })\n    .contains('td', /ALAIN/i) // Case-insensitive match\n    .should('be.visible');\n//validate pre-invoice package\ncy.contains('b', 'Invoice Package').should('exist').and('be.visible');\n//close window\ncy.get('kendo-icon.k-i-close').click();\n//.wait(5000);\n// endregion\n// region TC110-------------------------------------------\n//return invoice\ncy.get('.spinner-threedots', { timeout: 20000 }).should('not.be.visible');\ncy.get('[data-cy=\"return-btn\"]').last().should('be.visible', { timeout: 20000 }).and('not.be.disabled').click({ force: true });\n//validate pop up\ncy.get('[data-cy=\"return-batch-dialog\"]').should('exist').should('be.visible');\n//write comments\ncy.get('[name=\"batchNotes\"]').clear().type('Please recalculate batch.', { delay: 100 });\n//.wait(2000);\n//return invoice\ncy.get('[class=\"btn btn-primary\"]').contains('Return').click();\n//validate return\ncy.get('.k-notification-success', { timeout: 10000 })\n    .should('exist')\n    .and('be.visible')\n    .within(() => {\n    cy.contains('Batch Returned').should('exist');\n});\ncy.get('[name=\"x-circle\"]', { timeout: 10000 }).click({ force: true });\ncy.get('[class=\"k-input-inner\"]').first().type('Returned').type('{enter}');\ncy.contains('td.k-table-td', 'Returned').should('exist').and('be.visible');\n// endregion",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'payrollInvoice')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'payrollInvoice')\n    at Context.eval (webpack:///./src/e2e/kl/client-portal-TC109-TC110.cy.ts:20:0)",
+                "diff": null
+              },
+              "uuid": "91212ade-8cc0-494a-8d22-e6b90abaef92",
+              "parentUUID": "dde93cf3-6d95-4808-bbc7-a1588e6605a0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC110",
+              "fullTitle": "Client Reply TC110",
+              "timedOut": null,
+              "duration": 48,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (21/03/25), SK (19/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Return batch\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC109.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "d3e81cff-6a7c-41c1-8c04-0f43396921af",
+              "parentUUID": "dde93cf3-6d95-4808-bbc7-a1588e6605a0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d3e81cff-6a7c-41c1-8c04-0f43396921af"
+          ],
+          "failures": [
+            "91212ade-8cc0-494a-8d22-e6b90abaef92"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 330,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "6f4be22e-5564-479e-8599-670d8ce61ce3",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC111.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC111.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8ddcf63c-e0d3-4df2-8108-88dbe718b2c5",
+          "title": "Returned Invoice",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC111.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC111.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC111",
+              "fullTitle": "Returned Invoice TC111",
+              "timedOut": null,
+              "duration": 19864,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (24/03/25), SK (20/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Edit returned batch\n*/\n// Filter batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    batchStatusList: 'Returned',\n    customerId: '162463',\n    batchOwnerUserId: 'Siti Khalidah A Ramli'\n});\n//go to batch\ncy.disablePopUps();\ncy.contains('button', 'View', { timeout: 10000 }).first().should('be.visible').click();\n//check comment\ncy.contains('button', '+ Expand', { timeout: 15000 }).click();\ncy.get('[class=\"k-grid-aria-root\"]', { timeout: 15000 }).eq(0).should('be.visible').and('contain.text', 'Jane Eyre_CT');\n//make changes\ncy.get('[data-cy=\"batch-name-input\"]').clear().type('Client Portal Automation Test', { delay: 100 });\n//reply comment\ncy.get('[name=\"batchComments\"]').type('Done making changes.', { delay: 100 });\n//.wait(2000);\ncy.get('[class=\"btn btn-primary mt-2 mr-1\"]', { timeout: 10000 }).should('be.visible').click(); //NODATACY\n//validate comment\ncy.get('.k-notification-content', { timeout: 20000 }).should('be.visible').and('contain.text', 'Comment saved.');\n//save\ncy.get('[data-cy=\"save-batch-btn\"]').should('be.visible').should('be.enabled').click();\n//cy.wait(3000); //to wait for the page to load\n//recalculate timecards\ncy.get('[data-kendo-grid-column-index=\"1\"] a', { timeout: 10000 })\n    .should('be.visible', { timeout: 10000 })\n    .invoke('removeAttr', 'target')\n    .click();\n//.wait(3000);\n//calculate timecard\ncy.get('[type=\"button\"]', { timeout: 10000 }).contains('Calculate', { timeout: 30000 }).should('be.visible').click(); //NODATACY\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate calculation\ncy.get('a.nav-link[href*=\"audit-history\"]').click({ force: true });\ncy.get('td[data-cy=\"audit-data\"]').each(($el) => {\n    if ($el.text().includes('Calculation initiated.')) {\n        cy.wrap($el).should('be.visible');\n    }\n});\n//return to batch\ncy.get('a.btn.btn-sm.btn-success', { timeout: 30000 }) // NODATACY\n    .should('be.visible') // Ensures the button is visible\n    .click({ force: true });\n//calculate batch\ncy.get('[data-cy=\"calculate-batch-btn\"]', { timeout: 30000 }).click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate calculation\ncy.get('kendo-dropdownlist[name=\"status\"]').within(() => {\n    cy.get('.k-input-value-text').should('have.text', 'Calculated');\n});\n//ensure timecard status as Calculated\ncy.get('.badge.badge-success', { timeout: 60000 }).last().should('be.visible', { timeout: 30000 });\n//validate batch\ncy.get('[data-cy=\"validate-batch-btn\"]').click();\ncy.get('.fa-spinner', { timeout: 60000 }).should('not.exist');\ncy.get('[data-cy=\"finalize-batch-btn\"]').should('be.enabled');\n//change status to Sent_To_Client\n//cy.wait(5000); //to wait for the page to load\ncy.selectKendoDropdownListItemCustomChild('[name=\"status\"]', 'Sent_To_Client', 0);\ncy.get('[data-cy=\"save-batch-btn\"]').click();\ncy.get('kendo-dialog-titlebar', { timeout: 10000 }).should('exist').and('contain.text', 'Attention!!!');\ncy.get('button#noBtn').first().click(); // NODATACY\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate status change\ncy.get('[data-cy=\"ready-batch-btn\"]', { timeout: 5000 }).should('be.visible').and('be.disabled');\ncy.get('[data-cy=\"calculate-batch-btn\"]', { timeout: 5000 }).should('be.visible').and('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.k-list-item`, but never found it. Queried from:\n\n              > cy.document().its(body)",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `.k-list-item`, but never found it. Queried from:\n\n              > cy.document().its(body)\n    at Context.eval (webpack:///../../../../libs/utils/src/lib/kendo-commands-custom-child.ts:28:0)",
+                "diff": null
+              },
+              "uuid": "5c783c7a-7bf4-4ea0-b0c2-c6aecdfe3507",
+              "parentUUID": "8ddcf63c-e0d3-4df2-8108-88dbe718b2c5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "5c783c7a-7bf4-4ea0-b0c2-c6aecdfe3507"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 19864,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "84df3e77-d60d-4aa9-b742-4c84ed385ebc",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC112.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC112.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1a7e220d-6e3a-4f68-ba11-a8f5c81d1043",
+          "title": "Client Approval",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC112.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC112.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC112",
+              "fullTitle": "Client Approval TC112",
+              "timedOut": null,
+              "duration": 255,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (21/03/25), SK (20/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Approve batch\n*/\n//view invoice\ncy.visit(this.urls.payrollInvoice);\ncy.get('td.k-table-td', { timeout: 15000 }).should('be.visible').and('contain.text', 'Ready For Approval');\ncy.get('button[data-cy=\"approve-btn\"]').should('be.enabled');\ncy.get('button[data-cy=\"return-btn\"]').should('be.enabled');\n//approve invoice\ncy.get('.spinner-threedots', { timeout: 20000 }).should('not.be.visible');\ncy.get('[data-cy=\"approve-btn\"]').last().should('be.visible', { timeout: 20000 }).and('not.be.disabled').click({ force: true });\n//validate pop up\ncy.get('[data-cy=\"approve-batch-dialog\"]').should('exist').should('be.visible');\n//write comments\ncy.get('[name=\"batchNotes\"]').clear().type('Approving batch.', { delay: 100 });\n//.wait(2000);\n//return invoice\ncy.get('[class=\"btn btn-primary\"]').contains('Approve').click();\n//validate approval\ncy.get('.k-notification-success', { timeout: 10000 })\n    .should('be.visible')\n    .within(() => {\n    cy.contains('Batch Client_Approved').should('exist');\n});\ncy.get('[name=\"x-circle\"]', { timeout: 10000 }).click({ force: true });\ncy.get('[class=\"k-input-inner\"]').first().type('Approved').type('{enter}');\ncy.get('table.k-grid-table tbody tr', { timeout: 15000 })\n    .filter((index, el) => {\n    const text = Cypress.$(el).text();\n    return text.includes('Approved') && text.includes('Approving batch');\n})\n    .should('have.length.greaterThan', 0);",
+              "err": {
+                "message": "TypeError: Cannot read properties of undefined (reading 'payrollInvoice')",
+                "estack": "TypeError: Cannot read properties of undefined (reading 'payrollInvoice')\n    at Context.eval (webpack:///./src/e2e/kl/client-portal-TC112.cy.ts:19:0)",
+                "diff": null
+              },
+              "uuid": "d82f53b7-042d-4f38-817b-10a36a112a1c",
+              "parentUUID": "1a7e220d-6e3a-4f68-ba11-a8f5c81d1043",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "d82f53b7-042d-4f38-817b-10a36a112a1c"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 255,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "702eb29c-e59d-4dd3-adab-82d16c5752e7",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC113-114.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC113-114.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "25abfa63-7eda-4c93-834e-560e534d80f9",
+          "title": "Finalizing batch",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC113-114.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC113-114.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC113",
+              "fullTitle": "Finalizing batch TC113",
+              "timedOut": null,
+              "duration": 15266,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK 28/03/25, SK (21/03/25), SK (20/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Check email notification\n*/\n// region TC113-------------------------------------------\n//check notification and validate\ncy.intercept('POST', '/api/core-adbridge/order-search/search').as('csOrderSearch');\ncy.get('[data-cy=\"er-sidebar-toggle\"]', { timeout: 15000 }).click();\ncy.get('[class=\"er-sidebar-link \"]').eq(2).click();\ncy.wait('@csOrderSearch', { responseTimeout: 60000 });\n//cy.wait(5000); //need to wait for page to load because cypress cannot click the notification\ncy.get('.er-sidebar-link', { timeout: 60000 }).contains('Notifications').should('be.visible').click({ force: true });\ncy.get('#notificationTypeId', { timeout: 20000 }).should('be.visible');\ncy.get('input[id=\"searchTerm\"]').type('Payroll Pre-invoice - Client Approved');\ncy.get('[name=\"Search\"]').click();\ncy.get('#pageSize', { timeout: 20000 }).should('be.visible');\ncy.contains('a', 'Payroll Pre-invoice - Client Approved').first().invoke('removeAttr', 'target').click();\n// endregion\n// region TC114-------------------------------------------\n//go to batch\ncy.psBatchSearchSearch({\n    useFaker: false,\n    batchStatusList: 'Client Approved',\n    customerId: '162463',\n    batchOwnerUserId: 'Siti Khalidah A Ramli'\n});\ncy.disablePopUps();\ncy.contains('button', 'View', { timeout: 10000 }).first().should('be.visible').click();\n//calculate batch\ncy.get('[data-cy=\"calculate-batch-btn\"]', { timeout: 30000 }).should('be.visible').click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate calculation\ncy.get('kendo-dropdownlist[name=\"status\"]').within(() => {\n    cy.get('.k-input-value-text').should('have.text', 'Calculated');\n});\n//validate batch\ncy.get('[data-cy=\"validate-batch-btn\"]').click();\ncy.get('.fa-spinner', { timeout: 60000 }).should('not.exist');\n//finalize batch\ncy.get('[data-cy=\"finalize-batch-btn\"]').should('be.enabled').click();\n//check printing pop up\ncy.get('div[role=\"dialog\"]', { timeout: 10000 }).then(($dialog) => {\n    if ($dialog.length > 0) {\n        cy.get('[class=\"btn btn-primary\"]').contains('Send To Check Printing').click();\n    }\n});\n//confirmation for finalize batch\ncy.get('div[role=\"dialog\"]', { timeout: 1000 }).then(($dialog) => {\n    if ($dialog.length > 0) {\n        cy.contains('button', 'Yes').click();\n    }\n});\n//validate finalized button is disabled and batch status changed\ncy.get('.fa-spinner', { timeout: 60000 }).should('not.exist');\ncy.get('[data-cy=\"finalize-batch-btn\"]', { timeout: 30000 }).should('be.disabled');\ncy.get('kendo-dropdownlist[name=\"status\"]').within(() => {\n    cy.get('.k-input-value-text').should('have.text', 'Completed');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `[data-cy=\"er-sidebar-toggle\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `[data-cy=\"er-sidebar-toggle\"]`, but never found it.\n    at Context.eval (webpack:///./src/e2e/kl/client-portal-TC113-114.cy.ts:21:0)",
+                "diff": null
+              },
+              "uuid": "94dfa56b-8ceb-486b-9b00-404f8638c84f",
+              "parentUUID": "25abfa63-7eda-4c93-834e-560e534d80f9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC114",
+              "fullTitle": "Finalizing batch TC114",
+              "timedOut": null,
+              "duration": 333,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (20/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Finalize batch\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC113.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "e4bd98d0-887b-48db-89ee-6c0fa9bb8e79",
+              "parentUUID": "25abfa63-7eda-4c93-834e-560e534d80f9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e4bd98d0-887b-48db-89ee-6c0fa9bb8e79"
+          ],
+          "failures": [
+            "94dfa56b-8ceb-486b-9b00-404f8638c84f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 15599,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "ff72427e-1ac3-459d-b176-a0cd35c7de51",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC115.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC115.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "79ceb61b-2dbd-4d95-96c6-ab37f1027610",
+          "title": "Status Validation in Client Portal",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC115.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC115.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC115",
+              "fullTitle": "Status Validation in Client Portal TC115",
+              "timedOut": null,
+              "duration": 9131,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (21/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Validate Status for Approver\n*/\ncy.visit(this.urls.payrollInvoice);\n//cy.get('td.k-table-td', { timeout: 15000 }).should('be.visible').and('contain.text', 'Ready For Approval');\n//validate a batch has been completed\ncy.get('[name=\"x-circle\"]', { timeout: 10000 }).click({ force: true });\ncy.get('[class=\"k-input-inner\"]').first().type('Completed').type('{enter}');\ncy.contains('td.k-table-td', 'Completed').should('exist').and('be.visible');\n//validate buttons are disabled for approver when batch is completed\ncy.get('button[data-cy=\"approve-btn\"]').should('have.attr', 'disabled');\ncy.get('button[data-cy=\"return-btn\"]').should('have.attr', 'disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Completed' within the selector: 'td.k-table-td' but never did.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Completed' within the selector: 'td.k-table-td' but never did.\n    at Context.eval (webpack:///./src/e2e/kl/client-portal-TC115.cy.ts:20:0)",
+                "diff": null
+              },
+              "uuid": "f76efbe1-581c-4d3b-a481-84b7af8170be",
+              "parentUUID": "79ceb61b-2dbd-4d95-96c6-ab37f1027610",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f76efbe1-581c-4d3b-a481-84b7af8170be"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 9131,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "400ea36d-46c4-4c94-9f7a-3af9b634d84c",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\client-portal-TC101-TC107.cy.ts",
+      "file": "src\\e2e\\kl\\client-portal-TC101-TC107.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+          "title": "Create payroll batch until sent to client",
+          "fullFile": "src\\e2e\\kl\\client-portal-TC101-TC107.cy.ts",
+          "file": "src\\e2e\\kl\\client-portal-TC101-TC107.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC101",
+              "fullTitle": "Create payroll batch until sent to client TC101",
+              "timedOut": null,
+              "duration": 61806,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK 8/4/25, SK 28/03/25, SK 26/03/25, SK (21/03/25), SK (19/03/25), SK (17/03/25), SK (12/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Create batch\n*/\n// region TC101-------------------------------------------\n//add new batch\ncy.psBatchDetailsCreateCreateNewBatch({\n    useFaker: false,\n    batchName: 'Client Portal Automation',\n    projectType: 'payroll',\n    batchTypeId: 'Payroll',\n    customerId: 'Regression Test Customer',\n    projectId: 'AUTOBOTS XRKL PRODUCTION',\n    batchOwnerUserId: 'Siti Khalidah A Ramli',\n    weekEndingDate: '1/1/2030',\n    checkDate: '1/1/2030'\n}).then((item) => {\n    const productionBatchId = item.id.toString();\n    cy.visit(`/ps/batch-details/${productionBatchId}/details`);\n    // endregion\n    // region TC102-------------------------------------------\n    //create timecard (Furina Focalors)\n    cy.psTimeCardDetailsCreateCreateTimeCard({\n        useFaker: false,\n        batchId: productionBatchId,\n        subProject: '!!skip',\n        payeeId: '1228053',\n        defaultUnionMembership: 'N: HAIR STYLIST - HAIR STYLIST - Hair Stylist',\n        beginDate: '1/1/2025',\n        endDate: '1/1/2030',\n        workAuthorization: '294680 (Resident) 01/01/2024'\n    }).then((timecardData) => {\n        const timeCardId = timecardData.id;\n        cy.get('[name=\"projectName\"]', { timeout: 60000 })\n            .invoke('val')\n            .then((value) => {\n            const subProjectName = value;\n            cy.visit(`/ps/batch-details/${productionBatchId}/details`);\n            cy.get('[class=\"Container\"]', { timeout: 10000 }).find('[role=\"gridcell\"]').contains(timeCardId).click();\n            cy.get('[name=\"projectName\"]', { timeout: 10000 }).should('have.value', subProjectName);\n        });\n    });\n});\ncy.addPaylines('[role=\"grid\"]', {\n    useFaker: false,\n    workDate: '2/11/2025',\n    unionJob: 'N: HAIR STYLIST - HAIR STYLIST - Hair Stylist',\n    payCode: '110 STRAIGHT',\n    payUnits: '8.00'\n}, 0);\n//save paylines\ncy.get('[data-cy=\"save-paylines-btn\"]').click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\ncy.get('[data-cy=\"save-paylines-btn\"]').should('be.disabled');\n//calculate timecard\ncy.get('[type=\"button\"]').contains('Calculate').click(); //NODATACY\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate calculation\ncy.get('a.nav-link[href*=\"audit-history\"]').click({ force: true });\ncy.get('td[data-cy=\"audit-data\"]').each(($el) => {\n    if ($el.text().includes('Calculation initiated.')) {\n        cy.wrap($el).should('be.visible');\n    }\n});\n// endregion\n// region TC104-------------------------------------------\n//add comment\ncy.get('a.btn.btn-sm.btn-success', { timeout: 30000 }) // NODATACY\n    .should('be.visible') // Ensures the button is visible\n    .click();\ncy.get('.spinner-threedots', { timeout: 30000 }).should('not.be.visible');\ncy.contains('button', '+ Expand', { timeout: 15000 }).click();\ncy.get('[name=\"batchComments\"]').type('Please pay on time.', { delay: 100 });\n//.wait(1000);\ncy.get('[class=\"btn btn-primary mt-2 mr-1\"]', { timeout: 10000 }).should('be.visible').click(); //NODATACY\n//validate comment\ncy.get('.k-notification-content', { timeout: 20000 }).should('be.visible').and('contain.text', 'Comment saved.');\ncy.get('[data-cy=\"save-batch-btn\"]').should('be.visible').should('be.enabled').click();\ncy.get('.fa-spinner.fa-spin', { timeout: 30000 }).should('not.exist');\n// endregion\n// region TC105-------------------------------------------\n//attach file\ncy.get('[data-cy=\"attachments-tab\"]').click({ force: true });\ncy.get('[data-cy=\"attachments-title\"]', { timeout: 10000 }).eq(0).should('be.visible');\n// cy.wait(5000); //using wait to prevent frozen screen during upload of file\ncy.get('[data-cy=\"attach-files-btn\"]').eq(1).should('be.visible').click();\n//attach file (panel)\n// cy.wait(5000); //using wait to prevent frozen screen during upload of file\ncy.get('[class=\"k-button-text\"]').eq(7).should('be.visible').click();\n// cy.wait(5000); //using wait to prevent frozen screen during upload of file\n//get file from fixture\ncy.get('input[type=\"file\"][name=\"files\"]').attachFile('sunset.jpg');\n//put description\ncy.get('[data-cy=\"attach-file-description-txtbox\"]').type('Snst blvd');\n//upload file\ncy.get('[data-cy=\"upload-file-splitbtn\"]').click();\n//validate file is uploaded\ncy.get('span').contains('Uploaded', { timeout: 30000 }).should('be.visible');\ncy.get('.k-notification-content', { timeout: 30000 }).should('include.text', 'uploaded successfully');\ncy.get('[data-cy=\"attachment-close-btn\"]', { timeout: 30000 })\n    .should('be.visible')\n    .should('not.be.disabled')\n    .then(($btn) => {\n    cy.wrap($btn).click();\n});\n// endregion\n// region TC106-------------------------------------------\n//send batch to client\ncy.intercept('GET', '/api/payroll/batch-details/get-expert-timecards?batchId=*').as('getTimecards');\ncy.get('[data-cy=\"details-tab\"]').click({ force: true });\ncy.wait('@getTimecards', { responseTimeout: 60000 });\ncy.get('[data-cy=\"calculate-batch-btn\"]', { timeout: 15000 }).should('be.visible').click({ force: true });\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate calculation\ncy.get('kendo-dropdownlist[name=\"status\"]').within(() => {\n    cy.get('.k-input-value-text', { timeout: 60000 }).should('have.text', 'Calculated');\n});\n//validate batch\ncy.get('[data-cy=\"validate-batch-btn\"]').click();\ncy.get('.fa-spinner', { timeout: 60000 }).should('not.exist');\ncy.get('[data-cy=\"finalize-batch-btn\"]').should('be.enabled');\n//change status to Sent_To_Client\n//cy.wait(5000); //to wait for the page to load\ncy.selectKendoDropdownListItemCustomChild('[name=\"status\"]', 'Sent_To_Client', 0);\ncy.get('[data-cy=\"save-batch-btn\"]').click();\ncy.get('kendo-dialog-titlebar', { timeout: 10000 }).should('exist').and('contain.text', 'Attention!!!');\ncy.get('button#noBtn').first().click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate status change\ncy.get('[data-cy=\"ready-batch-btn\"]', { timeout: 5000 }).should('be.visible').and('be.disabled');\ncy.get('[data-cy=\"calculate-batch-btn\"]', { timeout: 5000 }).should('be.visible').and('be.disabled');\n// endregion\n// region TC107-------------------------------------------\n//send batch to client\ncy.wait(2000); //to wait for the page to load\ncy.selectKendoDropdownListItemCustomChild('[name=\"status\"]', 'Editing', 0);\ncy.get('[name=\"batchNotes\"]').clear().type('Please pay on time and with correct amount. Thank you', { delay: 100 });\n//.wait(2000);\ncy.get('[data-cy=\"save-batch-btn\"]').should('be.visible').should('be.enabled').click();\ncy.get('kendo-dialog-titlebar', { timeout: 10000 }).should('exist').and('contain.text', 'Attention!!!');\ncy.get('button#noBtn').first().click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//calculate > validate > change status back to Sent_To_Client\n//cy.wait(4000); //to wait for the page to load\ncy.get('[data-cy=\"calculate-batch-btn\"]').click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate calculation\ncy.get('kendo-dropdownlist[name=\"status\"]').within(() => {\n    cy.get('.k-input-value-text', { timeout: 30000 }).should('have.text', 'Calculated');\n});\n//validate batch\ncy.get('[data-cy=\"validate-batch-btn\"]').click();\ncy.get('.fa-spinner', { timeout: 60000 }).should('not.exist');\ncy.get('[data-cy=\"finalize-batch-btn\"]').should('be.enabled');\n//change status to Sent_To_Client\n//cy.wait(5000); //to wait for the page to load\ncy.selectKendoDropdownListItemCustomChild('[name=\"status\"]', 'Sent_To_Client', 0);\ncy.get('[data-cy=\"save-batch-btn\"]').click();\ncy.get('kendo-dialog-titlebar', { timeout: 10000 }).should('exist').and('contain.text', 'Attention!!!');\ncy.get('button#noBtn').first().click();\ncy.get('.fa-spinner', { timeout: 30000 }).should('not.exist');\n//validate status change\ncy.get('[data-cy=\"ready-batch-btn\"]', { timeout: 5000 }).should('be.visible').and('be.disabled');\ncy.get('[data-cy=\"calculate-batch-btn\"]', { timeout: 5000 }).should('be.visible').and('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: Expected to find content: 'Create Batch' within the element: <input#nextButton.btn.btn-primary.btn-lg> but never did.",
+                "estack": "AssertionError: Timed out retrying after 60000ms: Expected to find content: 'Create Batch' within the element: <input#nextButton.btn.btn-primary.btn-lg> but never did.\n    at Context.eval (webpack:///../../../../libs/core-payroll/src/lib/99-legacy/path/ps-batch-details-create.ts:6:93)",
+                "diff": null
+              },
+              "uuid": "d5e67003-f7cc-45b9-b375-126f137955cd",
+              "parentUUID": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC102",
+              "fullTitle": "Create payroll batch until sent to client TC102",
+              "timedOut": null,
+              "duration": 444,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (17/03/25), SK (12/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Add timecard\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC101.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "0f5332d3-633c-4dde-bb1a-72186c6119e4",
+              "parentUUID": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC104",
+              "fullTitle": "Create payroll batch until sent to client TC104",
+              "timedOut": null,
+              "duration": 37,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (17/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Add message in comment box\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC102.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "573c35fa-ed87-4601-b92c-e525ed3daa65",
+              "parentUUID": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC105",
+              "fullTitle": "Create payroll batch until sent to client TC105",
+              "timedOut": null,
+              "duration": 39,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (17/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Add attachment\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC104.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "86dbfbda-6972-4d25-bc07-ef67136c3810",
+              "parentUUID": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC106",
+              "fullTitle": "Create payroll batch until sent to client TC106",
+              "timedOut": null,
+              "duration": 42,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (17/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Send batch to client for approval\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC105.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "e44db756-cac9-4a93-89c2-2bb1a4c04be3",
+              "parentUUID": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "TC107",
+              "fullTitle": "Create payroll batch until sent to client TC107",
+              "timedOut": null,
+              "duration": 38,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nLast Updated : SK (17/03/25)\nModule : Client Portal\nHigh Level Test Step :\n1. Change details and resend batch to client\n*/\ncy.readFile('src/fixtures/create-batch-result.json').then((data) => {\n    data.TC106.isPassed = false;\n    cy.writeFile('src/fixtures/create-batch-result.json', data);\n});",
+              "err": {},
+              "uuid": "4dbaa764-5e1e-495e-ae2d-3bfa5bb23297",
+              "parentUUID": "d9d15df3-fdd2-4892-9b59-e5dfa3fd23d1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0f5332d3-633c-4dde-bb1a-72186c6119e4",
+            "573c35fa-ed87-4601-b92c-e525ed3daa65",
+            "86dbfbda-6972-4d25-bc07-ef67136c3810",
+            "e44db756-cac9-4a93-89c2-2bb1a4c04be3",
+            "4dbaa764-5e1e-495e-ae2d-3bfa5bb23297"
+          ],
+          "failures": [
+            "d5e67003-f7cc-45b9-b375-126f137955cd"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 62406,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "..\\..\\..\\..\\cypress\\results\\mochawesome\\ui\\payroll\\client-portal\\.jsons",
+        "charts": true,
+        "reportPageTitle": "ER Test Suite - UI - Payroll/ClientPortal",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "ignoreVideos": false,
+        "saveAllAttempts": false,
+        "videoOnFailOnly": false,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

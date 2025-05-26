@@ -1,0 +1,1368 @@
+{
+  "stats": {
+    "suites": 22,
+    "tests": 22,
+    "passes": 13,
+    "pending": 0,
+    "failures": 9,
+    "testsRegistered": 22,
+    "passPercent": 59.09090909090909,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "start": "2025-05-19T15:19:00.316Z",
+    "end": "2025-05-19T15:46:05.081Z",
+    "duration": 1624765
+  },
+  "results": [
+    {
+      "uuid": "6a41457f-ab96-420f-8818-90a8848163ce",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1002.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1002.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "434744f5-a4e2-478b-9f7b-76fcbe9310d1",
+          "title": "Create Direct Deposit Via Plaid",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1002.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1002.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1002",
+              "fullTitle": "Create Direct Deposit Via Plaid TC1002",
+              "timedOut": null,
+              "duration": 43270,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Module : Add Message After Direct Deposit is Setup\n// Last Updated : Syakirah (12/3/2025)\n/*Steps:\n1- log in to Payee Portal\n2- Dashboard display\n3- Click on Direct Deposit\n4- Click on Agree button > select any bank > click continue until done\n5- Edit Bank Account Details form\n6- Click on Save button\n7- Direct Deposit details will appear after Alert Message Pop-up\n*/\nfunction createDepositViaPaid() {\n    //log in validation\n    cy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\n    //direct deposit\n    //add direct deposit for first time\n    cy.get('ion-row.md > :nth-child(1) > :nth-child(4)', { timeout: 60000 }).click();\n    // cy.wait(3000);\n    cy.get('.card-content-md > :nth-child(1) > .item-label > ion-row.md > ion-col.md > .ion-color', { timeout: 60000 }).click();\n    // cy.wait(10000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 }) // Replace with the iframe's ID\n        .find('button:contains(\"Agree\")') // Adjust the selector for the \"Agree\" button\n        .click();\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 })\n        .find('button:contains(\"Continue as guest\")', { timeout: 60000 })\n        .click({ force: true });\n    //choose bank\n    // cy.wait(3000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"search-input-input\"]').type('capital.xyz');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 })\n        .find('[class=\"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-skm7wc\"]', { timeout: 60000 })\n        .click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"digit-input\"]').type('1234');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"secureDigit-input\"]').type('1234');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('[type=\"checkbox\"]').first().check();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    cy.getIframeBody('#plaid-link-iframe-1')\n        .find('button:contains(\"Finish without saving\")', { timeout: 60000 })\n        .click({ force: true });\n    //edit account bank details\n    cy.get('[name=\"allocationType\"]', { timeout: 600000 }).select('Percentage');\n    cy.get(':nth-child(10) > :nth-child(2) > .full-width', { timeout: 600000 }).clear().type('{backspace}').type('1');\n    //Click activate direct deposit checkbox\n    //cy.get('.full-width > .ng-untouched', { timeout: 600000 }).click();\n    //Click save button\n    cy.get('.footer-md > ion-toolbar.md > .buttons-last-slot > .md', { timeout: 600000 }).click();\n    //alert popup message validation\n    cy.get('[class=\"alert-wrapper ion-overlay-wrapper sc-ion-alert-md\"]').should('be.visible');\n    // cy.wait(2000);\n    cy.get('.alert-button-inner').click();\n}\ncreateDepositViaPaid();",
+              "err": {},
+              "uuid": "43f779c2-7af3-4a35-a0bc-2d4ee9ae21ad",
+              "parentUUID": "434744f5-a4e2-478b-9f7b-76fcbe9310d1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "43f779c2-7af3-4a35-a0bc-2d4ee9ae21ad"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 43270,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "37522935-3430-43fa-aab4-07bce50f0872",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1003.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1003.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4873b02e-eb8d-4168-84fe-1a75a328b1f6",
+          "title": "Edit PP Manual Account Details",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1003.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1003.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1003",
+              "fullTitle": "Edit PP Manual Account Details TC1003",
+              "timedOut": null,
+              "duration": 87478,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Module : Edit PP Manual Account Details\n// Last Updated : Syakirah (18/4/2025)\n/*Steps:\n1- Log in Payee Portal\n2- Dashboard will display\n3- Click on Direct Deposit\n4- Create the Manual Bank Account and Plaid Bank Account\n5- Edit the Manual Bank Account\n    Expected: Can edit the bank account details\n6- Click on Direct Deposit\n7- Edit the Plaid Bank Account\n    Expected: Cannot edit the bank account details\n*/\nfunction createDepositViaPaidManually() {\n    //log in validation\n    cy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\n    //direct deposit\n    //add direct deposit for first time\n    cy.get('ion-row.md > :nth-child(1) > :nth-child(4)', { timeout: 60000 }).click();\n    // cy.wait(3000);\n    cy.get('.card-content-md > :nth-child(1) > .item-label > ion-row.md > ion-col.md > .ion-color', { timeout: 60000 }).click();\n    cy.wait(10000); // need to wait for 10sec because the slowness and unstable of the system\n    // cy.getIframeBody('[class=\"CoBrandedHeader-module__logoContainer\"]', { timeout: 60000 }).should('be.visible');\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 }) // Replace with the iframe's ID\n        .find('button:contains(\"Agree\")') // Adjust the selector for the \"Agree\" button\n        .click();\n    cy.getIframeBody('#plaid-link-iframe-1')\n        .find('button:contains(\"Continue as guest\")', { timeout: 60000 })\n        .click({ force: true });\n    //choose unknown name\n    // cy.wait(3000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"search-input-input\"]').type('xjdyyae');\n    //direct deposit manually button will appear\n    //cy.wait(10000); // need to wait for 10sec because the slowness and unstable of the system\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 })\n        .find('button:contains(\"+Direct Deposit Manually\")', { timeout: 60000 })\n        .click({ force: true });\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Yes, exit\")').click({ force: true });\n    cy.wait(5000); // TODO : Try to find load point for time out;\n    cy.get('.ion-button-add-dd-manually', { timeout: 10000 }).should('be.visible').click();\n    const routingNumber = faker_1.faker.string.numeric(9);\n    const accountNumber = faker_1.faker.string.numeric(12);\n    cy.get(':nth-child(2) > :nth-child(2) > .full-width').type(routingNumber); // routing number\n    cy.get(':nth-child(3) > :nth-child(2) > .full-width').type(accountNumber); // account number\n    cy.get('[name=\"accountType\"]').select('Checking');\n    cy.get(':nth-child(5) > :nth-child(2) > .full-width').type('Manual Test Bank');\n    cy.get(':nth-child(6) > :nth-child(2) > .full-width').type('Big Manual Bank');\n    cy.get('[name=\"allocationType\"]').select('Percentage');\n    cy.get(':nth-child(8) > :nth-child(2) > .full-width').type('1');\n    cy.get('[name=\"processingOrder\"]', { timeout: 60000 })\n        .find('option')\n        .last()\n        .invoke('val')\n        .then((value) => {\n        cy.get('[name=\"processingOrder\"]').select(value);\n    });\n    // //Click not activate direct deposit checkbox\n    // cy.get('ion-checkbox').then(($checkbox) => {\n    //     if ($checkbox.attr('aria-checked') === 'true') {\n    //         cy.wrap($checkbox).click(); // Uncheck only if it is checked\n    //     }\n    // });\n    cy.get('.footer-md > ion-toolbar.md > .buttons-last-slot > .md').click();\n    cy.wait(2000); // Need to wait atleast 2sec for the page completely load\n    cy.get('.alert-button-inner', { timeout: 60000 }).should('be.visible').click({ force: true });\n}\ncreateDepositViaPaidManually();\ncy.userLoginPayeePortalUAT2();\n//log in validation\ncy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\ncy.contains('p', 'Welcome to XR Portal - Your One-Stop Hub for Managing Pay Stubs, W2s and Personal information!', {\n    timeout: 10000\n}).should('be.visible');\ncy.get('ion-row.md > :nth-child(1) > :nth-child(4)', { timeout: 60000 }).should('be.visible').click();\n// 5- Edit the Manual Bank Account\ncy.wait(5000); // TODO : Try to find load point for time out;\ncy.get('[id=\"main-grid\"]').last().find('[name=\"create-outline\"]').click({ force: true });\ncy.get('ion-title', { timeout: 60000 }).should('contain.text', 'Edit Bank Account');\n// Verify the Routing Number input is editable\ncy.get('input[type=\"text\"]')\n    .eq(0) // Select first input field (Routing Number)\n    .should('be.enabled'); // Ensure it is enabled\n// Verify the Account Number input is editable\ncy.get('input[type=\"text\"]')\n    .eq(1) // Select second input field (Account Number)\n    .should('be.enabled');\n// Verify the Account Nickname input is editable\ncy.get('input[type=\"text\"]')\n    .eq(2) // Select third input field (Account Nickname)\n    .should('be.enabled');\n// Verify the Bank Name input is editable\ncy.get('input[type=\"text\"]')\n    .eq(3) // Select fourth input field (Bank Name)\n    .should('be.enabled');\n// Verify the Account Type dropdown is selectable\ncy.get('select#accountType').should('be.enabled');\n//Click not activate direct deposit checkbox\ncy.get('ion-checkbox').then(($checkbox) => {\n    if ($checkbox.attr('aria-checked') === 'true') {\n        cy.wrap($checkbox).click(); // Uncheck only if it is checked\n    }\n});\ncy.contains('ion-button', 'Cancel').click({ force: true });\ncy.contains('span', 'Yes').should('be.visible').click({ force: true });\ncy.contains('ion-button', 'Dashboard').click({ force: true });\ncy.userLoginPayeePortalUAT2();\nfunction createDepositViaPaid() {\n    //log in validation\n    cy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\n    //direct deposit\n    //add direct deposit for first time\n    cy.get('ion-row.md > :nth-child(1) > :nth-child(4)').click();\n    // cy.wait(3000);\n    cy.get('.card-content-md > :nth-child(1) > .item-label > ion-row.md > ion-col.md > .ion-color', { timeout: 60000 }).click();\n    // cy.wait(10000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 }) // Replace with the iframe's ID\n        .find('button:contains(\"Agree\")') // Adjust the selector for the \"Agree\" button\n        .click();\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 })\n        .find('button:contains(\"Continue as guest\")', { timeout: 60000 })\n        .click({ force: true });\n    //choose bank\n    // cy.wait(3000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"search-input-input\"]').type('capital.xyz');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 })\n        .find('[class=\"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-skm7wc\"]', { timeout: 60000 })\n        .click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"digit-input\"]').type('1234');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"secureDigit-input\"]').type('1234');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('[type=\"checkbox\"]').first().check();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    cy.getIframeBody('#plaid-link-iframe-1')\n        .find('button:contains(\"Finish without saving\")', { timeout: 60000 })\n        .click({ force: true });\n    //edit account bank details\n    cy.get('[name=\"allocationType\"]', { timeout: 600000 }).select('Percentage');\n    cy.get(':nth-child(10) > :nth-child(2) > .full-width', { timeout: 600000 }).clear().type('{backspace}').type('1');\n    cy.get('[name=\"processingOrder\"]', { timeout: 60000 })\n        .find('option')\n        .last()\n        .invoke('val')\n        .then((value) => {\n        cy.get('[name=\"processingOrder\"]').select(value);\n    });\n    //Click not activate direct deposit checkbox\n    cy.get('ion-checkbox').then(($checkbox) => {\n        if ($checkbox.attr('aria-checked') === 'true') {\n            cy.wrap($checkbox).click(); // Uncheck only if it is checked\n        }\n    });\n    //Click save button\n    cy.get('.footer-md > ion-toolbar.md > .buttons-last-slot > .md', { timeout: 600000 }).click();\n    //alert popup message validation\n    cy.get('[class=\"alert-wrapper ion-overlay-wrapper sc-ion-alert-md\"]').should('be.visible');\n    // cy.wait(2000);\n    cy.get('.alert-button-inner').click();\n}\ncreateDepositViaPaid();\ncy.userLoginPayeePortalUAT2();\n// 7- Edit the Plaid Bank Account\ncy.get('ion-row.md > :nth-child(1) > :nth-child(4)', { timeout: 60000 }).should('be.visible').click();\ncy.get('body').then(($body) => {\n    if ($body.find('span.alert-button-inner.sc-ion-alert-md').length > 0) {\n        cy.get('span.alert-button-inner.sc-ion-alert-md').click();\n    }\n    else {\n        cy.log('Alert button not found, proceeding with another action');\n        // Add alternative action here\n    }\n});\ncy.get('#main-grid ion-row', { timeout: 60000 }) // Get all rows\n    .should('exist');\ncy.wait(5000); // TODO : Try to find load point for time out;\ncy.get('[id=\"main-grid\"]').last().find('[name=\"create-outline\"]').click({ force: true });\ncy.get('ion-title', { timeout: 60000 }).should('contain.text', 'Edit Bank Account');\n// Verify the Routing Number input is disabled\ncy.get('input[class=\"full-width ng-untouched ng-pristine\"]').eq(0).should('have.attr', 'disabled');\n// Verify the Account Number input is disabled\ncy.get('input[class=\"full-width ng-untouched ng-pristine\"]').eq(1).should('be.disabled');\n// Verify the Account Nickname input is disabled\ncy.get('input[class=\"full-width ng-untouched ng-pristine\"]').eq(2).should('be.disabled');\n// Verify the Bank Name input is disabled\ncy.get('input[class=\"full-width ng-untouched ng-pristine\"]').eq(3).should('be.disabled');\n// Verify the Account Type dropdown is disabled\ncy.get('select#accountType').should('be.disabled');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<input.full-width.ng-untouched.ng-pristine>' to be 'enabled'",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<input.full-width.ng-untouched.ng-pristine>' to be 'enabled'\n    at Context.eval (webpack:///./src/e2e/kl/1000-regression-test/reg-test-TC1003.cy.ts:98:0)",
+                "diff": null
+              },
+              "uuid": "e3ee682c-dc1a-4619-9c23-b082025e138f",
+              "parentUUID": "4873b02e-eb8d-4168-84fe-1a75a328b1f6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "e3ee682c-dc1a-4619-9c23-b082025e138f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 87478,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1e008eca-564e-47b4-91ad-a84e1d1be77b",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1005.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1005.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "71eb0833-6c40-47cb-a4b2-a1c4a5874390",
+          "title": "Verify Registration Completion in Audit Events",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1005.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1005.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1005",
+              "fullTitle": "Verify Registration Completion in Audit Events TC1005",
+              "timedOut": null,
+              "duration": 67658,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Payee portal\nLast updated: Syakirah (21/3/2025) Chandini (13/03/2025)\nSteps:\n1- Log in to XR Pay.\n2- Go to the Payee Portal.\n3- Navigate to Audit Events and check whether the registration is completed or not.\n*/\n// Load the fixture data\ncy.fixture('xr-login.json').then(({ username, password, visitpayee_url }) => {\n    // Log in to XR Pay using the fixture credentials\n    cy.userLoginXR(username, password);\n    // Visit the Payee Portal Audit Events URL\n    cy.visit(visitpayee_url);\n    // Wait for any loading spinner to disappear\n    cy.get('.spinner-threedots', { timeout: 60000 }).should('not.exist');\n    // Assert that the registration completion log is visible in Audit Events\n    cy.get('.search-results').within(() => {\n        cy.contains('User completed Payee Portal Registration', { timeout: 60000 }).should('be.visible'); // Assert that the text is visible\n    });\n});",
+              "err": {},
+              "uuid": "4e030149-f715-4133-bc6f-b60709dde6aa",
+              "parentUUID": "71eb0833-6c40-47cb-a4b2-a1c4a5874390",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4e030149-f715-4133-bc6f-b60709dde6aa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 67658,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "fd116370-a2dc-440d-9413-b039547ad28e",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1010.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1010.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4d1a868a-ef1f-4d70-beb3-f5c76dc452cf",
+          "title": "Contact Us Feature",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1010.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1010.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1010",
+              "fullTitle": "Contact Us Feature TC1010",
+              "timedOut": null,
+              "duration": 21443,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*Steps:\nModule: Payee portal\nLast updated: Syakirah (27/3/2025), Chandini (14/03/2025)\n1- Log in Payee Portal\n2- Check contact us email\n3-Email should be payeesupport@extremereach.com\n*/\n// Click hamburger navigation\ncy.get('.buttons-first-slot > .button', { timeout: 60000 }).should('be.visible', { timeout: 60000 }).click().wait(2000);\n// Contact Us nav menu\ncy.contains('ion-item', 'Contact Us').click();\ncy.wait(2000);\ncy.get('a[href^=\"mailto:payeesupport@extremereach.com\"]') // Find <a> tag with the correct mailto link\n    .should('exist') // Ensure the email link exists\n    .and('have.attr', 'href', 'mailto:payeesupport@extremereach.com'); // Verify the mailto attribute value\n// Click on Mail Icon\ncy.visit('/pp-home');\ncy.wait(2000); // TODO : Try to find load point for time out;\ncy.get('ion-buttons[title=\"Contact Us\"] ion-icon[name=\"mail\"]').should('exist').click({ force: true });\ncy.get('.alert-message > div') // Find the alert message by ID\n    .find('a') // Find the <a> tag within the alert\n    .should('exist') // Ensure the <a> tag exists\n    .and('have.attr', 'href', 'mailto:payeesupport@extremereach.com') // Verify the href attribute\n    .and('have.text', 'payeesupport@extremereach.com'); // Verify the text content of the <a> tag",
+              "err": {},
+              "uuid": "7df2ede6-753f-4190-ba54-4060d85a4fa4",
+              "parentUUID": "4d1a868a-ef1f-4d70-beb3-f5c76dc452cf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7df2ede6-753f-4190-ba54-4060d85a4fa4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 21443,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "eef9c217-4fef-45dd-b6db-8bd5a7087c55",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1011.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1011.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d443b351-bbb7-4b91-8de3-867c0a52f341",
+          "title": "View and Download Tax Statement",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1011.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1011.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1011",
+              "fullTitle": "View and Download Tax Statement TC1011",
+              "timedOut": null,
+              "duration": 119557,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Payee Portal\nLast Updated: Adlina (24/03/2025), Syakirah (14/3/2025)\nHigh Level Steps:\nPart 1: Check for Work Authorization = Talent already linked to the Payee\nPart 2:\n    1. Log in Payee Portal\n    2. Dashboard will display\n    3. Click on Pay Statement Menu\n    4. View Pay Statement Details\n    5. Commercial Performer tab\n    6. Ability to export paystubs to CSV\n*/\n// Part 1: Check for Work Authorization = Talent already linked to the Payee\ncheckWA(this.urls, this.payee);\n// Part 2\n// Login to Payee Portal\ncy.userLoginPayeePortalUAT2();\n//log in validation\ncy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\ncy.wait(2000); //need to wait for 2 seconds because the system are not stable; sometimes too fast and sometimes too slow\ncy.get('ion-row.md > :nth-child(2) > :nth-child(2)', { timeout: 60000 }).should('be.visible').click({ force: true });\ncy.get('ion-label.sc-ion-label-md-h') // Target by class\n    .contains('Commercial Performer')\n    .should('be.visible')\n    .click();\ncy.get('.ion-justify-content-start > :nth-child(1) > .ng-untouched').click({ force: true });\ncy.get('.ion-justify-content-start > :nth-child(2) > .ion-color', { timeout: 60000 }).should('be.visible').click({ force: true });",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `div.form-control.ng-binding[name=\"ctrl.talent.TalentType\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `div.form-control.ng-binding[name=\"ctrl.talent.TalentType\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:97:99)",
+                "diff": null
+              },
+              "uuid": "cbc95828-5f46-4ef7-bf0b-d57818ea0bfb",
+              "parentUUID": "d443b351-bbb7-4b91-8de3-867c0a52f341",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "cbc95828-5f46-4ef7-bf0b-d57818ea0bfb"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 119557,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "cda10f18-adde-49f6-9951-3b5c6e645c4d",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1012.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1012.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "21de1373-51de-45a0-849d-c5f7034dddb7",
+          "title": " PPT - Welcome email invite",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1012.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1012.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1012",
+              "fullTitle": " PPT - Welcome email invite TC1012",
+              "timedOut": null,
+              "duration": 89167,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Payee portal\nLast updated: Chandini (25/03/2025), Syakirah (21/3/2025), Chandini (17/03/2025)\nSteps:\n1- Log in to XR Pay.\n2- Go to payee search and pick one individual payee.\n3- And edit details with faker email and send notification to payee portal.\n4- Go to notification and check wheather notification was sent or not.\n*/\n// Load the fixture data\ncy.fixture('xr-login.json').then(({ username, password, payeesearch, notification_page }) => {\n    // Log in to XR Pay using the fixture credentials\n    cy.userLoginXR(username, password);\n    // Visit the Payee search\n    cy.visit(payeesearch);\n    cy.wait(8000); // wait is necessary to load the page\n    //sent invitation to payee portal\n    cy.get('kendo-dropdownlist[name=\"payeeTypeSelect\"]')\n        .click()\n        .then(() => {\n        cy.get('.k-list-item').contains('Individual').click({ force: true });\n    });\n    cy.intercept('https://app.uat2-extremereach.com/api/payroll/payee-search/payees/search').as('pageload');\n    cy.get('[data-cy=\"search-submit-btn\"]').click();\n    cy.wait('@pageload');\n    // Get the current row and find the link to click\n    cy.get('kendo-grid .k-table .k-master-row')\n        .eq(0) // Cycle through 0, 1, 2, 3 (0 is the first row)\n        .find('a')\n        .first()\n        .click();\n    cy.wait(5000); // wait is necessary to load data of page.\n    cy.get('.details-form-actions > [name=\"buttonEdit\"] > .fa').click();\n    // Generate a random email with faker\n    const randomEmail = faker_1.faker.internet.email();\n    // Modify the email to have the desired prefix and suffix\n    const modifiedEmail = randomEmail.split('@')[0] + '+pp@extremereach.com'; // Modify the local part with '+pp' and use the fixed domain\n    cy.wait(3000);\n    cy.get('[name=\"details.email\"]').clear().type(modifiedEmail);\n    cy.get('[name=\"details.phone\"]').clear().type('2122010857');\n    cy.get('#ethnicity').select('Not Given');\n    cy.get('#datepicker-1') // Locate the input field\n        .click() // Open the date picker\n        .clear() // Clear the existing value if any\n        .type('04/22/2002'); // Type the date in the input field\n    cy.get('[name=\"buttonSave\"]').click();\n    cy.get('[name=\"buttonInviteToPayeePortal\"]').click();\n    cy.visit(notification_page);\n    cy.contains('h1', 'Search Notifications', { timeout: 60000 }).should('be.visible');\n    cy.get('#notificationTypeId', { timeout: 20000 }).should('be.visible');\n    cy.get('.sendbutton').click();\n    cy.get('#pageSize', { timeout: 20000 }).should('be.visible');\n    const timeout = 5 * 60 * 1000; // 5 minutes in milliseconds\n    const startTime = Date.now(); // Track the start time of the loop\n    let emailFound = false;\n    // Function to check for the email\n    function checkForEmail() {\n        cy.get('tbody') // Target the table body\n            .find('tr') // Look for rows in the table\n            .each(($row) => {\n            // Check if any row contains the email in the \"To\" column (5th td)\n            if ($row.find('td').eq(4).text().includes(modifiedEmail)) {\n                emailFound = true;\n                cy.log(`Email  found in the table!`);\n                return false; // Exit the `.each()` loop when the email is found\n            }\n        })\n            .then(() => {\n            // If the email is found, stop further retries\n            if (emailFound) {\n                cy.log('Stopping the loop as the email was found.');\n            }\n            else if (Date.now() - startTime < timeout) {\n                // If the email is not found and the timeout is not reached, retry\n                cy.get('.sendbutton').click(); // Click the search button again\n                cy.wait(5000).then(() => {\n                    // 5-second wait before retrying\n                    checkForEmail(); // Recursive call to check again\n                });\n            }\n            else {\n                // If the timeout is reached and email is not found\n                cy.log('Email not found after 5 minutes.');\n            }\n        });\n    }\n    // Start the email checking loop\n    checkForEmail();\n});",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://app.uat2-extremereach.com/adbridge/cs/support/notificationsearch?notificationDateStart=03%2F18%2F2025%2000%3A00%3A00\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: ESOCKETTIMEDOUT\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttps://app.uat2-extremereach.com/adbridge/cs/support/notificationsearch?notificationDateStart=03%2F18%2F2025%2000%3A00%3A00\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: ESOCKETTIMEDOUT\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n    at <unknown> (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:131607:74)\n    at visitFailedByErr (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:131006:12)\n    at <unknown> (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:131606:11)\n    at tryCatcher (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1720:18)\n    at _drainQueueStep (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2430:12)\n    at _drainQueue (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2423:9)\n    at Async._drainQueues (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2439:5)\n    at Async.drainQueues (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:2309:14)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./src/e2e/kl/1000-regression-test/reg-test-TC1012.cy.ts:53:0)\n\nFrom Node.js Internals:\n  Error: ESOCKETTIMEDOUT\n      at ClientRequest.<anonymous> (<embedded>:290:108477)\n      at Object.onceWrapper (node:events:628:28)\n      at ClientRequest.emit (node:events:514:28)\n      at TLSSocket.emitRequestTimeout (node:_http_client:847:9)\n      at Object.onceWrapper (node:events:628:28)\n      at TLSSocket.emit (node:events:526:35)\n      at TLSSocket._onTimeout (node:net:571:8)\n      at listOnTimeout (node:internal/timers:569:17)\n      at process.processTimers (node:internal/timers:512:7)",
+                "diff": null
+              },
+              "uuid": "058d8dbd-c4c3-49c3-92dc-cf125098f580",
+              "parentUUID": "21de1373-51de-45a0-849d-c5f7034dddb7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "058d8dbd-c4c3-49c3-92dc-cf125098f580"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 89167,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "b8cc1075-2945-460e-828b-fced4131c9a7",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1016.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1016.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6a1fc071-689a-4572-bf63-f9d03ae9840c",
+          "title": "PPT - Pay Statement ",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1016.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1016.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1016",
+              "fullTitle": "PPT - Pay Statement  TC1016",
+              "timedOut": null,
+              "duration": 18111,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : Project/Production Co. Info from Direct Deposit Screen\nLast Updated : Syakirah (14/4/2025)\nHigh Level Test Step :\n    1. Direct Deposit\n    2. Verify Project/Production Co. Info from Direct Deposit Screen\n*/\ncy.userLoginPayeePortal();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 60000 }).should('be.visible');\ncy.contains('h2', 'Direct Deposit', { timeout: 5000 }).should('be.visible');\ncy.wait(3000); // TODO need to wait 3 seconds for system to load well\ncy.contains('h3', 'Manage Direct Deposit', { timeout: 5000 }).should('be.visible').click();\ncy.contains('ion-card-title', 'Direct Deposit', { timeout: 60000 }).should('be.visible');\ncy.contains('span', 'Production Co./Project: Regression Test Customer', { timeout: 60000 }).should('be.visible');\ncy.document().then(() => {\n    const text1 = 'You are now managing the direct deposit account for';\n    const text2 = 'have not set up';\n    cy.get('span', { timeout: 3000 }).then(($spans) => {\n        const found = [...$spans].some((span) => span.textContent.includes(text1) || span.textContent.includes(text2));\n        if (found) {\n            cy.log('One of the expected messages is visible');\n        }\n        else {\n            cy.log('Neither message appeared — continuing anyway');\n        }\n    });\n});",
+              "err": {},
+              "uuid": "ea6b088a-8eab-47ad-9b18-f27b2a92e2a3",
+              "parentUUID": "6a1fc071-689a-4572-bf63-f9d03ae9840c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ea6b088a-8eab-47ad-9b18-f27b2a92e2a3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18111,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "df433c52-b41e-451d-97c3-78fd77184a2c",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1023.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1023.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e360628c-38e0-400f-beb6-e7cda6f791a9",
+          "title": "Pay Statement - Commercial Performer Tab",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1023.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1023.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1023",
+              "fullTitle": "Pay Statement - Commercial Performer Tab TC1023",
+              "timedOut": null,
+              "duration": 75937,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule: Payee portal\nLast updated: Adlina 24/03/2025, Chandini 17/03/2025\nHigh Level Steps:\nPart 1: Check for Work Authorization = Talent already linked to the Payee\nPart 2:\n    1. Login to payee portal\n    2. Go to pay statements and check that Production crew and Commercial performer tabs exsists.\n*/\n// Part 1: Check for Work Authorization = Talent already linked to the Payee\ncheckWA(this.urls, this.payee);\n// Part 2\n// Step 1: Login to Payee Portal\ncy.userLoginPayeePortalUAT2();\n// Step 2: Go to pay statements and check that Production crew and Commercial performer tabs exsists.\n// Click hamburger navigation\ncy.get('.buttons-first-slot > .button', { timeout: 60000 }).should('be.visible', { timeout: 60000 }).click().wait(2000);\n// Navigate to Pay Statements\ncy.contains('ion-item', 'Pay Statements').click();\n// Verify that there are two tabs in the tab list\ncy.get('ion-tab-bar') // Select the ion-tab-bar element\n    .should('exist') // Ensure the tab bar exists\n    .find('ion-tab-button') // Find all ion-tab-button elements (tabs)\n    .should('have.length', 2); // Assert that there are exactly two tabs\n// Verify that the \"Production Crew\" tab exists and contains the correct label\ncy.get('#tab-button-production-crew')\n    .should('exist') // Ensure the tab exists\n    .contains('Production Crew'); // Assert that it contains the text 'Production Crew'\n// Verify that the \"Commercial Performer\" tab exists and contains the correct label\ncy.get('#tab-button-commercial-performer')\n    .should('exist') // Ensure the tab exists\n    .contains('Commercial Performer');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `div.form-control.ng-binding[name=\"ctrl.talent.TalentType\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 15000ms: Expected to find element: `div.form-control.ng-binding[name=\"ctrl.talent.TalentType\"]`, but never found it.\n    at Context.eval (webpack:///./src/support/commands.ts:97:99)",
+                "diff": null
+              },
+              "uuid": "286b94d1-4f35-4542-9890-75b8c0e0da1a",
+              "parentUUID": "e360628c-38e0-400f-beb6-e7cda6f791a9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "286b94d1-4f35-4542-9890-75b8c0e0da1a"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 75937,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "bc6416e4-f592-421d-82d6-171288880ac5",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1026.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1026.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0dedf295-2449-4ac5-aa7b-9ce750039e6a",
+          "title": "Plaid Integration - Below 100% Allocation Warning Message ",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1026.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1026.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1026",
+              "fullTitle": "Plaid Integration - Below 100% Allocation Warning Message  TC1026",
+              "timedOut": null,
+              "duration": 8514,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Module : Create Direct Deposit Via Manually\n// Last Updated : Syakirah (12/3/2025), Lilian (20/1/2025), Syakirah\n/*Steps:\n1- log in to Payee Portal\n2- Dashboard display\n3- Click on Direct Deposit menu\n4- Plaid Integration - Below 100% Allocation Warning Message\n*/\n//log in validation\ncy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\n//direct deposit\n//add direct deposit for first time\ncy.get('ion-row.md > :nth-child(1) > :nth-child(4)').click();\n// cy.get('ion-label', { timeout: 60000 })\n//     .contains('WARNING ⚠️ - You have Under Allocated', { timeout: 5000 })\n//     .then(($el) => {\n//         if ($el.length > 0) {\n//             cy.wrap($el).should('be.visible');\n//         }\n//     });\ncy.get('ion-label', { timeout: 60000 }).then(($labels) => {\n    const warningMessage = $labels.filter((_, el) => el.innerText.includes('WARNING ⚠️ - You have Under Allocated'));\n    if (warningMessage.length > 0) {\n        cy.wrap(warningMessage).should('be.visible');\n        cy.log('⚠️ Warning message is visible.');\n    }\n    else {\n        cy.log('✅ Warning message not found or not visible. Ignoring...');\n    }\n});",
+              "err": {},
+              "uuid": "5c46bc5d-90f1-436b-8d88-904648b2b65e",
+              "parentUUID": "0dedf295-2449-4ac5-aa7b-9ce750039e6a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5c46bc5d-90f1-436b-8d88-904648b2b65e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 8514,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1ef0e0e8-baab-4421-bece-1e552d7c0722",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1028.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1028.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "48496b36-f478-433f-8b7e-be47751bff03",
+          "title": "check the payee portal link",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1028.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1028.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1028",
+              "fullTitle": "check the payee portal link TC1028",
+              "timedOut": null,
+              "duration": 28772,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*Steps:\nModule: Payee portal\nLast updated: Chandini (14/03/2025)\n1- Log in XR pay.\n2- Go to XR pay and click on the payee portal link.\n3-It should navigate to payee portal.\n*/\n// Log in to XR pay\ncy.PayeeLoginXR();\ncy.visit('https://app.uat2-extremereach.com/fo/residuals-dashboard');\n// Find the link with the class er-sidebar-link and click on it\ncy.get('.er-sidebar-icon') // Find the sidebar icon\n    .closest('a') // Find the <a> tag that contains the icon\n    .invoke('removeAttr', 'target')\n    .click(); // Remove the target attribute (prevents opening in a new tab)\n//Assert that content in the page to ensure it is opened\ncy.get('p').should('contain.text', 'Welcome to XR Portal - Your One-Stop Hub for Managing Pay Stubs, W2s and Personal information!');",
+              "err": {},
+              "uuid": "f2a353ad-a11b-4f7c-b78e-13a7fe874257",
+              "parentUUID": "48496b36-f478-433f-8b7e-be47751bff03",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f2a353ad-a11b-4f7c-b78e-13a7fe874257"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 28772,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2e6f8b39-690a-42db-aba6-9933ca7c53f5",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-dashboard\\dashboard-TC300.cy.ts",
+      "file": "src\\e2e\\kl\\300-dashboard\\dashboard-TC300.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "54f28faf-c10f-499e-ba24-ceb8fa300ec8",
+          "title": "Verify Dashboard Elements",
+          "fullFile": "src\\e2e\\kl\\300-dashboard\\dashboard-TC300.cy.ts",
+          "file": "src\\e2e\\kl\\300-dashboard\\dashboard-TC300.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC300",
+              "fullTitle": "Verify Dashboard Elements TC300",
+              "timedOut": null,
+              "duration": 10449,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : Dashboard Access\nLast Updated : Lilian (20/1/2025), Syakirah\nHigh Level Test Step :\nVerify Access to Dashboard Post-Login\n1. Log in to the portal.\nExpected: User should be redirected to the dashboard page.\n*/\ncy.userLoginPayeePortal();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 8000 }).should('be.visible');\ncy.contains('ion-card-content', 'Welcome to XR Portal - Your One-Stop Hub for Managing Pay Stubs, W2s and Personal information!');",
+              "err": {},
+              "uuid": "ecc3d4bc-caa2-4896-9f81-32d311c5ec0b",
+              "parentUUID": "54f28faf-c10f-499e-ba24-ceb8fa300ec8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ecc3d4bc-caa2-4896-9f81-32d311c5ec0b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10449,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "f4d8e010-2154-465f-af10-3e35c1a4e13b",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\300-dashboard\\dashboard-TC301.cy.ts",
+      "file": "src\\e2e\\kl\\300-dashboard\\dashboard-TC301.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "02f0493c-5dab-4625-85cd-2884e705451b",
+          "title": "Verify Dashboard Elements Display Correct Information",
+          "fullFile": "src\\e2e\\kl\\300-dashboard\\dashboard-TC301.cy.ts",
+          "file": "src\\e2e\\kl\\300-dashboard\\dashboard-TC301.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC301",
+              "fullTitle": "Verify Dashboard Elements Display Correct Information TC301",
+              "timedOut": null,
+              "duration": 11332,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : Dashboard Access\nLast Updated : Lilian (20/1/2025), Syakirah\nHigh Level Test Step :\nVerify Access to Dashboard Post-Login\n1. Log in to the portal and navigate to the dashboard.\nVerify each section/widget displays the correct information (e.g., direct deposit, pay statements)\nExpected: All sections and widgets should display accurate and up-to-date information.\n*/\ncy.userLoginPayeePortal();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 8000 }).should('be.visible');\n// My profile\ncy.contains('h2', 'My Profile').should('be.visible');\ncy.contains('h3', 'User information and preferences').should('be.visible');\n// Change of Address\ncy.contains('h2', 'Change of Address').should('be.visible');\ncy.contains('h3', 'Request an Address Change').should('be.visible');\ncy.contains('h6', '(Coming Soon)').should('be.visible').and('have.css', 'color', 'rgb(255, 0, 0)');\n// Direct Deposit\ncy.contains('h2', 'Direct Deposit').should('be.visible');\ncy.contains('h3', 'Manage Direct Deposit').should('be.visible');\n// Validate My Earnings\ncy.get('ion-col .dashboard-title b').should('be.visible').and('contain.text', 'My Earnings');\n// Pay Statements\ncy.get('ion-item ion-label').contains('Pay Statements').should('be.visible');\ncy.get('ion-item ion-label h3').contains('View and download your check stubs').should('be.visible');\n// Liens and Garnishments\ncy.get('ion-item ion-label').contains('Liens and Garnishments').should('be.visible');\ncy.get('ion-item ion-label h3').contains('View Liens and Garnishments Deducted').should('be.visible');\ncy.get('ion-item ion-label h6').contains('(Coming Soon)').should('have.css', 'color', 'rgb(255, 0, 0)');\n// Validate \"My Tax Documents\"\ncy.get('ion-col .dashboard-title b').should('be.visible').and('contain.text', 'My Tax Documents');\n// Validate \"Tax Statements\"\ncy.get('ion-item ion-label').contains('Tax Statements').should('be.visible');\ncy.get('ion-item ion-label h3').contains('Download your XR Extreme Reach W-2s').should('be.visible');\n// Validate \"W-4\"\ncy.get('ion-item ion-label').contains('W-4').should('be.visible');\ncy.get('ion-item ion-label h3').contains('Request a Change to Your W-4').should('be.visible');\ncy.get('ion-item ion-label h6').contains('(Coming Soon)').should('have.css', 'color', 'rgb(255, 0, 0)');\n// Validate \"Library\"\ncy.get('ion-item ion-label').contains('Library').should('be.visible');\ncy.get('ion-item ion-label h3').contains('Download Common Tax Forms').should('be.visible');\ncy.get('ion-item ion-label h6').contains('(Coming Soon)').should('have.css', 'color', 'rgb(255, 0, 0)');\nCypress.on('uncaught:exception', (err) => {\n    console.error('Uncaught exception:', err);\n    return false; // Prevent test failure\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: Expected to find content: 'Dashboard Announcement' within the selector: 'ion-card-title' but never did.",
+                "estack": "AssertionError: Timed out retrying after 8000ms: Expected to find content: 'Dashboard Announcement' within the selector: 'ion-card-title' but never did.\n    at Context.eval (webpack:///./src/e2e/kl/300-dashboard/dashboard-TC301.cy.ts:13:81)",
+                "diff": null
+              },
+              "uuid": "12fd32af-9639-4276-a2fd-72c23d34c17f",
+              "parentUUID": "02f0493c-5dab-4625-85cd-2884e705451b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "12fd32af-9639-4276-a2fd-72c23d34c17f"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 11332,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "1e822e8c-6d10-42ff-a64b-6e0451856f0f",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC200.cy.ts",
+      "file": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC200.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "102ed28e-7de0-425c-9d96-13f1edab1090",
+          "title": "Verify User Login with Valid Credentials",
+          "fullFile": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC200.cy.ts",
+          "file": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC200.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC200",
+              "fullTitle": "Verify User Login with Valid Credentials TC200",
+              "timedOut": null,
+              "duration": 4524,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : Login and authentication\nLast Updated : Lilian (20/1/2025), Syakirah\nHigh Level Test Step :\nVerify User Login with Valid Credentials\n1. Navigate to the login page.\n2. Enter a valid username.\n3. Enter a valid password.\n4. Click the \"Login\" button.\n*/\ncy.visit('/');\ncy.get('ion-card-title.ion-text-center', { timeout: 8000 })\n    .should('be.visible')\n    .and('have.text', ' Welcome to the XR Extreme Reach Portal ');\ncy.get('ion-input[formcontrolname=\"userName\"] input')\n    .should('be.visible')\n    .type(Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_PAYEE_PORTAL'));\ncy.get('[autocomplete=\"username\"]').should('have.value', Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_PAYEE_PORTAL'));\n// when input too fast it didn't go to the next form, werid behaviour on this line.\n// eslint-disable-next-line cypress/no-unnecessary-waiting\ncy.wait(1000);\ncy.get('ion-input[formcontrolname=\"password\"] input')\n    .should('be.visible')\n    .type(Cypress.env('PLATFORM_USER_PASSWORD_PAYROLL_PAYEE_PORTAL'));\n// Log in validation\ncy.contains('ion-button', 'Login').should('be.visible').click();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 8000 }).should('be.visible');",
+              "err": {},
+              "uuid": "627af57e-1fe9-445b-a213-64b7c8399319",
+              "parentUUID": "102ed28e-7de0-425c-9d96-13f1edab1090",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "627af57e-1fe9-445b-a213-64b7c8399319"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4524,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "4776056b-799b-42a2-a703-4a18f2134158",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC201.cy.ts",
+      "file": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC201.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "653f8237-d0d0-4200-9636-d3d15a6f4bab",
+          "title": "Verify Login with Invalid Credentials",
+          "fullFile": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC201.cy.ts",
+          "file": "src\\e2e\\kl\\200-login-and-authentication\\login-and-authentication-TC201.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC201",
+              "fullTitle": "Verify Login with Invalid Credentials TC201",
+              "timedOut": null,
+              "duration": 4933,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : Login and authentication\nLast Updated : Lilian (20/1/2025), Syakirah\nHigh Level Test Step :\nVerify User Login with Valid Credentials\n1. Navigate to the login page.\n2. Enter an invalid username.\n3. Enter an invalid password.\n4. Click the \"Login\" button.\n*/\ncy.visit('/');\ncy.get('ion-card-title.ion-text-center', { timeout: 8000 })\n    .should('be.visible')\n    .and('have.text', ' Welcome to the XR Extreme Reach Portal ');\ncy.get('ion-input[formcontrolname=\"userName\"] input')\n    .should('be.visible')\n    .type(Cypress.env('PLATFORM_USER_USERNAME_PAYROLL_PAYEE_PORTAL'));\n// when input too fast it didn't go to the next form, werid behaviour on this line.\n// eslint-disable-next-line cypress/no-unnecessary-waiting\ncy.wait(1000);\ncy.get('ion-input[formcontrolname=\"password\"] input').should('be.visible').type('wrongpassword');\n// Log in validation\ncy.contains('ion-button', 'Login').should('be.visible').click();\ncy.get(`[id*=\"hdr\"]`).should('be.visible').and('contains.text', 'Login Error!');\ncy.get(`[id*=\"msg\"]`).should('be.visible').and('contains.text', 'login failed: Invalid username or password.!');",
+              "err": {},
+              "uuid": "4fb908f3-436d-4a4a-9229-5f969fc179dc",
+              "parentUUID": "653f8237-d0d0-4200-9636-d3d15a6f4bab",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4fb908f3-436d-4a4a-9229-5f969fc179dc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4933,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2e82682f-632f-43f9-a3e6-bde6405eafff",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\400-profile\\profile-TC400.cy.ts",
+      "file": "src\\e2e\\kl\\400-profile\\profile-TC400.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b8c47974-a5a3-490e-964a-c5db4a63006d",
+          "title": "Verify personal profile",
+          "fullFile": "src\\e2e\\kl\\400-profile\\profile-TC400.cy.ts",
+          "file": "src\\e2e\\kl\\400-profile\\profile-TC400.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC400",
+              "fullTitle": "Verify personal profile TC400",
+              "timedOut": null,
+              "duration": 24074,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : My Profile\nLast Updated : Syakirah (25/3/2025), Lilian (20/1/2025), Syakirah\nHigh Level Test Step :\nVerify first name, last name, Email, phone number, address.\n*/\ncy.userLoginPayeePortal();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 60000 }).should('be.visible');\ncy.wait(1000); // need to wait for 10sec because of the system are not stable, (it load to fast and cannot get the element)\ncy.contains('h2', 'My Profile', { timeout: 5000 }).should('be.visible');\ncy.intercept('GET', '/api/payee-portal/dashboard-details/logged-in-sso-enabled-payee-portal-user-details?IsMyProfilePage=true').as('profile');\ncy.contains('h3', 'User information and preferences').should('be.visible').click();\ncy.wait('@profile').then((intercept) => {\n    const response = intercept.response.body;\n    const fields = {\n        firstName: response.firstName.trim(),\n        lastName: response.lastName,\n        email: response.email,\n        phone: response.phone,\n        street1: response.street1,\n        street2: response.street2,\n        city: response.city,\n        state: response.state,\n        postCode: response.zip,\n        country: response.country\n    };\n    Object.entries(fields).forEach(([key, value]) => {\n        cy.log(`${key}: ${value}`);\n    });\n    Object.entries(fields).forEach(([key, value]) => {\n        cy.wrap(value).as(key);\n    });\n});\nverifyText('@firstName', '.ion-padding > :nth-child(1) > :nth-child(2)');\nverifyText('@lastName', '.ion-padding > :nth-child(2) > :nth-child(2)');\nverifyText('@email', '.ion-padding > :nth-child(3) > :nth-child(2)');\nverifyText('@phone', '.ion-padding > :nth-child(4) > :nth-child(2)');\nverifyText('@street1', '.ion-padding > :nth-child(1) > :nth-child(4)');\n// verifyText('@street2', '.ion-padding > .md:nth-child(2) > .md:nth-child(4) > .md');\nverifyText('@city', '.ion-padding > :nth-child(3) > :nth-child(4)');\nverifyText('@state', ':nth-child(4) > :nth-child(4)');\nverifyText('@postCode', ':nth-child(5) > :nth-child(4)');\nverifyText('@country', ':nth-child(6) > [size-xs=\"4\"]');\ncy.get('ion-button.ion-color.ion-color-success').should('be.visible');\nCypress.on('uncaught:exception', (err) => {\n    console.error('Uncaught exception:', err);\n    return false; // Prevent test failure\n});",
+              "err": {
+                "message": "CypressError: Timed out retrying after 5000ms: `cy.wait()` timed out waiting `5000ms` for the 1st request to the route: `profile`. No request ever occurred.\n\nhttps://on.cypress.io/wait",
+                "estack": "CypressError: Timed out retrying after 5000ms: `cy.wait()` timed out waiting `5000ms` for the 1st request to the route: `profile`. No request ever occurred.\n\nhttps://on.cypress.io/wait\n    at cypressErr (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:76065:18)\n    at Object.errByPath (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:76119:10)\n    at checkForXhr (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:135342:84)\n    at <unknown> (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:135368:28)\n    at tryCatcher (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise.attempt.Promise.try (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:4338:29)\n    at whenStable (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:143744:68)\n    at <unknown> (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:143685:14)\n    at tryCatcher (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1830:23)\n    at Promise._settlePromiseFromHandler (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1542:31)\n    at Promise._settlePromise (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1599:18)\n    at Promise._settlePromise0 (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1644:10)\n    at Promise._settlePromises (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1724:18)\n    at Promise._fulfill (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:1668:18)\n    at <unknown> (https://portal.uat2-extremereach.com/__cypress/runner/cypress_runner.js:5473:46)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./src/e2e/kl/400-profile/profile-TC400.cy.ts:22:0)",
+                "diff": null
+              },
+              "uuid": "c02be3f7-2978-4a19-ad04-bdbe438d84e7",
+              "parentUUID": "b8c47974-a5a3-490e-964a-c5db4a63006d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "c02be3f7-2978-4a19-ad04-bdbe438d84e7"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 24074,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "206c2cf5-264d-4a92-8cea-23bafa0dac41",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\400-profile\\profile-TC401.cy.ts",
+      "file": "src\\e2e\\kl\\400-profile\\profile-TC401.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c510cd9d-1280-4507-a358-4ced76141e8f",
+          "title": "Verify my earnings",
+          "fullFile": "src\\e2e\\kl\\400-profile\\profile-TC401.cy.ts",
+          "file": "src\\e2e\\kl\\400-profile\\profile-TC401.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC401",
+              "fullTitle": "Verify my earnings TC401",
+              "timedOut": null,
+              "duration": 34322,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : My Profile\nLast Updated : Syakirah (14/4/2025)\nHigh Level Test Step :\nVerify My Earning Tab and the menu below it\n*/\ncy.userLoginPayeePortal();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 60000 }).should('be.visible');\ncy.contains('b', 'My Earnings').should('be.visible');\ncy.contains('h2', 'Pay Statements', { timeout: 5000 }).should('be.visible');\ncy.contains('h3', 'View and download your check stubs', { timeout: 5000 }).should('be.visible');\ncy.contains('h2', 'Liens and Garnishments', { timeout: 5000 }).should('be.visible');\ncy.contains('h3', 'View Liens and Garnishments Deducted', { timeout: 5000 }).should('be.visible');",
+              "err": {},
+              "uuid": "fcf28e5a-6903-414e-9955-1a4c775b5abb",
+              "parentUUID": "c510cd9d-1280-4507-a358-4ced76141e8f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fcf28e5a-6903-414e-9955-1a4c775b5abb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 34322,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "176b4e6c-0722-4ccc-8c55-7e608f88a403",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\400-profile\\profile-TC402.cy.ts",
+      "file": "src\\e2e\\kl\\400-profile\\profile-TC402.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "caf17795-f2f3-4626-bcb3-1189f18b95dc",
+          "title": "Verify my earnings",
+          "fullFile": "src\\e2e\\kl\\400-profile\\profile-TC402.cy.ts",
+          "file": "src\\e2e\\kl\\400-profile\\profile-TC402.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC401",
+              "fullTitle": "Verify my earnings TC401",
+              "timedOut": null,
+              "duration": 18138,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nModule : My Profile\nLast Updated : Syakirah (14/4/2025)\nHigh Level Test Step :\nVerify My Tax Documents Tab and the menu below it\n*/\ncy.userLoginPayeePortal();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 60000 }).should('be.visible');\ncy.contains('b', 'My Tax Documents').should('be.visible');\ncy.contains('h2', 'Tax Statements', { timeout: 5000 }).should('be.visible');\ncy.contains('h3', 'Download your XR Extreme Reach W-2s', { timeout: 5000 }).should('be.visible');\ncy.contains('h2', 'W-4', { timeout: 5000 }).should('be.visible');\ncy.contains('h3', 'Request a Change to Your W-4', { timeout: 5000 }).should('be.visible');\ncy.contains('h2', 'Library', { timeout: 5000 }).should('be.visible');\ncy.contains('h3', 'Download Common Tax Forms', { timeout: 5000 }).should('be.visible');",
+              "err": {},
+              "uuid": "25371d1a-0f6d-43cd-a401-152e91071eda",
+              "parentUUID": "caf17795-f2f3-4626-bcb3-1189f18b95dc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "25371d1a-0f6d-43cd-a401-152e91071eda"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18138,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "6ee1f507-2dcf-4098-b600-3982a3c3c017",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC500.cy.ts",
+      "file": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC500.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c5f718ab-231a-4a5b-a9ed-b3e4aa98c8a3",
+          "title": "Create Direct Deposit Via Plaid",
+          "fullFile": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC500.cy.ts",
+          "file": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC500.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC500",
+              "fullTitle": "Create Direct Deposit Via Plaid TC500",
+              "timedOut": null,
+              "duration": 26235,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Module : Create Direct Deposit Via Plaid\n// Last Updated : Syakirah (12/3/2025), Lilian (20/1/2025), Syakirah\n/*Steps:\n1- log in to Payee Portal\n2- Dashboard display\n3- Click on Direct Deposit\n4- Click on Agree button > select any bank > click continue until done\n5- Edit Bank Account Details form\n6- Click on Save button\n7- Direct Deposit details will appear after Alert Message Pop-up\n*/\nfunction createDepositViaPaid() {\n    //log in validation\n    cy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\n    //direct deposit\n    //add direct deposit for first time\n    cy.get('ion-row.md > :nth-child(1) > :nth-child(4)').click();\n    // cy.wait(3000);\n    cy.get('.card-content-md > :nth-child(1) > .item-label > ion-row.md > ion-col.md > .ion-color', { timeout: 60000 }).click();\n    // cy.wait(10000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 }) // Replace with the iframe's ID\n        .find('button:contains(\"Agree\")') // Adjust the selector for the \"Agree\" button\n        .click();\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 60000 })\n        .find('button:contains(\"Continue as guest\")', { timeout: 60000 })\n        .click({ force: true });\n    //choose bank\n    // cy.wait(3000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"search-input-input\"]').type('capital.xyz');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 })\n        .find('[class=\"MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-skm7wc\"]', { timeout: 60000 })\n        .click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"digit-input\"]').type('1234');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"secureDigit-input\"]').type('1234');\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('[type=\"checkbox\"]').first().check();\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Continue\")').click();\n    cy.getIframeBody('#plaid-link-iframe-1')\n        .find('button:contains(\"Finish without saving\")', { timeout: 60000 })\n        .click({ force: true });\n    //edit account bank details\n    cy.get('[name=\"allocationType\"]', { timeout: 600000 }).select('Percentage');\n    cy.get(':nth-child(10) > :nth-child(2) > .full-width', { timeout: 600000 }).clear().type('{backspace}').type('1');\n    cy.get('[name=\"processingOrder\"]', { timeout: 60000 })\n        .find('option')\n        .last()\n        .invoke('val')\n        .then((value) => {\n        cy.get('[name=\"processingOrder\"]').select(value);\n    });\n    //Click not activate direct deposit checkbox\n    cy.get('ion-checkbox').then(($checkbox) => {\n        if ($checkbox.attr('aria-checked') === 'true') {\n            cy.wrap($checkbox).click(); // Uncheck only if it is checked\n        }\n    });\n    //Click save button\n    cy.get('.footer-md > ion-toolbar.md > .buttons-last-slot > .md', { timeout: 600000 }).click();\n    //alert popup message validation\n    cy.get('[class=\"alert-wrapper ion-overlay-wrapper sc-ion-alert-md\"]').should('be.visible');\n    // cy.wait(2000);\n    cy.get('.alert-button-inner').click();\n}\ncreateDepositViaPaid();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#plaid-link-iframe-1`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#plaid-link-iframe-1`, but never found it.\n    at Context.eval (webpack:///./src/e2e/kl/500-direct-deposit/direct-deposit-TC500.cy.ts:6:0)",
+                "diff": null
+              },
+              "uuid": "1e31cf02-1b4a-48f3-a597-c7f53a2c3095",
+              "parentUUID": "c5f718ab-231a-4a5b-a9ed-b3e4aa98c8a3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "1e31cf02-1b4a-48f3-a597-c7f53a2c3095"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 26235,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "d5183389-a55f-43be-92fc-e6d667071a13",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC501.cy.ts",
+      "file": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC501.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9ebf6c45-736a-462a-b03d-082452df66f0",
+          "title": "Create Direct Deposit Via Manually",
+          "fullFile": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC501.cy.ts",
+          "file": "src\\e2e\\kl\\500-direct-deposit\\direct-deposit-TC501.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC501",
+              "fullTitle": "Create Direct Deposit Via Manually TC501",
+              "timedOut": null,
+              "duration": 33988,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Module : Create Direct Deposit Via Manually\n// Last Updated : Syakirah (12/3/2025), Lilian (20/1/2025), Syakirah\n/*Steps:\n1- log in to Payee Portal\n2- Dashboard display\n3- Click on Direct Deposit\n4- Click on Agree button > select any bank > click continue until done\n5- Edit Bank Account Details form\n6- Click on Save button\n7- Direct Deposit details will appear after Alert Message Pop-up\n*/\nfunction createDepositViaPaidManually() {\n    //log in validation\n    cy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\n    //direct deposit\n    //add direct deposit for first time\n    cy.get('ion-row.md > :nth-child(1) > :nth-child(4)').click();\n    // cy.wait(3000);\n    cy.get('.card-content-md > :nth-child(1) > .item-label > ion-row.md > ion-col.md > .ion-color').click();\n    // cy.wait(10000);\n    cy.getIframeBody('#plaid-link-iframe-1') // Replace with the iframe's ID\n        .find('button:contains(\"Agree\")') // Adjust the selector for the \"Agree\" button\n        .click();\n    cy.getIframeBody('#plaid-link-iframe-1')\n        .find('button:contains(\"Continue as guest\")', { timeout: 60000 })\n        .click({ force: true });\n    //choose unknown name\n    // cy.wait(3000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('input[id=\"search-input-input\"]').type('xjdyyae');\n    //direct deposit manually button will appear\n    cy.wait(10000); // need to wait for 10sec because the slowness and unstable of the system\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 })\n        .find('button:contains(\"+Direct Deposit Manually\")', { timeout: 60000 })\n        .click({ force: true });\n    // cy.wait(2000);\n    cy.getIframeBody('#plaid-link-iframe-1', { timeout: 10000 }).find('button:contains(\"Yes, exit\")').click({ force: true });\n    // cy.wait(5000);\n    cy.get('.ion-button-add-dd-manually', { timeout: 10000 }).should('be.visible').click();\n    const routingNumber = faker_1.faker.string.numeric(9);\n    const accountNumber = faker_1.faker.string.numeric(12);\n    cy.get(':nth-child(2) > :nth-child(2) > .full-width').type(routingNumber); // routing number\n    cy.get(':nth-child(3) > :nth-child(2) > .full-width').type(accountNumber); // account number\n    cy.get('[name=\"accountType\"]').select('Checking');\n    cy.get(':nth-child(5) > :nth-child(2) > .full-width').type('Manual Test Bank');\n    cy.get(':nth-child(6) > :nth-child(2) > .full-width').type('Big Manual Bank');\n    cy.get('[name=\"allocationType\"]').select('Percentage');\n    cy.get(':nth-child(8) > :nth-child(2) > .full-width').type('1');\n    cy.get('select[name=\"processingOrder\"] option', { timeout: 60000 }).then(($options) => {\n        const lastValue = $options.last().val();\n        cy.get('select[name=\"processingOrder\"]').select(lastValue);\n    });\n    //Click not activate direct deposit checkbox\n    cy.get('ion-checkbox').then(($checkbox) => {\n        if ($checkbox.attr('aria-checked') === 'true') {\n            cy.wrap($checkbox).click(); // Uncheck only if it is checked\n        }\n    });\n    cy.get('.footer-md > ion-toolbar.md > .buttons-last-slot > .md').click();\n    // cy.wait(2000);\n    cy.get('.alert-button-inner', { timeout: 60000 }).should('be.visible').click({ force: true });\n}\ncreateDepositViaPaidManually();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#plaid-link-iframe-1`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `#plaid-link-iframe-1`, but never found it.\n    at Context.eval (webpack:///./src/e2e/kl/500-direct-deposit/direct-deposit-TC501.cy.ts:9:0)",
+                "diff": null
+              },
+              "uuid": "af60b57c-e54c-4c41-b0a3-183441b2ad0a",
+              "parentUUID": "9ebf6c45-736a-462a-b03d-082452df66f0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "af60b57c-e54c-4c41-b0a3-183441b2ad0a"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 33988,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "27498126-db4a-4e48-85aa-94e7ab7a503c",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\600-bank-accounts\\bank-account-TC600.cy.ts",
+      "file": "src\\e2e\\kl\\600-bank-accounts\\bank-account-TC600.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "30e11dbf-52d6-4018-91c6-09ef16143679",
+          "title": "Bank accounts",
+          "fullFile": "src\\e2e\\kl\\600-bank-accounts\\bank-account-TC600.cy.ts",
+          "file": "src\\e2e\\kl\\600-bank-accounts\\bank-account-TC600.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC600",
+              "fullTitle": "Bank accounts TC600",
+              "timedOut": null,
+              "duration": 46142,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Module : View and Download Tax Statement\n// Last Updated : Syakirah (24/3/2025)\n/*Steps:\n1- Log in XR Payroll\n2- Go to Search Payee\n3- Add bank account\n4- Payee portal will show bank accounts from\n    A6 - Bank account manually entered on A6\n*/\n// Login into A6 and go to Payee Details\ncy.fixture('xr-login.json').then(({ username, password, payeeDetails }) => {\n    cy.userLoginXR(username, password);\n    cy.visit(payeeDetails);\n});\ncy.get('.col-md-6', { timeout: 60000 }).should('be.visible').contains('Payee Details');\ncy.contains('a.slug-link', 'Bank Accounts', { timeout: 60000 }).should('be.visible').click({ force: true });\ncy.get('[data-cy=\"add-bank-account-btn\"]', { timeout: 60000 }).should('be.visible').click({ force: true });\ncy.wait(8000); // need to wait for 8 sec because the system are not stable slow to load the form\ncy.get('[class=\"k-i-close k-button-icon k-icon k-font-icon ng-star-inserted\"]').click({ force: true });\ncy.get('[data-cy=\"add-bank-account-btn\"]', { timeout: 60000 }).should('be.visible').click({ force: true });\ncy.contains('[class=\"k-window-title k-dialog-title\"]', 'Add/Edit Bank Account')\n    .parent()\n    .parent()\n    .as('addBankAccount')\n    .should('be.visible');\n// cy.get('.disabledDiv', { timeout: 60000 }).invoke('removeClass', 'disabledDiv');\ncy.fixture('bank-account.json').then((bankData) => {\n    cy.get('[name=\"routingNumber\"]', { timeout: 60000 }).type(bankData.routingNumber);\n    cy.get('[name=\"accountNumber\"]', { timeout: 60000 }).type(bankData.accountNumber);\n    cy.get('@addBankAccount')\n        .find('[class=\"k-input-value-text\"]', { timeout: 60000 })\n        .eq(0) // account type\n        .type(bankData.accountType + '{enter}');\n    cy.get('[name=\"accountNickName\"]', { timeout: 60000 }).type(bankData.accountNickName);\n    cy.get('[name=\"bankName\"]', { timeout: 60000 }).type(bankData.bankName);\n    cy.get('[name=\"bankAddress\"]', { timeout: 60000 }).type(bankData.bankAddress);\n    cy.get('[name=\"bankCity\"]', { timeout: 60000 }).type(bankData.bankCity);\n    cy.get('@addBankAccount')\n        .find('[class=\"k-input-value-text\"]', { timeout: 60000 })\n        .eq(1) // bank state\n        .type(bankData.stateId + '{enter}', { delay: 200 });\n    cy.get('[name=\"bankPostalCode\"]', { timeout: 60000 }).type(bankData.bankPostalCode);\n    cy.get('@addBankAccount')\n        .find('[class=\"k-input-value-text\"]', { timeout: 60000 })\n        .eq(2) // bank country\n        .type(bankData.destinationCountryId + '{enter}');\n    cy.get('@addBankAccount')\n        .find('[class=\"k-input-value-text\"]', { timeout: 60000 })\n        .eq(3) // bank allocation type\n        .type(bankData.allocationType + '{enter}', { delay: 200 });\n    cy.get('[name=\"allocationPercentage\"]', { timeout: 60000 }).type(bankData.allocationPercentage);\n    cy.wait(3000); // TODO : Try to find load point for time out;\n    cy.get('@addBankAccount').find('[class=\"k-input-value-text\"]', { timeout: 60000 }).eq(4).click();\n    // cy.pause();\n    //cy.get('.k-popup k-list-container k-dropdownlist-popup').last().click();\n    cy.get('.k-list-ul li.k-list-item').last().click({ force: true });\n    cy.get('input[name=\"isActive\"]', { timeout: 60000 }).then(($checkbox) => {\n        if ($checkbox.is(':checked')) {\n            cy.get('input[name=\"isActive\"]').uncheck({ force: true });\n        }\n    });\n    cy.contains('span.k-button-text', 'Save', { timeout: 60000 }).click({ force: true });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<div.k-window.k-dialog.ng-tns-c756294696-0>' to be 'visible'\n\nThis element `<div.k-window.k-dialog.ng-tns-c756294696-0>` is not visible because its ancestor has `position: fixed` CSS property and it is overflowed by other elements. How about scrolling to the element with `cy.scrollIntoView()`?",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<div.k-window.k-dialog.ng-tns-c756294696-0>' to be 'visible'\n\nThis element `<div.k-window.k-dialog.ng-tns-c756294696-0>` is not visible because its ancestor has `position: fixed` CSS property and it is overflowed by other elements. How about scrolling to the element with `cy.scrollIntoView()`?\n    at Context.eval (webpack:///./src/e2e/kl/600-bank-accounts/bank-account-TC600.cy.ts:30:0)",
+                "diff": null
+              },
+              "uuid": "66032b0c-cf37-4134-9d02-7fd68063a201",
+              "parentUUID": "30e11dbf-52d6-4018-91c6-09ef16143679",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "66032b0c-cf37-4134-9d02-7fd68063a201"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 46142,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "fa5d85cc-bc46-4dec-a423-d07f9b313cf4",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\700-tax-statements\\tax-statements-TC700.cy.ts",
+      "file": "src\\e2e\\kl\\700-tax-statements\\tax-statements-TC700.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a44df92b-101b-46fa-9a6a-f17af7ca061f",
+          "title": "View and download tax statements",
+          "fullFile": "src\\e2e\\kl\\700-tax-statements\\tax-statements-TC700.cy.ts",
+          "file": "src\\e2e\\kl\\700-tax-statements\\tax-statements-TC700.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC700",
+              "fullTitle": "View and download tax statements TC700",
+              "timedOut": null,
+              "duration": 138347,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1: Login and go to Payee Details\ncy.fixture('xr-login.json').then(({ payeesearch }) => {\n    cy.visit(payeesearch);\n});\n// Step 2: Search Payee\ncy.fixture('attachment-details.json').then((attachmentData) => {\n    cy.get('[data-cy=\"tax-id-input\"]', { timeout: 60000 }).type(attachmentData.payeeSSN);\n});\ncy.get('[data-cy=\"search-submit-btn\"]').click();\ncy.get('td[data-kendo-grid-column-index=\"5\"]', { timeout: 60000 }).should('be.visible').and('contain.text', 'AUTOMATION');\n// Step 3: View Payee Details\ncy.window().then((win) => {\n    cy.stub(win, 'open').callsFake((url) => {\n        win.location.href = url;\n    });\n});\ncy.get('tr.k-master-row').first().find('button[data-cy=\"view-payee-btn\"]').click();\n// Step 4: Go to Attachments tab\ncy.get('a[routerlink=\"attachments\"]', { timeout: 60000 }).click();\n// Step 5: Check attachment state\ncy.get('table.k-table')\n    .should('be.visible')\n    .then(($table) => {\n    const tableText = $table.text();\n    if (tableText.includes('There are no attachments.')) {\n        cy.log('No attachments found — uploading...');\n        uploadAttachment();\n        verifyUploadSuccess();\n    }\n    else {\n        cy.get('td.k-table-td').then(($cells) => {\n            const w2Exists = [...$cells].some((cell) => cell.textContent.includes('W2'));\n            if (w2Exists) {\n                cy.log('W2 already exists — skipping upload.');\n            }\n            else {\n                cy.log('No W2 found — uploading...');\n                uploadAttachment();\n                verifyUploadSuccess();\n            }\n        });\n    }\n});\n// Upload helper\nfunction uploadAttachment() {\n    cy.contains('span.k-button-text', 'Attach Files').click();\n    cy.get('.k-dropzone').attachFile('2023_ERPS_W2-C.pdf', {\n        subjectType: 'drag-n-drop'\n    });\n    cy.get('span.k-window-title.k-dialog-title', { timeout: 60000 }).should('be.visible').and('contain.text', 'Attach File(s)');\n    cy.fixture('attachment-details.json').then((attachmentData) => {\n        cy.get('[data-cy=\"attach-file-description-txtbox\"]', { timeout: 60000 })\n            .should('be.visible')\n            .type(attachmentData.description);\n    });\n    cy.get('span.k-input-inner').click();\n    cy.get('.k-list-item').contains('W2').click();\n    cy.contains('span.k-button-text', 'Upload All', { timeout: 60000 }).click();\n}\n// Verify upload success toast/alert\nfunction verifyUploadSuccess() {\n    cy.get('div[role=\"alert\"].k-notification-success', { timeout: 60000 })\n        .should('be.visible')\n        .and('contain.text', 'All files uploaded successfully');\n}\n// Step 6: Login to Payee Portal\ncy.userLoginPayeePortalUAT2();\ncy.contains('ion-card-title', 'Dashboard Announcement', { timeout: 60000 }).should('be.visible');\ncy.get(':nth-child(3) > :nth-child(2) > .sc-ion-label-md-h').click();\ncy.get('[class=\"ion-text-center ion-inherit-color md hydrated\"]').contains('Tax Statements');\n// Step 7: Select year and trigger hybrid download\ncy.get('select[name=\"selectedTaxYear\"]').select(1);\ncy.wait(2000); // need to wait atleast 2sec for the page completely load\ncy.window().then((win) => {\n    cy.stub(win, 'open').callsFake((url) => {\n        win.location.href = url;\n    });\n});\ncy.get('a[href*=\"Download\"]').first().contains('Download Statement').click();",
+              "err": {},
+              "uuid": "b76bcc29-94b0-40ce-be5a-108cfa8d2caa",
+              "parentUUID": "a44df92b-101b-46fa-9a6a-f17af7ca061f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b76bcc29-94b0-40ce-be5a-108cfa8d2caa"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 138347,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    },
+    {
+      "uuid": "2476bd71-5f6a-4695-b064-24f07f03f54d",
+      "title": "",
+      "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1001.cy.ts",
+      "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1001.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2b6f6291-f2fd-434c-b0f0-c4e90886a557",
+          "title": "DD Allocation Over/Under Validation",
+          "fullFile": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1001.cy.ts",
+          "file": "src\\e2e\\kl\\1000-regression-test\\reg-test-TC1001.cy.ts",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "TC1001",
+              "fullTitle": "DD Allocation Over/Under Validation TC1001",
+              "timedOut": null,
+              "duration": 17414,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Module : DD Allocation Over/Under Validation\n// Last Updated : Syakirah (25/3/2025), Syakirah (12/3/2025)\n/*Steps:\n1- Log in Payee Portal\n2- Dashboard will display\n3- Click on Direct Deposit\n4- Create the Plaid Bank Account\n5- Edit the Allocation Percentage to 100%\n    Expected: Can edit the bank account details\n*/\n//log in validation\ncy.get('ion-card-title', { timeout: 60000 }).should('be.visible').should('contain.text', 'Dashboard Announcement');\ncy.contains('p', 'Welcome to XR Portal - Your One-Stop Hub for Managing Pay Stubs, W2s and Personal information!', {\n    timeout: 10000\n}).should('be.visible');\n// 5- Edit the Allocation Percentage to 100%\ncy.get('ion-row.md > :nth-child(1) > :nth-child(4)', { timeout: 60000 }).should('be.visible').click();\ncy.get('ion-label', { timeout: 60000 }) // Click first row\n    .contains('#')\n    .click();\ncy.get('ion-label') // Click first row\n    .contains('#')\n    .click()\n    .parents('ion-row') // Use ion-item instead of ion-row\n    .within(() => {\n    cy.get('ion-button')\n        .contains('Edit')\n        .should('be.visible') // Ensure it's visible before clicking\n        .click();\n});\ncy.get('ion-title', { timeout: 60000 }).should('contain.text', 'Edit Bank Account');\n// Edit the Allocation Percentage >100%\ncy.get(':nth-child(10) > :nth-child(2) > .full-width', { timeout: 60000 }).type('100');\n// Click Save\ncy.get('.footer-md > ion-toolbar.md > .buttons-last-slot > .md').click();\ncy.get('ion-toast')\n    .shadow()\n    .find('.toast-message')\n    .should('be.visible')\n    .invoke('text')\n    .should('contain', 'Total amount of all active percentage records should not exceed 100%');",
+              "err": {},
+              "uuid": "09ac571a-2983-4601-8dc4-2ffacb1eb200",
+              "parentUUID": "2b6f6291-f2fd-434c-b0f0-c4e90886a557",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "09ac571a-2983-4601-8dc4-2ffacb1eb200"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 17414,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "..\\..\\..\\..\\cypress\\results\\mochawesome\\ui\\payroll\\payee-portal\\.jsons",
+        "charts": true,
+        "reportPageTitle": "ER Test Suite - UI - Payroll/PayeePortal",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "saveJson": true,
+        "ignoreVideos": false,
+        "saveAllAttempts": false,
+        "videoOnFailOnly": false,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
