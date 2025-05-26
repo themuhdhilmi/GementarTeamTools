@@ -44,18 +44,17 @@ model Session {
 }
 
 model User {
-    id            String          @id @default(cuid())
-    name          String
-    email         String         @unique
-    hashed_password          String
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    group         Group           @relation(fields: [groupId], references: [id])
-    groupId       String
-    assignedClaim AssignedClaim[]
-    permission    Permission[]
+    id              String          @id @default(cuid())
+    name            String
+    email           String          @unique
+    hashed_password String
+    emailVerified   DateTime?
+    image           String?
+    accounts        Account[]
+    sessions        Session[]
+    group           Group           @relation(fields: [groupId], references: [id])
+    groupId         String
+    assignedClaim   AssignedClaim[]
 }
 
 model Group {
@@ -68,7 +67,6 @@ model Permission {
     id         Int            @id
     permission PermissionList
     group      Group[]
-    user User[]
 }
 
 enum PermissionList {
@@ -81,23 +79,32 @@ enum PermissionList {
     GET_SELF_CLAIMS
 
     PAGE_PERMISSION_REIMBURSEMENT
+    PAGE_PERMISSION_REIMBURSEMENT_DASHBOARD
+    PAGE_PERMISSION_REIMBURSEMENT_MANAGE_CLAIM
+
     PAGE_PERMISSION_CYPRESS_REPORT
 }
 
-enum ClaimCategory {
-    CATEGORY_1
-    CATEGORY_2
-    CATEGORY_3
-    CATEGORY_4
+model ClaimCategory {
+    id            String          @id @default(cuid())
+    name          String
+    assignedClaim AssignedClaim[]
 }
 
 model AssignedClaim {
-    id             String           @id @default(cuid())
-    value          Float
-    claimCategory  ClaimCategory
-    requestedClaim RequestedClaim[]
-    user           User?            @relation(fields: [userId], references: [id])
-    userId         String?
+    id              String           @id @default(cuid())
+    value           Float
+    perClaimLimit   Float?
+    isPerMonth      Boolean          @default(false)
+    isCustomDate    Boolean          @default(false)
+    dateStart       DateTime?
+    dateEnd         DateTime?
+    year            Int
+    claimCategory   ClaimCategory    @relation(fields: [claimCategoryId], references: [id])
+    requestedClaim  RequestedClaim[]
+    user            User?            @relation(fields: [userId], references: [id])
+    userId          String?
+    claimCategoryId String
 }
 
 enum RequestedClaimStatus {
@@ -109,7 +116,7 @@ enum RequestedClaimStatus {
 model RequestedClaim {
     id              String               @id @default(cuid())
     value           Float
-    status          RequestedClaimStatus
+    status          RequestedClaimStatus @default(PENDING)
     AssignedClaim   AssignedClaim?       @relation(fields: [assignedClaimId], references: [id])
     assignedClaimId String?
 }

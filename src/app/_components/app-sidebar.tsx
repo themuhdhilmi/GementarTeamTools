@@ -3,20 +3,14 @@
 import * as React from "react"
 import {
   AudioWaveform,
-  BookOpen,
   Bot,
   Command,
   Flame,
-  Frame,
-  GalleryVerticalEnd,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
   SquareTerminal,
-  TestTube,
   TestTube2,
+  type LucideIcon,
 } from "lucide-react"
 
 
@@ -28,14 +22,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
 } from "~/components/ui/sidebar"
 import { NavMain } from "./nav-main"
 import { NavProjects } from "./nav-projects"
 import { NavUser } from "./nav-user"
-import { TeamSwitcher } from "./team-switcher"
 import { useSession } from "next-auth/react"
 import { NavSecondary } from "./nav-secondary"
+import { PermissionList } from "@prisma/client";
+import { api } from "~/trpc/react"
 
 // This is sample data.
 const data = {
@@ -67,18 +61,17 @@ const data = {
       url: "#",
       icon: SquareTerminal,
       isActive: true,
+      permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Dashboard",
+          url: "/portal",
+          permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT_DASHBOARD,
         },
         {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          title: "Manage Claim",
+          url: "/portal/reimbursement/manage-claim",
+          permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT_MANAGE_CLAIM,
         },
       ],
     },
@@ -92,57 +85,11 @@ const data = {
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Claim Category",
           url: "#",
         },
         {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
+          title: "Assigned Claim",
           url: "#",
         },
       ],
@@ -161,11 +108,6 @@ const data = {
     },
   ],
   projects: [
-    // {
-    //   name: "real time paste",
-    //   url: "/real-time-paste",
-    //   icon: Frame,
-    // },
     {
       name: "cypress report",
       url: "/portal/cypress-report-generator",
@@ -174,45 +116,107 @@ const data = {
   ],
 }
 
+type MenuItem = {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  permission?: PermissionList;
+  items?: {
+    title: string;
+    url: string;
+    permission?: PermissionList;
+  }[];
+};
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
   const session = useSession();
+  
+  // Get all unique permissions from the menu items
+  const getAllPermissions = React.useCallback(() => {
+    const permissions = new Set<PermissionList>();
+    
+    data.navMain.forEach((item: MenuItem) => {
+      if (item.permission) {
+        permissions.add(item.permission);
+      }
+      item.items?.forEach(subItem => {
+        if (subItem.permission) {
+          permissions.add(subItem.permission);
+        }
+      });
+    });
 
-  const datas = {
-    user: {
-      name: session.data?.user?.name ?? "",
-      email: session.data?.user?.email ?? "",
-      avatar: session.data?.user?.image ?? "",
-    },
+    return Array.from(permissions);
+  }, []);
+
+  // Get all permissions first
+  const permissions = React.useMemo(() => getAllPermissions(), [getAllPermissions]);
+
+  // Check all permissions at once
+  const { data: permissionResults, isLoading: isPermissionLoading } = api.permission.checkMultiplePermissions.useQuery(
+    { permissions: permissions.map(p => p.toString()) },
+    { enabled: permissions.length > 0 }
+  );
+
+  // Filter navMain items based on permissions
+  const filteredNavMain = React.useMemo(() => {
+    if (!permissionResults) return data.navMain;
+
+    return data.navMain.filter((item: MenuItem) => {
+      // If item has no permission requirement, show it
+      if (!item.permission) return true;
+      
+      // Check main menu permission
+      if (!permissionResults[item.permission]) return false;
+
+      // Filter sub-items based on their permissions
+      if (item.items) {
+        item.items = item.items.filter(subItem => {
+          if (!subItem.permission) return true;
+          return permissionResults[subItem.permission] ?? false;
+        });
+
+        // Only show menu if it has visible sub-items
+        return item.items.length > 0;
+      }
+
+      return true;
+    });
+  }, [permissionResults]);
+
+  if(!isPermissionLoading)
+  {
+    return (
+      <Sidebar variant="inset" {...props}>
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" asChild>
+                <a href="#">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                    <Command className="size-4" />
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">XR Lunar</span>
+                    <span className="truncate text-xs">Claim Management</span>
+                    <span className="truncate text-xs text-muted-foreground">{new Date().toLocaleDateString('en-MY')}</span>
+                  </div>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
+        <SidebarContent>
+          <NavMain items={filteredNavMain} />
+          <NavProjects projects={data.projects} />
+          <NavSecondary items={data.navSecondary} className="mt-auto" />
+        </SidebarContent>
+        <SidebarFooter>
+          <NavUser user={data.user} />
+        </SidebarFooter>
+      </Sidebar>
+    )
   }
 
-  return (
-    <Sidebar variant="inset" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-    </Sidebar>
-  )
 }

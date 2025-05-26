@@ -53,7 +53,15 @@ CREATE TABLE `Group` (
 -- CreateTable
 CREATE TABLE `Permission` (
     `id` INTEGER NOT NULL,
-    `permission` ENUM('LOGIN', 'LOGOUT', 'REQUEST_CLAIM', 'ASSIGN_CLAIM', 'GET_USER_CLAIMS', 'GET_SELF_CLAIMS') NOT NULL,
+    `permission` ENUM('LOGIN', 'LOGOUT', 'REQUEST_CLAIM', 'ASSIGN_CLAIM', 'GET_USER_CLAIMS', 'GET_SELF_CLAIMS', 'PAGE_PERMISSION_REIMBURSEMENT', 'PAGE_PERMISSION_CYPRESS_REPORT') NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ClaimCategory` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -61,9 +69,16 @@ CREATE TABLE `Permission` (
 -- CreateTable
 CREATE TABLE `AssignedClaim` (
     `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
     `value` DOUBLE NOT NULL,
-    `claimCategory` ENUM('CATEGORY_1', 'CATEGORY_2', 'CATEGORY_3', 'CATEGORY_4') NOT NULL,
+    `perClaimLimit` DOUBLE NULL,
+    `isPerMonth` BOOLEAN NOT NULL DEFAULT false,
+    `isCustomDate` BOOLEAN NOT NULL DEFAULT false,
+    `dateStart` DATETIME(3) NULL,
+    `dateEnd` DATETIME(3) NULL,
+    `year` INTEGER NOT NULL,
     `userId` VARCHAR(191) NULL,
+    `claimCategoryId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -72,7 +87,7 @@ CREATE TABLE `AssignedClaim` (
 CREATE TABLE `RequestedClaim` (
     `id` VARCHAR(191) NOT NULL,
     `value` DOUBLE NOT NULL,
-    `status` ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL,
+    `status` ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL DEFAULT 'PENDING',
     `assignedClaimId` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
@@ -95,6 +110,9 @@ ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`
 
 -- AddForeignKey
 ALTER TABLE `User` ADD CONSTRAINT `User_groupId_fkey` FOREIGN KEY (`groupId`) REFERENCES `Group`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `AssignedClaim` ADD CONSTRAINT `AssignedClaim_claimCategoryId_fkey` FOREIGN KEY (`claimCategoryId`) REFERENCES `ClaimCategory`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `AssignedClaim` ADD CONSTRAINT `AssignedClaim_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

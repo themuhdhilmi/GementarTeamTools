@@ -1,10 +1,13 @@
-import { PrismaClient, PermissionList, ClaimCategory } from "@prisma/client";
+import { PrismaClient, PermissionList } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.user.deleteMany();
   await prisma.permission.deleteMany();
   await prisma.group.deleteMany();
+  await prisma.assignedClaim.deleteMany();
+  await prisma.claimCategory.deleteMany();
+
 
   const allPermissions = Object.values(PermissionList);
 
@@ -41,7 +44,7 @@ async function main() {
     data: {
       id: "STAFF",
       permission: {
-        connect: [{ id: 0 }, { id: 1 }],
+        connect: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id : 4}, { id : 5}, { id : 6}, { id : 7}, { id : 8}, { id : 9}],
       },
     },
   });
@@ -55,18 +58,34 @@ async function main() {
     },
   });
 
-  // await prisma.user.create({
-  //   data: {
-  //     name: "sample user",
-  //     email: "sample@email.com",
-  //     hashed_password: "$2a$12$twZYpoyxc8zHfoO3HE.pTOwMf8Y05OzrmxLYD80aXqvOVknUvBV3W", //Sample@123
-  //     group: {
-  //       connect: {
-  //         id: "STAFF",
-  //       },
-  //     },
-  //   },
-  // });
+  await prisma.claimCategory.createMany({
+    data: [
+      {
+        name: "Category 1",
+      },
+      {
+        name: "Category 2",
+      },
+      {
+        name: "Category 3",
+      },
+      {
+        name: "Category 4",
+      },
+      
+    ],
+  });
+
+  const claimCategories = await prisma.claimCategory.findMany();
+  
+  if (claimCategories.length === 0) {
+    throw new Error("No claim categories found in database");
+  }
+
+  const firstCategory = claimCategories[0]!; // Non-null assertion operator
+  const secondCategory = claimCategories[1]!; // Non-null assertion operator
+  const thirdCategory = claimCategories[2]!; // Non-null assertion operator
+  const fourthCategory = claimCategories[3]!; // Non-null assertion operator
 
   await prisma.user.upsert({
     where: {
@@ -78,22 +97,53 @@ async function main() {
       groupId: "STAFF",
       hashed_password: "$2a$12$twZYpoyxc8zHfoO3HE.pTOwMf8Y05OzrmxLYD80aXqvOVknUvBV3W", //Sample@123
       assignedClaim: {
-        createMany: {
-          data: [
-            {
-              value: 100,
-              claimCategory: ClaimCategory.CATEGORY_1,
-            },
-            {
-              value: 200,
-              claimCategory: ClaimCategory.CATEGORY_2,
-            },
-            {
-              value: 300,
-              claimCategory: ClaimCategory.CATEGORY_3,
-            },
-          ],
-        },
+        create: [
+          {
+            value: 1000,
+            year: 2025,
+            claimCategoryId: firstCategory.id,
+          },
+          {
+            value: 12000,
+            year: 2025,
+            perClaimLimit: 1000,
+            claimCategoryId: secondCategory.id,
+          },
+          {
+            value: 15000,
+            year: 2025,
+            perClaimLimit: 1000,
+            claimCategoryId: thirdCategory.id,
+          },
+          {
+            value: 11000,
+            year: 2025,
+            isCustomDate: true,
+            dateStart: new Date("2025-01-01"),
+            dateEnd: new Date("2025-01-31"),
+            claimCategoryId: fourthCategory.id,
+            requestedClaim: {
+              create: [
+                {
+                  value: 500,
+                  status: "PENDING"
+                },
+                {
+                  value: 750,
+                  status: "APPROVED"
+                },
+                {
+                  value: 150,
+                  status: "APPROVED"
+                },
+                {
+                  value: 1000,
+                  status: "REJECTED"
+                }
+              ]
+            }
+          }
+        ]
       },
     },
     update: {},

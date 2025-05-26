@@ -64,4 +64,34 @@ export const claimRouter = createTRPCRouter({
 
     return user?.assignedClaim ?? null;
   }),
+
+  getSelfClaimCategories: protectedProcedure
+  .query(async ({ ctx }) => {
+
+    if(!(await isUserHasPermission(ctx.session.user.email, PermissionList.GET_SELF_CLAIMS))) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You are not authorized to access this resource",
+      });
+    }
+
+    if(!ctx.session.user.email) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You are not authorized to access this resource",
+      });
+    }
+
+    const claimCategories = await ctx.db.claimCategory.findMany({
+      where: {
+        assignedClaim : {
+          some: {
+            userId: ctx.session.user.id,
+          },
+        },
+      },
+    });
+
+    return claimCategories ?? null;
+  }),
 });
