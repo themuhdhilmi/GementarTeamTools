@@ -65,7 +65,7 @@ const data = {
       items: [
         {
           title: "Dashboard",
-          url: "/portal",
+          url: "/portal/reimbursement/dashboard",
           permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT_DASHBOARD,
         },
         {
@@ -154,9 +154,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const permissions = React.useMemo(() => getAllPermissions(), [getAllPermissions]);
 
   // Check all permissions at once
-  const { data: permissionResults, isLoading: isPermissionLoading } = api.permission.checkMultiplePermissions.useQuery(
+  const { data: permissionResults } = api.permission.checkMultiplePermissions.useQuery(
     { permissions: permissions.map(p => p.toString()) },
-    { enabled: permissions.length > 0 }
+    { 
+      enabled: permissions.length > 0,
+      staleTime: Infinity, // Data will never become stale
+      gcTime: 1000 * 60 * 60, // Cache for 1 hour
+    }
   );
 
   // Filter navMain items based on permissions
@@ -185,38 +189,34 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     });
   }, [permissionResults]);
 
-  if(!isPermissionLoading)
-  {
-    return (
-      <Sidebar variant="inset" {...props}>
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild>
-                <a href="#">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                    <Command className="size-4" />
-                  </div>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">XR Lunar</span>
-                    <span className="truncate text-xs">Claim Management</span>
-                    <span className="truncate text-xs text-muted-foreground">{new Date().toLocaleDateString('en-MY')}</span>
-                  </div>
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarHeader>
-        <SidebarContent>
-          <NavMain items={filteredNavMain} />
-          <NavProjects projects={data.projects} />
-          <NavSecondary items={data.navSecondary} className="mt-auto" />
-        </SidebarContent>
-        <SidebarFooter>
-          <NavUser user={data.user} />
-        </SidebarFooter>
-      </Sidebar>
-    )
-  }
-
+  return (
+    <Sidebar variant="inset" {...props}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="#">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <Command className="size-4" />
+                </div>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-semibold">XR Lunar</span>
+                  <span className="truncate text-xs">Claim Management</span>
+                  <span className="truncate text-xs text-muted-foreground">{new Date().toLocaleDateString('en-MY')}</span>
+                </div>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={filteredNavMain} />
+        <NavProjects projects={data.projects} />
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+    </Sidebar>
+  )
 }
