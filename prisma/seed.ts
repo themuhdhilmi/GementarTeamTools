@@ -11,7 +11,7 @@ async function main() {
 
   const allPermissions = Object.values(PermissionList);
 
-  let int = 0;
+  let int = 0; const connectPermissions = [];
   for (const perm of allPermissions) {
     await prisma.permission.create({
       data: {
@@ -19,6 +19,7 @@ async function main() {
         permission: perm,
       },
     });
+    connectPermissions.push({ id: int });
     int++;
   }
 
@@ -43,6 +44,42 @@ async function main() {
   await prisma.group.create({
     data: {
       id: "STAFF",
+      permission: {
+        connect: connectPermissions
+      },
+    },
+  });
+
+  await prisma.group.create({
+    data: {
+      id: "MANAGER",
+      permission: {
+        connect: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id : 4}, { id : 5}, { id : 6}, { id : 7}, { id : 8}, { id : 9}],
+      },
+    },
+  });
+
+  await prisma.group.create({
+    data: {
+      id: "EXECUTIVE",
+      permission: {
+        connect: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id : 4}, { id : 5}, { id : 6}, { id : 7}, { id : 8}, { id : 9}],
+      },
+    },
+  });
+
+  await prisma.group.create({
+    data: {
+      id: "HR",
+      permission: {
+        connect: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id : 4}, { id : 5}, { id : 6}, { id : 7}, { id : 8}, { id : 9}],
+      },
+    },
+  });
+
+  await prisma.group.create({
+    data: {
+      id: "FINANCE",
       permission: {
         connect: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id : 4}, { id : 5}, { id : 6}, { id : 7}, { id : 8}, { id : 9}],
       },
@@ -72,7 +109,6 @@ async function main() {
       {
         name: "Category 4",
       },
-      
     ],
   });
 

@@ -5,8 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
 import { Separator } from "~/components/ui/separator";
 import { SectionCards } from "~/app/_components/section-cards";
+import { checkPagePermission } from "~/lib/permissions/check-page-permission";
+import { PermissionList } from "@prisma/client";
 
 export default async function Home() {
+  await checkPagePermission(PermissionList.PAGE_PERMISSION_REIMBURSEMENT_DASHBOARD);
+  
   const session = await auth();
   const claims = await getUserClaimsByYear(session?.user.email, 2025);
   

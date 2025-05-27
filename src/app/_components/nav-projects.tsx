@@ -38,7 +38,7 @@ export function NavProjects({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+      {/* <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -83,7 +83,7 @@ export function NavProjects({
             <span>More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
-      </SidebarMenu>
+      </SidebarMenu> */}
     </SidebarGroup>
   )
 }
