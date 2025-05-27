@@ -1,6 +1,31 @@
 import { PrismaClient, PermissionList } from "@prisma/client";
 const prisma = new PrismaClient();
 
+async function generateMultipleUsers(count: number) {
+  const groups = ["STAFF", "MANAGER", "EXECUTIVE", "HR", "FINANCE", "ADMIN", "STAFF_ADMIN", "DEACTIVATED_USER"] as const;
+  const firstNames = ["Ahmad", "Siti", "John", "Sarah", "Raj", "Mei", "Ali", "Fatimah", "David", "Lisa"] as const;
+  const lastNames = ["Abdullah", "Tan", "Kumar", "Wong", "Singh", "Lee", "Ibrahim", "Ng", "Patel", "Lim"] as const;
+  
+  for (let i = 0; i < count; i++) {
+    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)]!;
+    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)]!;
+    const randomGroup = groups[Math.floor(Math.random() * groups.length)]!;
+    
+    await prisma.user.create({
+      data: {
+        name: `${firstName} ${lastName}`,
+        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@company.com`,
+        group: {
+          connect: {
+            id: randomGroup
+          }
+        },
+        hashed_password: "$2a$12$twZYpoyxc8zHfoO3HE.pTOwMf8Y05OzrmxLYD80aXqvOVknUvBV3W", //Sample@123
+      },
+    });
+  }
+}
+
 async function main() {
   await prisma.user.deleteMany();
   await prisma.permission.deleteMany();
@@ -88,7 +113,7 @@ async function main() {
 
   await prisma.group.create({
     data: {
-      id: "BANNED_USER",
+      id: "DEACTIVATED_USER",
       permission: {
         connect: [],
       },
@@ -184,6 +209,8 @@ async function main() {
     },
     update: {},
   });
+
+  await generateMultipleUsers(200);
 }
 
 main()
