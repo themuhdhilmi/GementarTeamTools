@@ -114,8 +114,8 @@ export function EditUserDialog({ userId, userName, userEmail, userGroupId, onSuc
               </SelectContent>
             </Select>
           </div>
-          <Button type="submit" className="w-full" disabled={updateUser.isLoading}>
-            {updateUser.isLoading ? "Updating..." : "Update User"}
+          <Button type="submit" className="w-full" disabled={updateUser.isPending }>
+            {updateUser.isPending ? "Updating..." : "Update User"}
           </Button>
         </form>
       </DialogContent>
