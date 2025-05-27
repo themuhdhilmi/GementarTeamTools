@@ -45,6 +45,7 @@
     "@trpc/client": "^11.0.0-rc.446",
     "@trpc/react-query": "^11.0.0-rc.446",
     "@trpc/server": "^11.0.0-rc.446",
+    "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/mochawesome": "^6.2.4",
     "bcrypt": "^6.0.0",
@@ -72,6 +73,7 @@
     "zod": "^3.25.28"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@types/eslint": "^8.56.10",
     "@types/node": "^20.17.50",
     "@types/papaparse": "^5.3.15",

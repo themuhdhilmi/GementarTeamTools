@@ -18,7 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select"
-import { ArrowUpDown, Pencil, Trash2, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowUpDown, Trash2, ChevronLeft, ChevronRight } from "lucide-react"
+import { EditUserDialog } from "./edit-user-dialog"
 
 export function UserTable() {
     const [emailFilter, setEmailFilter] = React.useState("")
@@ -29,7 +30,7 @@ export function UserTable() {
         direction: "asc" | "desc";
     }>({ key: "email", direction: "asc" })
 
-    const { data: users, isLoading } = api.user.getAllUsers.useQuery({
+    const { data: users, isLoading, refetch } = api.user.getAllUsers.useQuery({
         filterByName: emailFilter,
         filterByGroup: selectedGroup === "ALL" ? "" : selectedGroup,
         resultCount: 10,
@@ -110,12 +111,16 @@ export function UserTable() {
                                 <TableCell>{user.groupId}</TableCell>
                                 <TableCell>
                                     <div className="flex space-x-2">
-                                        <Button variant="ghost" size="icon">
-                                            <Pencil className="h-4 w-4" />
-                                        </Button>
-                                        <Button variant="ghost" size="icon">
+                                        <EditUserDialog
+                                            userId={user.id}
+                                            userName={user.name}
+                                            userEmail={user.email}
+                                            userGroupId={user.groupId}
+                                            onSuccess={() => refetch()}
+                                        />
+                                        {/* <Button variant="ghost" size="icon">
                                             <Trash2 className="h-4 w-4" />
-                                        </Button>
+                                        </Button> */}
                                     </div>
                                 </TableCell>
                             </TableRow>

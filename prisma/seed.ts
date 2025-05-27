@@ -1,20 +1,19 @@
 import { PrismaClient, PermissionList } from "@prisma/client";
+import { faker } from '@faker-js/faker';
 const prisma = new PrismaClient();
 
 async function generateMultipleUsers(count: number) {
   const groups = ["STAFF", "MANAGER", "EXECUTIVE", "HR", "FINANCE", "ADMIN", "STAFF_ADMIN", "DEACTIVATED_USER"] as const;
-  const firstNames = ["Ahmad", "Siti", "John", "Sarah", "Raj", "Mei", "Ali", "Fatimah", "David", "Lisa"] as const;
-  const lastNames = ["Abdullah", "Tan", "Kumar", "Wong", "Singh", "Lee", "Ibrahim", "Ng", "Patel", "Lim"] as const;
   
   for (let i = 0; i < count; i++) {
-    const firstName = firstNames[Math.floor(Math.random() * firstNames.length)]!;
-    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)]!;
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
     const randomGroup = groups[Math.floor(Math.random() * groups.length)]!;
     
     await prisma.user.create({
       data: {
         name: `${firstName} ${lastName}`,
-        email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}${i}@company.com`,
+        email: faker.internet.email({ firstName, lastName }),
         group: {
           connect: {
             id: randomGroup

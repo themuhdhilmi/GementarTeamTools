@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Hilmi's Tools",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body>
         <SessionProvider>
           <TRPCReactProvider>{children}</TRPCReactProvider>
+          <Toaster />
         </SessionProvider>
             
       </body>
