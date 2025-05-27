@@ -59,6 +59,7 @@ model User {
 
 model Group {
     id         String       @id
+    name       String
     permission Permission[]
     user       User[]
 }

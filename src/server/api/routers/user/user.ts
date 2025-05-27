@@ -82,9 +82,12 @@ export const userRouter = createTRPCRouter({
       include: {
         group: true,
       },
-      orderBy: sortBy ? {
-        [sortBy === 'group' ? 'group.name' : sortBy]: sortOrder
-      } : undefined,
+      orderBy: {
+        ...(sortBy === 'email' 
+          ? { email: sortOrder }
+          : { group: { id: sortOrder } }
+        )
+      },
       take: resultCount,
       skip: skip,
     }); 

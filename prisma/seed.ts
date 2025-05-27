@@ -210,7 +210,7 @@ async function main() {
     update: {},
   });
 
-  await generateMultipleUsers(200);
+  await generateMultipleUsers(9214);
 }
 
 main()

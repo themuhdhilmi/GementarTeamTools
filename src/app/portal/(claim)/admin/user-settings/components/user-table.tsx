@@ -11,7 +11,13 @@ import {
 } from "~/components/ui/table"
 import { Input } from "~/components/ui/input"
 import { Button } from "~/components/ui/button"
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select"
 import { ArrowUpDown, Pencil, Trash2, ChevronLeft, ChevronRight } from "lucide-react"
 
 export function UserTable() {
@@ -46,75 +52,80 @@ export function UserTable() {
     }
 
     return (
-        <div className="w-full space-y-4 p-5">
-            <div className="flex items-center justify-between">
+        <div className="w-full space-y-4 p-2 sm:p-5">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <Input
                     placeholder="Search by email..."
                     value={emailFilter}
                     onChange={(e) => setEmailFilter(e.target.value)}
-                    className="max-w-sm"
+                    className="w-full sm:max-w-sm"
                 />
-                <Tabs value={selectedGroup} onValueChange={setSelectedGroup}>
-                    <TabsList>
-                        <TabsTrigger value="ALL">All</TabsTrigger>
+                <Select value={selectedGroup} onValueChange={setSelectedGroup}>
+                    <SelectTrigger className="w-full sm:w-[180px]">
+                        <SelectValue placeholder="Select group" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="ALL">All Groups</SelectItem>
                         {groups?.map((group) => (
-                            <TabsTrigger key={group.id} value={group.id}>
+                            <SelectItem key={group.id} value={group.id}>
                                 {group.id}
-                            </TabsTrigger>
+                            </SelectItem>
                         ))}
-                    </TabsList>
-                </Tabs>
+                    </SelectContent>
+                </Select>
             </div>
 
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead 
-                            className="cursor-pointer"
-                            onClick={() => handleSort("email")}
-                        >
-                            <div className="flex items-center">
-                                Email
-                                <ArrowUpDown className="ml-2 h-4 w-4" />
-                            </div>
-                        </TableHead>
-                        <TableHead 
-                            className="cursor-pointer"
-                            onClick={() => handleSort("group")}
-                        >
-                            <div className="flex items-center">
-                                Group
-                                <ArrowUpDown className="ml-2 h-4 w-4" />
-                            </div>
-                        </TableHead>
-                        <TableHead>Actions</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {isLoading && <TableRow><TableCell colSpan={4} className="h-24 text-center">Loading...</TableCell></TableRow>}
-                    {users?.users.map((user) => (
-                        <TableRow key={user.id}>
-                            <TableCell>{user.name}</TableCell>
-                            <TableCell>{user.email}</TableCell>
-                            <TableCell>{user.groupId}</TableCell>
-                            <TableCell>
-                                <div className="flex space-x-2">
-                                    <Button variant="ghost" size="icon">
-                                        <Pencil className="h-4 w-4" />
-                                    </Button>
-                                    <Button variant="ghost" size="icon">
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
+            <div className="overflow-x-auto">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead 
+                                className="cursor-pointer"
+                                onClick={() => handleSort("email")}
+                            >
+                                <div className="flex items-center">
+                                    Email
+                                    <ArrowUpDown className="ml-2 h-4 w-4" />
                                 </div>
-                            </TableCell>
+                            </TableHead>
+                            <TableHead 
+                                className="cursor-pointer"
+                                onClick={() => handleSort("group")}
+                            >
+                                <div className="flex items-center">
+                                    Group
+                                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                                </div>
+                            </TableHead>
+                            <TableHead>Actions</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {isLoading && <TableRow><TableCell colSpan={4} className="h-24 text-center">Loading...</TableCell></TableRow>}
+                        {users?.users.map((user) => (
+                            <TableRow key={user.id}>
+                                <TableCell>{user.name}</TableCell>
+                                <TableCell>{user.email}</TableCell>
+                                <TableCell>{user.groupId}</TableCell>
+                                <TableCell>
+                                    <div className="flex space-x-2">
+                                        <Button variant="ghost" size="icon">
+                                            <Pencil className="h-4 w-4" />
+                                        </Button>
+                                        <Button variant="ghost" size="icon">
+                                            <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
 
-            <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-sm text-muted-foreground text-center sm:text-left">
                     Showing {((currentPage - 1) * 10) + 1} to {Math.min(currentPage * 10, users?.pagination.totalCount ?? 0)} of {users?.pagination.totalCount} entries
                 </div>
                 <div className="flex items-center space-x-2">
