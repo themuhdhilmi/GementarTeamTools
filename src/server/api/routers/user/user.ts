@@ -1,9 +1,19 @@
 import { TRPCError } from "@trpc/server";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 import { z } from "zod";
 import { hash } from "bcrypt";
 
 export const userRouter = createTRPCRouter({
+  samplePublicProcedure: publicProcedure.query(async ({ ctx }) => {
+    return "Hello World";
+  }),
+
+  samplePublicProcedureMutation: publicProcedure.input(z.object({
+    name: z.string(),
+  })).mutation(async ({ ctx, input }) => {
+    return "Hello World " + input.name;
+  }),
+
   getUser: protectedProcedure.query(async ({ ctx }) => {
     if (!ctx.session.user.email) {
       throw new TRPCError({
@@ -173,7 +183,7 @@ export const userRouter = createTRPCRouter({
 
       if (password) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        const hashedPassword = (await hash(password, 10)) as string;
+        const hashedPassword = (await hash(password, 10));
 
         // Update user
         const updatedUser = await ctx.db.user.update({
