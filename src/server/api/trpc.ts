@@ -10,6 +10,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { getUserGroup } from "~/lib/permissions/permission";
 
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
@@ -130,4 +131,26 @@ export const protectedProcedure = t.procedure
         session: { ...ctx.session, user: ctx.session.user },
       },
     });
-  });
+});
+
+export const protectedProcedureAdmin = t.procedure
+  .use(timingMiddleware)
+  .use(async ({ ctx, next }) => {
+    if (!ctx.session || !ctx.session.user || !ctx.session?.user.email) {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+
+    const userGroup = await getUserGroup(ctx.session.user.email);
+
+    if (userGroup !== "ADMIN") {
+      throw new TRPCError({ code: "UNAUTHORIZED" });
+    }
+    
+    return next({
+      ctx: {
+        // infers the `session` as non-nullable
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+});
+
