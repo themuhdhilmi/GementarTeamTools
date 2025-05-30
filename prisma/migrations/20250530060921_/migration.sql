@@ -46,6 +46,7 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Group` (
     `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -53,13 +54,13 @@ CREATE TABLE `Group` (
 -- CreateTable
 CREATE TABLE `Permission` (
     `id` INTEGER NOT NULL,
-    `permission` ENUM('LOGIN', 'LOGOUT', 'REQUEST_CLAIM', 'ASSIGN_CLAIM', 'GET_USER_CLAIMS', 'GET_SELF_CLAIMS', 'PAGE_PERMISSION_REIMBURSEMENT', 'PAGE_PERMISSION_CYPRESS_REPORT') NOT NULL,
+    `permission` ENUM('LOGIN', 'PAGE_PERMISSION_ADMIN', 'PAGE_PERMISSION_GROUP_SETTINGS', 'PAGE_PERMISSION_USER_SETTINGS', 'ADMIN', 'PAGE_PERMISSION_CYPRESS_REPORT', 'NOT_PERMISSION') NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `ClaimCategory` (
+CREATE TABLE `Project` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
 
@@ -67,28 +68,27 @@ CREATE TABLE `ClaimCategory` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `AssignedClaim` (
+CREATE TABLE `Result` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `value` DOUBLE NOT NULL,
-    `perClaimLimit` DOUBLE NULL,
-    `isPerMonth` BOOLEAN NOT NULL DEFAULT false,
-    `isCustomDate` BOOLEAN NOT NULL DEFAULT false,
-    `dateStart` DATETIME(3) NULL,
-    `dateEnd` DATETIME(3) NULL,
-    `year` INTEGER NOT NULL,
-    `userId` VARCHAR(191) NULL,
-    `claimCategoryId` VARCHAR(191) NOT NULL,
+    `date` DATETIME(3) NOT NULL,
+    `projectId` VARCHAR(191) NOT NULL,
+    `data` JSON NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `RequestedClaim` (
+CREATE TABLE `S3File` (
     `id` VARCHAR(191) NOT NULL,
-    `value` DOUBLE NOT NULL,
-    `status` ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL DEFAULT 'PENDING',
-    `assignedClaimId` VARCHAR(191) NULL,
+    `fileName` VARCHAR(191) NOT NULL,
+    `remark` VARCHAR(191) NULL,
+    `bucketName` VARCHAR(191) NOT NULL,
+    `contentType` VARCHAR(191) NOT NULL,
+    `fileUrl` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+    `resultId` VARCHAR(191) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -102,6 +102,15 @@ CREATE TABLE `_GroupToPermission` (
     INDEX `_GroupToPermission_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `_ProjectToUser` (
+    `A` VARCHAR(191) NOT NULL,
+    `B` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `_ProjectToUser_AB_unique`(`A`, `B`),
+    INDEX `_ProjectToUser_B_index`(`B`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `Account` ADD CONSTRAINT `Account_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -112,16 +121,19 @@ ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`
 ALTER TABLE `User` ADD CONSTRAINT `User_groupId_fkey` FOREIGN KEY (`groupId`) REFERENCES `Group`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `AssignedClaim` ADD CONSTRAINT `AssignedClaim_claimCategoryId_fkey` FOREIGN KEY (`claimCategoryId`) REFERENCES `ClaimCategory`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Result` ADD CONSTRAINT `Result_projectId_fkey` FOREIGN KEY (`projectId`) REFERENCES `Project`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `AssignedClaim` ADD CONSTRAINT `AssignedClaim_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `RequestedClaim` ADD CONSTRAINT `RequestedClaim_assignedClaimId_fkey` FOREIGN KEY (`assignedClaimId`) REFERENCES `AssignedClaim`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `S3File` ADD CONSTRAINT `S3File_resultId_fkey` FOREIGN KEY (`resultId`) REFERENCES `Result`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_GroupToPermission` ADD CONSTRAINT `_GroupToPermission_A_fkey` FOREIGN KEY (`A`) REFERENCES `Group`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_GroupToPermission` ADD CONSTRAINT `_GroupToPermission_B_fkey` FOREIGN KEY (`B`) REFERENCES `Permission`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_ProjectToUser` ADD CONSTRAINT `_ProjectToUser_A_fkey` FOREIGN KEY (`A`) REFERENCES `Project`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `_ProjectToUser` ADD CONSTRAINT `_ProjectToUser_B_fkey` FOREIGN KEY (`B`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

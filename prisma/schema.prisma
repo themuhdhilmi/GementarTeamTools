@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     // provider = "prisma-dbml-generator"
     provider = "prisma-client-js"
@@ -8,10 +5,6 @@ generator client {
 
 datasource db {
     provider = "mysql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
@@ -44,17 +37,17 @@ model Session {
 }
 
 model User {
-    id              String          @id @default(cuid())
+    id              String    @id @default(cuid())
     name            String
-    email           String          @unique
+    email           String    @unique
     hashed_password String
     emailVerified   DateTime?
     image           String?
     accounts        Account[]
     sessions        Session[]
-    group           Group           @relation(fields: [groupId], references: [id])
+    group           Group     @relation(fields: [groupId], references: [id])
     groupId         String
-    assignedClaim   AssignedClaim[]
+    projects        Project[]
 }
 
 model Group {
@@ -72,69 +65,43 @@ model Permission {
 
 enum PermissionList {
     LOGIN
-    LOGOUT
-    REQUEST_CLAIM
-    ASSIGN_CLAIM
 
-    GET_USER_CLAIMS
-    GET_SELF_CLAIMS
-
-    // REIMBURSEMENT ALL USERS
-    PAGE_PERMISSION_REIMBURSEMENT
-    PAGE_PERMISSION_REIMBURSEMENT_DASHBOARD
-    PAGE_PERMISSION_REIMBURSEMENT_MANAGE_CLAIM
-
-    // MANAGEMENT MANAGER/HR/FINANCE
-    PAGE_PERMISSION_MANAGEMENT
-    PAGE_PERMISSION_MANAGEMENT_DASHBOARD
-    PAGE_PERMISSION_USER_MANAGEMENT
-    PAGE_PERMISSION_CLAIM_APPROVALS
-
-    // ADMIN
     PAGE_PERMISSION_ADMIN
-    PAGE_PERMISSION_CLAIM_CATEGORY
     PAGE_PERMISSION_GROUP_SETTINGS
     PAGE_PERMISSION_USER_SETTINGS
 
-    // CYPRESS REPORT
-    PAGE_PERMISSION_CYPRESS_REPORT  
+    ADMIN
 
-    // ETC
+    PAGE_PERMISSION_CYPRESS_REPORT
     NOT_PERMISSION
 }
 
-model ClaimCategory {
-    id            String          @id @default(cuid())
-    name          String
-    assignedClaim AssignedClaim[]
+model Project {
+    id           String   @id @default(cuid())
+    name         String
+    participants User[]
+    results      Result[]
 }
 
-model AssignedClaim {
-    id              String           @id @default(cuid())
-    value           Float
-    perClaimLimit   Float?
-    isPerMonth      Boolean          @default(false)
-    isCustomDate    Boolean          @default(false)
-    dateStart       DateTime?
-    dateEnd         DateTime?
-    year            Int
-    claimCategory   ClaimCategory    @relation(fields: [claimCategoryId], references: [id])
-    requestedClaim  RequestedClaim[]
-    user            User?            @relation(fields: [userId], references: [id])
-    userId          String?
-    claimCategoryId String
+model Result {
+    id        String  @id @default(cuid())
+    name      String
+    project   Project @relation(fields: [projectId], references: [id])
+    date      DateTime
+    projectId String
+    data      Json?
+    s3Files S3File[]
 }
 
-enum RequestedClaimStatus {
-    PENDING
-    APPROVED
-    REJECTED
-}
-
-model RequestedClaim {
-    id              String               @id @default(cuid())
-    value           Float
-    status          RequestedClaimStatus @default(PENDING)
-    AssignedClaim   AssignedClaim?       @relation(fields: [assignedClaimId], references: [id])
-    assignedClaimId String?
+model S3File {
+    id          String   @id @default(cuid())
+    fileName    String
+    remark      String?
+    bucketName  String
+    contentType String
+    fileUrl     String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    Result      Result?  @relation(fields: [resultId], references: [id])
+    resultId    String?
 }

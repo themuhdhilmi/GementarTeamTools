@@ -50,60 +50,12 @@ export const menuData = {
   ],
   navMain: [
     {
-      title: "Reimbursement",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT,
-      items: [
-        {
-          title: "Dashboard",
-          url: "/portal/reimbursement/dashboard",
-          permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT_DASHBOARD,
-        },
-        {
-          title: "Manage Claim",
-          url: "/portal/reimbursement/manage-claim",
-          permission: PermissionList.PAGE_PERMISSION_REIMBURSEMENT_MANAGE_CLAIM,
-        },
-      ],
-    },
-    {
-      title: "Management",
-      url: "#",
-      icon: Bot,
-      isActive: true,
-      permission: PermissionList.PAGE_PERMISSION_MANAGEMENT,
-      items: [
-        {
-          title: "Dashboard",
-          url: "/portal/management/dashboard",
-          permission: PermissionList.PAGE_PERMISSION_MANAGEMENT_DASHBOARD,
-        },
-        {
-          title: "User Management",
-          url: "/portal/management/user-management",
-          permission: PermissionList.PAGE_PERMISSION_USER_MANAGEMENT,
-        },
-        {
-          title: "Claim Approvals",
-          url: "/portal/management/claim-approvals",
-          permission: PermissionList.PAGE_PERMISSION_CLAIM_APPROVALS,
-        },
-      ],
-    },
-    {
       title: "Admin",
       url: "#",
       icon: Bot,
       isActive: true,
       permission: PermissionList.PAGE_PERMISSION_ADMIN,
       items: [
-        {
-          title: "Claim Category",
-          url: "/portal/admin/claim-category",
-          permission: PermissionList.PAGE_PERMISSION_CLAIM_CATEGORY,
-        },
         {
           title: "Group Settings",
           url: "/portal/admin/group-settings",
@@ -126,6 +78,11 @@ export const menuData = {
         {
           title: "Cypress Report",
           url: "/portal/cypress-report-generator",
+          permission: PermissionList.PAGE_PERMISSION_CYPRESS_REPORT,
+        },
+        {
+          title: "Report Manager",
+          url: "/portal/report-manager",
           permission: PermissionList.PAGE_PERMISSION_CYPRESS_REPORT,
         },
       ],

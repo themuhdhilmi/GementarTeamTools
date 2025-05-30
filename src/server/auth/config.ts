@@ -68,10 +68,14 @@ export const authConfig = {
 
         const isPasswordValid = await bcrypt.compare(
           credentials.password as string,
-          user.hashed_password as string
+          user.hashed_password
         );
 
         if (!isPasswordValid) {
+          return null;
+        }
+
+        if (user.groupId === "BANNED") {
           return null;
         }
 

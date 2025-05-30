@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { GetMochaData, parseJiraCSV } from "./functions/convert-jira-csv";
 import { processItemToCsv } from "./functions/process-item-to-csv";
 import { getDashboardData } from "./functions/process-dashboard-data";
+import { uploadMultipleFiles, uploadToS3 } from "~/lib/dashboards/uploadItems";
 // import { type MochaData } from "~/app/(generator-page)/cypress-report-generator/columns";
 
 export type MochaDataAPI = {
@@ -36,14 +37,44 @@ export async function POST(request: NextRequest) {
 
     const csv = processItemToCsv(mochaData, jiraData)
 
-    const response = new NextResponse(csv, {
-      headers: {
-        'Content-Type': 'text/csv',  // Set content type to CSV
-        'Content-Disposition': 'attachment; filename=generated-data.csv',  // Set file name
-      }
-    });
+    // Create files for upload
+    const csvBlob = new Blob([csv], { type: 'text/csv' });
+    const timestamp = Date.now();
+    const csvFileName = `cypress-report-${timestamp}.csv`;
+    
+    // Create separate JSON files for each module
+    const jsonFiles = mochaData.map((data, index) => ({
+      file: new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }),
+      fileName: `cypress-report-${timestamp}-module-${index + 1}.json`,
+      bucketName: 'cypress-reports',
+      contentType: 'application/json'
+    }));
+    
+    try {
+      const uploadResult = await uploadMultipleFiles([
+        {
+          file: csvBlob,
+          fileName: csvFileName,
+          bucketName: 'cypress-reports',
+          contentType: 'text/csv'
+        },
+        ...jsonFiles
+      ]);
 
-    return response;
+      console.log('uploadResult', JSON.stringify(uploadResult));
+
+      return NextResponse.json({ 
+        success: true, 
+        downloadUrl: uploadResult,
+        message: 'Files processed and uploaded successfully'
+      });
+    } catch (uploadError) {
+      console.error('Error uploading to S3:', uploadError);
+      return NextResponse.json({ 
+        error: 'Failed to upload files to storage',
+        details: (uploadError as Error).message 
+      }, { status: 500 });
+    }
   } catch (error) {
     return new NextResponse(
       JSON.stringify({
