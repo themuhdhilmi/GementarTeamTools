@@ -34,8 +34,42 @@ async function generateMultipleUsers(count: number) {
   }
 }
 
+async function generateResultsForProjects() {
+  const projects = await prisma.project.findMany();
+  
+  for (const project of projects) {
+    // Generate 5-10 results per project
+    const resultCount = faker.number.int({ min: 5, max: 10 });
+    
+    for (let i = 0; i < resultCount; i++) {
+      await prisma.result.create({
+        data: {
+          name: `Test Result ${i + 1} - ${faker.word.words(3)}`,
+          projectId: project.id,
+          date: faker.date.recent({ days: 30 }),
+          data: {
+            status: faker.helpers.arrayElement(["passed", "failed", "pending"]),
+            duration: faker.number.int({ min: 1000, max: 60000 }),
+            tests: faker.number.int({ min: 10, max: 100 }),
+            suites: faker.number.int({ min: 1, max: 10 })
+          },
+          s3Files: {
+            create: Array.from({ length: faker.number.int({ min: 0, max: 3 }) }, () => ({
+              fileName: `${faker.system.fileName()}.json`,
+              remark: faker.helpers.maybe(() => faker.lorem.sentence()),
+              bucketName: "test-bucket",
+              contentType: "application/json",
+              fileUrl: faker.internet.url()
+            }))
+          }
+        }
+      });
+    }
+  }
+}
+
 async function main() {
-  // First, clean up existing data
+  await prisma.result.deleteMany();
   await prisma.user.deleteMany();
   await prisma.permission.deleteMany();
   await prisma.group.deleteMany();
@@ -92,21 +126,24 @@ async function main() {
     data: [
       {
         id: "0",
-        name: "KL",
+        name: "UAT2",
       },
       {
         id: "1",
-        name: "BLR",
+        name: "AD SERVING",
       },
       {
         id: "2",
-        name: "US",
-      },
+        name: "DEV",
+      }
     ],
   });
 
   // Generate users after all necessary records exist
   await generateMultipleUsers(200);
+
+  // Generate results for each project
+  await generateResultsForProjects();
 
   // Create sample user last
   const firstProject = await prisma.project.findFirst();

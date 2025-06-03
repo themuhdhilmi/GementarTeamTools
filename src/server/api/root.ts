@@ -2,6 +2,8 @@ import { claimRouter } from "~/server/api/routers/claim/claim";
 import { permissionRouter } from "~/server/api/routers/permission/permission";
 import { userRouter } from "~/server/api/routers/user/user";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { projectRouter } from "./routers/project";
+import { resultRouter } from "./routers/result";
 
 /**
  * This is the primary router for your server.
@@ -12,6 +14,8 @@ export const appRouter = createTRPCRouter({
   claim: claimRouter,
   user: userRouter,
   permission: permissionRouter,
+  project: projectRouter,
+  result: resultRouter,
 });
 
 // export type definition of API
