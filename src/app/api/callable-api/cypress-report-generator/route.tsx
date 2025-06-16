@@ -50,6 +50,8 @@ export async function POST(request: NextRequest) {
       contentType: 'application/json'
     }));
     
+    // Commented out upload section as it's not working yet
+    /*
     try {
       const uploadResult = await uploadMultipleFiles([
         {
@@ -75,6 +77,15 @@ export async function POST(request: NextRequest) {
         details: (uploadError as Error).message 
       }, { status: 500 });
     }
+    */
+
+    // Return CSV data directly for now
+    return new NextResponse(csv, {
+      headers: {
+        'Content-Type': 'text/csv',
+        'Content-Disposition': `attachment; filename="${csvFileName}"`,
+      },
+    });
   } catch (error) {
     return new NextResponse(
       JSON.stringify({

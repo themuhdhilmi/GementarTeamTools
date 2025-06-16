@@ -282,11 +282,11 @@ export default function DemoPage() {
   return (
     <div className="container mx-auto px-5 py-10">
       <Toaster />
-      <LineChartComponent />
+      {/* <LineChartComponent /> */}
 
       <Tabs defaultValue="total" className="w-full py-5">
         <TabsList>
-          <TabsTrigger value="total">Total</TabsTrigger>
+          {dashboardData && <TabsTrigger value="total">Total</TabsTrigger>}
           {dashboardData?.paths.map((item) => {
             const statsPerPath = dashboardData?.statsPerPath?.find(
               (x) => x.path === item,

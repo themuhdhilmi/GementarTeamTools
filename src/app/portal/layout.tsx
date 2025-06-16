@@ -23,16 +23,16 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const permissions = getAllPermissions();
-  const permissionResults = await api.permission.checkMultiplePermissions({
-    permissions
-  });
+  // const permissions = getAllPermissions();
+  // const permissionResults = await api.permission.checkMultiplePermissions({
+  //   permissions
+  // });
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
       <SidebarProvider>
-          <AppSidebar initialPermissions={permissionResults} />
+          {/* <AppSidebar initialPermissions={permissionResults} /> */}
           <SidebarInset>
             <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
               <div className="flex items-center gap-2 px-4">
